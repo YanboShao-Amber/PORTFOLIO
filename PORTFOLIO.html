@@ -97,11 +97,15 @@
     line-height:1;
     letter-spacing:-.03em;
     text-align:center;
-    white-space:nowrap;          /* 强制一行 */
+    white-space:nowrap;
     position:relative;z-index:1;
     margin:0;
     padding:0 4px;
     pointer-events:none;
+    background:linear-gradient(180deg,#ffffff 0%,#c0bdb8 45%,#6a665e 100%);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    background-clip:text;
   }
   .hero__title .bang{color:var(--muted)}
 
@@ -164,7 +168,7 @@
     will-change:transform;
   }
   .m-tile{
-    height:150px;
+    height:120px;
     display:grid;place-items:center;
     flex-shrink:0;
   }
@@ -178,7 +182,7 @@
     fill:none;stroke-linecap:round;stroke-linejoin:round;
   }
   .m-tile img{
-    height:150px;
+    height:120px;
     width:auto;
     object-fit:contain;
     display:block;
@@ -210,74 +214,74 @@
   .about__cta{margin-top:30px}
 
   /* ---------- SELECTED WORKS ---------- */
-  .works{padding:24px 0 72px}
-  .works__list{list-style:none}
-  .work{border-top:1px solid var(--line)}
-  .work:last-child{border-bottom:1px solid var(--line)}
+  .works{
+    padding:24px 0 72px;
+    width:calc(100vw - 160px);
+    margin-left:calc(-50vw + 50% + 80px);
+  }
+  .works__list{list-style:none;display:flex;flex-direction:column;gap:4px}
+  .work{}
 
   .work__link{
-    display:grid;
-    grid-template-columns:240px 1fr 60px;
-    align-items:stretch;
-    gap:28px;
-    text-decoration:none;color:inherit;
-    padding:22px 8px;
-    transition:background .35s var(--ease);
+    display:block;text-decoration:none;color:inherit;
+    position:relative;overflow:hidden;
   }
-  .work__link:hover{background:var(--surface)}
   .work__link:focus-visible{outline:2px solid var(--text);outline-offset:-2px}
 
-  /* 作品封面占位 —— 替换：把 background 换成你的封面图
-     例如：style="background-image:url('harem.jpg')" */
   .work__thumb{
-    aspect-ratio:16/9;
-    border:1px solid var(--line);
+    width:100%;height:385px;
     background-size:cover;background-position:center;
-    display:grid;place-items:center;
-    overflow:hidden;position:relative;
-    transition:transform .5s var(--ease);
+    position:relative;
+    transition:transform .6s var(--ease);
   }
-  .work__link:hover .work__thumb{transform:scale(1.015)}
-  .thumb--harem{background:linear-gradient(150deg,#3a2a18,#7a5a2e 55%,#1c140b)}
-  .thumb--unity{background:linear-gradient(150deg,#10262b,#1f4e57 55%,#0a1416)}
-  .thumb--godot{background:linear-gradient(150deg,#12241c,#1c4035 55%,#0a130f)}
-  .thumb--char {background:linear-gradient(150deg,#241830,#4a2f63 55%,#120c19)}
-  .work__thumb span{
-    font-family:var(--display);font-weight:800;
-    font-size:24px;letter-spacing:.05em;color:rgba(255,255,255,.82);
-    text-shadow:0 2px 18px rgba(0,0,0,.5);
+  .work__link:hover .work__thumb{transform:scale(1.02)}
+  .work__thumb::after{
+    content:'';position:absolute;inset:0;
+    background:linear-gradient(to right,rgba(0,0,0,.75) 0%,rgba(0,0,0,.2) 55%,transparent 100%);
   }
 
-  .work__body{display:flex;flex-direction:column;justify-content:center}
+  .thumb--puppy   {background:linear-gradient(150deg,#3d1f5e,#7b4ac8 55%,#1a0d2e)}
+  .thumb--rainfall{background:linear-gradient(150deg,#0d1f2d,#1a4a6b 55%,#071015)}
+  .thumb--soma    {background:linear-gradient(150deg,#2d0f0a,#8b2810 55%,#1a0805)}
+  .thumb--blacksea{background:linear-gradient(150deg,#0a0a0a,#252525 55%,#050505)}
+  .thumb--dice    {background:linear-gradient(150deg,#2a1408,#7a3010 55%,#150a04)}
+
+  .work__overlay{
+    position:absolute;inset:0;z-index:1;
+    padding:28px 36px;
+    display:flex;flex-direction:column;justify-content:space-between;
+  }
   .work__num{
-    font-family:var(--mono);font-size:13px;color:var(--faint);
-    letter-spacing:.1em;margin-bottom:6px;
+    font-family:var(--mono);font-size:12px;
+    color:rgba(255,255,255,.55);letter-spacing:.14em;
   }
   .work__title{
-    font-family:var(--display);font-weight:800;
-    font-size:clamp(22px,3.4vw,30px);line-height:1.05;
+    font-family:var(--display);font-weight:900;
+    font-size:clamp(32px,5vw,64px);line-height:1;
+    margin-bottom:12px;
   }
-  .work__cat{
-    font-family:var(--mono);font-size:11px;letter-spacing:.14em;
-    text-transform:uppercase;color:var(--muted);
-    margin-top:6px;
+  .work__meta{
+    font-family:var(--mono);font-size:11px;letter-spacing:.08em;
+    color:rgba(255,255,255,.65);
+    display:flex;flex-direction:column;gap:4px;
+    margin-bottom:10px;
   }
-  .work__desc{font-size:14px;color:var(--muted);margin-top:12px;max-width:46ch}
-
-  .work__arrow{display:grid;place-items:center}
-  .work__arrow svg{
-    width:34px;height:34px;color:var(--muted);stroke-width:1.5;
-    transition:transform .4s var(--ease),color .4s var(--ease);
+  .work__desc{
+    font-size:13px;color:rgba(255,255,255,.6);
+    max-width:54ch;line-height:1.65;
+    display:-webkit-box;-webkit-line-clamp:2;
+    -webkit-box-orient:vertical;overflow:hidden;
   }
-  .work__link:hover .work__arrow svg{transform:translate(4px,-4px);color:var(--text)}
 
   /* ---------- FOOTER ---------- */
   .footer{
     border-top:1px solid var(--line);
     padding:48px 0 60px;
     display:grid;
-    grid-template-columns:1fr 1fr 1fr;
-    gap:30px;
+    grid-template-columns:1fr auto auto;
+    gap:60px;
+    width:calc(100vw - 160px);
+    margin-left:calc(-50vw + 50% + 80px);
   }
   .footer__logo{
     font-family:var(--display);font-weight:900;
@@ -383,7 +387,7 @@
   }
   .nav__brand span{color:var(--muted)}
   .nav__brand:focus-visible{outline:2px solid var(--text);outline-offset:3px}
-  .nav__links{display:flex;gap:26px;list-style:none}
+  .nav__links{display:flex;gap:96px;list-style:none}
   .nav__links a{
     font-family:var(--mono);font-size:11px;letter-spacing:.16em;
     text-transform:uppercase;color:var(--muted);text-decoration:none;
@@ -414,10 +418,10 @@
   <!-- ============ 顶部导航（wrap 外，背景铺满页面宽度）============ -->
   <nav class="nav" aria-label="Primary">
     <ul class="nav__links">
-      <li><a href="#home">Home</a></li>
-      <li><a href="#works">Works</a></li>
-      <li><a href="#about">Experience</a></li>
-      <li><a href="#contact">Contact</a></li>
+      <li><a href="PORTFOLIO.html">Home</a></li>
+      <li><a href="works.html">Works</a></li>
+      <li><a href="experience.html">Gaming</a></li>
+      <li><a href="contact.html">Contact</a></li>
     </ul>
 
     <!-- 语言切换 -->
@@ -494,54 +498,84 @@
 
       <li class="work reveal">
         <a class="work__link" href="#">
-          <!-- 替换封面：style="background-image:url('harem.jpg')" -->
-          <span class="work__thumb thumb--harem"><span>HAREM</span></span>
-          <span class="work__body">
-            <span class="work__num">01</span>
-            <h3 class="work__title">HAREM</h3>
-            <span class="work__cat">Board Game Design</span>
-            <p class="work__desc">Board game about strategy, resource and negotiation.</p>
-          </span>
-          <span class="work__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></span>
+          <div class="work__thumb thumb--puppy">
+            <div class="work__overlay">
+              <div>
+                <h3 class="work__title">PUPPY ISLAND</h3>
+                <div class="work__meta">
+                  <span>· Game Type: Relaxing and Healing</span>
+                  <span>· Game Platform: VR</span>
+                </div>
+                <p class="work__desc">A relaxing VR healing game. I want to provide players with a game that is slow-paced and has a light and cute style. The focus of the gameplay is the interaction of emotional feedback and whimsical concepts, making it a healing game.</p>
+              </div>
+            </div>
+          </div>
         </a>
       </li>
 
       <li class="work reveal">
         <a class="work__link" href="#">
-          <span class="work__thumb thumb--unity"></span>
-          <span class="work__body">
-            <span class="work__num">02</span>
-            <h3 class="work__title">UNITY DEMO</h3>
-            <span class="work__cat">Gameplay Design</span>
-            <p class="work__desc">3D adventure demo developed in Unity.</p>
-          </span>
-          <span class="work__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></span>
+          <div class="work__thumb thumb--rainfall">
+            <div class="work__overlay">
+              <div>
+                <h3 class="work__title">RAINFALL ECHOES</h3>
+                <div class="work__meta">
+                  <span>· Game Type: A Third Person Horror Deception Game</span>
+                  <span>· Game Platform: PC</span>
+                </div>
+                <p class="work__desc">In the far future, raindrops mysteriously fell on the arid city. Since then, the humans began to wander around the open city, and there was no sign of stopping. Players will play the role of a detective and investigate the truth of the event.</p>
+              </div>
+            </div>
+          </div>
         </a>
       </li>
 
       <li class="work reveal">
         <a class="work__link" href="#">
-          <span class="work__thumb thumb--godot"></span>
-          <span class="work__body">
-            <span class="work__num">03</span>
-            <h3 class="work__title">GODOT PROJECT</h3>
-            <span class="work__cat">Game Design</span>
-            <p class="work__desc">2D exploration game built with Godot.</p>
-          </span>
-          <span class="work__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></span>
+          <div class="work__thumb thumb--soma">
+            <div class="work__overlay">
+              <div>
+                <h3 class="work__title">VERMILLION SOMA</h3>
+                <div class="work__meta">
+                  <span>· Game Art / Concept Art</span>
+                </div>
+                <p class="work__desc">SOMA is a three-player cooperative alien planet survival exploration game, in which players can choose from three different professions and enter game dungeons in groups of three. On the map, the three players are, and they need to collaborate and share resources to terminate the dungeon boss and complete the game.</p>
+              </div>
+            </div>
+          </div>
         </a>
       </li>
 
       <li class="work reveal">
         <a class="work__link" href="#">
-          <span class="work__thumb thumb--char"></span>
-          <span class="work__body">
-            <span class="work__num">04</span>
-            <h3 class="work__title">CHARACTER DESIGN</h3>
-            <span class="work__cat">3D Character Art</span>
-            <p class="work__desc">Character modeling and design works.</p>
-          </span>
-          <span class="work__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></span>
+          <div class="work__thumb thumb--blacksea">
+            <div class="work__overlay">
+              <div>
+                <h3 class="work__title">BLACK SEA</h3>
+                <div class="work__meta">
+                  <span>· Concept Design</span>
+                </div>
+                <p class="work__desc">An unknown territory has always hidden an unexplored forbidden zone, known as the "Black Sea". This "Black Sea" was said like a shadow at the corner of the area. People entering here are like hiding in darkness, merging into darkness, and there seems to be some mysterious power in the darkness that pursues the people here.</p>
+              </div>
+            </div>
+          </div>
+        </a>
+      </li>
+
+      <li class="work reveal">
+        <a class="work__link" href="#">
+          <div class="work__thumb thumb--dice">
+            <div class="work__overlay">
+              <div>
+                <h3 class="work__title">DICE OR DEATH</h3>
+                <div class="work__meta">
+                  <span>· Platform: PC &nbsp;·&nbsp; Team: Endless Ladder Studio</span>
+                  <span>· Awards: Best Art &amp; Best Popularity — Mini Game Competition</span>
+                </div>
+                <p class="work__desc">A strategy roguelike game on PC. The player is like a small dice — they need to roll the dice so that the numbers on different sides can come into contact with different nodes on the map, aiming to obtain the highest score possible.</p>
+              </div>
+            </div>
+          </div>
         </a>
       </li>
 
@@ -555,10 +589,10 @@
     <nav class="footer__col" aria-label="Navigation">
       <h4>Navigation</h4>
       <ul>
-        <li><a href="#home">Home</a></li>
-        <li><a href="#works">Works</a></li>
-        <li><a href="#about">Experience</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <li><a href="PORTFOLIO.html">Home</a></li>
+        <li><a href="works.html">Works</a></li>
+        <li><a href="experience.html">Gaming</a></li>
+        <li><a href="contact.html">Contact</a></li>
       </ul>
     </nav>
 
@@ -647,7 +681,7 @@
     var pos = 0, vel = 0;
 
     window.addEventListener('wheel', function(e){
-      vel += e.deltaY * 0.45;
+      vel += e.deltaY * 0.225;
     }, {passive:true});
 
     function tick(){
