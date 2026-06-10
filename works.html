@@ -33,7 +33,7 @@
   .page-header{padding:72px 0 48px}
   .page-title{
     font-family:var(--display);font-weight:800;
-    font-size:clamp(56px,12vw,96px);letter-spacing:.12em;text-align:center;
+    font-size:clamp(40px,9vw,86px);letter-spacing:.12em;text-align:center;
     -webkit-text-stroke:2px var(--text);color:transparent;
     white-space:nowrap;width:100vw;margin-left:calc(-50vw + 50%);
   }
@@ -44,6 +44,13 @@
   .filter-btn.active{color:var(--text);border-color:var(--text);background:var(--surface)}
 
   .works{padding:0 0 72px;width:calc(100vw - 160px);margin-left:calc(-50vw + 50% + 80px)}
+  .work{position:relative}
+  .work__crown{
+    position:absolute;top:12px;right:12px;z-index:10;
+    width:44px;height:44px;object-fit:contain;
+    filter:drop-shadow(0 2px 6px rgba(0,0,0,.5));
+    pointer-events:none;
+  }
   .works__list{list-style:none;display:flex;flex-direction:column;gap:4px}
   .work__link{display:block;text-decoration:none;color:inherit;position:relative;overflow:hidden}
   .work__thumb{width:100%;height:385px;background-size:cover;background-position:center;position:relative;transition:transform .6s var(--ease)}
@@ -92,7 +99,7 @@
 
 <div class="wrap">
   <header class="page-header">
-    <h1 class="page-title reveal">SELECTED WORKS</h1>
+    <h1 class="page-title reveal">PORTFOLIO</h1>
   </header>
 
   <div class="works-filter reveal">
@@ -106,7 +113,7 @@
   <section class="works">
     <ul class="works__list">
 
-      <li class="work reveal" data-cat="demo design">
+      <li class="work reveal" data-cat="demo design" data-project="puppy-island">
         <a class="work__link" href="#">
           <div class="work__thumb thumb--puppy">
             <div class="work__overlay">
@@ -123,7 +130,7 @@
         </a>
       </li>
 
-      <li class="work reveal" data-cat="demo design">
+      <li class="work reveal" data-cat="demo design" data-project="rainfall-echoes">
         <a class="work__link" href="#">
           <div class="work__thumb thumb--rainfall">
             <div class="work__overlay">
@@ -140,7 +147,7 @@
         </a>
       </li>
 
-      <li class="work reveal" data-cat="design">
+      <li class="work reveal" data-cat="design" data-project="vermillion-soma">
         <a class="work__link" href="#">
           <div class="work__thumb thumb--soma">
             <div class="work__overlay">
@@ -154,7 +161,7 @@
         </a>
       </li>
 
-      <li class="work reveal" data-cat="design system">
+      <li class="work reveal" data-cat="design system" data-project="black-sea">
         <a class="work__link" href="#">
           <div class="work__thumb thumb--blacksea">
             <div class="work__overlay">
@@ -168,7 +175,7 @@
         </a>
       </li>
 
-      <li class="work reveal" data-cat="demo system">
+      <li class="work reveal" data-cat="demo system" data-project="dice-or-death">
         <a class="work__link" href="#">
           <div class="work__thumb thumb--dice">
             <div class="work__overlay">
