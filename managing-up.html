@@ -197,48 +197,86 @@
     .concept-entry__title{font-size:17px}
   }
 
-  /* CORE LOOP DIAGRAM */
+  /* ===== CORE LOOP — three-layer economy ===== */
   .loop{padding-top:4px}
-  .loop__intro{font-size:15px;line-height:1.85;color:#a4a4b0;margin-bottom:30px}
-  .loop__figure{display:block;width:100%;max-width:840px;height:auto;margin:0 auto}
-  .loop__key{display:flex;gap:30px;justify-content:center;flex-wrap:wrap;margin-top:24px}
-  .loop__key-item{display:flex;align-items:center;gap:9px;font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#a4a4b0}
-  .loop__swatch{width:24px;height:3px;border-radius:2px;flex-shrink:0}
-  .loop__legend{display:flex;flex-direction:column;gap:0;margin:38px auto 0;max-width:760px}
-  .loop__legend-row{display:flex;gap:18px;align-items:baseline;padding:15px 0;border-bottom:1px solid var(--line)}
-  .loop__legend-row:first-child{border-top:1px solid var(--line)}
-  .loop__legend-tier{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;white-space:nowrap;flex-shrink:0;width:160px}
-  .loop__legend-tier .dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:8px;vertical-align:middle}
-  .loop__legend-text{font-size:16px;line-height:1.7;color:#a4a4b0}
-  .loop__note{margin:34px auto 0;max-width:760px;font-size:15px;line-height:1.78;color:#a4a4b0;border-top:1px solid var(--line);padding-top:22px}
-  .loop__note strong{color:#69bd92;font-weight:400}
+  .loop__intro{font-size:15px;line-height:1.85;color:#a4a4b0;margin-bottom:34px}
 
-  .ld-num{font-family:var(--mono);font-weight:700;font-size:18px}
-  .ld-title{font-family:var(--display);font-weight:700;font-size:15px;fill:#eae7df}
-  .ld-desc{font-family:var(--body);font-size:12px;fill:#a4a4b0}
-  .ld-meta{font-family:var(--mono);font-weight:700;font-size:9.5px;letter-spacing:.14em}
-  .ld-tag{font-family:var(--mono);font-weight:700;font-size:10px;letter-spacing:.12em;fill:#69bd92}
-  .ld-ceil{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;fill:#6a665e}
+  /* resource chips */
+  .loop__res{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:42px}
+  .res-chip{flex:1 1 230px;border:1px solid var(--line);border-radius:10px;padding:17px 19px;background:rgba(255,255,255,.018)}
+  .res-chip__head{display:flex;align-items:center;gap:9px;margin-bottom:9px}
+  .res-chip__dot{width:11px;height:11px;border-radius:50%;flex-shrink:0}
+  .res-chip__name{font-family:var(--display);font-weight:700;font-size:15px;color:#eae7df}
+  .res-chip__tag{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#6f6f7c;margin-left:auto}
+  .res-chip__desc{font-size:13px;line-height:1.65;color:#a4a4b0}
+
+  /* loop cards */
+  .loop__cards{display:flex;flex-direction:column;gap:18px}
+  .lcard{border:1px solid var(--line);border-radius:12px;padding:26px 30px 30px;background:rgba(255,255,255,.018)}
+  .lcard__head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:24px}
+  .lcard__idx{font-family:var(--mono);font-weight:700;font-size:13px;letter-spacing:.08em}
+  .lcard__title{font-family:var(--display);font-weight:700;font-size:19px;color:#eae7df}
+  .lcard__en{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#6f6f7c}
+  .lcard__freq{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#6f6f7c;margin-left:auto;white-space:nowrap}
+  .lcard__body{display:grid;grid-template-columns:240px 1fr;gap:36px;align-items:center}
+
+  .lring{width:100%;max-width:240px;height:auto;margin:0 auto;display:block}
+  .lr-num{font-family:var(--mono);font-weight:700;font-size:13px}
+  .lr-cycle{font-family:var(--mono);font-weight:700;font-size:34px;fill:#69bd92}
+
+  /* node list */
+  .lnodes{display:flex;flex-direction:column}
+  .lnode{display:flex;gap:14px;padding:13px 0;border-bottom:1px solid var(--line)}
+  .lnode:first-child{padding-top:0}
+  .lnode:last-child{border-bottom:0;padding-bottom:0}
+  .lnode__num{font-family:var(--mono);font-weight:700;font-size:12px;color:#69bd92;flex-shrink:0;width:16px;padding-top:3px}
+  .lnode__main{flex:1;min-width:0}
+  .lnode__dec{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-weight:700;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#69bd92;border:1px solid rgba(105,189,146,.4);border-radius:3px;padding:2px 8px;margin-bottom:7px}
+  .lnode__title{font-size:14.5px;font-weight:600;color:#eae7df;line-height:1.5}
+  .lnode__desc{font-size:13px;color:#a4a4b0;line-height:1.6;margin-top:2px}
+  .lnode--auto .lnode__title{font-weight:400;color:#cdcabf}
+  .lnode--gate{background:linear-gradient(to right,rgba(105,189,146,.08),transparent 80%);border-radius:8px;margin:0 -10px;padding-left:10px;padding-right:10px}
+  .lnode--gate .lnode__dec{background:#69bd92;color:#15151b;border-color:#69bd92;box-shadow:0 0 12px rgba(105,189,146,.5)}
+  .lnode__feed{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:#69bd92;margin-top:14px}
+
+  /* meta progression line */
+  .lcard__body--line{display:block}
+  .lprog{display:flex;align-items:flex-start;margin:6px 0 0}
+  .lprog__step{flex:1;text-align:center;position:relative;padding:0 4px}
+  .lprog__step:not(:last-child)::after{content:'';position:absolute;top:8px;left:calc(50% + 12px);right:calc(-50% + 12px);height:2px;background:#69bd92;opacity:.5}
+  .lprog__dot{width:18px;height:18px;border-radius:50%;border:1.5px solid #69bd92;background:#15151b;margin:0 auto 14px;position:relative;z-index:1}
+  .lprog__m{font-family:var(--mono);font-weight:700;font-size:13px;color:#69bd92;margin-bottom:6px}
+  .lprog__unlock{font-size:12px;line-height:1.5;color:#a4a4b0}
+  .lmeta__shape{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#cda44e;margin-bottom:20px;display:flex;align-items:center;gap:8px}
+  .lmeta__note{font-size:13px;line-height:1.7;color:#6f6f7c;margin-top:24px;border-top:1px solid var(--line);padding-top:16px}
+
+  /* KPI gate band */
+  .lgate{margin-top:24px;border:1px solid rgba(105,189,146,.32);border-radius:12px;padding:24px 28px;background:linear-gradient(to right,rgba(105,189,146,.07),transparent 72%)}
+  .lgate__head{display:flex;align-items:center;gap:11px;margin-bottom:12px}
+  .lgate__diamond{width:12px;height:12px;background:#69bd92;transform:rotate(45deg);flex-shrink:0;box-shadow:0 0 10px rgba(105,189,146,.5)}
+  .lgate__title{font-family:var(--display);font-weight:700;font-size:16px;color:#69bd92}
+  .lgate__text{font-size:14px;line-height:1.78;color:#a4a4b0}
+  .lgate__text strong{color:#eae7df;font-weight:500}
 
   @media(prefers-reduced-motion:no-preference){
     @keyframes lfade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
     @keyframes ldraw{to{stroke-dashoffset:0}}
-    @keyframes gpulse{0%,100%{opacity:.45}50%{opacity:.9}}
+    @keyframes gpulse{0%,100%{opacity:.5}50%{opacity:.95}}
     .tab-panel.active .loop__intro{animation:lfade .5s var(--ease) both}
-    .tab-panel.active .loop__figure{animation:lfade .6s var(--ease) .08s both}
-    .tab-panel.active .loop__key{animation:lfade .6s var(--ease) .16s both}
-    .tab-panel.active .loop__legend{animation:lfade .6s var(--ease) .22s both}
-    .tab-panel.active .loop__note{animation:lfade .6s var(--ease) .3s both}
-    .tab-panel.active .cr-arc{stroke-dasharray:200;stroke-dashoffset:200;animation:ldraw .9s var(--ease) forwards}
-    .tab-panel.active .cr-arc.cr1{animation-delay:.25s}
-    .tab-panel.active .cr-arc.cr2{animation-delay:.45s}
-    .tab-panel.active .cr-arc.cr3{animation-delay:.65s}
-    .tab-panel.active .cr-arc.cr4{animation-delay:.85s}
+    .tab-panel.active .loop__res{animation:lfade .6s var(--ease) .08s both}
+    .tab-panel.active .lcard:nth-of-type(1){animation:lfade .6s var(--ease) .18s both}
+    .tab-panel.active .lcard:nth-of-type(2){animation:lfade .6s var(--ease) .28s both}
+    .tab-panel.active .lcard:nth-of-type(3){animation:lfade .6s var(--ease) .38s both}
+    .tab-panel.active .lgate{animation:lfade .6s var(--ease) .48s both}
+    .tab-panel.active .lr-arc{stroke-dasharray:140;stroke-dashoffset:140;animation:ldraw .8s var(--ease) .3s forwards}
     .gate-glow{animation:gpulse 2.8s ease-in-out infinite}
   }
-  @media(max-width:600px){
-    .loop__legend-row{flex-direction:column;gap:6px}
-    .loop__legend-tier{width:auto}
+  @media(max-width:720px){
+    .lcard__body{grid-template-columns:1fr;gap:24px}
+    .lprog{flex-direction:column;gap:18px}
+    .lprog__step{text-align:left;display:flex;gap:14px;align-items:flex-start;padding:0}
+    .lprog__step:not(:last-child)::after{display:none}
+    .lprog__dot{margin:2px 0 0}
   }
 
   /* SCREENSHOT GRID */
@@ -419,111 +457,232 @@
         <div class="loop">
 
           <p class="loop__intro"
-            data-en="The core loop is a single clean ring: coworkers produce, KPI accumulates, you reinvest, output grows stronger. Complexity isn't piled into the core ring — it hangs off the outside. Dollar headhunting is a 'gamble' support ring; the M1–M5 unlocks are a slow loop that raises the ceiling. All three funnel through one KPI gate: whether you land a hire by luck or by cash, you still have to spend KPI to put them to work."
-            data-zh="核心循环是一个干净的单环：同事产出、攒 KPI、投回去、产得更强。复杂度不堆在核心环里，而是挂在外面——Dollar 猎头是一条&quot;赌一把&quot;的支撑环，M1–M5 解锁是一条抬高天花板的慢循环。三者靠同一道 KPI 闸门收口：无论靠运气还是靠钱招到人，都得花 KPI 才能上工。">The core loop is a single clean ring: coworkers produce, KPI accumulates, you reinvest, output grows stronger. Complexity isn't piled into the core ring — it hangs off the outside. Dollar headhunting is a 'gamble' support ring; the M1–M5 unlocks are a slow loop that raises the ceiling. All three funnel through one KPI gate: whether you land a hire by luck or by cash, you still have to spend KPI to put them to work.</p>
+            data-en="This economy runs on three layers: a high-frequency production loop that ticks every minute, a mid-frequency recruitment loop where you 'bank up, then gamble', and a one-time long-term progression line. All three funnel through a single KPI gate — every coworker deployed and every growth investment must spend KPI. Separating these three layers, and giving the player a real choice in each, is the design goal of this system."
+            data-zh="这套经济分三层：一个每分钟都在跑的高频生产环、一个&quot;攒一笔赌一把&quot;的中频招聘环、一条一次性的长期成长线。三者用同一道 KPI 闸门收口——所有同事上工、所有成长投入，都必须花 KPI。区分这三层、并让玩家在每层都有选择，是这套系统的设计目标。">This economy runs on three layers: a high-frequency production loop that ticks every minute, a mid-frequency recruitment loop where you 'bank up, then gamble', and a one-time long-term progression line. All three funnel through a single KPI gate — every coworker deployed and every growth investment must spend KPI. Separating these three layers, and giving the player a real choice in each, is the design goal of this system.</p>
 
-          <svg class="loop__figure" viewBox="0 0 920 640" role="img"
-               aria-label="Core loop diagram: a green KPI-driven main ring of four nodes, with a gold Dollar headhunting support ring and a dim M1–M5 unlock support ring, all converging on the KPI gate.">
+          <!-- shared SVG defs -->
+          <svg width="0" height="0" aria-hidden="true" style="position:absolute">
             <defs>
-              <marker id="ah-green" viewBox="0 0 10 10" refX="7.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#69bd92"/></marker>
-              <marker id="ah-gold" viewBox="0 0 10 10" refX="7.5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#cda44e"/></marker>
-              <marker id="ah-dark" viewBox="0 0 10 10" refX="7.5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#6a665e"/></marker>
-              <radialGradient id="coreGlow" cx="50%" cy="50%" r="50%">
-                <stop offset="0%" stop-color="#69bd92" stop-opacity=".12"/>
-                <stop offset="62%" stop-color="#69bd92" stop-opacity=".03"/>
-                <stop offset="100%" stop-color="#69bd92" stop-opacity="0"/>
+              <marker id="lah-green" viewBox="0 0 10 10" refX="7.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#69bd92"/></marker>
+              <linearGradient id="recRing" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#69bd92"/>
+                <stop offset="100%" stop-color="#cda44e"/>
+              </linearGradient>
+              <radialGradient id="ringGlow" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#69bd92" stop-opacity=".10"/>
+                <stop offset="66%" stop-color="#69bd92" stop-opacity="0"/>
               </radialGradient>
-              <filter id="gateGlow" x="-80%" y="-80%" width="260%" height="260%">
-                <feGaussianBlur stdDeviation="5" result="b"/>
+              <filter id="lgateGlow" x="-90%" y="-90%" width="280%" height="280%">
+                <feGaussianBlur stdDeviation="4" result="b"/>
                 <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
               </filter>
             </defs>
-
-            <!-- core ambient glow -->
-            <circle cx="430" cy="300" r="215" fill="url(#coreGlow)"/>
-
-            <!-- ============ SUPPORT RING B · UNLOCK (dim, behind) ============ -->
-            <g opacity=".62">
-              <path d="M 396 464 C 320 506, 232 484, 198 454" fill="none" stroke="#6a665e" stroke-width="1.25" stroke-dasharray="3 4" marker-end="url(#ah-dark)"/>
-              <path d="M 150 408 C 108 322, 150 224, 246 172" fill="none" stroke="#6a665e" stroke-width="1.25" stroke-dasharray="3 4" marker-end="url(#ah-dark)"/>
-              <circle cx="170" cy="430" r="24" fill="#191816" stroke="#6a665e" stroke-width="1.25"/>
-              <text class="ld-num" x="170" y="431" text-anchor="middle" dominant-baseline="middle" fill="#a4a4b0" style="font-size:13px">M1–5</text>
-              <text class="ld-meta" x="170" y="476" text-anchor="middle" fill="#6a665e">UNLOCK · 解锁</text>
-              <text class="ld-desc" x="170" y="494" text-anchor="middle" data-en="Raise the ceiling" data-zh="抬高产能天花板">抬高产能天花板</text>
-              <text class="ld-ceil" x="252" y="156" text-anchor="middle" data-en="CAPACITY CEILING ↑" data-zh="产能天花板 ↑">产能天花板 ↑</text>
-            </g>
-
-            <!-- ============ SUPPORT RING A · DOLLAR (gold) ============ -->
-            <g opacity=".9">
-              <path d="M 588 336 C 642 382, 692 380, 720 372" fill="none" stroke="#cda44e" stroke-width="1.6" marker-end="url(#ah-gold)"/>
-              <path d="M 712 402 C 682 462, 542 472, 470 461" fill="none" stroke="#cda44e" stroke-width="1.6" marker-end="url(#ah-gold)"/>
-              <circle cx="725" cy="378" r="25" fill="#191816" stroke="#cda44e" stroke-width="1.6"/>
-              <text class="ld-num" x="725" y="379" text-anchor="middle" dominant-baseline="middle" fill="#cda44e" style="font-size:19px">$</text>
-              <text class="ld-meta" x="725" y="424" text-anchor="middle" fill="#cda44e">DOLLAR · 猎头</text>
-              <text class="ld-title" x="725" y="445" text-anchor="middle" data-en="Headhunt" data-zh="猎头招聘" style="font-size:14px">猎头招聘</text>
-              <text class="ld-desc" x="725" y="463" text-anchor="middle" data-en="Spend Dollar, gamble for talent" data-zh="花 Dollar 赌高级苗子">花 Dollar 赌高级苗子</text>
-            </g>
-
-            <!-- ============ CORE RING (green, main) ============ -->
-            <g>
-              <path class="cr-arc cr1" d="M459.57 147.85 A155 155 0 0 1 582.15 270.43" fill="none" stroke="#69bd92" stroke-width="2.6" marker-end="url(#ah-green)"/>
-              <path class="cr-arc cr2" d="M582.15 329.57 A155 155 0 0 1 459.57 452.15" fill="none" stroke="#69bd92" stroke-width="2.6" marker-end="url(#ah-green)"/>
-              <path class="cr-arc cr3" d="M400.43 452.15 A155 155 0 0 1 277.85 329.57" fill="none" stroke="#69bd92" stroke-width="2.6" marker-end="url(#ah-green)"/>
-              <path class="cr-arc cr4" d="M277.85 270.43 A155 155 0 0 1 400.43 147.85" fill="none" stroke="#69bd92" stroke-width="2.6" marker-end="url(#ah-green)"/>
-            </g>
-
-            <!-- node ① PRODUCE (top) -->
-            <circle cx="430" cy="145" r="30" fill="#191816" stroke="#69bd92" stroke-width="2.2"/>
-            <text class="ld-num" x="430" y="146" text-anchor="middle" dominant-baseline="middle" fill="#69bd92">01</text>
-            <text class="ld-title" x="430" y="74" text-anchor="middle" data-en="Produce" data-zh="产出 / Produce">产出 / Produce</text>
-            <text class="ld-desc" x="430" y="96" text-anchor="middle" data-en="Workers auto-produce files" data-zh="同事上工，自动产出文件">同事上工，自动产出文件</text>
-
-            <!-- node ② CONVERT (right) -->
-            <circle cx="585" cy="300" r="30" fill="#191816" stroke="#69bd92" stroke-width="2.2"/>
-            <text class="ld-num" x="585" y="301" text-anchor="middle" dominant-baseline="middle" fill="#69bd92">02</text>
-            <text class="ld-title" x="623" y="286" text-anchor="start" data-en="Convert" data-zh="转化 / Convert">转化 / Convert</text>
-            <text class="ld-desc" x="623" y="308" text-anchor="start" data-en="Files graded → KPI" data-zh="评级转 KPI">评级转 KPI</text>
-
-            <!-- node ③ REINVEST (bottom) — KPI GATE, highlighted -->
-            <circle class="gate-glow" cx="430" cy="455" r="38" fill="#69bd92" opacity=".5" filter="url(#gateGlow)"/>
-            <circle cx="430" cy="455" r="31" fill="#69bd92" stroke="#69bd92" stroke-width="2.2"/>
-            <text class="ld-num" x="430" y="456" text-anchor="middle" dominant-baseline="middle" fill="#15151b">03</text>
-            <text class="ld-title" x="430" y="527" text-anchor="middle" data-en="Reinvest" data-zh="再投资 / Reinvest">再投资 / Reinvest</text>
-            <text class="ld-desc" x="430" y="549" text-anchor="middle" data-en="Spend KPI: upgrade desks, deploy hires" data-zh="KPI 投回：升级工位、招人上工">KPI 投回：升级工位、招人上工</text>
-            <rect x="362" y="563" width="136" height="22" rx="11" fill="none" stroke="#69bd92" stroke-width="1"/>
-            <text class="ld-tag" x="430" y="578" text-anchor="middle" data-en="KPI GATE · only choke point" data-zh="KPI 闸门 · 唯一收口">KPI 闸门 · 唯一收口</text>
-
-            <!-- node ④ SCALE (left) -->
-            <circle cx="275" cy="300" r="30" fill="#191816" stroke="#69bd92" stroke-width="2.2"/>
-            <text class="ld-num" x="275" y="301" text-anchor="middle" dominant-baseline="middle" fill="#69bd92">04</text>
-            <text class="ld-title" x="237" y="286" text-anchor="end" data-en="Scale" data-zh="增益 / Scale">增益 / Scale</text>
-            <text class="ld-desc" x="237" y="308" text-anchor="end" data-en="Buffs + staff → stronger" data-zh="工位 buff、人手更多">工位 buff、人手更多</text>
           </svg>
 
-          <div class="loop__key">
-            <span class="loop__key-item"><span class="loop__swatch" style="background:#69bd92"></span><span data-en="KPI / Performance" data-zh="KPI / 绩效">KPI / Performance</span></span>
-            <span class="loop__key-item"><span class="loop__swatch" style="background:#cda44e"></span><span data-en="Dollar / Money" data-zh="Dollar / 金钱">Dollar / Money</span></span>
-            <span class="loop__key-item"><span class="loop__swatch" style="background:#6a665e"></span><span data-en="Unlock / Meta" data-zh="解锁 / 元循环">Unlock / Meta</span></span>
+          <!-- resource chips -->
+          <div class="loop__res">
+            <div class="res-chip">
+              <div class="res-chip__head">
+                <span class="res-chip__dot" style="background:#69bd92"></span>
+                <span class="res-chip__name">KPI</span>
+                <span class="res-chip__tag" data-en="Growth currency" data-zh="成长主货币">Growth currency</span>
+              </div>
+              <p class="res-chip__desc" data-en="Earned from output, spent on growth — upgrade desks / push progression / deploy hires." data-zh="靠产出获得，投入成长：升工位 / 推进度 / 招人上工。">Earned from output, spent on growth — upgrade desks / push progression / deploy hires.</p>
+            </div>
+            <div class="res-chip">
+              <div class="res-chip__head">
+                <span class="res-chip__dot" style="background:#cda44e"></span>
+                <span class="res-chip__name">Dollar</span>
+                <span class="res-chip__tag" data-en="Gacha currency" data-zh="抽卡专用货币">Gacha currency</span>
+              </div>
+              <p class="res-chip__desc" data-en="A random byproduct of coworkers working; its only use is headhunting." data-zh="员工工作的随机副产品，唯一去向是猎头招聘。">A random byproduct of coworkers working; its only use is headhunting.</p>
+            </div>
+            <div class="res-chip">
+              <div class="res-chip__head">
+                <span class="res-chip__dot" style="background:#7d7a72"></span>
+                <span class="res-chip__name" data-en="Files" data-zh="文件">Files</span>
+                <span class="res-chip__tag" data-en="Intermediate" data-zh="中间产物">Intermediate</span>
+              </div>
+              <p class="res-chip__desc" data-en="Quality-graded (gray / green / blue / gold). Grade decides how much KPI each output converts to." data-zh="带质量评级（灰 / 绿 / 蓝 / 金），质量决定每次产出能换多少 KPI。">Quality-graded (gray / green / blue / gold). Grade decides how much KPI each output converts to.</p>
+            </div>
           </div>
 
-          <div class="loop__legend">
-            <div class="loop__legend-row">
-              <span class="loop__legend-tier" style="color:#69bd92"><span class="dot" style="background:#69bd92"></span><span data-en="Core · High-freq" data-zh="核心环 · 高频">核心环 · 高频</span></span>
-              <span class="loop__legend-text" data-en="Produce → Convert → Reinvest → Scale, then back to Produce. The single tight loop that carries the moment-to-moment game." data-zh="产出 → 转化 → 再投资 → 增益，再回到产出。承载逐帧体验的那个紧凑单环。">产出 → 转化 → 再投资 → 增益，再回到产出。承载逐帧体验的那个紧凑单环。</span>
+          <div class="loop__cards">
+
+            <!-- ===== ① CORE LOOP ===== -->
+            <div class="lcard">
+              <div class="lcard__head">
+                <span class="lcard__idx" style="color:#69bd92">①</span>
+                <span class="lcard__title" data-en="Core Production Loop" data-zh="核心生产循环">Core Production Loop</span>
+                <span class="lcard__en">Core Loop</span>
+                <span class="lcard__freq" data-en="High-freq · per minute" data-zh="高频 · 每分钟">High-freq · per minute</span>
+              </div>
+              <div class="lcard__body">
+                <svg class="lring" viewBox="0 0 240 240" aria-hidden="true">
+                  <circle cx="120" cy="120" r="104" fill="url(#ringGlow)"/>
+                  <path class="lr-arc" d="M139.35 42.4 A80 80 0 0 1 197.6 100.65" fill="none" stroke="#69bd92" stroke-width="2.4" marker-end="url(#lah-green)"/>
+                  <path class="lr-arc" d="M197.6 139.35 A80 80 0 0 1 139.35 197.6" fill="none" stroke="#69bd92" stroke-width="2.4" marker-end="url(#lah-green)"/>
+                  <path class="lr-arc" d="M100.65 197.6 A80 80 0 0 1 42.4 139.35" fill="none" stroke="#69bd92" stroke-width="2.4" marker-end="url(#lah-green)"/>
+                  <path class="lr-arc" d="M42.4 100.65 A80 80 0 0 1 100.65 42.4" fill="none" stroke="#69bd92" stroke-width="2.4" marker-end="url(#lah-green)"/>
+                  <text class="lr-cycle" x="120" y="122" text-anchor="middle" dominant-baseline="central">&#8635;</text>
+                  <!-- 1 top: auto circle -->
+                  <circle cx="120" cy="40" r="15" fill="#15151b" stroke="#69bd92" stroke-width="2"/>
+                  <text class="lr-num" x="120" y="40" text-anchor="middle" dominant-baseline="central" fill="#69bd92">1</text>
+                  <!-- 2 right: auto circle -->
+                  <circle cx="200" cy="120" r="15" fill="#15151b" stroke="#69bd92" stroke-width="2"/>
+                  <text class="lr-num" x="200" y="120" text-anchor="middle" dominant-baseline="central" fill="#69bd92">2</text>
+                  <!-- 3 bottom: DECISION diamond -->
+                  <rect x="109.4" y="189.4" width="21.2" height="21.2" rx="2.5" transform="rotate(45 120 200)" fill="#15151b" stroke="#69bd92" stroke-width="2"/>
+                  <text class="lr-num" x="120" y="200" text-anchor="middle" dominant-baseline="central" fill="#69bd92">3</text>
+                  <!-- 4 left: auto circle -->
+                  <circle cx="40" cy="120" r="15" fill="#15151b" stroke="#69bd92" stroke-width="2"/>
+                  <text class="lr-num" x="40" y="120" text-anchor="middle" dominant-baseline="central" fill="#69bd92">4</text>
+                </svg>
+                <div class="lnodes">
+                  <div class="lnode lnode--auto">
+                    <span class="lnode__num">1</span>
+                    <div class="lnode__main"><p class="lnode__title" data-en="Coworkers produce files (auto)" data-zh="同事产出文件（自动）">Coworkers produce files (auto)</p></div>
+                  </div>
+                  <div class="lnode lnode--auto">
+                    <span class="lnode__num">2</span>
+                    <div class="lnode__main">
+                      <p class="lnode__title" data-en="Files are quality-graded" data-zh="文件按质量评级">Files are quality-graded</p>
+                      <p class="lnode__desc" data-en="Gray / green / blue / gold — grade sets how much KPI they convert to." data-zh="灰 / 绿 / 蓝 / 金 —— 评级决定能换多少 KPI。">Gray / green / blue / gold — grade sets how much KPI they convert to.</p>
+                    </div>
+                  </div>
+                  <div class="lnode">
+                    <span class="lnode__num">3</span>
+                    <div class="lnode__main">
+                      <span class="lnode__dec" data-en="◆ Decision" data-zh="◆ 决策">◆ Decision</span>
+                      <p class="lnode__title" data-en="Where to reinvest KPI?" data-zh="KPI 投回哪里？">Where to reinvest KPI?</p>
+                      <p class="lnode__desc" data-en="Upgrade desks for buffs, or bank it to push player progression." data-zh="升工位提 buff，还是攒着推玩家进度。">Upgrade desks for buffs, or bank it to push player progression.</p>
+                    </div>
+                  </div>
+                  <div class="lnode lnode--auto">
+                    <span class="lnode__num">4</span>
+                    <div class="lnode__main"><p class="lnode__title" data-en="Capacity rises → back to start" data-zh="产能提升 → 回到起点">Capacity rises → back to start</p></div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="loop__legend-row">
-              <span class="loop__legend-tier" style="color:#cda44e"><span class="dot" style="background:#cda44e"></span><span data-en="Support A · Mid-freq" data-zh="支撑环 A · 中频">支撑环 A · 中频</span></span>
-              <span class="loop__legend-text" data-en="Dollar drops randomly while working → headhunt for a shot at a higher-tier hire → still must pass the KPI gate to deploy → merges back in." data-zh="工作时随机掉落 Dollar → 猎头招聘，更大几率赌到高级苗子 → 仍须经 KPI 闸门才能上工 → 汇入核心环。">工作时随机掉落 Dollar → 猎头招聘，更大几率赌到高级苗子 → 仍须经 KPI 闸门才能上工 → 汇入核心环。</span>
+
+            <!-- ===== ② RECRUITMENT LOOP ===== -->
+            <div class="lcard">
+              <div class="lcard__head">
+                <span class="lcard__idx" style="color:#cda44e">②</span>
+                <span class="lcard__title" data-en="Recruitment Loop" data-zh="员工获取循环">Recruitment Loop</span>
+                <span class="lcard__en">Recruitment Loop</span>
+                <span class="lcard__freq" data-en="Mid-freq · bank & gamble" data-zh="中频 · 攒一笔赌一把">Mid-freq · bank &amp; gamble</span>
+              </div>
+              <div class="lcard__body">
+                <svg class="lring" viewBox="0 0 240 240" aria-hidden="true">
+                  <circle cx="120" cy="120" r="104" fill="url(#ringGlow)"/>
+                  <path class="lr-arc" d="M139.35 42.4 A80 80 0 0 1 197.6 100.65" fill="none" stroke="url(#recRing)" stroke-width="2.4" marker-end="url(#lah-green)"/>
+                  <path class="lr-arc" d="M197.6 139.35 A80 80 0 0 1 139.35 197.6" fill="none" stroke="url(#recRing)" stroke-width="2.4" marker-end="url(#lah-green)"/>
+                  <path class="lr-arc" d="M100.65 197.6 A80 80 0 0 1 42.4 139.35" fill="none" stroke="url(#recRing)" stroke-width="2.4" marker-end="url(#lah-green)"/>
+                  <path class="lr-arc" d="M42.4 100.65 A80 80 0 0 1 100.65 42.4" fill="none" stroke="url(#recRing)" stroke-width="2.4" marker-end="url(#lah-green)"/>
+                  <text class="lr-cycle" x="120" y="122" text-anchor="middle" dominant-baseline="central" style="fill:#cda44e">&#8635;</text>
+                  <!-- 1 top: DECISION diamond (channel, Dollar option → gold) -->
+                  <rect x="109.4" y="29.4" width="21.2" height="21.2" rx="2.5" transform="rotate(45 120 40)" fill="#15151b" stroke="#cda44e" stroke-width="2"/>
+                  <text class="lr-num" x="120" y="40" text-anchor="middle" dominant-baseline="central" fill="#cda44e">1</text>
+                  <!-- 2 right: auto circle -->
+                  <circle cx="200" cy="120" r="15" fill="#15151b" stroke="#69bd92" stroke-width="2"/>
+                  <text class="lr-num" x="200" y="120" text-anchor="middle" dominant-baseline="central" fill="#69bd92">2</text>
+                  <!-- 3 bottom: KPI GATE — solid diamond + glow -->
+                  <rect class="gate-glow" x="103" y="183" width="34" height="34" rx="4" transform="rotate(45 120 200)" fill="#69bd92" opacity=".5" filter="url(#lgateGlow)"/>
+                  <rect x="106.9" y="186.9" width="26.2" height="26.2" rx="3" transform="rotate(45 120 200)" fill="#69bd92" stroke="#69bd92" stroke-width="2"/>
+                  <text class="lr-num" x="120" y="200" text-anchor="middle" dominant-baseline="central" fill="#15151b">3</text>
+                  <!-- 4 left: DECISION diamond -->
+                  <rect x="29.4" y="109.4" width="21.2" height="21.2" rx="2.5" transform="rotate(45 40 120)" fill="#15151b" stroke="#69bd92" stroke-width="2"/>
+                  <text class="lr-num" x="40" y="120" text-anchor="middle" dominant-baseline="central" fill="#69bd92">4</text>
+                </svg>
+                <div class="lnodes">
+                  <div class="lnode">
+                    <span class="lnode__num">1</span>
+                    <div class="lnode__main">
+                      <span class="lnode__dec" data-en="◆ Decision" data-zh="◆ 决策">◆ Decision</span>
+                      <p class="lnode__title" data-en="Which recruiting channel?" data-zh="走哪条招募渠道？">Which recruiting channel?</p>
+                      <p class="lnode__desc" data-en="HR drops a free candidate on a timer, or spend Dollar on headhunting to gamble for a higher-tier prospect." data-zh="HR 定时白嫖一个候选人，还是花 Dollar 走猎头赌高级苗子。">HR drops a free candidate on a timer, or spend Dollar on headhunting to gamble for a higher-tier prospect.</p>
+                    </div>
+                  </div>
+                  <div class="lnode lnode--auto">
+                    <span class="lnode__num">2</span>
+                    <div class="lnode__main"><p class="lnode__title" data-en="You get a candidate" data-zh="得到候选人">You get a candidate</p></div>
+                  </div>
+                  <div class="lnode lnode--gate">
+                    <span class="lnode__num">3</span>
+                    <div class="lnode__main">
+                      <span class="lnode__dec" data-en="◆ KPI GATE · only choke point" data-zh="◆ KPI 闸门 · 唯一收口">◆ KPI GATE · only choke point</span>
+                      <p class="lnode__title" data-en="Spend KPI to decide who works first" data-zh="花 KPI 让谁先上工">Spend KPI to decide who works first</p>
+                      <p class="lnode__desc" data-en="Resources are limited — who do you deploy first?" data-zh="资源有限，先招谁。">Resources are limited — who do you deploy first?</p>
+                    </div>
+                  </div>
+                  <div class="lnode">
+                    <span class="lnode__num">4</span>
+                    <div class="lnode__main">
+                      <span class="lnode__dec" data-en="◆ Decision" data-zh="◆ 决策">◆ Decision</span>
+                      <p class="lnode__title" data-en="Which desk for the new hire?" data-zh="新同事放进哪个工位？">Which desk for the new hire?</p>
+                      <p class="lnode__desc" data-en="Reshapes the capacity structure." data-zh="改变产能结构。">Reshapes the capacity structure.</p>
+                    </div>
+                  </div>
+                  <p class="lnode__feed" data-en="→ feeds back into the Core Loop" data-zh="→ 喂回核心环">→ feeds back into the Core Loop</p>
+                </div>
+              </div>
             </div>
-            <div class="loop__legend-row">
-              <span class="loop__legend-tier" style="color:#a4a4b0"><span class="dot" style="background:#6a665e"></span><span data-en="Support B · Low-freq" data-zh="支撑环 B · 低频">支撑环 B · 低频</span></span>
-              <span class="loop__legend-text" data-en="Keep banking KPI → level up M1–M5 → unlock more desks / office count / office types → raise the core ring's output ceiling." data-zh="持续攒 KPI → 玩家升级 M1–M5 → 解锁更多工位 / 办公室数量 / 办公室类型 → 抬高核心环的产能天花板。">持续攒 KPI → 玩家升级 M1–M5 → 解锁更多工位 / 办公室数量 / 办公室类型 → 抬高核心环的产能天花板。</span>
+
+            <!-- ===== ③ META PROGRESSION (line, not a loop) ===== -->
+            <div class="lcard">
+              <div class="lcard__head">
+                <span class="lcard__idx" style="color:#a4a4b0">③</span>
+                <span class="lcard__title" data-en="Meta Progression" data-zh="长期成长循环">Meta Progression</span>
+                <span class="lcard__en">Meta Progression</span>
+                <span class="lcard__freq" data-en="Low-freq · one-time" data-zh="低频 · 一次性">Low-freq · one-time</span>
+              </div>
+              <div class="lcard__body lcard__body--line">
+                <p class="lmeta__shape" data-en="—— Drawn as a LINE, not a ring (deliberate)" data-zh="—— 直线进度，刻意不画成环">—— Drawn as a LINE, not a ring (deliberate)</p>
+                <div class="lprog">
+                  <div class="lprog__step">
+                    <div class="lprog__dot"></div>
+                    <p class="lprog__m">M1</p>
+                    <p class="lprog__unlock" data-en="Starting office" data-zh="基础办公室">Starting office</p>
+                  </div>
+                  <div class="lprog__step">
+                    <div class="lprog__dot"></div>
+                    <p class="lprog__m">M2</p>
+                    <p class="lprog__unlock" data-en="More desks" data-zh="更多工位">More desks</p>
+                  </div>
+                  <div class="lprog__step">
+                    <div class="lprog__dot"></div>
+                    <p class="lprog__m">M3</p>
+                    <p class="lprog__unlock" data-en="More offices" data-zh="更多办公室数量">More offices</p>
+                  </div>
+                  <div class="lprog__step">
+                    <div class="lprog__dot"></div>
+                    <p class="lprog__m">M4</p>
+                    <p class="lprog__unlock" data-en="New office types" data-zh="新办公室类型">New office types</p>
+                  </div>
+                  <div class="lprog__step">
+                    <div class="lprog__dot"></div>
+                    <p class="lprog__m">M5</p>
+                    <p class="lprog__unlock" data-en="New staff pool" data-zh="新员工池">New staff pool</p>
+                  </div>
+                </div>
+                <p class="lmeta__note" data-en="This layer is Meta Progression (chapter growth), not a loop — deliberately drawn as a straight line rather than a ring, to separate the high-frequency loops you run over and over from one-time long-term growth. Its job: raise the output ceiling of both the Core and Recruitment loops." data-zh="这一层是 Meta Progression（章节成长），不是循环——刻意画成直线而非环，以区分反复跑的高频循环和一次性的长期成长。作用：抬高整个核心环与招聘环的产能天花板。">This layer is Meta Progression (chapter growth), not a loop — deliberately drawn as a straight line rather than a ring, to separate the high-frequency loops you run over and over from one-time long-term growth. Its job: raise the output ceiling of both the Core and Recruitment loops.</p>
+              </div>
             </div>
+
           </div>
 
-          <p class="loop__note"
-            data-en-html="Decision point: recruiting has two channels — <strong>HR hiring</strong> (a free candidate on a timer) and <strong>headhunting</strong> (spend Dollar to gamble for a higher-tier candidate). But no matter which channel a hire arrives through, you still have to spend KPI before they can actually start working. KPI is the one and only gate every coworker must pass to enter play."
-            data-zh-html="决策点：招募有两条渠道——<strong>HR 普通招聘</strong>（定时白送一个候选人）/ <strong>猎头招聘</strong>（花 Dollar 赌更高级候选人），但两条渠道的人到了之后，都必须再花 KPI 才能正式上工。KPI 是所有同事入场的唯一闸门。">Decision point: recruiting has two channels — <strong>HR hiring</strong> (a free candidate on a timer) and <strong>headhunting</strong> (spend Dollar to gamble for a higher-tier candidate). But no matter which channel a hire arrives through, you still have to spend KPI before they can actually start working. KPI is the one and only gate every coworker must pass to enter play.</p>
+          <!-- KPI gate band -->
+          <div class="lgate">
+            <div class="lgate__head">
+              <span class="lgate__diamond"></span>
+              <span class="lgate__title" data-en="KPI Gate · the only choke point" data-zh="KPI 闸门 · 唯一收口">KPI Gate · the only choke point</span>
+            </div>
+            <p class="lgate__text"
+              data-en-html="Both loops must pass through the KPI gate: whether a hire came free from HR or was gambled out of headhunting with Dollar, once they arrive you still have to <strong>spend KPI to put them to work</strong>. KPI is the single exit for every coworker entering play and every growth investment — it's what keeps the two outboard loops from letting the system diverge."
+              data-zh-html="两个循环都必须穿过 KPI 闸门：无论靠 HR 白嫖、还是花 Dollar 猎头赌来的人，到了之后都得<strong>再花 KPI 才能上工</strong>。KPI 是所有同事入场、所有成长投入的唯一出口——它让两条外挂循环不会让系统发散。">Both loops must pass through the KPI gate: whether a hire came free from HR or was gambled out of headhunting with Dollar, once they arrive you still have to <strong>spend KPI to put them to work</strong>. KPI is the single exit for every coworker entering play and every growth investment — it's what keeps the two outboard loops from letting the system diverge.</p>
+          </div>
 
         </div>
       </div>
