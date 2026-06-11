@@ -135,6 +135,68 @@
   .tab-panel.active{display:block}
   .tab-panel__content{font-size:15px;line-height:1.8;color:var(--muted);min-height:60px;padding-top:4px}
 
+  /* CONCEPT TIMELINE */
+  .concept-timeline{padding-top:4px}
+  .concept-timeline__intro{font-size:15px;line-height:1.85;color:#a4a4b0;margin-bottom:52px}
+  .concept-spine{position:relative;padding-left:36px}
+  .concept-spine::before{
+    content:'';position:absolute;
+    left:8px;top:9px;bottom:9px;
+    width:2px;
+    background:linear-gradient(to bottom,#69bd92 0%,#cda44e 100%);
+    z-index:0;
+  }
+  .concept-entry{position:relative;padding-bottom:44px}
+  .concept-entry:last-child{padding-bottom:2px}
+  .concept-entry__dot{
+    position:absolute;left:-35px;top:2px;
+    width:14px;height:14px;border-radius:50%;
+    border:1.5px solid rgba(164,164,176,.38);
+    background:var(--bg);
+    box-sizing:border-box;z-index:1;
+  }
+  .concept-entry--payoff{
+    background:linear-gradient(to right,rgba(105,189,146,.08) 0%,transparent 68%);
+    border-radius:8px;
+    margin-left:-14px;padding-left:14px;
+    padding-top:10px;margin-top:-10px;
+  }
+  .concept-entry--payoff .concept-entry__dot{
+    background:#69bd92;border-color:#69bd92;
+    box-shadow:0 0 10px rgba(105,189,146,.55),0 0 22px rgba(105,189,146,.2);
+  }
+  .concept-entry__meta{
+    font-family:var(--mono);font-size:10px;letter-spacing:.2em;
+    text-transform:uppercase;color:#a4a4b0;
+    margin-bottom:8px;
+  }
+  .concept-entry__title{
+    font-size:20px;font-weight:700;color:#eae7df;
+    margin-bottom:10px;line-height:1.25;
+    display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+  }
+  .concept-entry__tag{
+    font-family:var(--mono);font-size:10px;letter-spacing:.1em;
+    color:#69bd92;border:1px solid rgba(105,189,146,.4);
+    border-radius:3px;padding:2px 8px;
+    font-weight:400;text-transform:uppercase;white-space:nowrap;flex-shrink:0;
+  }
+  .concept-entry__body{font-size:15px;line-height:1.8;color:#a4a4b0}
+  @media(prefers-reduced-motion:no-preference){
+    @keyframes cfadeup{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+    .tab-panel.active .concept-entry{animation:cfadeup .55s cubic-bezier(.22,.61,.36,1) both}
+    .tab-panel.active .concept-entry:nth-child(1){animation-delay:.00s}
+    .tab-panel.active .concept-entry:nth-child(2){animation-delay:.08s}
+    .tab-panel.active .concept-entry:nth-child(3){animation-delay:.16s}
+    .tab-panel.active .concept-entry:nth-child(4){animation-delay:.24s}
+    .tab-panel.active .concept-entry:nth-child(5){animation-delay:.32s}
+  }
+  @media(max-width:600px){
+    .concept-spine{padding-left:28px}
+    .concept-entry__dot{left:-27px}
+    .concept-entry__title{font-size:17px}
+  }
+
   /* SCREENSHOT GRID */
   .proj-screens{
     display:grid;grid-template-columns:1fr 1fr;gap:4px;
@@ -253,7 +315,64 @@
         <button class="tab-btn" data-tab="build" data-en="Build" data-zh="技术实现">Build</button>
       </div>
       <div class="tab-panel active" id="tab-concept">
-        <p class="tab-panel__content">—</p>
+        <div class="concept-timeline">
+
+          <p class="concept-timeline__intro"
+            data-en="In this project, no mechanic is neutral. How the player role is framed, how currencies are split, how hiring is implemented, what the game looks like — every design decision is itself a workplace satire. That's what 'gameplay = theme' means: the theme isn't written into the story, it's built into the mechanics."
+            data-zh="这个项目里，没有一个机制是中立的。角色怎么定位、货币怎么分轨、招人怎么实现、游戏长成什么样——每一个设计决策，本身都是一句职场讽刺。这才是&quot;玩法即主题&quot;：主题不是写在剧情里，是长在机制里。">In this project, no mechanic is neutral. How the player role is framed, how currencies are split, how hiring is implemented, what the game looks like — every design decision is itself a workplace satire. That's what 'gameplay = theme' means: the theme isn't written into the story, it's built into the mechanics.</p>
+
+          <div class="concept-spine">
+
+            <div class="concept-entry">
+              <div class="concept-entry__dot" aria-hidden="true"></div>
+              <p class="concept-entry__meta">THEME · 主题</p>
+              <h4 class="concept-entry__title" data-en="Role Reversal" data-zh="角色反转">Role Reversal</h4>
+              <p class="concept-entry__body"
+                data-en="You're not the exploited worker — you're the one doing the managing. The game inverts the powerlessness of real office life into a satirical sense of control. You're finally the one giving orders, which is exactly what makes the whole thing more absurd."
+                data-zh="玩家不是被压榨的打工人，而是反过来&quot;管理上级&quot;的那个人。游戏把现实里的无力感倒置成讽刺性的掌控感——你终于站在了发号施令的那一端，而这恰恰让整件事更荒诞。">You're not the exploited worker — you're the one doing the managing. The game inverts the powerlessness of real office life into a satirical sense of control. You're finally the one giving orders, which is exactly what makes the whole thing more absurd.</p>
+            </div>
+
+            <div class="concept-entry">
+              <div class="concept-entry__dot" aria-hidden="true"></div>
+              <p class="concept-entry__meta">CURRENCY · 货币</p>
+              <h4 class="concept-entry__title" data-en="KPI &amp; Dollar" data-zh="KPI &amp; Dollar">KPI &amp; Dollar</h4>
+              <p class="concept-entry__body"
+                data-en="KPI is earned through output, spent on upgrades and desk décor. Dollar is reserved solely for headhunting. The two never convert — and that's the sharp edge of the design. In real life, performance metrics and actual money run on entirely separate logics: no KPI translates into hiring power, no cash buys a promotion. Most games let currencies flow freely. This one deliberately doesn't — because the disconnect is the point."
+                data-zh="KPI 靠产出赚取，花在升级和工位装饰；Dollar 只能用来猎头挖人。两者互不兑换——这正是设计的尖锐处：现实里&quot;考核指标&quot;和&quot;真金白银&quot;本就是两套逻辑，刷再多绩效也变不出钱去挖人，砸再多钱也换不来一次晋升。多数游戏会把货币打通做成兑换闭环，这里偏不，因为脱钩本身就是要讲的那句话。">KPI is earned through output, spent on upgrades and desk décor. Dollar is reserved solely for headhunting. The two never convert — and that's the sharp edge of the design.</p>
+            </div>
+
+            <div class="concept-entry">
+              <div class="concept-entry__dot" aria-hidden="true"></div>
+              <p class="concept-entry__meta">SYSTEM · 招募</p>
+              <h4 class="concept-entry__title" data-en="Coworker Gacha" data-zh="同事抽卡">Coworker Gacha</h4>
+              <p class="concept-entry__body"
+                data-en="Recruitment is built as gacha. This reframes hiring — a supposedly serious decision — as pure gambling. You spend resources, you get randomness. Star performer or deadweight, it's all probability. The most entertainment-coded mechanic applied to the most real-world anxiety."
+                data-zh="招募做成 gacha。这一步把&quot;招人&quot;这件正经事，戏仿成了一场纯赌博——你付出的是成本，得到的是运气，干将还是水货全凭概率。用最娱乐化的抽卡形式，去戳最现实的用人焦虑。">Recruitment is built as gacha. This reframes hiring — a supposedly serious decision — as pure gambling. You spend resources, you get randomness. Star performer or deadweight, it's all probability.</p>
+            </div>
+
+            <div class="concept-entry concept-entry--payoff">
+              <div class="concept-entry__dot" aria-hidden="true"></div>
+              <p class="concept-entry__meta">FORM · 形式</p>
+              <h4 class="concept-entry__title">
+                <span data-en="Slacking Mode" data-zh="摸鱼模式">Slacking Mode</span>
+                <span class="concept-entry__tag" data-en="Design Closed Loop" data-zh="设计闭环">Design Closed Loop</span>
+              </h4>
+              <p class="concept-entry__body"
+                data-en="The game hides on your desktop disguised as a productivity tool — looks like a notepad, mimics genuine paid-hours slacking. The disguise isn't a gimmick: a game about slacking off becomes the actual tool you use to slack off. Form and content converge; the concept closes the loop at this layer."
+                data-zh="伪装成生产力工具，藏在桌面上，长得像记事本，模仿真实的带薪摸鱼。这层伪装不是炫技：一个讲摸鱼的游戏，本身就成了你摸鱼的工具——形式和内容在这里合一，概念闭环也合在这一层。">The game hides on your desktop disguised as a productivity tool — looks like a notepad, mimics genuine paid-hours slacking. The disguise isn't a gimmick: a game about slacking off becomes the actual tool you use to slack off. Form and content converge; the concept closes the loop at this layer.</p>
+            </div>
+
+            <div class="concept-entry">
+              <div class="concept-entry__dot" aria-hidden="true"></div>
+              <p class="concept-entry__meta">GENRE · 品类</p>
+              <h4 class="concept-entry__title" data-en="Idle = Labor" data-zh="挂机即打工">Idle = Labor</h4>
+              <p class="concept-entry__body"
+                data-en="Choosing idle as the genre is itself a statement. The essence of idle is 'it runs whether you're watching or not' — which is just work, isn't it? Output accumulates automatically, your presence is optional. Other games use idle for farms, empires, factories. This one uses it to replicate the actual condition of having a job: the mechanic mirrors the theme."
+                data-zh="选挂机这个品类本身就是表达。挂机的本质是&quot;你不盯着，它也在跑&quot;——这不正是打工？产出自动累积，你在不在场无所谓。别人用挂机做农场、帝国、工厂，这里用它复刻打工的真实处境，让玩法结构和主题对上了号。">Choosing idle as the genre is itself a statement. The essence of idle is 'it runs whether you're watching or not' — which is just work, isn't it? Output accumulates automatically, your presence is optional.</p>
+            </div>
+
+          </div>
+        </div>
       </div>
       <div class="tab-panel" id="tab-loop">
         <p class="tab-panel__content">—</p>
