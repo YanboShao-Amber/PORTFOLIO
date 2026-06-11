@@ -273,6 +273,15 @@
     font-size:13px;color:rgba(255,255,255,.6);
     max-width:54ch;line-height:1.65;
   }
+  .work__arrow{
+    position:absolute;bottom:28px;right:36px;
+    display:flex;align-items:center;
+    opacity:0;transform:translateX(-16px);
+    transition:opacity .35s var(--ease),transform .35s var(--ease);
+    pointer-events:none;z-index:2;
+  }
+  .work__link:hover .work__arrow{opacity:1;transform:translateX(0)}
+  .work__arrow img{height:20px;width:auto}
 
   /* ---------- FOOTER ---------- */
   .footer{
@@ -502,6 +511,7 @@
       <li class="work reveal" data-project="managing-up">
         <a class="work__link" href="#">
           <div class="work__thumb thumb--managing-up">
+            <span class="work__arrow"><img src="icon/长箭头.png" alt="→"></span>
             <div class="work__overlay">
               <div>
                 <h3 class="work__title">MANAGING UP</h3>
@@ -519,6 +529,7 @@
       <li class="work reveal" data-project="rainfall-echoes">
         <a class="work__link" href="#">
           <div class="work__thumb thumb--rainfall">
+            <span class="work__arrow"><img src="icon/长箭头.png" alt="→"></span>
             <div class="work__overlay">
               <div>
                 <h3 class="work__title">RAINFALL ECHOES</h3>
@@ -536,6 +547,7 @@
       <li class="work reveal" data-project="vermillion-soma">
         <a class="work__link" href="#">
           <div class="work__thumb thumb--soma">
+            <span class="work__arrow"><img src="icon/长箭头.png" alt="→"></span>
             <div class="work__overlay">
               <div>
                 <h3 class="work__title">VERMILLION SOMA</h3>
@@ -552,6 +564,7 @@
       <li class="work reveal" data-project="black-sea">
         <a class="work__link" href="#">
           <div class="work__thumb thumb--blacksea">
+            <span class="work__arrow"><img src="icon/长箭头.png" alt="→"></span>
             <div class="work__overlay">
               <div>
                 <h3 class="work__title">BLACK SEA</h3>
@@ -568,6 +581,7 @@
       <li class="work reveal" data-project="dice-or-death">
         <a class="work__link" href="#">
           <div class="work__thumb thumb--dice">
+            <span class="work__arrow"><img src="icon/长箭头.png" alt="→"></span>
             <div class="work__overlay">
               <div>
                 <h3 class="work__title">DICE OR DEATH</h3>
