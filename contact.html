@@ -11,7 +11,7 @@
   :root{
     --bg:#191816;--surface:#211f1d;--surface-2:#272421;
     --line:rgba(255,255,255,.12);--line-strong:rgba(255,255,255,.22);
-    --text:#f3f0ea;--muted:#9b978d;--faint:#6a665e;
+    --text:#ffffff;--muted:#ffffff;--faint:#ffffff;
     --display:'Archivo',sans-serif;--body:'Inter',sans-serif;--mono:'Space Mono',monospace;
     --maxw:880px;--ease:cubic-bezier(.22,.61,.36,1);
   }
@@ -22,7 +22,7 @@
 
   .nav{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:center;height:60px;background:rgba(25,24,22,.82);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line);margin:0 -20px;padding:0 20px}
   .nav__links{display:flex;gap:96px;list-style:none}
-  .nav__links a{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);text-decoration:none;position:relative;padding:6px 0;transition:color .25s var(--ease)}
+  .nav__links a{font-family:var(--mono);font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);text-decoration:none;position:relative;padding:6px 0;transition:color .25s var(--ease)}
   .nav__links a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:1px;background:var(--text);transition:width .3s var(--ease)}
   .nav__links a:hover,.nav__links a.active{color:var(--text)}
   .nav__links a:hover::after,.nav__links a.active::after{width:100%}
@@ -30,7 +30,7 @@
   .lang-toggle__btn{font-family:var(--mono);font-size:11px;font-weight:500;color:rgba(255,255,255,.45);background:transparent;border:none;cursor:pointer;padding:5px 13px;border-radius:16px;transition:color .2s ease,background .2s ease}
   .lang-toggle__btn.active{background:#fff;color:#1a1a1a;box-shadow:0 1px 5px rgba(0,0,0,.35)}
 
-  .page-header{padding:72px 0 80px}
+  .page-header{padding:22px 0 80px}
   .page-title{
     font-family:var(--display);font-weight:800;
     font-size:clamp(56px,12vw,96px);letter-spacing:.12em;text-align:center;
@@ -121,6 +121,7 @@
     <li><a href="PORTFOLIO.html">Home</a></li>
     <li><a href="works.html">Works</a></li>
     <li><a href="experience.html">Gaming</a></li>
+    <li><a href="resume.html">Resume</a></li>
     <li><a href="contact.html" class="active">Contact</a></li>
   </ul>
   <div class="lang-toggle">
@@ -230,6 +231,7 @@
         <li><a href="PORTFOLIO.html">Home</a></li>
         <li><a href="works.html">Works</a></li>
         <li><a href="experience.html">Gaming</a></li>
+        <li><a href="resume.html">Resume</a></li>
         <li><a href="contact.html">Contact</a></li>
       </ul>
     </nav>
