@@ -264,6 +264,59 @@
   .lgate__text{font-size:15px;line-height:1.78;color:#a4a4b0}
   .lgate__text strong{color:#eae7df;font-weight:500}
 
+  /* ===== BUILD — technical, layered (appendix weight) ===== */
+  .build{padding-top:4px}
+  .build__intro{font-size:15px;line-height:1.85;color:#a4a4b0;margin-bottom:24px}
+  .build__stack{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:34px}
+  .build__tag{font-family:var(--mono);font-size:12px;letter-spacing:.08em;color:#6f6f7c;border:1px solid var(--line);border-radius:4px;padding:5px 12px}
+  .build__cards{display:flex;flex-direction:column;gap:14px}
+  .build__row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+
+  .bcard{border:1px solid var(--line);border-radius:10px;background:rgba(255,255,255,.012);overflow:hidden}
+  .bcard--main{border-color:rgba(105,189,146,.22);background:linear-gradient(to bottom,rgba(105,189,146,.03),transparent 55%)}
+  .bcard__summary{list-style:none;cursor:pointer;padding:24px 26px;display:block}
+  .bcard--main .bcard__summary{padding:26px 30px}
+  .bcard__summary::-webkit-details-marker{display:none}
+  .bcard__summary::marker{content:''}
+  .bcard__summary:focus-visible{outline:2px solid #69bd92;outline-offset:-2px}
+  .bcard__head{display:flex;align-items:center;gap:12px;margin-bottom:13px}
+  .bcard__idx{font-family:var(--mono);font-weight:700;font-size:14px;letter-spacing:.1em;color:#6f6f7c}
+  .bcard__badge{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#69bd92;border:1px solid rgba(105,189,146,.4);border-radius:3px;padding:2px 8px}
+  .bcard__title{font-family:var(--display);font-weight:700;font-size:17px;color:#eae7df;line-height:1.35;margin-bottom:16px}
+  .bcard--main .bcard__title{font-size:20px}
+  .bcard__seg{margin-bottom:13px}
+  .bcard__seg:last-of-type{margin-bottom:0}
+  .bcard__label{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#6f6f7c;display:block;margin-bottom:6px}
+  .bcard__text{font-size:15px;line-height:1.75;color:#a4a4b0}
+  .bcard__seg--oneline .bcard__text{color:#cdcabf}
+  .bcard__toggle{display:inline-flex;align-items:center;gap:7px;margin-top:18px;font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#69bd92}
+  .bcard__chev{transition:transform .3s var(--ease);font-size:13px}
+  .bcard[open] .bcard__chev{transform:rotate(180deg)}
+  .bcard__detail{padding:0 24px 24px}
+  .bcard--main .bcard__detail{padding:0 28px 28px}
+  .bcard__detail-inner{border-top:1px solid var(--line);padding-top:18px;display:flex;flex-direction:column;gap:16px}
+  .bcard__list{list-style:none;display:flex;flex-direction:column;gap:7px;padding:0}
+  .bcard__list li{font-size:14px;line-height:1.65;color:#a4a4b0;padding-left:14px;position:relative}
+  .bcard__list li::before{content:'';position:absolute;left:0;top:9px;width:4px;height:4px;border-radius:50%;background:#69bd92;opacity:.65}
+  .bcard__detail-text{font-size:14px;line-height:1.7;color:#a4a4b0}
+  .bcard__why{font-size:14px;line-height:1.7;color:#a4a4b0;border-left:2px solid #69bd92;padding:10px 0 10px 15px;background:linear-gradient(to right,rgba(105,189,146,.05),transparent 80%);border-radius:0 6px 6px 0}
+  .bcard__why strong{color:#eae7df;font-weight:500}
+  .build__close{margin-top:26px;font-size:14px;line-height:1.75;color:#6f6f7c;border-top:1px solid var(--line);padding-top:18px}
+
+  @media(prefers-reduced-motion:no-preference){
+    @keyframes bdetail{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+    .tab-panel.active .build__intro{animation:lfade .5s var(--ease) both}
+    .tab-panel.active .build__stack{animation:lfade .5s var(--ease) .08s both}
+    .tab-panel.active .build__cards>.bcard{animation:lfade .55s var(--ease) .16s both}
+    .tab-panel.active .build__row>.bcard:nth-child(1){animation:lfade .55s var(--ease) .26s both}
+    .tab-panel.active .build__row>.bcard:nth-child(2){animation:lfade .55s var(--ease) .32s both}
+    .tab-panel.active .build__close{animation:lfade .5s var(--ease) .4s both}
+    .bcard[open] .bcard__detail-inner{animation:bdetail .4s var(--ease) both}
+  }
+  @media(max-width:720px){
+    .build__row{grid-template-columns:1fr}
+  }
+
   @media(prefers-reduced-motion:no-preference){
     @keyframes lfade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
     @keyframes ldraw{to{stroke-dashoffset:0}}
@@ -400,7 +453,6 @@
       <div class="tab-bar">
         <button class="tab-btn active" data-tab="concept" data-en="Concept" data-zh="玩法即主题">Concept</button>
         <button class="tab-btn" data-tab="loop" data-en="Core Loop" data-zh="核心循环">Core Loop</button>
-        <button class="tab-btn" data-tab="economy" data-en="Economy Design" data-zh="经济系统">Economy Design</button>
         <button class="tab-btn" data-tab="balance" data-en="Balancing" data-zh="数值平衡">Balancing</button>
         <button class="tab-btn" data-tab="build" data-en="Build" data-zh="技术实现">Build</button>
       </div>
@@ -716,14 +768,131 @@
 
         </div>
       </div>
-      <div class="tab-panel" id="tab-economy">
-        <p class="tab-panel__content">—</p>
-      </div>
       <div class="tab-panel" id="tab-balance">
         <p class="tab-panel__content">—</p>
       </div>
       <div class="tab-panel" id="tab-build">
-        <p class="tab-panel__content">—</p>
+        <div class="build">
+
+          <p class="build__intro"
+            data-en="As a designer, I can ship my own designs. The systems below were all built by me in Godot 4 — to verify whether the mechanics hold up in real interaction, not just on paper. If you want implementation details, expand any card."
+            data-zh="作为策划，我能把设计独立落地。以下系统均由我在 Godot 4 中自主实现——目的是验证机制在真实交互里是否成立，而不止于纸面。想看实现细节的，可以展开每张卡片。">As a designer, I can ship my own designs. The systems below were all built by me in Godot 4 — to verify whether the mechanics hold up in real interaction, not just on paper. If you want implementation details, expand any card.</p>
+
+          <div class="build__stack">
+            <span class="build__tag">Godot 4</span>
+            <span class="build__tag">GDScript</span>
+            <span class="build__tag">CSV i18n</span>
+          </div>
+
+          <div class="build__cards">
+
+            <!-- ① MAIN: multi-window passthrough -->
+            <details class="bcard bcard--main">
+              <summary class="bcard__summary">
+                <div class="bcard__head">
+                  <span class="bcard__idx">01</span>
+                  <span class="bcard__badge" data-en="Tech enables design" data-zh="技术 → 设计">Tech enables design</span>
+                </div>
+                <h4 class="bcard__title" data-en="Disguising the game as a desktop productivity tool" data-zh="把游戏伪装成桌面生产力工具">Disguising the game as a desktop productivity tool</h4>
+                <div class="bcard__seg">
+                  <span class="bcard__label" data-en="Design goal" data-zh="设计目标">Design goal</span>
+                  <p class="bcard__text" data-en="Disguise the game as a desktop notepad / productivity tool — panels you can drag, yet click straight through to the real desktop when you don't need them. The core theme of 'slacking on the clock' physically depends on this to hold up." data-zh="让游戏伪装成一个桌面记事本 / 生产力工具，面板既能拖动、又能在不需要时点击穿透到桌面——&quot;带薪摸鱼&quot;这个核心主题，物理上必须靠它才成立。">Disguise the game as a desktop notepad / productivity tool — panels you can drag, yet click straight through to the real desktop when you don't need them. The core theme of 'slacking on the clock' physically depends on this to hold up.</p>
+                </div>
+                <div class="bcard__seg bcard__seg--oneline">
+                  <span class="bcard__label" data-en="In one line" data-zh="一句话实现">In one line</span>
+                  <p class="bcard__text" data-en="Built on Godot's multi-window + mouse passthrough architecture." data-zh="基于 Godot 多窗口 + 鼠标穿透（mouse passthrough）架构。">Built on Godot's multi-window + mouse passthrough architecture.</p>
+                </div>
+                <span class="bcard__toggle"><span data-en="Technical details" data-zh="展开技术细节">Technical details</span><span class="bcard__chev">▾</span></span>
+              </summary>
+              <div class="bcard__detail">
+                <div class="bcard__detail-inner">
+                  <div>
+                    <span class="bcard__label" data-en="Implementation" data-zh="具体实现">Implementation</span>
+                    <ul class="bcard__list">
+                      <li data-en="Several independent windows host different floating panels, each draggable." data-zh="多个独立窗口承载不同悬浮面板，各自可拖拽。">Several independent windows host different floating panels, each draggable.</li>
+                      <li data-en="By setting each window's mouse-passthrough region, panels stay interactive while clicks outside them pass through to the real desktop." data-zh="通过设置窗口的鼠标穿透区域，实现&quot;面板上可交互、面板外点击穿透到真实桌面&quot;。">By setting each window's mouse-passthrough region, panels stay interactive while clicks outside them pass through to the real desktop.</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <span class="bcard__label" data-en="Hard part" data-zh="难点">Hard part</span>
+                    <p class="bcard__detail-text" data-en="Boundary detection between passthrough and interactive regions, plus z-order and focus management across multiple windows." data-zh="穿透区域与可交互区域的边界判定，以及多窗口之间的层级与焦点管理。">Boundary detection between passthrough and interactive regions, plus z-order and focus management across multiple windows.</p>
+                  </div>
+                  <div>
+                    <span class="bcard__label" data-en="Key decision" data-zh="关键决策">Key decision</span>
+                    <p class="bcard__detail-text" data-en="Chose true multi-window over simulating panels inside a single window — so the 'disguise' physically holds in the real desktop environment: the panels actually float on your desktop, not painted onto a game canvas." data-zh="选多窗口而非在单窗口内模拟，是为了让&quot;伪装&quot;在真实桌面里物理成立——面板真的浮在你的桌面上，而不是画在一张游戏画布里。">Chose true multi-window over simulating panels inside a single window — so the 'disguise' physically holds in the real desktop environment: the panels actually float on your desktop, not painted onto a game canvas.</p>
+                  </div>
+                  <p class="bcard__why" data-en-html="This is the one case where <strong>tech directly enables the design</strong>: without this architecture, the whole 'disguised as a productivity tool' theme couldn't stand." data-zh-html="这是技术直接成就设计的例子——<strong>没有这套架构，&quot;伪装成生产力工具&quot;这个主题就立不住</strong>。">This is the one case where <strong>tech directly enables the design</strong>: without this architecture, the whole 'disguised as a productivity tool' theme couldn't stand.</p>
+                </div>
+              </div>
+            </details>
+
+            <div class="build__row">
+
+              <!-- ② Localization -->
+              <details class="bcard">
+                <summary class="bcard__summary">
+                  <div class="bcard__head"><span class="bcard__idx">02</span></div>
+                  <h4 class="bcard__title" data-en="Bilingual localization" data-zh="中英双语本地化">Bilingual localization</h4>
+                  <div class="bcard__seg">
+                    <span class="bcard__label" data-en="Design goal" data-zh="设计目标">Design goal</span>
+                    <p class="bcard__text" data-en="Targeting major domestic studios, the game must switch between Chinese and English." data-zh="面向国内大厂，游戏要能中英切换。">Targeting major domestic studios, the game must switch between Chinese and English.</p>
+                  </div>
+                  <div class="bcard__seg bcard__seg--oneline">
+                    <span class="bcard__label" data-en="In one line" data-zh="一句话实现">In one line</span>
+                    <p class="bcard__text" data-en="CSV-driven Godot TranslationServer with multi-line text support." data-zh="基于 CSV 的 Godot TranslationServer，支持多行文本。">CSV-driven Godot TranslationServer with multi-line text support.</p>
+                  </div>
+                  <span class="bcard__toggle"><span data-en="Technical details" data-zh="展开技术细节">Technical details</span><span class="bcard__chev">▾</span></span>
+                </summary>
+                <div class="bcard__detail">
+                  <div class="bcard__detail-inner">
+                    <div>
+                      <span class="bcard__label" data-en="Implementation" data-zh="具体实现">Implementation</span>
+                      <ul class="bcard__list">
+                        <li data-en="CSV manages translation key-value pairs, imported as Godot translation resources." data-zh="CSV 管理翻译键值，导入为 Godot 翻译资源。">CSV manages translation key-value pairs, imported as Godot translation resources.</li>
+                        <li data-en="Language switches at runtime via TranslationServer; the UI refreshes live." data-zh="运行时通过 TranslationServer 切换语言，UI 实时刷新。">Language switches at runtime via TranslationServer; the UI refreshes live.</li>
+                        <li data-en="Handles layout and control auto-sizing for multi-line / long text." data-zh="处理多行 / 长文本的排版与控件自适应。">Handles layout and control auto-sizing for multi-line / long text.</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </details>
+
+              <!-- ③ Dialogue system -->
+              <details class="bcard">
+                <summary class="bcard__summary">
+                  <div class="bcard__head"><span class="bcard__idx">03</span></div>
+                  <h4 class="bcard__title" data-en="KPI character dialogue" data-zh="KPI 角色的对话系统">KPI character dialogue</h4>
+                  <div class="bcard__seg">
+                    <span class="bcard__label" data-en="Design goal" data-zh="设计目标">Design goal</span>
+                    <p class="bcard__text" data-en="KPI is personified as a character that holds multi-turn dialogue; bubbles must fit content of any length." data-zh="KPI 被拟人化成一个会跟玩家多轮对话的角色，气泡要能容纳不同长度的内容。">KPI is personified as a character that holds multi-turn dialogue; bubbles must fit content of any length.</p>
+                  </div>
+                  <div class="bcard__seg bcard__seg--oneline">
+                    <span class="bcard__label" data-en="In one line" data-zh="一句话实现">In one line</span>
+                    <p class="bcard__text" data-en="Auto-height NinePatchRect bubbles + multi-line dialogue sequences + typewriter effect." data-zh="自适应高度的 NinePatchRect 对话气泡 + 多行对话序列 + 打字机效果。">Auto-height NinePatchRect bubbles + multi-line dialogue sequences + typewriter effect.</p>
+                  </div>
+                  <span class="bcard__toggle"><span data-en="Technical details" data-zh="展开技术细节">Technical details</span><span class="bcard__chev">▾</span></span>
+                </summary>
+                <div class="bcard__detail">
+                  <div class="bcard__detail-inner">
+                    <div>
+                      <span class="bcard__label" data-en="Implementation" data-zh="具体实现">Implementation</span>
+                      <ul class="bcard__list">
+                        <li data-en="NinePatchRect gives a 9-slice, stretchable bubble background." data-zh="NinePatchRect 实现可九宫格伸缩的气泡背景。">NinePatchRect gives a 9-slice, stretchable bubble background.</li>
+                        <li data-en="Bubble height adapts to text length." data-zh="气泡随文本长度自适应高度。">Bubble height adapts to text length.</li>
+                        <li data-en="Single lines expand into a sequence that plays line by line." data-zh="把单句对话扩展成可逐行播放的序列。">Single lines expand into a sequence that plays line by line.</li>
+                        <li data-en="A typewriter effect reveals text character by character." data-zh="打字机效果逐字显示文本。">A typewriter effect reveals text character by character.</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </details>
+
+            </div>
+          </div>
+
+          <p class="build__close" data-en="All of these systems were built solo. For design interviewers, they're proof the design can ship; for engineering interviewers, they're samples of how I handle engineering problems." data-zh="这些系统全部独立实现。对策划，它们是设计能落地的证明；对程序，它们是我处理工程问题的样本。">All of these systems were built solo. For design interviewers, they're proof the design can ship; for engineering interviewers, they're samples of how I handle engineering problems.</p>
+
+        </div>
       </div>
     </div>
 
