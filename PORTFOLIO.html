@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
+  @font-face{font-family:'StackedPixel';src:url('fonts/Stacked pixel.ttf') format('truetype')}
   :root{
     --bg:#191816;          /* 暖调近黑底色 warm near-black */
     --surface:#211f1d;     /* 卡片/方块底色 */
@@ -190,6 +191,7 @@
 
   /* ---------- ABOUT ---------- */
   .about{padding:64px 0;text-align:center}
+  #about .section-title{margin-top:-10px}
   #about .section-title,
   #works .section-title{
     -webkit-text-stroke:2px var(--text);
@@ -240,7 +242,7 @@
     background:linear-gradient(to right,rgba(0,0,0,.75) 0%,rgba(0,0,0,.2) 55%,transparent 100%);
   }
 
-  .thumb--puppy   {background:linear-gradient(150deg,#3d1f5e,#7b4ac8 55%,#1a0d2e)}
+  .thumb--managing-up{background-image:url('WORKS/MANAGING UP/MANAGING UP COVER.png')}
   .thumb--rainfall{background:linear-gradient(150deg,#0d1f2d,#1a4a6b 55%,#071015)}
   .thumb--soma    {background:linear-gradient(150deg,#2d0f0a,#8b2810 55%,#1a0805)}
   .thumb--blacksea{background:linear-gradient(150deg,#0a0a0a,#252525 55%,#050505)}
@@ -249,15 +251,16 @@
   .work__overlay{
     position:absolute;inset:0;z-index:1;
     padding:28px 36px;
-    display:flex;flex-direction:column;justify-content:space-between;
+    display:flex;flex-direction:column;justify-content:flex-end;
   }
   .work__num{
     font-family:var(--mono);font-size:12px;
     color:rgba(255,255,255,.55);letter-spacing:.14em;
   }
+  .work[data-project="managing-up"] .work__title{font-family:'StackedPixel',var(--display)}
   .work__title{
     font-family:var(--display);font-weight:900;
-    font-size:clamp(32px,5vw,64px);line-height:1;
+    font-size:clamp(40px,5vw,64px);line-height:1;
     margin-bottom:12px;
   }
   .work__meta{
@@ -269,8 +272,6 @@
   .work__desc{
     font-size:13px;color:rgba(255,255,255,.6);
     max-width:54ch;line-height:1.65;
-    display:-webkit-box;-webkit-line-clamp:2;
-    -webkit-box-orient:vertical;overflow:hidden;
   }
 
   /* ---------- FOOTER ---------- */
@@ -496,17 +497,17 @@
     <h2 class="section-title reveal">SELECTED WORKS</h2>
     <ul class="works__list">
 
-      <li class="work reveal" data-project="puppy-island">
+      <li class="work reveal" data-project="managing-up">
         <a class="work__link" href="#">
-          <div class="work__thumb thumb--puppy">
+          <div class="work__thumb thumb--managing-up">
             <div class="work__overlay">
               <div>
-                <h3 class="work__title">PUPPY ISLAND</h3>
+                <h3 class="work__title">MANAGING UP</h3>
                 <div class="work__meta">
-                  <span>· Game Type: Relaxing and Healing</span>
-                  <span>· Game Platform: VR</span>
+                  <span>· GAME TYPE : IDLE GAME</span>
+                  <span>· DEMO PLATFORM : itch.io</span>
                 </div>
-                <p class="work__desc">A relaxing VR healing game. I want to provide players with a game that is slow-paced and has a light and cute style. The focus of the gameplay is the interaction of emotional feedback and whimsical concepts, making it a healing game.</p>
+                <p class="work__desc">A satirical idle game where you exploit coworkers for KPI to get promoted, featuring a stealth "Work-Safe" mode disguised as a notepad to slack off and vent office stress on the clock.</p>
               </div>
             </div>
           </div>
