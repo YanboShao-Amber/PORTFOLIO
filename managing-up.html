@@ -77,7 +77,7 @@
 
   /* INFO ROW */
   .proj-info{
-    display:grid;grid-template-columns:repeat(4,1fr);
+    display:grid;grid-template-columns:repeat(5,1fr);
     gap:0;
     border:1px solid var(--line);
     margin-top:48px;
@@ -103,7 +103,11 @@
   .proj-info__link:hover{color:var(--muted)}
 
   /* BODY SECTIONS */
-  .proj-body{padding:72px 0 48px;display:flex;flex-direction:column;gap:72px}
+  .proj-body{
+    padding:72px 0 48px;display:flex;flex-direction:column;gap:72px;
+    width:calc(100vw - 400px);
+    margin-left:calc(-50vw + 50% + 200px);
+  }
 
   .proj-section__label{
     font-family:var(--mono);font-size:10px;letter-spacing:.2em;
@@ -111,7 +115,7 @@
     margin-bottom:20px;
   }
   .proj-section__text{
-    font-size:16px;line-height:1.8;color:var(--muted);max-width:72ch;
+    font-size:16px;line-height:1.8;color:var(--muted);
   }
   .proj-section__text strong{color:var(--text);font-weight:600}
 
@@ -190,7 +194,7 @@
   <div class="proj-info reveal">
     <div class="proj-info__item">
       <p class="proj-info__label">Role</p>
-      <p class="proj-info__value">Game Designer, Game Programmer</p>
+      <p class="proj-info__value">Game Designer,<br>Game Programmer</p>
     </div>
     <div class="proj-info__item">
       <p class="proj-info__label">Platform</p>
@@ -203,6 +207,10 @@
     <div class="proj-info__item">
       <p class="proj-info__label">Tools</p>
       <p class="proj-info__value">Godot</p>
+    </div>
+    <div class="proj-info__item">
+      <p class="proj-info__label">AI Agent</p>
+      <p class="proj-info__value">Gemini, Claude</p>
     </div>
   </div>
 
