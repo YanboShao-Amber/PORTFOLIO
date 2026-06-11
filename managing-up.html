@@ -241,14 +241,20 @@
 
   /* meta progression line */
   .lcard__body--line{display:block}
-  .lprog{display:flex;align-items:flex-start;margin:6px 0 0}
-  .lprog__step{flex:1;text-align:center;position:relative;padding:0 4px}
+  .lprog{display:flex;align-items:stretch;margin:6px 0 0}
+  .lprog__step{flex:1;position:relative;padding:0 8px}
   .lprog__step:not(:last-child)::after{content:'';position:absolute;top:8px;left:calc(50% + 12px);right:calc(-50% + 12px);height:2px;background:#69bd92;opacity:.5}
   .lprog__dot{width:18px;height:18px;border-radius:50%;border:1.5px solid #69bd92;background:#15151b;margin:0 auto 14px;position:relative;z-index:1}
-  .lprog__m{font-family:var(--mono);font-weight:700;font-size:13px;color:#69bd92;margin-bottom:6px}
-  .lprog__unlock{font-size:12px;line-height:1.5;color:#a4a4b0}
-  .lmeta__shape{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#cda44e;margin-bottom:20px;display:flex;align-items:center;gap:8px}
-  .lmeta__note{font-size:13px;line-height:1.7;color:#6f6f7c;margin-top:24px;border-top:1px solid var(--line);padding-top:16px}
+  .lprog__m{font-family:var(--mono);font-weight:700;font-size:13px;color:#69bd92;text-align:center;margin-bottom:6px}
+  .lprog__m .max{color:#cda44e;font-size:9px;letter-spacing:.08em;margin-left:5px}
+  .lprog__cost{font-family:var(--mono);font-weight:700;font-size:12px;color:#69bd92;text-align:center;margin-bottom:13px}
+  .lprog__cost--start{color:#6f6f7c}
+  .lprog__list{list-style:none;display:flex;flex-direction:column;gap:6px;padding:0}
+  .lprog__list li{font-size:11.5px;line-height:1.45;color:#a4a4b0;padding-left:11px;position:relative}
+  .lprog__list li::before{content:'';position:absolute;left:0;top:7px;width:4px;height:4px;border-radius:50%;background:#69bd92;opacity:.7}
+  .lprog__list li.unlock{color:#cda44e}
+  .lprog__list li.unlock::before{background:#cda44e}
+  .lmeta__note{font-size:13px;line-height:1.7;color:#6f6f7c;margin-top:26px;border-top:1px solid var(--line);padding-top:16px}
 
   /* KPI gate band */
   .lgate{margin-top:24px;border:1px solid rgba(105,189,146,.32);border-radius:12px;padding:24px 28px;background:linear-gradient(to right,rgba(105,189,146,.07),transparent 72%)}
@@ -273,10 +279,12 @@
   }
   @media(max-width:720px){
     .lcard__body{grid-template-columns:1fr;gap:24px}
-    .lprog{flex-direction:column;gap:18px}
-    .lprog__step{text-align:left;display:flex;gap:14px;align-items:flex-start;padding:0}
+    .lprog{flex-direction:column;gap:22px}
+    .lprog__step{display:grid;grid-template-columns:22px 1fr;gap:0 14px;padding:0}
     .lprog__step:not(:last-child)::after{display:none}
-    .lprog__dot{margin:2px 0 0}
+    .lprog__dot{margin:2px 0 0;grid-row:1 / span 3}
+    .lprog__m,.lprog__cost{text-align:left}
+    .lprog__cost{margin-bottom:9px}
   }
 
   /* SCREENSHOT GRID */
@@ -602,7 +610,7 @@
                     <div class="lnode__main">
                       <span class="lnode__dec" data-en="◆ Decision" data-zh="◆ 决策">◆ Decision</span>
                       <p class="lnode__title" data-en="Which recruiting channel?" data-zh="走哪条招募渠道？">Which recruiting channel?</p>
-                      <p class="lnode__desc" data-en="HR drops a free candidate on a timer, or spend Dollar on headhunting to gamble for a higher-tier prospect." data-zh="HR 定时白嫖一个候选人，还是花 Dollar 走猎头赌高级苗子。">HR drops a free candidate on a timer, or spend Dollar on headhunting to gamble for a higher-tier prospect.</p>
+                      <p class="lnode__desc" data-en="HR drops a free candidate on a timer, or spend Dollar on headhunting to gamble for a higher-tier prospect (headhunting unlocks at M3)." data-zh="HR 定时白嫖一个候选人，还是花 Dollar 走猎头赌高级苗子（猎头需 M3 解锁）。">HR drops a free candidate on a timer, or spend Dollar on headhunting to gamble for a higher-tier prospect (headhunting unlocks at M3).</p>
                     </div>
                   </div>
                   <div class="lnode lnode--auto">
@@ -639,35 +647,57 @@
                 <span class="lcard__freq" data-en="Low-freq · one-time" data-zh="低频 · 一次性">Low-freq · one-time</span>
               </div>
               <div class="lcard__body lcard__body--line">
-                <p class="lmeta__shape" data-en="—— Drawn as a LINE, not a ring (deliberate)" data-zh="—— 直线进度，刻意不画成环">—— Drawn as a LINE, not a ring (deliberate)</p>
                 <div class="lprog">
                   <div class="lprog__step">
                     <div class="lprog__dot"></div>
                     <p class="lprog__m">M1</p>
-                    <p class="lprog__unlock" data-en="Starting office" data-zh="基础办公室">Starting office</p>
+                    <p class="lprog__cost lprog__cost--start" data-en="START" data-zh="起点">START</p>
+                    <ul class="lprog__list">
+                      <li data-en="Base office, base desks" data-zh="基础办公室与工位">Base office, base desks</li>
+                    </ul>
                   </div>
                   <div class="lprog__step">
                     <div class="lprog__dot"></div>
                     <p class="lprog__m">M2</p>
-                    <p class="lprog__unlock" data-en="More desks" data-zh="更多工位">More desks</p>
+                    <p class="lprog__cost">↑ 50 KPI</p>
+                    <ul class="lprog__list">
+                      <li data-en="Desks → 2 rows (max Lv.2)" data-zh="工位扩到 2 排（桌 ≤ Lv.2）">Desks → 2 rows (max Lv.2)</li>
+                      <li data-en="1st private office" data-zh="解锁第 1 间独立办公室">1st private office</li>
+                      <li class="unlock" data-en="Unlock: Pantry" data-zh="解锁 Pantry 茶水间">Unlock: Pantry</li>
+                    </ul>
                   </div>
                   <div class="lprog__step">
                     <div class="lprog__dot"></div>
                     <p class="lprog__m">M3</p>
-                    <p class="lprog__unlock" data-en="More offices" data-zh="更多办公室数量">More offices</p>
+                    <p class="lprog__cost">↑ 5,000 KPI</p>
+                    <ul class="lprog__list">
+                      <li data-en="Desks → 3 rows (max Lv.3)" data-zh="工位扩到 3 排（桌 ≤ Lv.3）">Desks → 3 rows (max Lv.3)</li>
+                      <li data-en="Offices → 2" data-zh="办公室扩到 2 间">Offices → 2</li>
+                      <li class="unlock" data-en="Unlock: Headhunt" data-zh="解锁 Headhunt 猎头招聘">Unlock: Headhunt</li>
+                    </ul>
                   </div>
                   <div class="lprog__step">
                     <div class="lprog__dot"></div>
                     <p class="lprog__m">M4</p>
-                    <p class="lprog__unlock" data-en="New office types" data-zh="新办公室类型">New office types</p>
+                    <p class="lprog__cost">↑ 30,000 KPI</p>
+                    <ul class="lprog__list">
+                      <li data-en="Desks → 4 rows (max Lv.4)" data-zh="工位扩到 4 排（桌 ≤ Lv.4）">Desks → 4 rows (max Lv.4)</li>
+                      <li data-en="Offices → 3" data-zh="办公室扩到 3 间">Offices → 3</li>
+                      <li class="unlock" data-en="Unlock: Meeting Room" data-zh="解锁 Meeting 会议室">Unlock: Meeting Room</li>
+                    </ul>
                   </div>
                   <div class="lprog__step">
                     <div class="lprog__dot"></div>
-                    <p class="lprog__m">M5</p>
-                    <p class="lprog__unlock" data-en="New staff pool" data-zh="新员工池">New staff pool</p>
+                    <p class="lprog__m">M5<span class="max" data-en="MAX" data-zh="满级">MAX</span></p>
+                    <p class="lprog__cost">↑ 100,000 KPI</p>
+                    <ul class="lprog__list">
+                      <li data-en="Desks → 5 rows (cap stays Lv.4)" data-zh="工位扩到 5 排（桌上限维持 Lv.4）">Desks → 5 rows (cap stays Lv.4)</li>
+                      <li data-en="Offices → 4" data-zh="办公室扩到 4 间">Offices → 4</li>
+                      <li class="unlock" data-en="Unlock: Culture" data-zh="解锁 Culture 企业文化">Unlock: Culture</li>
+                    </ul>
                   </div>
                 </div>
-                <p class="lmeta__note" data-en="This layer is Meta Progression (chapter growth), not a loop — deliberately drawn as a straight line rather than a ring, to separate the high-frequency loops you run over and over from one-time long-term growth. Its job: raise the output ceiling of both the Core and Recruitment loops." data-zh="这一层是 Meta Progression（章节成长），不是循环——刻意画成直线而非环，以区分反复跑的高频循环和一次性的长期成长。作用：抬高整个核心环与招聘环的产能天花板。">This layer is Meta Progression (chapter growth), not a loop — deliberately drawn as a straight line rather than a ring, to separate the high-frequency loops you run over and over from one-time long-term growth. Its job: raise the output ceiling of both the Core and Recruitment loops.</p>
+                <p class="lmeta__note" data-en="This layer is Meta Progression (chapter growth), not a loop — deliberately drawn as a straight line rather than a ring, to separate the high-frequency loops you run over and over from one-time long-term growth. The cost jumps ~10–100× each level (50 → 5,000 → 30,000 → 100,000 KPI): every milestone raises the output ceiling of both the Core and Recruitment loops, and unlocks a new system (Pantry, Headhunt, Meeting, Culture)." data-zh="这一层是 Meta Progression（章节成长），不是循环——刻意画成直线而非环，以区分反复跑的高频循环和一次性的长期成长。每级花费跳涨约 10–100 倍（50 → 5,000 → 30,000 → 100,000 KPI）：每次升级都抬高核心环与招聘环的产能天花板，并解锁一个新系统（茶水间 / 猎头 / 会议室 / 企业文化）。">This layer is Meta Progression (chapter growth), not a loop — deliberately drawn as a straight line rather than a ring, to separate the high-frequency loops you run over and over from one-time long-term growth. The cost jumps ~10–100× each level (50 → 5,000 → 30,000 → 100,000 KPI): every milestone raises the output ceiling of both the Core and Recruitment loops, and unlocks a new system (Pantry, Headhunt, Meeting, Culture).</p>
               </div>
             </div>
 
