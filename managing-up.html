@@ -24,7 +24,7 @@
   /* NAV */
   .nav{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:center;height:60px;background:rgba(25,24,22,.82);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line);margin:0 -20px;padding:0 20px}
   .nav__links{display:flex;gap:96px;list-style:none}
-  .nav__links a{font-family:var(--mono);font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);text-decoration:none;position:relative;padding:6px 0;transition:color .25s var(--ease)}
+  .nav__links a{font-family:var(--mono);font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,0.65);text-decoration:none;position:relative;padding:6px 0;transition:color .25s var(--ease)}
   .nav__links a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:1px;background:var(--text);transition:width .3s var(--ease)}
   .nav__links a:hover,.nav__links a.active{color:var(--text)}
   .nav__links a:hover::after,.nav__links a.active::after{width:100%}
@@ -105,19 +105,35 @@
   /* BODY SECTIONS */
   .proj-body{
     padding:72px 0 48px;display:flex;flex-direction:column;gap:72px;
-    width:calc(100vw - 400px);
-    margin-left:calc(-50vw + 50% + 200px);
+    width:calc(100vw - 440px);
+    margin-left:calc(-50vw + 50% + 220px);
   }
 
   .proj-section__label{
-    font-family:var(--mono);font-size:10px;letter-spacing:.2em;
-    text-transform:uppercase;color:var(--faint);
+    font-family:var(--mono);font-size:15px;letter-spacing:.2em;
+    text-transform:uppercase;color:#ffffff;
     margin-bottom:20px;
   }
   .proj-section__text{
-    font-size:16px;line-height:1.8;color:var(--muted);
+    font-size:16px;line-height:1.8;color:#ffffff;
   }
-  .proj-section__text strong{color:var(--text);font-weight:600}
+  .proj-section__text strong{color:#ffffff;font-weight:400}
+
+  /* TABS */
+  .tab-bar{display:flex;gap:0;border-bottom:1px solid var(--line);margin-bottom:32px;flex-wrap:wrap}
+  .tab-btn{
+    font-family:var(--mono);font-size:13px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--faint);background:none;border:none;cursor:pointer;
+    padding:12px 56px 12px 0;position:relative;white-space:nowrap;
+    transition:color .25s var(--ease);
+  }
+  .tab-btn::after{content:'';position:absolute;left:0;bottom:-1px;width:0;height:2px;background:var(--text);transition:width .3s var(--ease)}
+  .tab-btn.active{color:var(--text)}
+  .tab-btn.active::after{width:calc(100% - 56px)}
+  .tab-btn:hover:not(.active){color:var(--muted)}
+  .tab-panel{display:none}
+  .tab-panel.active{display:block}
+  .tab-panel__content{font-size:15px;line-height:1.8;color:var(--muted);min-height:60px;padding-top:4px}
 
   /* SCREENSHOT GRID */
   .proj-screens{
@@ -230,33 +246,34 @@
     </div>
 
     <div class="reveal">
-      <p class="proj-section__label" data-en="Design Goals" data-zh="设计目标">Design Goals</p>
-      <p class="proj-section__text">
-        Placeholder — describe the core design goals, mechanics, or systems here.
-      </p>
+      <div class="tab-bar">
+        <button class="tab-btn active" data-tab="concept">概念 · Concept</button>
+        <button class="tab-btn" data-tab="loop">循环 · Loop</button>
+        <button class="tab-btn" data-tab="economy">经济 · Economy</button>
+        <button class="tab-btn" data-tab="balance">数值 · Balance</button>
+        <button class="tab-btn" data-tab="build">实现 · Build</button>
+      </div>
+      <div class="tab-panel active" id="tab-concept">
+        <p class="tab-panel__content">—</p>
+      </div>
+      <div class="tab-panel" id="tab-loop">
+        <p class="tab-panel__content">—</p>
+      </div>
+      <div class="tab-panel" id="tab-economy">
+        <p class="tab-panel__content">—</p>
+      </div>
+      <div class="tab-panel" id="tab-balance">
+        <p class="tab-panel__content">—</p>
+      </div>
+      <div class="tab-panel" id="tab-build">
+        <p class="tab-panel__content">—</p>
+      </div>
     </div>
 
   </div>
 
 </div>
 
-<!-- SCREENSHOTS -->
-<div style="max-width:var(--maxw);margin:0 auto;padding:0 20px">
-  <div class="proj-screens reveal">
-    <div class="proj-screen">
-      <div class="proj-screen__placeholder">Screenshot 01</div>
-    </div>
-    <div class="proj-screen">
-      <div class="proj-screen__placeholder">Screenshot 02</div>
-    </div>
-    <div class="proj-screen">
-      <div class="proj-screen__placeholder">Screenshot 03</div>
-    </div>
-    <div class="proj-screen">
-      <div class="proj-screen__placeholder">Screenshot 04</div>
-    </div>
-  </div>
-</div>
 
 <div class="wrap" style="padding-bottom:120px"></div>
 
@@ -292,6 +309,20 @@
     entries.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target)}});
   },{threshold:.12});
   els.forEach(function(e){io.observe(e)});
+})();
+/* ---- Tabs ---- */
+(function(){
+  var bar = document.querySelector('.tab-bar');
+  if(!bar) return;
+  bar.addEventListener('click', function(e){
+    var btn = e.target.closest('.tab-btn');
+    if(!btn) return;
+    document.querySelectorAll('.tab-btn').forEach(function(b){b.classList.remove('active')});
+    document.querySelectorAll('.tab-panel').forEach(function(p){p.classList.remove('active')});
+    btn.classList.add('active');
+    var panel = document.getElementById('tab-' + btn.dataset.tab);
+    if(panel) panel.classList.add('active');
+  });
 })();
 /* ---- Language Switch ---- */
 (function(){
