@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Managing Up — Amber</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  @font-face{font-family:'StackedPixel';src:url('fonts/Stacked pixel.ttf') format('truetype')}
+  :root{
+    --bg:#191816;--surface:#211f1d;--surface-2:#272421;
+    --line:rgba(255,255,255,.12);--line-strong:rgba(255,255,255,.22);
+    --text:#f3f0ea;--muted:#9b978d;--faint:#6a665e;
+    --display:'Archivo',sans-serif;--body:'Inter',sans-serif;--mono:'Space Mono',monospace;
+    --maxw:880px;--ease:cubic-bezier(.22,.61,.36,1);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--text);font-family:var(--body);line-height:1.55;-webkit-font-smoothing:antialiased;padding:0 20px;overflow-x:hidden}
+  .wrap{max-width:var(--maxw);margin:0 auto}
+
+  /* NAV */
+  .nav{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:center;height:60px;background:rgba(25,24,22,.82);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line);margin:0 -20px;padding:0 20px}
+  .nav__links{display:flex;gap:96px;list-style:none}
+  .nav__links a{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);text-decoration:none;position:relative;padding:6px 0;transition:color .25s var(--ease)}
+  .nav__links a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:1px;background:var(--text);transition:width .3s var(--ease)}
+  .nav__links a:hover,.nav__links a.active{color:var(--text)}
+  .nav__links a:hover::after,.nav__links a.active::after{width:100%}
+  .lang-toggle{position:absolute;right:60px;display:flex;align-items:center;background:rgba(255,255,255,.08);border-radius:20px;padding:3px;gap:2px}
+  .lang-toggle__btn{font-family:var(--mono);font-size:11px;font-weight:500;color:rgba(255,255,255,.45);background:transparent;border:none;cursor:pointer;padding:5px 13px;border-radius:16px;transition:color .2s ease,background .2s ease}
+  .lang-toggle__btn.active{background:#fff;color:#1a1a1a;box-shadow:0 1px 5px rgba(0,0,0,.35)}
+
+  /* BACK LINK */
+  .back{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:var(--mono);font-size:13px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--faint);text-decoration:none;
+    padding:28px 0 0;
+    margin-left:calc(-50vw + 50% + 100px);
+    transition:color .25s var(--ease);
+  }
+  .back:hover{color:var(--text)}
+  .back svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2}
+
+  /* HERO */
+  .proj-hero{
+    width:calc(100vw - 160px);
+    margin-left:calc(-50vw + 50% + 80px);
+    margin-top:48px;
+    position:relative;
+    height:385px;
+    overflow:hidden;
+  }
+  .proj-hero__img{
+    width:100%;height:100%;
+    object-fit:cover;object-position:center;
+    display:block;
+  }
+  .proj-hero__overlay{
+    position:absolute;inset:0;
+    background:linear-gradient(to right,rgba(0,0,0,.85) 0%,rgba(0,0,0,.3) 55%,transparent 100%);
+    display:flex;flex-direction:column;justify-content:flex-end;
+    padding:48px 56px;
+  }
+  .proj-hero__title{
+    font-family:'StackedPixel',var(--display);font-weight:900;
+    font-size:clamp(40px,6vw,80px);line-height:1;
+    margin-bottom:16px;
+  }
+  .proj-hero__meta{
+    font-family:var(--mono);font-size:11px;letter-spacing:.08em;
+    color:rgba(255,255,255,.6);
+    display:flex;flex-direction:column;gap:4px;
+  }
+
+  /* INFO ROW */
+  .proj-info{
+    display:grid;grid-template-columns:repeat(4,1fr);
+    gap:0;
+    border:1px solid var(--line);
+    margin-top:48px;
+    width:calc(var(--maxw) * 1.5);
+    margin-left:calc((var(--maxw) - var(--maxw) * 1.5) / 2);
+  }
+  .proj-info__item{
+    padding:24px 28px;
+    border-right:1px solid var(--line);
+  }
+  .proj-info__item:last-child{border-right:0}
+  .proj-info__label{
+    font-family:var(--mono);font-size:12px;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--muted);margin-bottom:10px;
+  }
+  .proj-info__value{
+    font-size:15px;font-weight:600;color:var(--text);line-height:1.5;
+  }
+  .proj-info__link{
+    color:var(--text);text-decoration:none;
+    transition:color .25s var(--ease);
+  }
+  .proj-info__link:hover{color:var(--muted)}
+
+  /* BODY SECTIONS */
+  .proj-body{padding:72px 0 48px;display:flex;flex-direction:column;gap:72px}
+
+  .proj-section__label{
+    font-family:var(--mono);font-size:10px;letter-spacing:.2em;
+    text-transform:uppercase;color:var(--faint);
+    margin-bottom:20px;
+  }
+  .proj-section__text{
+    font-size:16px;line-height:1.8;color:var(--muted);max-width:72ch;
+  }
+  .proj-section__text strong{color:var(--text);font-weight:600}
+
+  /* SCREENSHOT GRID */
+  .proj-screens{
+    display:grid;grid-template-columns:1fr 1fr;gap:4px;
+    width:calc(100vw - 160px);
+    margin-left:calc(-50vw + 50% + 80px);
+  }
+  .proj-screens--1col{grid-template-columns:1fr}
+  .proj-screen{
+    aspect-ratio:16/9;background:var(--surface);
+    overflow:hidden;position:relative;
+  }
+  .proj-screen img{width:100%;height:100%;object-fit:cover;display:block}
+  .proj-screen__placeholder{
+    width:100%;height:100%;
+    display:flex;align-items:center;justify-content:center;
+    font-family:var(--mono);font-size:11px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--faint);
+  }
+
+  /* FOOTER */
+  .footer{border-top:1px solid var(--line);padding:48px 0 60px;display:grid;grid-template-columns:1fr auto auto;gap:60px;width:calc(100vw - 160px);margin-left:calc(-50vw + 50% + 80px)}
+  .footer__logo{font-family:var(--display);font-weight:900;font-size:34px;letter-spacing:-.01em;align-self:start}
+  .footer__logo span{color:var(--muted)}
+  .footer__col+.footer__col{margin-left:100px}
+  .footer__col:last-child{margin-right:200px}
+  .footer__col h4{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);font-weight:700;margin-bottom:16px}
+  .footer__col ul{list-style:none}
+  .footer__col li{margin-bottom:9px}
+  .footer__col a{color:var(--text);text-decoration:none;font-size:14px;position:relative;transition:color .25s var(--ease)}
+  .footer__col a::after{content:"";position:absolute;left:0;bottom:-2px;width:0;height:1px;background:currentColor;transition:width .3s var(--ease)}
+  .footer__col a:hover{color:var(--muted)}
+  .footer__col a:hover::after{width:100%}
+
+  .reveal{opacity:0;transform:translateY(20px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+  .reveal.in{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <ul class="nav__links">
+    <li><a href="PORTFOLIO.html">Home</a></li>
+    <li><a href="works.html" class="active">Works</a></li>
+    <li><a href="experience.html">Gaming</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="lang-toggle">
+    <button class="lang-toggle__btn active">EN</button>
+    <button class="lang-toggle__btn">中文</button>
+  </div>
+</nav>
+
+<div class="wrap">
+  <a class="back" href="works.html">
+    <svg viewBox="0 0 24 24"><path d="M19 12H5M5 12l7 7M5 12l7-7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    Back to Works
+  </a>
+</div>
+
+<!-- HERO (full-bleed) -->
+<div style="max-width:var(--maxw);margin:0 auto;padding:0 20px">
+  <div class="proj-hero reveal">
+    <img class="proj-hero__img" src="WORKS/MANAGING UP/MANAGING UP COVER.png" alt="Managing Up Cover">
+    <div class="proj-hero__overlay">
+      <h1 class="proj-hero__title">MANAGING UP</h1>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- INFO ROW -->
+  <div class="proj-info reveal">
+    <div class="proj-info__item">
+      <p class="proj-info__label">Role</p>
+      <p class="proj-info__value">Game Designer, Game Programmer</p>
+    </div>
+    <div class="proj-info__item">
+      <p class="proj-info__label">Platform</p>
+      <p class="proj-info__value">PC (Windows)</p>
+    </div>
+    <div class="proj-info__item">
+      <p class="proj-info__label">Duration</p>
+      <p class="proj-info__value">4 Months</p>
+    </div>
+    <div class="proj-info__item">
+      <p class="proj-info__label">Tools</p>
+      <p class="proj-info__value">Godot</p>
+    </div>
+  </div>
+
+  <!-- BODY -->
+  <div class="proj-body">
+
+    <div class="reveal">
+      <p class="proj-section__label">Overview</p>
+      <p class="proj-section__text">
+        A satirical idle game where you <strong>exploit coworkers for KPI</strong> to get promoted,
+        featuring a stealth <strong>"Work-Safe" mode</strong> disguised as a notepad
+        to slack off and vent office stress on the clock.
+      </p>
+    </div>
+
+    <div class="reveal">
+      <p class="proj-section__label">Design Goals</p>
+      <p class="proj-section__text">
+        Placeholder — describe the core design goals, mechanics, or systems here.
+      </p>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- SCREENSHOTS -->
+<div style="max-width:var(--maxw);margin:0 auto;padding:0 20px">
+  <div class="proj-screens reveal">
+    <div class="proj-screen">
+      <div class="proj-screen__placeholder">Screenshot 01</div>
+    </div>
+    <div class="proj-screen">
+      <div class="proj-screen__placeholder">Screenshot 02</div>
+    </div>
+    <div class="proj-screen">
+      <div class="proj-screen__placeholder">Screenshot 03</div>
+    </div>
+    <div class="proj-screen">
+      <div class="proj-screen__placeholder">Screenshot 04</div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap" style="padding-bottom:120px"></div>
+
+<div style="max-width:var(--maxw);margin:0 auto;padding:0 20px">
+  <footer class="footer">
+    <div class="footer__logo">AMBER<span>.</span></div>
+    <nav class="footer__col">
+      <h4>Navigation</h4>
+      <ul>
+        <li><a href="PORTFOLIO.html">Home</a></li>
+        <li><a href="works.html">Works</a></li>
+        <li><a href="experience.html">Gaming</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <nav class="footer__col">
+      <h4>Connect</h4>
+      <ul>
+        <li><a href="#" target="_blank" rel="noopener">itch.io</a></li>
+        <li><a href="#" target="_blank" rel="noopener">LinkedIn</a></li>
+        <li><a href="#" target="_blank" rel="noopener">GitHub</a></li>
+      </ul>
+    </nav>
+  </footer>
+</div>
+
+<script>
+(function(){
+  var els = document.querySelectorAll('.reveal');
+  if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')});return}
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target)}});
+  },{threshold:.12});
+  els.forEach(function(e){io.observe(e)});
+})();
+(function(){
+  var toggle = document.querySelector('.lang-toggle');
+  if(!toggle) return;
+  toggle.addEventListener('click',function(e){
+    var btn = e.target.closest('.lang-toggle__btn');
+    if(!btn) return;
+    toggle.querySelectorAll('.lang-toggle__btn').forEach(function(b){b.classList.remove('active')});
+    btn.classList.add('active');
+  });
+})();
+</script>
+</body>
+</html>
