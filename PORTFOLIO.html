@@ -430,11 +430,11 @@
   <!-- ============ 顶部导航（wrap 外，背景铺满页面宽度）============ -->
   <nav class="nav" aria-label="Primary">
     <ul class="nav__links">
-      <li><a href="PORTFOLIO.html">Home</a></li>
-      <li><a href="works.html">Works</a></li>
-      <li><a href="experience.html">Gaming</a></li>
-      <li><a href="resume.html">Resume</a></li>
-      <li><a href="contact.html">Contact</a></li>
+      <li><a href="PORTFOLIO.html" data-en="Home" data-zh="主页">Home</a></li>
+      <li><a href="works.html" data-en="Works" data-zh="作品集">Works</a></li>
+      <li><a href="experience.html" data-en="Gaming" data-zh="游戏">Gaming</a></li>
+      <li><a href="resume.html" data-en="Resume" data-zh="简历">Resume</a></li>
+      <li><a href="contact.html" data-en="Contact" data-zh="联系">Contact</a></li>
     </ul>
 
     <!-- 语言切换 -->
@@ -448,18 +448,21 @@
 
   <!-- ============ HERO ============ -->
   <header class="hero" id="home">
-    <h1 class="hero__title">HI<span class="bang">!</span> I'M AMBER</h1>
+    <h1 class="hero__title" data-en-html='HI<span class="bang">!</span> I&apos;M AMBER' data-zh-html='嗨<span class="bang">！</span>我是 AMBER'>HI<span class="bang">!</span> I'M AMBER</h1>
 
     <!-- 三列：左描述（贴近头像）· 中头像 · 右按钮（贴近头像）-->
     <div class="hero__mid">
-      <p class="hero__desc">A DESIGNER PASSIONATE ABOUT<br>CRAFTING BOLD AND<br>MEMORABLE PROJECTS ✦</p>
+      <p class="hero__desc"
+         data-en-html="A DESIGNER PASSIONATE ABOUT<br>CRAFTING BOLD AND<br>MEMORABLE PROJECTS ✦"
+         data-zh-html="热爱设计<br>专注打造大胆而<br>令人难忘的项目 ✦">
+         A DESIGNER PASSIONATE ABOUT<br>CRAFTING BOLD AND<br>MEMORABLE PROJECTS ✦</p>
 
       <figure class="hero__avatar" aria-label="Amber character">
         <img src="avatar.png" alt="Amber">
       </figure>
 
       <a class="btn btn--download" href="resume.html">
-        View Resume
+        <span data-en="View Resume" data-zh="查看简历">View Resume</span>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
       </a>
     </div>
@@ -491,14 +494,16 @@
 
   <!-- ============ ABOUT ============ -->
   <section class="about reveal" id="about">
-    <h2 class="section-title">ABOUT ME</h2>
-    <div class="about__box">
+    <h2 class="section-title" data-en="ABOUT ME" data-zh="关于我">ABOUT ME</h2>
+    <div class="about__box"
+      data-en-html='I am a <em>Gameplay Designer</em> and <em>Digital Media Designer</em> passionate about creating engaging game experiences and visual stories.'
+      data-zh-html='我是一名<em>游戏玩法设计师</em>与<em>数字媒体设计师</em>，热衷于打造沉浸式游戏体验和视觉故事。'>
       I am a <em>Gameplay Designer</em> and <em>Digital Media Designer</em>
       passionate about creating engaging game experiences and visual stories.
     </div>
     <div class="about__cta">
       <a class="btn btn--download" href="resume.html">
-        View Resume
+        <span data-en="View Resume" data-zh="查看简历">View Resume</span>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
       </a>
     </div>
@@ -506,7 +511,7 @@
 
   <!-- ============ SELECTED WORKS ============ -->
   <section class="works" id="works">
-    <h2 class="section-title reveal">SELECTED WORKS</h2>
+    <h2 class="section-title reveal" data-en="SELECTED WORKS" data-zh="精选作品">SELECTED WORKS</h2>
     <ul class="works__list">
 
       <li class="work reveal" data-project="managing-up">
@@ -517,10 +522,10 @@
               <div>
                 <h3 class="work__title">MANAGING UP</h3>
                 <div class="work__meta">
-                  <span>· GAME TYPE : IDLE GAME</span>
-                  <span>· DEMO PLATFORM : itch.io</span>
+                  <span data-en="· GAME TYPE : IDLE GAME" data-zh="· 游戏类型：放置游戏">· GAME TYPE : IDLE GAME</span>
+                  <span data-en="· DEMO PLATFORM : itch.io" data-zh="· 试玩平台：itch.io">· DEMO PLATFORM : itch.io</span>
                 </div>
-                <p class="work__desc">A satirical idle game where you exploit coworkers for KPI to get promoted, featuring a stealth "Work-Safe" mode disguised as a notepad to slack off and vent office stress on the clock.</p>
+                <p class="work__desc" data-en="A satirical idle game where you exploit coworkers for KPI to get promoted, featuring a stealth &quot;Work-Safe&quot; mode disguised as a notepad to slack off and vent office stress on the clock." data-zh="一款讽刺性放置游戏，你要榨取同事的KPI谋求晋升。游戏内置「安全模式」，伪装成记事本，让你在上班时间摸鱼、发泄职场压力。">A satirical idle game where you exploit coworkers for KPI to get promoted, featuring a stealth "Work-Safe" mode disguised as a notepad to slack off and vent office stress on the clock.</p>
               </div>
             </div>
           </div>
@@ -535,10 +540,10 @@
               <div>
                 <h3 class="work__title">RAINFALL ECHOES</h3>
                 <div class="work__meta">
-                  <span>· Game Type: A Third Person Horror Deception Game</span>
-                  <span>· Game Platform: PC</span>
+                  <span data-en="· Game Type: A Third Person Horror Deception Game" data-zh="· 游戏类型：第三人称恐怖欺骗游戏">· Game Type: A Third Person Horror Deception Game</span>
+                  <span data-en="· Game Platform: PC" data-zh="· 游戏平台：PC">· Game Platform: PC</span>
                 </div>
-                <p class="work__desc">In the far future, raindrops mysteriously fell on the arid city. Since then, the humans began to wander around the open city, and there was no sign of stopping. Players will play the role of a detective and investigate the truth of the event.</p>
+                <p class="work__desc" data-en="In the far future, raindrops mysteriously fell on the arid city. Since then, the humans began to wander around the open city, and there was no sign of stopping. Players will play the role of a detective and investigate the truth of the event." data-zh="遥远的未来，神秘雨水降临干旱之城。从此，人们开始漫无目的地游荡街头，久久不散。玩家将扮演一名侦探，追查这一事件背后的真相。">In the far future, raindrops mysteriously fell on the arid city. Since then, the humans began to wander around the open city, and there was no sign of stopping. Players will play the role of a detective and investigate the truth of the event.</p>
               </div>
             </div>
           </div>
@@ -553,9 +558,9 @@
               <div>
                 <h3 class="work__title">VERMILLION SOMA</h3>
                 <div class="work__meta">
-                  <span>· Game Art / Concept Art</span>
+                  <span data-en="· Game Art / Concept Art" data-zh="· 游戏美术 / 概念设计">· Game Art / Concept Art</span>
                 </div>
-                <p class="work__desc">SOMA is a three-player cooperative alien planet survival exploration game, in which players can choose from three different professions and enter game dungeons in groups of three. On the map, the three players are, and they need to collaborate and share resources to terminate the dungeon boss and complete the game.</p>
+                <p class="work__desc" data-en="SOMA is a three-player cooperative alien planet survival exploration game, in which players can choose from three different professions and enter game dungeons in groups of three." data-zh="SOMA 是一款三人合作的异星生存探索游戏。玩家从三个职业中选择，以三人小队进入副本，协同配合、共享资源，击败BOSS完成游戏。">SOMA is a three-player cooperative alien planet survival exploration game, in which players can choose from three different professions and enter game dungeons in groups of three. On the map, the three players are, and they need to collaborate and share resources to terminate the dungeon boss and complete the game.</p>
               </div>
             </div>
           </div>
@@ -570,9 +575,9 @@
               <div>
                 <h3 class="work__title">BLACK SEA</h3>
                 <div class="work__meta">
-                  <span>· Concept Design</span>
+                  <span data-en="· Concept Design" data-zh="· 概念设计">· Concept Design</span>
                 </div>
-                <p class="work__desc">An unknown territory has always hidden an unexplored forbidden zone, known as the "Black Sea". This "Black Sea" was said like a shadow at the corner of the area. People entering here are like hiding in darkness, merging into darkness, and there seems to be some mysterious power in the darkness that pursues the people here.</p>
+                <p class="work__desc" data-en="An unknown territory has always hidden an unexplored forbidden zone, known as the &quot;Black Sea&quot;. This &quot;Black Sea&quot; was said like a shadow at the corner of the area." data-zh="在这片未知领域深处，始终藏着一片无人踏足的禁区——「黑海」。据说它如同盘踞在角落的阴影，踏入其中的人便与黑暗融为一体。">An unknown territory has always hidden an unexplored forbidden zone, known as the "Black Sea". This "Black Sea" was said like a shadow at the corner of the area. People entering here are like hiding in darkness, merging into darkness, and there seems to be some mysterious power in the darkness that pursues the people here.</p>
               </div>
             </div>
           </div>
@@ -587,10 +592,10 @@
               <div>
                 <h3 class="work__title">DICE OR DEATH</h3>
                 <div class="work__meta">
-                  <span>· Platform: PC &nbsp;·&nbsp; Team: Endless Ladder Studio</span>
-                  <span>· Awards: Best Art &amp; Best Popularity — Mini Game Competition</span>
+                  <span data-en="· Platform: PC &amp;nbsp;·&amp;nbsp; Team: Endless Ladder Studio" data-zh="· 平台：PC &amp;nbsp;·&amp;nbsp; 团队：Endless Ladder Studio">· Platform: PC &nbsp;·&nbsp; Team: Endless Ladder Studio</span>
+                  <span data-en="· Awards: Best Art &amp;amp; Best Popularity — Mini Game Competition" data-zh="· 奖项：最佳美术奖 &amp; 最受欢迎奖 — 小型游戏大赛">· Awards: Best Art &amp; Best Popularity — Mini Game Competition</span>
                 </div>
-                <p class="work__desc">A strategy roguelike game on PC. The player is like a small dice — they need to roll the dice so that the numbers on different sides can come into contact with different nodes on the map, aiming to obtain the highest score possible.</p>
+                <p class="work__desc" data-en="A strategy roguelike game on PC. The player is like a small dice — they need to roll the dice so that the numbers on different sides can come into contact with different nodes on the map, aiming to obtain the highest score possible." data-zh="一款PC端策略肉鸽游戏。玩家化身一枚小骰子，不断翻滚，让各面数字触碰地图节点，力求得分最高。">A strategy roguelike game on PC. The player is like a small dice — they need to roll the dice so that the numbers on different sides can come into contact with different nodes on the map, aiming to obtain the highest score possible.</p>
               </div>
             </div>
           </div>
@@ -605,18 +610,18 @@
     <div class="footer__logo">AMBER<span>.</span></div>
 
     <nav class="footer__col" aria-label="Navigation">
-      <h4>Navigation</h4>
+      <h4 data-en="Navigation" data-zh="导航">Navigation</h4>
       <ul>
-        <li><a href="PORTFOLIO.html">Home</a></li>
-        <li><a href="works.html">Works</a></li>
-        <li><a href="experience.html">Gaming</a></li>
-        <li><a href="resume.html">Resume</a></li>
-        <li><a href="contact.html">Contact</a></li>
+        <li><a href="PORTFOLIO.html" data-en="Home" data-zh="主页">Home</a></li>
+        <li><a href="works.html" data-en="Works" data-zh="作品集">Works</a></li>
+        <li><a href="experience.html" data-en="Gaming" data-zh="游戏">Gaming</a></li>
+        <li><a href="resume.html" data-en="Resume" data-zh="简历">Resume</a></li>
+        <li><a href="contact.html" data-en="Contact" data-zh="联系">Contact</a></li>
       </ul>
     </nav>
 
     <nav class="footer__col" aria-label="Connect">
-      <h4>Connect</h4>
+      <h4 data-en="Connect" data-zh="联系">Connect</h4>
       <ul>
         <li><a href="#" target="_blank" rel="noopener">itch.io</a></li>
         <li><a href="#" target="_blank" rel="noopener">LinkedIn</a></li>
@@ -730,16 +735,28 @@
     update();
   })();
 
-  /* ---- 语言切换 ---- */
+  /* ---- Language Switch ---- */
   (function(){
+    var K = 'portfolio_lang';
+    function applyLang(lang) {
+      document.querySelectorAll('[data-en]').forEach(function(el){
+        el.textContent = el.getAttribute('data-' + lang) || el.getAttribute('data-en');
+      });
+      document.querySelectorAll('[data-en-html]').forEach(function(el){
+        el.innerHTML = el.getAttribute('data-' + lang + '-html') || el.getAttribute('data-en-html');
+      });
+      document.querySelectorAll('.lang-toggle__btn').forEach(function(b){
+        b.classList.toggle('active', b.dataset.lang === lang);
+      });
+      document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+      try { localStorage.setItem(K, lang); } catch(e){}
+    }
+    var saved; try { saved = localStorage.getItem(K); } catch(e){}
+    applyLang(saved || 'en');
     var toggle = document.querySelector('.lang-toggle');
-    if(!toggle) return;
-    toggle.addEventListener('click', function(e){
-      var btn = e.target.closest('.lang-toggle__btn');
-      if(!btn) return;
-      toggle.querySelectorAll('.lang-toggle__btn').forEach(function(b){ b.classList.remove('active'); });
-      btn.classList.add('active');
-      /* 此处可扩展：document.documentElement.lang = btn.dataset.lang */
+    if(toggle) toggle.addEventListener('click', function(e){
+      var btn = e.target.closest('[data-lang]');
+      if(btn) applyLang(btn.dataset.lang);
     });
   })();
 </script>

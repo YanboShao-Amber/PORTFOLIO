@@ -160,22 +160,22 @@
 
 <nav class="nav">
   <ul class="nav__links">
-    <li><a href="PORTFOLIO.html">Home</a></li>
-    <li><a href="works.html" class="active">Works</a></li>
-    <li><a href="experience.html">Gaming</a></li>
-    <li><a href="resume.html">Resume</a></li>
-    <li><a href="contact.html">Contact</a></li>
+    <li><a href="PORTFOLIO.html" data-en="Home" data-zh="主页">Home</a></li>
+    <li><a href="works.html" class="active" data-en="Works" data-zh="作品集">Works</a></li>
+    <li><a href="experience.html" data-en="Gaming" data-zh="游戏">Gaming</a></li>
+    <li><a href="resume.html" data-en="Resume" data-zh="简历">Resume</a></li>
+    <li><a href="contact.html" data-en="Contact" data-zh="联系">Contact</a></li>
   </ul>
   <div class="lang-toggle">
-    <button class="lang-toggle__btn active">EN</button>
-    <button class="lang-toggle__btn">中文</button>
+    <button class="lang-toggle__btn active" data-lang="en">EN</button>
+    <button class="lang-toggle__btn" data-lang="zh">中文</button>
   </div>
 </nav>
 
 <div class="wrap">
   <a class="back" href="works.html">
     <svg viewBox="0 0 24 24"><path d="M19 12H5M5 12l7 7M5 12l7-7" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    Back to Works
+    <span data-en="Back to Works" data-zh="返回作品集">Back to Works</span>
   </a>
 </div>
 
@@ -194,23 +194,23 @@
   <!-- INFO ROW -->
   <div class="proj-info reveal">
     <div class="proj-info__item">
-      <p class="proj-info__label">Role</p>
-      <p class="proj-info__value">Game Designer,<br>Game Programmer</p>
+      <p class="proj-info__label" data-en="Role" data-zh="职位">Role</p>
+      <p class="proj-info__value" data-en-html="Game Designer,<br>Game Programmer" data-zh-html="游戏策划，<br>游戏程序">Game Designer,<br>Game Programmer</p>
     </div>
     <div class="proj-info__item">
-      <p class="proj-info__label">Platform</p>
+      <p class="proj-info__label" data-en="Platform" data-zh="平台">Platform</p>
       <p class="proj-info__value">PC (Windows)</p>
     </div>
     <div class="proj-info__item">
-      <p class="proj-info__label">Duration</p>
-      <p class="proj-info__value">4 Months</p>
+      <p class="proj-info__label" data-en="Duration" data-zh="周期">Duration</p>
+      <p class="proj-info__value" data-en="4 Months" data-zh="4 个月">4 Months</p>
     </div>
     <div class="proj-info__item">
-      <p class="proj-info__label">Tools</p>
+      <p class="proj-info__label" data-en="Tools" data-zh="工具">Tools</p>
       <p class="proj-info__value">Godot</p>
     </div>
     <div class="proj-info__item">
-      <p class="proj-info__label">AI Agent</p>
+      <p class="proj-info__label" data-en="AI Agent" data-zh="AI 工具">AI Agent</p>
       <p class="proj-info__value">Gemini, Claude</p>
     </div>
   </div>
@@ -219,8 +219,10 @@
   <div class="proj-body">
 
     <div class="reveal">
-      <p class="proj-section__label">Overview</p>
-      <p class="proj-section__text">
+      <p class="proj-section__label" data-en="Overview" data-zh="项目简介">Overview</p>
+      <p class="proj-section__text"
+        data-en-html='A satirical idle game where you <strong>exploit coworkers for KPI</strong> to get promoted, featuring a stealth <strong>&quot;Work-Safe&quot; mode</strong> disguised as a notepad to slack off and vent office stress on the clock.'
+        data-zh-html='一款讽刺性放置游戏，你要<strong>榨取同事的KPI</strong>谋求晋升。游戏内置<strong>「安全模式」</strong>，伪装成记事本，让你在上班时间摸鱼、发泄职场压力。'>
         A satirical idle game where you <strong>exploit coworkers for KPI</strong> to get promoted,
         featuring a stealth <strong>"Work-Safe" mode</strong> disguised as a notepad
         to slack off and vent office stress on the clock.
@@ -228,7 +230,7 @@
     </div>
 
     <div class="reveal">
-      <p class="proj-section__label">Design Goals</p>
+      <p class="proj-section__label" data-en="Design Goals" data-zh="设计目标">Design Goals</p>
       <p class="proj-section__text">
         Placeholder — describe the core design goals, mechanics, or systems here.
       </p>
@@ -262,17 +264,17 @@
   <footer class="footer">
     <div class="footer__logo">AMBER<span>.</span></div>
     <nav class="footer__col">
-      <h4>Navigation</h4>
+      <h4 data-en="Navigation" data-zh="导航">Navigation</h4>
       <ul>
-        <li><a href="PORTFOLIO.html">Home</a></li>
-        <li><a href="works.html">Works</a></li>
-        <li><a href="experience.html">Gaming</a></li>
-        <li><a href="resume.html">Resume</a></li>
-        <li><a href="contact.html">Contact</a></li>
+        <li><a href="PORTFOLIO.html" data-en="Home" data-zh="主页">Home</a></li>
+        <li><a href="works.html" data-en="Works" data-zh="作品集">Works</a></li>
+        <li><a href="experience.html" data-en="Gaming" data-zh="游戏">Gaming</a></li>
+        <li><a href="resume.html" data-en="Resume" data-zh="简历">Resume</a></li>
+        <li><a href="contact.html" data-en="Contact" data-zh="联系">Contact</a></li>
       </ul>
     </nav>
     <nav class="footer__col">
-      <h4>Connect</h4>
+      <h4 data-en="Connect" data-zh="联系">Connect</h4>
       <ul>
         <li><a href="#" target="_blank" rel="noopener">itch.io</a></li>
         <li><a href="#" target="_blank" rel="noopener">LinkedIn</a></li>
@@ -291,14 +293,28 @@
   },{threshold:.12});
   els.forEach(function(e){io.observe(e)});
 })();
+/* ---- Language Switch ---- */
 (function(){
+  var K = 'portfolio_lang';
+  function applyLang(lang) {
+    document.querySelectorAll('[data-en]').forEach(function(el){
+      el.textContent = el.getAttribute('data-' + lang) || el.getAttribute('data-en');
+    });
+    document.querySelectorAll('[data-en-html]').forEach(function(el){
+      el.innerHTML = el.getAttribute('data-' + lang + '-html') || el.getAttribute('data-en-html');
+    });
+    document.querySelectorAll('.lang-toggle__btn').forEach(function(b){
+      b.classList.toggle('active', b.dataset.lang === lang);
+    });
+    document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+    try { localStorage.setItem(K, lang); } catch(e){}
+  }
+  var saved; try { saved = localStorage.getItem(K); } catch(e){}
+  applyLang(saved || 'en');
   var toggle = document.querySelector('.lang-toggle');
-  if(!toggle) return;
-  toggle.addEventListener('click',function(e){
-    var btn = e.target.closest('.lang-toggle__btn');
-    if(!btn) return;
-    toggle.querySelectorAll('.lang-toggle__btn').forEach(function(b){b.classList.remove('active')});
-    btn.classList.add('active');
+  if(toggle) toggle.addEventListener('click', function(e){
+    var btn = e.target.closest('[data-lang]');
+    if(btn) applyLang(btn.dataset.lang);
   });
 })();
 </script>

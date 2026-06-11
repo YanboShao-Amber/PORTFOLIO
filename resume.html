@@ -42,8 +42,8 @@
   .resume{padding:0 0 140px;display:flex;flex-direction:column;gap:64px}
 
   .rblock__label{
-    font-family:var(--mono);font-size:10px;letter-spacing:.2em;
-    text-transform:uppercase;color:var(--faint);
+    font-family:var(--mono);font-size:16px;letter-spacing:.2em;
+    text-transform:uppercase;color:#ffffff;
     padding-bottom:20px;border-bottom:1px solid var(--line);
     margin-bottom:32px;
   }
@@ -52,9 +52,14 @@
   .rentry:last-child{border-bottom:none;padding-bottom:0}
   .rentry__header{display:flex;justify-content:space-between;align-items:flex-start;gap:16px}
   .rentry__title{font-size:17px;font-weight:600;color:var(--text)}
-  .rentry__org{font-size:15px;color:var(--muted)}
-  .rentry__date{font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--faint);white-space:nowrap}
-  .rentry__desc{font-size:14px;color:var(--muted);line-height:1.7;margin-top:8px}
+  .rentry__org{font-size:15px;color:var(--muted);margin-top:8px}
+  .rentry__right{display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex-shrink:0}
+  .rentry__date{font-family:var(--mono);font-size:13px;letter-spacing:.08em;color:#ffffff;white-space:nowrap}
+  .rentry__loc{font-family:var(--mono);font-size:13px;letter-spacing:.08em;color:#ffffff;white-space:nowrap}
+  .rentry__desc{font-size:14px;color:var(--muted);line-height:1.7;margin-top:4px}
+  .rentry__bullets{list-style:none;display:flex;flex-direction:column;gap:5px;margin-top:8px}
+  .rentry__bullets li{font-size:14px;color:var(--muted);line-height:1.7;padding-left:16px;position:relative}
+  .rentry__bullets li::before{content:"·";position:absolute;left:0;color:var(--faint)}
   .rentry__tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
   .rentry__tag{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);padding:4px 10px;border:1px solid var(--line);border-radius:999px}
 
@@ -84,15 +89,15 @@
 
 <nav class="nav">
   <ul class="nav__links">
-    <li><a href="PORTFOLIO.html">Home</a></li>
-    <li><a href="works.html">Works</a></li>
-    <li><a href="experience.html">Gaming</a></li>
-    <li><a href="resume.html" class="active">Resume</a></li>
-    <li><a href="contact.html">Contact</a></li>
+    <li><a href="PORTFOLIO.html" data-en="Home" data-zh="主页">Home</a></li>
+    <li><a href="works.html" data-en="Works" data-zh="作品集">Works</a></li>
+    <li><a href="experience.html" data-en="Gaming" data-zh="游戏">Gaming</a></li>
+    <li><a href="resume.html" class="active" data-en="Resume" data-zh="简历">Resume</a></li>
+    <li><a href="contact.html" data-en="Contact" data-zh="联系">Contact</a></li>
   </ul>
   <div class="lang-toggle">
-    <button class="lang-toggle__btn active">EN</button>
-    <button class="lang-toggle__btn">中文</button>
+    <button class="lang-toggle__btn active" data-lang="en">EN</button>
+    <button class="lang-toggle__btn" data-lang="zh">中文</button>
   </div>
 </nav>
 
@@ -105,58 +110,102 @@
 
     <!-- Education -->
     <div class="reveal">
-      <p class="rblock__label">Education</p>
+      <p class="rblock__label" data-en="Education" data-zh="教育经历">Education</p>
+
       <div class="rentry">
         <div class="rentry__header">
           <div>
-            <div class="rentry__title">Game Design</div>
-            <div class="rentry__org">University / Institution</div>
+            <div class="rentry__title" data-en="Northeastern University" data-zh="东北大学">Northeastern University</div>
+            <div class="rentry__org" data-en="M.S. Digital Media / Game Design (Concentration)" data-zh="数字媒体 / 游戏设计（专修）硕士">M.S. Digital Media / Game Design (Concentration)</div>
           </div>
-          <div class="rentry__date">2020 — 2024</div>
+          <div class="rentry__right">
+            <div class="rentry__date" data-en="Sep 2024 – Jun 2026" data-zh="2024年9月 – 2026年6月">Sep 2024 – Jun 2026</div>
+            <div class="rentry__loc" data-en="Boston, MA" data-zh="美国 波士顿">Boston, MA</div>
+          </div>
         </div>
-        <div class="rentry__desc">Description of your degree, focus areas, and notable achievements.</div>
+        <div class="rentry__desc" data-en="GPA: 3.77 (Top 5% of Program)" data-zh="GPA：3.77（专业前5%）">GPA: 3.77 (Top 5% of Program)</div>
+        <div class="rentry__desc" data-en="Relevant Courses: Game Design Fundamentals, Game Development, Game Engines, Digital Narrative, Usability &amp; HCI" data-zh="相关课程：游戏设计基础、游戏开发、游戏引擎基础、数字叙事基础、可用性与人机交互">Relevant Courses: Game Design Fundamentals, Game Development, Game Engines, Digital Narrative, Usability &amp; HCI</div>
+      </div>
+
+      <div class="rentry">
+        <div class="rentry__header">
+          <div>
+            <div class="rentry__title" data-en="Beihua University" data-zh="北华大学">Beihua University</div>
+            <div class="rentry__org" data-en="B.S. Digital Media Technology" data-zh="计算机科学学院 / 数字媒体技术 本科">B.S. Digital Media Technology</div>
+          </div>
+          <div class="rentry__right">
+            <div class="rentry__date" data-en="Sep 2018 – May 2022" data-zh="2018年9月 – 2022年5月">Sep 2018 – May 2022</div>
+            <div class="rentry__loc" data-en="Jilin, China" data-zh="吉林">Jilin, China</div>
+          </div>
+        </div>
+        <ul class="rentry__bullets">
+          <li data-en="Second-Class Scholarship (2021)" data-zh="2021年度二等奖学金">Second-Class Scholarship (2021)</li>
+          <li data-en="3rd Prize — NCCCU National College Computer Challenge" data-zh="全国大学生计算机挑战赛（NCCCU）三等奖">3rd Prize — NCCCU National College Computer Challenge</li>
+          <li data-en="Provincial Outstanding Innovation &amp; Entrepreneurship Project" data-zh="省级大学生创新创业训练计划优秀项目">Provincial Outstanding Innovation &amp; Entrepreneurship Project</li>
+        </ul>
       </div>
     </div>
 
-    <!-- Experience -->
+    <!-- Publication -->
     <div class="reveal">
-      <p class="rblock__label">Experience</p>
+      <p class="rblock__label" data-en="Publication" data-zh="学术发表">Publication</p>
       <div class="rentry">
         <div class="rentry__header">
           <div>
-            <div class="rentry__title">Game Designer</div>
-            <div class="rentry__org">Studio / Company</div>
+            <div class="rentry__title" data-en="Zhengong Film Studio — Exclusive Memory Impressions" data-zh="帧工影视工作室——独家记忆印象">帧工影视工作室——独家记忆印象</div>
+            <div class="rentry__org" data-en="Keji Feng (ISSN: 1671-7341)" data-zh="《科技风》ISSN: 1671-7341">Keji Feng (ISSN: 1671-7341)</div>
           </div>
-          <div class="rentry__date">2024 — Present</div>
-        </div>
-        <div class="rentry__desc">Description of your role, responsibilities, and key contributions.</div>
-        <div class="rentry__tags">
-          <span class="rentry__tag">Game Design</span>
-          <span class="rentry__tag">Prototyping</span>
+          <div class="rentry__date" data-en="First Author" data-zh="第一作者">First Author</div>
         </div>
       </div>
     </div>
 
     <!-- Skills -->
     <div class="reveal">
-      <p class="rblock__label">Skills</p>
+      <p class="rblock__label" data-en="Skills" data-zh="技能">Skills</p>
       <div class="skills-grid">
         <div>
-          <div class="skill-group__name">Design</div>
+          <div class="skill-group__name" data-en="Languages" data-zh="语言能力">Languages</div>
           <div class="skill-group__list">
-            <span class="skill-tag">Game Design</span>
-            <span class="skill-tag">Systems Design</span>
-            <span class="skill-tag">Level Design</span>
+            <span class="skill-tag" data-en="Mandarin (Native)" data-zh="普通话（母语）">Mandarin (Native)</span>
+            <span class="skill-tag" data-en="English (IELTS 6.5)" data-zh="英语（雅思 6.5）">English (IELTS 6.5)</span>
           </div>
         </div>
         <div>
-          <div class="skill-group__name">Tools</div>
+          <div class="skill-group__name" data-en="Code" data-zh="代码语言">Code</div>
           <div class="skill-group__list">
-            <span class="skill-tag">Unity</span>
-            <span class="skill-tag">Figma</span>
-            <span class="skill-tag">Notion</span>
+            <span class="skill-tag">C#</span>
+            <span class="skill-tag">GDScript</span>
           </div>
         </div>
+        <div style="grid-column:1/-1">
+          <div class="skill-group__name" data-en="Engines &amp; Tools" data-zh="引擎及软件">Engines &amp; Tools</div>
+          <div class="skill-group__list">
+            <span class="skill-tag">Godot Engine</span>
+            <span class="skill-tag">Unity</span>
+            <span class="skill-tag">Notion</span>
+            <span class="skill-tag">Excel / Google Sheets</span>
+            <span class="skill-tag">Premiere Pro</span>
+            <span class="skill-tag">After Effects</span>
+            <span class="skill-tag">Photoshop</span>
+            <span class="skill-tag">Blender</span>
+            <span class="skill-tag">Cinema 4D</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- About Me -->
+    <div class="reveal">
+      <p class="rblock__label" data-en="About Me" data-zh="性格特征">About Me</p>
+      <div class="rentry">
+        <div class="rentry__desc" data-en="Detail-oriented with strong ownership — I push through blockers, welcome feedback, and iterate fast. I don't back down from complex problems." data-zh="性格认真细致，责任心强 — 面对项目问题能够主动推进、持续调整，接受反馈快速迭代，不回避复杂任务。">Detail-oriented with strong ownership — I push through blockers, welcome feedback, and iterate fast. I don't back down from complex problems.</div>
+      </div>
+      <div class="rentry">
+        <div class="rentry__desc" data-en="Fast learner — I adapt quickly to new tools and engines, and turn coursework into real shipped work." data-zh="学习能力强 — 能在新工具、新引擎和新项目环境中快速上手，将课程知识转化为实际项目产出。">Fast learner — I adapt quickly to new tools and engines, and turn coursework into real shipped work.</div>
+      </div>
+      <div class="rentry">
+        <div class="rentry__desc" data-en="Team player — I contribute across design, documentation, and coordination while keeping the team on track." data-zh="协作意识好 — 能承担策划、文档整理、沟通协调等工作，重视项目目标和团队节奏。">Team player — I contribute across design, documentation, and coordination while keeping the team on track.</div>
       </div>
     </div>
 
@@ -166,22 +215,70 @@
 <footer class="footer">
   <div class="footer__logo">AMBER<span>.</span></div>
   <nav class="footer__col">
-    <h4>Navigation</h4>
+    <h4 data-en="Navigation" data-zh="导航">Navigation</h4>
     <ul>
-      <li><a href="PORTFOLIO.html">Home</a></li>
-      <li><a href="works.html">Works</a></li>
-      <li><a href="experience.html">Gaming</a></li>
-      <li><a href="resume.html">Resume</a></li>
-      <li><a href="contact.html">Contact</a></li>
+      <li><a href="PORTFOLIO.html" data-en="Home" data-zh="主页">Home</a></li>
+      <li><a href="works.html" data-en="Works" data-zh="作品集">Works</a></li>
+      <li><a href="experience.html" data-en="Gaming" data-zh="游戏">Gaming</a></li>
+      <li><a href="resume.html" data-en="Resume" data-zh="简历">Resume</a></li>
+      <li><a href="contact.html" data-en="Contact" data-zh="联系">Contact</a></li>
+    </ul>
+  </nav>
+  <nav class="footer__col">
+    <h4 data-en="Connect" data-zh="联系">Connect</h4>
+    <ul>
+      <li><a href="#" target="_blank" rel="noopener">itch.io</a></li>
+      <li><a href="#" target="_blank" rel="noopener">LinkedIn</a></li>
+      <li><a href="#" target="_blank" rel="noopener">GitHub</a></li>
     </ul>
   </nav>
 </footer>
 
 <script>
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('in') })
-  },{threshold:.15})
-  document.querySelectorAll('.reveal').forEach(el => obs.observe(el))
+(function(){
+  var els = document.querySelectorAll('.reveal');
+  if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')});return}
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target)}});
+  },{threshold:.15});
+  els.forEach(function(e){io.observe(e)});
+})();
+(function(){
+  var title = document.querySelector('.page-title');
+  if(!title) return;
+  function update(){
+    var rect = title.getBoundingClientRect();
+    var vh = window.innerHeight;
+    var p = 1 - Math.max(0,Math.min(1,(rect.top - vh*0.25)/(vh*0.6)));
+    title.style.color = 'rgba(243,240,234,'+p.toFixed(3)+')';
+  }
+  window.addEventListener('scroll',update,{passive:true});
+  update();
+})();
+/* ---- Language Switch ---- */
+(function(){
+  var K = 'portfolio_lang';
+  function applyLang(lang) {
+    document.querySelectorAll('[data-en]').forEach(function(el){
+      el.textContent = el.getAttribute('data-' + lang) || el.getAttribute('data-en');
+    });
+    document.querySelectorAll('[data-en-html]').forEach(function(el){
+      el.innerHTML = el.getAttribute('data-' + lang + '-html') || el.getAttribute('data-en-html');
+    });
+    document.querySelectorAll('.lang-toggle__btn').forEach(function(b){
+      b.classList.toggle('active', b.dataset.lang === lang);
+    });
+    document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+    try { localStorage.setItem(K, lang); } catch(e){}
+  }
+  var saved; try { saved = localStorage.getItem(K); } catch(e){}
+  applyLang(saved || 'en');
+  var toggle = document.querySelector('.lang-toggle');
+  if(toggle) toggle.addEventListener('click', function(e){
+    var btn = e.target.closest('[data-lang]');
+    if(btn) applyLang(btn.dataset.lang);
+  });
+})();
 </script>
 </body>
 </html>
