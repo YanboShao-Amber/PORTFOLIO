@@ -81,8 +81,8 @@
     gap:0;
     border:1px solid var(--line);
     margin-top:48px;
-    width:calc(var(--maxw) * 1.5);
-    margin-left:calc((var(--maxw) - var(--maxw) * 1.5) / 2);
+    width:calc(100vw - 440px);
+    margin-left:calc(-50vw + 50% + 220px);
   }
   .proj-info__item{
     padding:24px 28px;
@@ -166,7 +166,7 @@
     box-shadow:0 0 10px rgba(105,189,146,.55),0 0 22px rgba(105,189,146,.2);
   }
   .concept-entry__meta{
-    font-family:var(--mono);font-size:10px;letter-spacing:.2em;
+    font-family:var(--mono);font-size:12px;letter-spacing:.2em;
     text-transform:uppercase;color:#a4a4b0;
     margin-bottom:8px;
   }
@@ -195,6 +195,50 @@
     .concept-spine{padding-left:28px}
     .concept-entry__dot{left:-27px}
     .concept-entry__title{font-size:17px}
+  }
+
+  /* CORE LOOP DIAGRAM */
+  .loop{padding-top:4px}
+  .loop__intro{font-size:15px;line-height:1.85;color:#a4a4b0;margin-bottom:30px}
+  .loop__figure{display:block;width:100%;max-width:840px;height:auto;margin:0 auto}
+  .loop__key{display:flex;gap:30px;justify-content:center;flex-wrap:wrap;margin-top:24px}
+  .loop__key-item{display:flex;align-items:center;gap:9px;font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#a4a4b0}
+  .loop__swatch{width:24px;height:3px;border-radius:2px;flex-shrink:0}
+  .loop__legend{display:flex;flex-direction:column;gap:0;margin:38px auto 0;max-width:760px}
+  .loop__legend-row{display:flex;gap:18px;align-items:baseline;padding:15px 0;border-bottom:1px solid var(--line)}
+  .loop__legend-row:first-child{border-top:1px solid var(--line)}
+  .loop__legend-tier{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;white-space:nowrap;flex-shrink:0;width:160px}
+  .loop__legend-tier .dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:8px;vertical-align:middle}
+  .loop__legend-text{font-size:16px;line-height:1.7;color:#a4a4b0}
+  .loop__note{margin:34px auto 0;max-width:760px;font-size:15px;line-height:1.78;color:#a4a4b0;border-top:1px solid var(--line);padding-top:22px}
+  .loop__note strong{color:#69bd92;font-weight:400}
+
+  .ld-num{font-family:var(--mono);font-weight:700;font-size:18px}
+  .ld-title{font-family:var(--display);font-weight:700;font-size:15px;fill:#eae7df}
+  .ld-desc{font-family:var(--body);font-size:12px;fill:#a4a4b0}
+  .ld-meta{font-family:var(--mono);font-weight:700;font-size:9.5px;letter-spacing:.14em}
+  .ld-tag{font-family:var(--mono);font-weight:700;font-size:10px;letter-spacing:.12em;fill:#69bd92}
+  .ld-ceil{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;fill:#6a665e}
+
+  @media(prefers-reduced-motion:no-preference){
+    @keyframes lfade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+    @keyframes ldraw{to{stroke-dashoffset:0}}
+    @keyframes gpulse{0%,100%{opacity:.45}50%{opacity:.9}}
+    .tab-panel.active .loop__intro{animation:lfade .5s var(--ease) both}
+    .tab-panel.active .loop__figure{animation:lfade .6s var(--ease) .08s both}
+    .tab-panel.active .loop__key{animation:lfade .6s var(--ease) .16s both}
+    .tab-panel.active .loop__legend{animation:lfade .6s var(--ease) .22s both}
+    .tab-panel.active .loop__note{animation:lfade .6s var(--ease) .3s both}
+    .tab-panel.active .cr-arc{stroke-dasharray:200;stroke-dashoffset:200;animation:ldraw .9s var(--ease) forwards}
+    .tab-panel.active .cr-arc.cr1{animation-delay:.25s}
+    .tab-panel.active .cr-arc.cr2{animation-delay:.45s}
+    .tab-panel.active .cr-arc.cr3{animation-delay:.65s}
+    .tab-panel.active .cr-arc.cr4{animation-delay:.85s}
+    .gate-glow{animation:gpulse 2.8s ease-in-out infinite}
+  }
+  @media(max-width:600px){
+    .loop__legend-row{flex-direction:column;gap:6px}
+    .loop__legend-tier{width:auto}
   }
 
   /* SCREENSHOT GRID */
@@ -350,13 +394,10 @@
                 data-zh="招募做成 gacha。这一步把&quot;招人&quot;这件正经事，戏仿成了一场纯赌博——你付出的是成本，得到的是运气，干将还是水货全凭概率。用最娱乐化的抽卡形式，去戳最现实的用人焦虑。">Recruitment is built as gacha. This reframes hiring — a supposedly serious decision — as pure gambling. You spend resources, you get randomness. Star performer or deadweight, it's all probability.</p>
             </div>
 
-            <div class="concept-entry concept-entry--payoff">
+            <div class="concept-entry">
               <div class="concept-entry__dot" aria-hidden="true"></div>
               <p class="concept-entry__meta">FORM · 形式</p>
-              <h4 class="concept-entry__title">
-                <span data-en="Slacking Mode" data-zh="摸鱼模式">Slacking Mode</span>
-                <span class="concept-entry__tag" data-en="Design Closed Loop" data-zh="设计闭环">Design Closed Loop</span>
-              </h4>
+              <h4 class="concept-entry__title" data-en="Slacking Mode" data-zh="摸鱼模式">Slacking Mode</h4>
               <p class="concept-entry__body"
                 data-en="The game hides on your desktop disguised as a productivity tool — looks like a notepad, mimics genuine paid-hours slacking. The disguise isn't a gimmick: a game about slacking off becomes the actual tool you use to slack off. Form and content converge; the concept closes the loop at this layer."
                 data-zh="伪装成生产力工具，藏在桌面上，长得像记事本，模仿真实的带薪摸鱼。这层伪装不是炫技：一个讲摸鱼的游戏，本身就成了你摸鱼的工具——形式和内容在这里合一，概念闭环也合在这一层。">The game hides on your desktop disguised as a productivity tool — looks like a notepad, mimics genuine paid-hours slacking. The disguise isn't a gimmick: a game about slacking off becomes the actual tool you use to slack off. Form and content converge; the concept closes the loop at this layer.</p>
@@ -364,7 +405,7 @@
 
             <div class="concept-entry">
               <div class="concept-entry__dot" aria-hidden="true"></div>
-              <p class="concept-entry__meta">GENRE · 品类</p>
+              <p class="concept-entry__meta">Idle · 挂机</p>
               <h4 class="concept-entry__title" data-en="Idle = Labor" data-zh="挂机即打工">Idle = Labor</h4>
               <p class="concept-entry__body"
                 data-en="Choosing idle as the genre is itself a statement. The essence of idle is 'it runs whether you're watching or not' — which is just work, isn't it? Output accumulates automatically, your presence is optional. Other games use idle for farms, empires, factories. This one uses it to replicate the actual condition of having a job: the mechanic mirrors the theme."
@@ -375,7 +416,116 @@
         </div>
       </div>
       <div class="tab-panel" id="tab-loop">
-        <p class="tab-panel__content">—</p>
+        <div class="loop">
+
+          <p class="loop__intro"
+            data-en="The core loop is a single clean ring: coworkers produce, KPI accumulates, you reinvest, output grows stronger. Complexity isn't piled into the core ring — it hangs off the outside. Dollar headhunting is a 'gamble' support ring; the M1–M5 unlocks are a slow loop that raises the ceiling. All three funnel through one KPI gate: whether you land a hire by luck or by cash, you still have to spend KPI to put them to work."
+            data-zh="核心循环是一个干净的单环：同事产出、攒 KPI、投回去、产得更强。复杂度不堆在核心环里，而是挂在外面——Dollar 猎头是一条&quot;赌一把&quot;的支撑环，M1–M5 解锁是一条抬高天花板的慢循环。三者靠同一道 KPI 闸门收口：无论靠运气还是靠钱招到人，都得花 KPI 才能上工。">The core loop is a single clean ring: coworkers produce, KPI accumulates, you reinvest, output grows stronger. Complexity isn't piled into the core ring — it hangs off the outside. Dollar headhunting is a 'gamble' support ring; the M1–M5 unlocks are a slow loop that raises the ceiling. All three funnel through one KPI gate: whether you land a hire by luck or by cash, you still have to spend KPI to put them to work.</p>
+
+          <svg class="loop__figure" viewBox="0 0 920 640" role="img"
+               aria-label="Core loop diagram: a green KPI-driven main ring of four nodes, with a gold Dollar headhunting support ring and a dim M1–M5 unlock support ring, all converging on the KPI gate.">
+            <defs>
+              <marker id="ah-green" viewBox="0 0 10 10" refX="7.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#69bd92"/></marker>
+              <marker id="ah-gold" viewBox="0 0 10 10" refX="7.5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#cda44e"/></marker>
+              <marker id="ah-dark" viewBox="0 0 10 10" refX="7.5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#6a665e"/></marker>
+              <radialGradient id="coreGlow" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#69bd92" stop-opacity=".12"/>
+                <stop offset="62%" stop-color="#69bd92" stop-opacity=".03"/>
+                <stop offset="100%" stop-color="#69bd92" stop-opacity="0"/>
+              </radialGradient>
+              <filter id="gateGlow" x="-80%" y="-80%" width="260%" height="260%">
+                <feGaussianBlur stdDeviation="5" result="b"/>
+                <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+            </defs>
+
+            <!-- core ambient glow -->
+            <circle cx="430" cy="300" r="215" fill="url(#coreGlow)"/>
+
+            <!-- ============ SUPPORT RING B · UNLOCK (dim, behind) ============ -->
+            <g opacity=".62">
+              <path d="M 396 464 C 320 506, 232 484, 198 454" fill="none" stroke="#6a665e" stroke-width="1.25" stroke-dasharray="3 4" marker-end="url(#ah-dark)"/>
+              <path d="M 150 408 C 108 322, 150 224, 246 172" fill="none" stroke="#6a665e" stroke-width="1.25" stroke-dasharray="3 4" marker-end="url(#ah-dark)"/>
+              <circle cx="170" cy="430" r="24" fill="#191816" stroke="#6a665e" stroke-width="1.25"/>
+              <text class="ld-num" x="170" y="431" text-anchor="middle" dominant-baseline="middle" fill="#a4a4b0" style="font-size:13px">M1–5</text>
+              <text class="ld-meta" x="170" y="476" text-anchor="middle" fill="#6a665e">UNLOCK · 解锁</text>
+              <text class="ld-desc" x="170" y="494" text-anchor="middle" data-en="Raise the ceiling" data-zh="抬高产能天花板">抬高产能天花板</text>
+              <text class="ld-ceil" x="252" y="156" text-anchor="middle" data-en="CAPACITY CEILING ↑" data-zh="产能天花板 ↑">产能天花板 ↑</text>
+            </g>
+
+            <!-- ============ SUPPORT RING A · DOLLAR (gold) ============ -->
+            <g opacity=".9">
+              <path d="M 588 336 C 642 382, 692 380, 720 372" fill="none" stroke="#cda44e" stroke-width="1.6" marker-end="url(#ah-gold)"/>
+              <path d="M 712 402 C 682 462, 542 472, 470 461" fill="none" stroke="#cda44e" stroke-width="1.6" marker-end="url(#ah-gold)"/>
+              <circle cx="725" cy="378" r="25" fill="#191816" stroke="#cda44e" stroke-width="1.6"/>
+              <text class="ld-num" x="725" y="379" text-anchor="middle" dominant-baseline="middle" fill="#cda44e" style="font-size:19px">$</text>
+              <text class="ld-meta" x="725" y="424" text-anchor="middle" fill="#cda44e">DOLLAR · 猎头</text>
+              <text class="ld-title" x="725" y="445" text-anchor="middle" data-en="Headhunt" data-zh="猎头招聘" style="font-size:14px">猎头招聘</text>
+              <text class="ld-desc" x="725" y="463" text-anchor="middle" data-en="Spend Dollar, gamble for talent" data-zh="花 Dollar 赌高级苗子">花 Dollar 赌高级苗子</text>
+            </g>
+
+            <!-- ============ CORE RING (green, main) ============ -->
+            <g>
+              <path class="cr-arc cr1" d="M459.57 147.85 A155 155 0 0 1 582.15 270.43" fill="none" stroke="#69bd92" stroke-width="2.6" marker-end="url(#ah-green)"/>
+              <path class="cr-arc cr2" d="M582.15 329.57 A155 155 0 0 1 459.57 452.15" fill="none" stroke="#69bd92" stroke-width="2.6" marker-end="url(#ah-green)"/>
+              <path class="cr-arc cr3" d="M400.43 452.15 A155 155 0 0 1 277.85 329.57" fill="none" stroke="#69bd92" stroke-width="2.6" marker-end="url(#ah-green)"/>
+              <path class="cr-arc cr4" d="M277.85 270.43 A155 155 0 0 1 400.43 147.85" fill="none" stroke="#69bd92" stroke-width="2.6" marker-end="url(#ah-green)"/>
+            </g>
+
+            <!-- node ① PRODUCE (top) -->
+            <circle cx="430" cy="145" r="30" fill="#191816" stroke="#69bd92" stroke-width="2.2"/>
+            <text class="ld-num" x="430" y="146" text-anchor="middle" dominant-baseline="middle" fill="#69bd92">01</text>
+            <text class="ld-title" x="430" y="74" text-anchor="middle" data-en="Produce" data-zh="产出 / Produce">产出 / Produce</text>
+            <text class="ld-desc" x="430" y="96" text-anchor="middle" data-en="Workers auto-produce files" data-zh="同事上工，自动产出文件">同事上工，自动产出文件</text>
+
+            <!-- node ② CONVERT (right) -->
+            <circle cx="585" cy="300" r="30" fill="#191816" stroke="#69bd92" stroke-width="2.2"/>
+            <text class="ld-num" x="585" y="301" text-anchor="middle" dominant-baseline="middle" fill="#69bd92">02</text>
+            <text class="ld-title" x="623" y="286" text-anchor="start" data-en="Convert" data-zh="转化 / Convert">转化 / Convert</text>
+            <text class="ld-desc" x="623" y="308" text-anchor="start" data-en="Files graded → KPI" data-zh="评级转 KPI">评级转 KPI</text>
+
+            <!-- node ③ REINVEST (bottom) — KPI GATE, highlighted -->
+            <circle class="gate-glow" cx="430" cy="455" r="38" fill="#69bd92" opacity=".5" filter="url(#gateGlow)"/>
+            <circle cx="430" cy="455" r="31" fill="#69bd92" stroke="#69bd92" stroke-width="2.2"/>
+            <text class="ld-num" x="430" y="456" text-anchor="middle" dominant-baseline="middle" fill="#15151b">03</text>
+            <text class="ld-title" x="430" y="527" text-anchor="middle" data-en="Reinvest" data-zh="再投资 / Reinvest">再投资 / Reinvest</text>
+            <text class="ld-desc" x="430" y="549" text-anchor="middle" data-en="Spend KPI: upgrade desks, deploy hires" data-zh="KPI 投回：升级工位、招人上工">KPI 投回：升级工位、招人上工</text>
+            <rect x="362" y="563" width="136" height="22" rx="11" fill="none" stroke="#69bd92" stroke-width="1"/>
+            <text class="ld-tag" x="430" y="578" text-anchor="middle" data-en="KPI GATE · only choke point" data-zh="KPI 闸门 · 唯一收口">KPI 闸门 · 唯一收口</text>
+
+            <!-- node ④ SCALE (left) -->
+            <circle cx="275" cy="300" r="30" fill="#191816" stroke="#69bd92" stroke-width="2.2"/>
+            <text class="ld-num" x="275" y="301" text-anchor="middle" dominant-baseline="middle" fill="#69bd92">04</text>
+            <text class="ld-title" x="237" y="286" text-anchor="end" data-en="Scale" data-zh="增益 / Scale">增益 / Scale</text>
+            <text class="ld-desc" x="237" y="308" text-anchor="end" data-en="Buffs + staff → stronger" data-zh="工位 buff、人手更多">工位 buff、人手更多</text>
+          </svg>
+
+          <div class="loop__key">
+            <span class="loop__key-item"><span class="loop__swatch" style="background:#69bd92"></span><span data-en="KPI / Performance" data-zh="KPI / 绩效">KPI / Performance</span></span>
+            <span class="loop__key-item"><span class="loop__swatch" style="background:#cda44e"></span><span data-en="Dollar / Money" data-zh="Dollar / 金钱">Dollar / Money</span></span>
+            <span class="loop__key-item"><span class="loop__swatch" style="background:#6a665e"></span><span data-en="Unlock / Meta" data-zh="解锁 / 元循环">Unlock / Meta</span></span>
+          </div>
+
+          <div class="loop__legend">
+            <div class="loop__legend-row">
+              <span class="loop__legend-tier" style="color:#69bd92"><span class="dot" style="background:#69bd92"></span><span data-en="Core · High-freq" data-zh="核心环 · 高频">核心环 · 高频</span></span>
+              <span class="loop__legend-text" data-en="Produce → Convert → Reinvest → Scale, then back to Produce. The single tight loop that carries the moment-to-moment game." data-zh="产出 → 转化 → 再投资 → 增益，再回到产出。承载逐帧体验的那个紧凑单环。">产出 → 转化 → 再投资 → 增益，再回到产出。承载逐帧体验的那个紧凑单环。</span>
+            </div>
+            <div class="loop__legend-row">
+              <span class="loop__legend-tier" style="color:#cda44e"><span class="dot" style="background:#cda44e"></span><span data-en="Support A · Mid-freq" data-zh="支撑环 A · 中频">支撑环 A · 中频</span></span>
+              <span class="loop__legend-text" data-en="Dollar drops randomly while working → headhunt for a shot at a higher-tier hire → still must pass the KPI gate to deploy → merges back in." data-zh="工作时随机掉落 Dollar → 猎头招聘，更大几率赌到高级苗子 → 仍须经 KPI 闸门才能上工 → 汇入核心环。">工作时随机掉落 Dollar → 猎头招聘，更大几率赌到高级苗子 → 仍须经 KPI 闸门才能上工 → 汇入核心环。</span>
+            </div>
+            <div class="loop__legend-row">
+              <span class="loop__legend-tier" style="color:#a4a4b0"><span class="dot" style="background:#6a665e"></span><span data-en="Support B · Low-freq" data-zh="支撑环 B · 低频">支撑环 B · 低频</span></span>
+              <span class="loop__legend-text" data-en="Keep banking KPI → level up M1–M5 → unlock more desks / office count / office types → raise the core ring's output ceiling." data-zh="持续攒 KPI → 玩家升级 M1–M5 → 解锁更多工位 / 办公室数量 / 办公室类型 → 抬高核心环的产能天花板。">持续攒 KPI → 玩家升级 M1–M5 → 解锁更多工位 / 办公室数量 / 办公室类型 → 抬高核心环的产能天花板。</span>
+            </div>
+          </div>
+
+          <p class="loop__note"
+            data-en-html="Decision point: recruiting has two channels — <strong>HR hiring</strong> (a free candidate on a timer) and <strong>headhunting</strong> (spend Dollar to gamble for a higher-tier candidate). But no matter which channel a hire arrives through, you still have to spend KPI before they can actually start working. KPI is the one and only gate every coworker must pass to enter play."
+            data-zh-html="决策点：招募有两条渠道——<strong>HR 普通招聘</strong>（定时白送一个候选人）/ <strong>猎头招聘</strong>（花 Dollar 赌更高级候选人），但两条渠道的人到了之后，都必须再花 KPI 才能正式上工。KPI 是所有同事入场的唯一闸门。">Decision point: recruiting has two channels — <strong>HR hiring</strong> (a free candidate on a timer) and <strong>headhunting</strong> (spend Dollar to gamble for a higher-tier candidate). But no matter which channel a hire arrives through, you still have to spend KPI before they can actually start working. KPI is the one and only gate every coworker must pass to enter play.</p>
+
+        </div>
       </div>
       <div class="tab-panel" id="tab-economy">
         <p class="tab-panel__content">—</p>
