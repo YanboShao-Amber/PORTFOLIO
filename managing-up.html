@@ -119,6 +119,20 @@
   }
   .proj-section__text strong{color:#ffffff;font-weight:400}
 
+  /* ITCH DEMO BUTTON */
+  .demo-btn{
+    display:inline-flex;align-items:center;gap:11px;
+    font-family:var(--mono);font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+    color:#15151b;background:#69bd92;text-decoration:none;
+    border-radius:9px;padding:14px 24px;margin-bottom:30px;
+    transition:transform .25s var(--ease),box-shadow .25s var(--ease),background .25s var(--ease);
+  }
+  .demo-btn:hover{background:#7ccfa3;transform:translateY(-2px);box-shadow:0 10px 26px rgba(105,189,146,.28)}
+  .demo-btn:active{transform:translateY(0)}
+  .demo-btn__icon{width:17px;height:17px;flex-shrink:0;fill:#15151b}
+  .demo-btn__arrow{width:14px;height:14px;flex-shrink:0;stroke:#15151b;stroke-width:2;fill:none;transition:transform .25s var(--ease)}
+  .demo-btn:hover .demo-btn__arrow{transform:translate(2px,-2px)}
+
   /* TABS */
   .tab-bar{display:flex;gap:0;border-bottom:1px solid var(--line);margin-bottom:32px;flex-wrap:wrap}
   .tab-btn{
@@ -340,6 +354,150 @@
     .lprog__cost{margin-bottom:9px}
   }
 
+  /* ===== BALANCE — the cost curve is the difficulty curve ===== */
+  .bal{padding-top:4px}
+  .bal__intro{font-size:15px;line-height:1.85;color:#a4a4b0;margin-bottom:42px}
+  .bal__intro strong{color:#eae7df;font-weight:500}
+
+  .bal__block{margin-bottom:46px}
+  .bal__btag{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#69bd92;display:block;margin-bottom:11px}
+  .bal__btitle{font-family:var(--display);font-weight:700;font-size:21px;color:#eae7df;line-height:1.3;margin-bottom:11px}
+  .bal__bsub{font-size:15px;line-height:1.75;color:#a4a4b0;margin-bottom:26px}
+  .bal__bsub strong{color:#cdcabf;font-weight:500}
+
+  /* cost-curve chart */
+  .balchart{border:1px solid var(--line);border-radius:12px;padding:26px 30px 24px;background:rgba(255,255,255,.018)}
+  .balchart__legend{display:flex;flex-wrap:wrap;align-items:center;gap:18px;margin-bottom:26px;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#6f6f7c}
+  .balchart__scale{margin-right:auto;display:flex;align-items:center;gap:7px}
+  .balchart__key{display:flex;align-items:center;gap:7px}
+  .balchart__kdot{width:9px;height:9px;border-radius:2px;display:inline-block}
+  .balchart__bars{display:flex;align-items:flex-end;gap:16px;height:236px}
+  .balbar{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;min-width:0}
+  .balbar__cost{font-family:var(--mono);font-weight:700;font-size:15px;color:#eae7df;margin-bottom:9px;display:flex;align-items:baseline;gap:6px;white-space:nowrap}
+  .balbar__mult{font-size:11px;font-weight:700;color:#cda44e;letter-spacing:.03em}
+  .balbar__col{width:100%;max-width:72px;border-radius:6px 6px 0 0;min-height:6px}
+  .balbar--early .balbar__col{background:linear-gradient(to top,rgba(105,189,146,.9),rgba(105,189,146,.34))}
+  .balbar--mid .balbar__col{background:linear-gradient(to top,rgba(150,178,108,.9),rgba(150,178,108,.34))}
+  .balbar--late .balbar__col{background:linear-gradient(to top,rgba(205,164,78,.92),rgba(205,164,78,.34))}
+  .balchart__axis{display:flex;gap:16px;margin-top:13px}
+  .balaxis{flex:1;text-align:center;min-width:0}
+  .balaxis__lv{display:block;font-family:var(--mono);font-weight:700;font-size:12.5px;color:#cdcabf;margin-bottom:5px}
+  .balaxis__time{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.03em;color:#8a8780}
+  .balchart__total{margin-top:22px;border-top:1px solid var(--line);padding-top:15px;font-family:var(--mono);font-size:13px;line-height:1.6;letter-spacing:.02em;color:#6f6f7c}
+  .balchart__total strong{color:#cdcabf;font-weight:700}
+
+  /* front-loaded insight callout */
+  .bal__quote{margin:30px 0 0;border-left:2px solid #cda44e;padding:8px 0 8px 18px;font-size:15.5px;line-height:1.72;color:#cdcabf;background:linear-gradient(to right,rgba(205,164,78,.06),transparent 80%);border-radius:0 6px 6px 0}
+  .bal__quote strong{color:#eae7df;font-weight:600}
+
+  /* supply: two lever cards */
+  .bal__levers{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .balcard{border:1px solid var(--line);border-radius:12px;padding:24px 26px;background:rgba(255,255,255,.018)}
+  .balcard__lever{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#69bd92;display:block;margin-bottom:7px}
+  .balcard__h{font-family:var(--display);font-weight:700;font-size:17px;color:#eae7df;margin-bottom:18px}
+  .baltable{width:100%;border-collapse:collapse;margin-bottom:16px}
+  .baltable th{font-family:var(--mono);font-weight:400;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:#6f6f7c;text-align:right;padding:0 0 9px;border-bottom:1px solid var(--line)}
+  .baltable th:first-child{text-align:left}
+  .baltable td{font-family:var(--mono);font-size:13px;color:#a4a4b0;text-align:right;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.06)}
+  .baltable td:first-child{text-align:left}
+  .baltable tr:last-child td{border-bottom:0}
+  .baltable .g-grey{color:#8a8780}
+  .baltable .g-green{color:#69bd92}
+  .baltable .g-blue{color:#6aa9e0}
+  .baltable .g-gold{color:#cda44e}
+  .baltable .kpi{font-weight:700;color:#eae7df}
+  .balcard__flabel{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:#6f6f7c;display:block;margin-bottom:7px}
+  .balcard__formula{display:block;font-family:var(--mono);font-size:12px;line-height:1.6;color:#9b978d;background:rgba(0,0,0,.2);border-radius:6px;padding:10px 12px;margin-bottom:14px;word-break:break-word}
+  .balcard__formula b{color:#69bd92;font-weight:700}
+  .balcard__note{font-size:13.5px;line-height:1.6;color:#8a8780}
+  .balcard__note strong{color:#cdcabf;font-weight:500}
+
+  /* design principles band */
+  .bal__principles{margin-top:46px}
+  .balprin{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .balprin__item{border:1px solid var(--line);border-radius:10px;padding:20px 22px;background:rgba(255,255,255,.012)}
+  .balprin__n{font-family:var(--mono);font-weight:700;font-size:12px;color:#69bd92;letter-spacing:.08em;margin-bottom:9px;display:block}
+  .balprin__t{font-size:15px;font-weight:600;color:#eae7df;margin-bottom:6px;line-height:1.4}
+  .balprin__d{font-size:13.5px;line-height:1.62;color:#a4a4b0}
+
+  @media(prefers-reduced-motion:no-preference){
+    @keyframes balgrow{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+    .tab-panel.active .bal__intro{animation:lfade .5s var(--ease) both}
+    .tab-panel.active .bal__block:nth-of-type(2){animation:lfade .55s var(--ease) .1s both}
+    .tab-panel.active .balbar__col{transform-origin:bottom;animation:balgrow .7s var(--ease) both}
+    .tab-panel.active .balbar:nth-child(1) .balbar__col{animation-delay:.18s}
+    .tab-panel.active .balbar:nth-child(2) .balbar__col{animation-delay:.28s}
+    .tab-panel.active .balbar:nth-child(3) .balbar__col{animation-delay:.38s}
+    .tab-panel.active .balbar:nth-child(4) .balbar__col{animation-delay:.48s}
+    .tab-panel.active .balbar:nth-child(5) .balbar__col{animation-delay:.58s}
+    .tab-panel.active .bal__quote{animation:lfade .55s var(--ease) .35s both}
+    .tab-panel.active .bal__levers{animation:lfade .55s var(--ease) .25s both}
+    .tab-panel.active .bal__principles{animation:lfade .55s var(--ease) .35s both}
+  }
+  @media(max-width:600px){
+    .bal__levers{grid-template-columns:1fr}
+    .balprin{grid-template-columns:1fr}
+    .balchart{padding:22px 16px 20px}
+    .balchart__bars{height:200px;gap:8px}
+    .balchart__axis{gap:8px}
+    .balbar__cost{font-size:11.5px;gap:4px}
+    .balbar__mult{font-size:10px}
+    .balaxis__lv{font-size:11px}
+    .balaxis__time{font-size:9.5px}
+  }
+
+  /* ===== GDD — source design document ===== */
+  .gdd{padding-top:4px}
+  .gdd__lead{font-size:15px;line-height:1.85;color:#a4a4b0;margin-bottom:16px}
+  .gdd__lead strong{color:#eae7df;font-weight:500}
+  .gdd__scope{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:4px}
+  .gdd__chip{font-family:var(--mono);font-size:11px;letter-spacing:.07em;color:#8a8780;border:1px solid var(--line);border-radius:4px;padding:4px 11px}
+
+  .gdd__sec{margin-top:50px;border-top:1px solid var(--line);padding-top:30px}
+  .gdd__sec:first-of-type{margin-top:38px;border-top:0;padding-top:0}
+  .gdd__sechead{display:flex;align-items:baseline;gap:14px;margin-bottom:6px}
+  .gdd__secnum{font-family:var(--mono);font-weight:700;font-size:13px;letter-spacing:.12em;color:#69bd92;flex-shrink:0}
+  .gdd__sectitle{font-family:var(--display);font-weight:800;font-size:23px;color:#eae7df;line-height:1.2}
+
+  .gdd__sub{margin-top:26px}
+  .gdd__subtitle{font-family:var(--mono);font-size:12.5px;letter-spacing:.05em;text-transform:uppercase;color:#cda44e;font-weight:700;margin-bottom:9px}
+  .gdd__p{font-size:15px;line-height:1.78;color:#a4a4b0;margin-bottom:10px}
+  .gdd__p:last-child{margin-bottom:0}
+  .gdd__p strong{color:#cdcabf;font-weight:500}
+
+  .gdd__ul{list-style:none;padding:0;margin:6px 0 12px}
+  .gdd__ul li{font-size:14.5px;line-height:1.7;color:#a4a4b0;padding-left:17px;position:relative;margin-bottom:8px}
+  .gdd__ul li::before{content:'';position:absolute;left:0;top:9px;width:5px;height:5px;border-radius:50%;background:#69bd92;opacity:.6}
+  .gdd__ul li strong{color:#cdcabf;font-weight:600}
+
+  .gdd__defs{display:grid;grid-template-columns:max-content 1fr;gap:9px 24px;margin:6px 0 12px;font-size:14.5px}
+  .gdd__defs dt{font-family:var(--mono);color:#8a8780;letter-spacing:.02em}
+  .gdd__defs dd{color:#cdcabf;line-height:1.6}
+
+  .gdd__callout{border-left:2px solid #69bd92;padding:11px 0 11px 18px;margin:14px 0;background:linear-gradient(to right,rgba(105,189,146,.06),transparent 80%);border-radius:0 6px 6px 0;font-size:15px;line-height:1.74;color:#cdcabf}
+  .gdd__callout strong{color:#eae7df;font-weight:600}
+
+  .gddtable-wrap{overflow-x:auto;margin:12px 0 14px}
+  .gddtable{width:100%;border-collapse:collapse;font-size:13.5px;min-width:340px}
+  .gddtable th{font-family:var(--mono);font-weight:400;font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:#6f6f7c;text-align:left;padding:0 16px 9px 0;border-bottom:1px solid var(--line);vertical-align:bottom;white-space:nowrap}
+  .gddtable td{color:#a4a4b0;text-align:left;padding:9px 16px 9px 0;border-bottom:1px solid rgba(255,255,255,.06);vertical-align:top;line-height:1.55}
+  .gddtable tr:last-child td{border-bottom:0}
+  .gddtable td:first-child{color:#cdcabf;white-space:nowrap}
+  .gddtable .g-grey{color:#8a8780}.gddtable .g-green{color:#69bd92}.gddtable .g-blue{color:#6aa9e0}.gddtable .g-gold{color:#cda44e}
+
+  .gdd__formula{display:block;font-family:var(--mono);font-size:12.5px;line-height:1.65;color:#9b978d;background:rgba(0,0,0,.2);border-radius:6px;padding:11px 13px;margin:6px 0 12px;word-break:break-word}
+  .gdd__formula b{color:#69bd92;font-weight:700}
+
+  @media(prefers-reduced-motion:no-preference){
+    .tab-panel.active .gdd__lead,.tab-panel.active .gdd__scope{animation:lfade .5s var(--ease) both}
+    .tab-panel.active .gdd__sec{animation:lfade .55s var(--ease) .1s both}
+  }
+  @media(max-width:600px){
+    .gdd__defs{grid-template-columns:1fr}
+    .gdd__defs dt{margin-top:7px}
+    .gdd__sectitle{font-size:20px}
+  }
+
   /* SCREENSHOT GRID */
   .proj-screens{
     display:grid;grid-template-columns:1fr 1fr;gap:4px;
@@ -440,6 +598,11 @@
   <div class="proj-body">
 
     <div class="reveal">
+      <a class="demo-btn" href="https://xixishao.itch.io/managing-up" target="_blank" rel="noopener noreferrer">
+        <svg class="demo-btn__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+        <span data-en="Play Demo on itch.io" data-zh="在 itch.io 试玩 Demo">Play Demo on itch.io</span>
+        <svg class="demo-btn__arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M17 7H8M17 7v9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
       <p class="proj-section__label" data-en="Overview" data-zh="项目简介">Overview</p>
       <p class="proj-section__text" style="margin-bottom:12px" data-en="Game Type: Idle Game" data-zh="游戏类型：挂机游戏">Game Type: Idle Game</p>
       <p class="proj-section__text"
@@ -455,6 +618,7 @@
         <button class="tab-btn" data-tab="loop" data-en="Core Loop" data-zh="核心循环">Core Loop</button>
         <button class="tab-btn" data-tab="balance" data-en="Balancing" data-zh="数值平衡">Balancing</button>
         <button class="tab-btn" data-tab="build" data-en="Build" data-zh="技术实现">Build</button>
+        <button class="tab-btn" data-tab="gdd" data-en="GDD" data-zh="GDD">GDD</button>
       </div>
       <div class="tab-panel active" id="tab-concept">
         <div class="concept-timeline">
@@ -471,7 +635,7 @@
               <h4 class="concept-entry__title" data-en="Role Reversal" data-zh="角色反转">Role Reversal</h4>
               <p class="concept-entry__body"
                 data-en="You're not the exploited worker — you're the one doing the managing. The game inverts the powerlessness of real office life into a satirical sense of control. You're finally the one giving orders, which is exactly what makes the whole thing more absurd."
-                data-zh="玩家不是被压榨的打工人，而是反过来&quot;管理上级&quot;的那个人。游戏把现实里的无力感倒置成讽刺性的掌控感——你终于站在了发号施令的那一端，而这恰恰让整件事更荒诞。">You're not the exploited worker — you're the one doing the managing. The game inverts the powerlessness of real office life into a satirical sense of control. You're finally the one giving orders, which is exactly what makes the whole thing more absurd.</p>
+                data-zh="玩家不是被压榨的打工人，而是翻身坐到管理岗、靠压榨同事换业绩的那个人。游戏把现实里的无力感倒置成讽刺性的掌控感——你终于站在了发号施令的那一端，而这恰恰让整件事更荒诞。">You're not the exploited worker — you're the one doing the managing. The game inverts the powerlessness of real office life into a satirical sense of control. You're finally the one giving orders, which is exactly what makes the whole thing more absurd.</p>
             </div>
 
             <div class="concept-entry">
@@ -479,8 +643,8 @@
               <p class="concept-entry__meta">CURRENCY · 货币</p>
               <h4 class="concept-entry__title" data-en="KPI &amp; Dollar" data-zh="KPI &amp; Dollar">KPI &amp; Dollar</h4>
               <p class="concept-entry__body"
-                data-en="KPI is earned through output, spent on upgrades and desk décor. Dollar is reserved solely for headhunting. The two never convert — and that's the sharp edge of the design. In real life, performance metrics and actual money run on entirely separate logics: no KPI translates into hiring power, no cash buys a promotion. Most games let currencies flow freely. This one deliberately doesn't — because the disconnect is the point."
-                data-zh="KPI 靠产出赚取，花在升级和工位装饰；Dollar 只能用来猎头挖人。两者互不兑换——这正是设计的尖锐处：现实里&quot;考核指标&quot;和&quot;真金白银&quot;本就是两套逻辑，刷再多绩效也变不出钱去挖人，砸再多钱也换不来一次晋升。多数游戏会把货币打通做成兑换闭环，这里偏不，因为脱钩本身就是要讲的那句话。">KPI is earned through output, spent on upgrades and desk décor. Dollar is reserved solely for headhunting. The two never convert — and that's the sharp edge of the design.</p>
+                data-en="KPI is earned through output, spent on workstation upgrades, office growth, and promotions. Dollar is reserved solely for headhunting. The two never convert — and that's the sharp edge of the design. In real life, performance metrics and actual money run on entirely separate logics: no KPI translates into hiring power, no cash buys a promotion. Most games let currencies flow freely. This one deliberately doesn't — because the disconnect is the point."
+                data-zh="KPI 靠产出赚取，花在工位升级、办公室扩张与晋升；Dollar 只能用来猎头挖人。两者互不兑换——这正是设计的尖锐处：现实里&quot;考核指标&quot;和&quot;真金白银&quot;本就是两套逻辑，刷再多绩效也变不出钱去挖人，砸再多钱也换不来一次晋升。多数游戏会把货币打通做成兑换闭环，这里偏不，因为脱钩本身就是要讲的那句话。">KPI is earned through output, spent on workstation upgrades, office growth, and promotions. Dollar is reserved solely for headhunting. The two never convert — and that's the sharp edge of the design.</p>
             </div>
 
             <div class="concept-entry">
@@ -555,12 +719,12 @@
                 <span class="res-chip__name">Dollar</span>
                 <span class="res-chip__tag" data-en="Gacha currency" data-zh="抽卡专用货币">Gacha currency</span>
               </div>
-              <p class="res-chip__desc" data-en="A random byproduct of coworkers working; its only use is headhunting." data-zh="员工工作的随机副产品，唯一去向是猎头招聘。">A random byproduct of coworkers working; its only use is headhunting.</p>
+              <p class="res-chip__desc" data-en="Drops at random as coworkers work, plus from clicking slacking bubbles and SR/SSR firing refunds. Its only sink is headhunting." data-zh="员工工作时随机掉落，也来自点击摸鱼气泡与 SR/SSR 解雇返还；唯一去向是猎头招聘。">Drops at random as coworkers work, plus from clicking slacking bubbles and SR/SSR firing refunds. Its only sink is headhunting.</p>
             </div>
             <div class="res-chip">
               <div class="res-chip__head">
                 <span class="res-chip__dot" style="background:#7d7a72"></span>
-                <span class="res-chip__name" data-en="Files" data-zh="文件">Files</span>
+                <span class="res-chip__name" data-en="Documents" data-zh="文件">Documents</span>
                 <span class="res-chip__tag" data-en="Intermediate" data-zh="中间产物">Intermediate</span>
               </div>
               <p class="res-chip__desc" data-en="Quality-graded (gray / green / blue / gold). Grade decides how much KPI each output converts to." data-zh="带质量评级（灰 / 绿 / 蓝 / 金），质量决定每次产出能换多少 KPI。">Quality-graded (gray / green / blue / gold). Grade decides how much KPI each output converts to.</p>
@@ -601,12 +765,12 @@
                 <div class="lnodes">
                   <div class="lnode lnode--auto">
                     <span class="lnode__num">1</span>
-                    <div class="lnode__main"><p class="lnode__title" data-en="Coworkers produce files (auto)" data-zh="同事产出文件（自动）">Coworkers produce files (auto)</p></div>
+                    <div class="lnode__main"><p class="lnode__title" data-en="Coworkers produce documents (auto)" data-zh="同事产出文件（自动）">Coworkers produce documents (auto)</p></div>
                   </div>
                   <div class="lnode lnode--auto">
                     <span class="lnode__num">2</span>
                     <div class="lnode__main">
-                      <p class="lnode__title" data-en="Files are quality-graded" data-zh="文件按质量评级">Files are quality-graded</p>
+                      <p class="lnode__title" data-en="Documents are quality-graded" data-zh="文件按质量评级">Documents are quality-graded</p>
                       <p class="lnode__desc" data-en="Gray / green / blue / gold — grade sets how much KPI they convert to." data-zh="灰 / 绿 / 蓝 / 金 —— 评级决定能换多少 KPI。">Gray / green / blue / gold — grade sets how much KPI they convert to.</p>
                     </div>
                   </div>
@@ -706,6 +870,7 @@
                     <p class="lprog__cost lprog__cost--start" data-en="START" data-zh="起点">START</p>
                     <ul class="lprog__list">
                       <li data-en="Base office, base desks" data-zh="基础办公室与工位">Base office, base desks</li>
+                      <li class="unlock" data-en="Pantry available" data-zh="开放 Pantry 茶水间">Pantry available</li>
                     </ul>
                   </div>
                   <div class="lprog__step">
@@ -715,7 +880,6 @@
                     <ul class="lprog__list">
                       <li data-en="Desks → 2 rows (max Lv.2)" data-zh="工位扩到 2 排（桌 ≤ Lv.2）">Desks → 2 rows (max Lv.2)</li>
                       <li data-en="1st private office" data-zh="解锁第 1 间独立办公室">1st private office</li>
-                      <li class="unlock" data-en="Unlock: Pantry" data-zh="解锁 Pantry 茶水间">Unlock: Pantry</li>
                     </ul>
                   </div>
                   <div class="lprog__step">
@@ -740,7 +904,7 @@
                   </div>
                   <div class="lprog__step">
                     <div class="lprog__dot"></div>
-                    <p class="lprog__m">M5<span class="max" data-en="MAX" data-zh="满级">MAX</span></p>
+                    <p class="lprog__m">M5</p>
                     <p class="lprog__cost">↑ 100,000 KPI</p>
                     <ul class="lprog__list">
                       <li data-en="Desks → 5 rows (cap stays Lv.4)" data-zh="工位扩到 5 排（桌上限维持 Lv.4）">Desks → 5 rows (cap stays Lv.4)</li>
@@ -748,8 +912,17 @@
                       <li class="unlock" data-en="Unlock: Culture" data-zh="解锁 Culture 企业文化">Unlock: Culture</li>
                     </ul>
                   </div>
+                  <div class="lprog__step">
+                    <div class="lprog__dot"></div>
+                    <p class="lprog__m">M6<span class="max" data-en="MAX" data-zh="满级">MAX</span></p>
+                    <p class="lprog__cost">↑ 200,000 KPI</p>
+                    <ul class="lprog__list">
+                      <li data-en="Top of the ladder" data-zh="登顶公司高层">Top of the ladder</li>
+                      <li class="unlock" data-en="Trigger: Win Scene" data-zh="触发 Win Scene">Trigger: Win Scene</li>
+                    </ul>
+                  </div>
                 </div>
-                <p class="lmeta__note" data-en="This layer is Meta Progression (chapter growth), not a loop — deliberately drawn as a straight line rather than a ring, to separate the high-frequency loops you run over and over from one-time long-term growth. The cost jumps ~10–100× each level (50 → 5,000 → 30,000 → 100,000 KPI): every milestone raises the output ceiling of both the Core and Recruitment loops, and unlocks a new system (Pantry, Headhunt, Meeting, Culture)." data-zh="这一层是 Meta Progression（章节成长），不是循环——刻意画成直线而非环，以区分反复跑的高频循环和一次性的长期成长。每级花费跳涨约 10–100 倍（50 → 5,000 → 30,000 → 100,000 KPI）：每次升级都抬高核心环与招聘环的产能天花板，并解锁一个新系统（茶水间 / 猎头 / 会议室 / 企业文化）。">This layer is Meta Progression (chapter growth), not a loop — deliberately drawn as a straight line rather than a ring, to separate the high-frequency loops you run over and over from one-time long-term growth. The cost jumps ~10–100× each level (50 → 5,000 → 30,000 → 100,000 KPI): every milestone raises the output ceiling of both the Core and Recruitment loops, and unlocks a new system (Pantry, Headhunt, Meeting, Culture).</p>
+                <p class="lmeta__note" data-en="This layer is Meta Progression (chapter growth), not a loop — deliberately drawn as a straight line rather than a ring, to separate the high-frequency loops you run over and over from one-time long-term growth. The cost climbs ×100 → ×6 → ×3.3 → ×2 (50 → 5,000 → 30,000 → 100,000 → 200,000 KPI): every milestone raises the output ceiling of both the Core and Recruitment loops and unlocks a new system (Headhunt, Meeting, Culture), ending at the Level-6 Win Scene." data-zh="这一层是 Meta Progression（章节成长），不是循环——刻意画成直线而非环，以区分反复跑的高频循环和一次性的长期成长。花费依次跳涨 ×100 → ×6 → ×3.3 → ×2（50 → 5,000 → 30,000 → 100,000 → 200,000 KPI）：每次升级都抬高核心环与招聘环的产能天花板，并解锁一个新系统（猎头 / 会议室 / 企业文化），最终在 6 级触发 Win Scene。">This layer is Meta Progression (chapter growth), not a loop — deliberately drawn as a straight line rather than a ring, to separate the high-frequency loops you run over and over from one-time long-term growth. The cost climbs ×100 → ×6 → ×3.3 → ×2 (50 → 5,000 → 30,000 → 100,000 → 200,000 KPI): every milestone raises the output ceiling of both the Core and Recruitment loops and unlocks a new system (Headhunt, Meeting, Culture), ending at the Level-6 Win Scene.</p>
               </div>
             </div>
 
@@ -769,7 +942,163 @@
         </div>
       </div>
       <div class="tab-panel" id="tab-balance">
-        <p class="tab-panel__content">—</p>
+        <div class="bal">
+
+          <p class="bal__intro"
+            data-en-html="Managing Up has <strong>no fail state</strong> and adds no harder inputs as you climb — the only thing that grows is the KPI you must bank to promote. So balancing wasn't about tuning enemies or timers; it was about shaping <strong>one cost curve</strong>. The goal: make the first promotion land in seconds and the last take hours, while the player never learns a new button — only a better way to earn."
+            data-zh-html="《Managing Up》<strong>没有失败状态</strong>，越往上也不会加入更难的操作——唯一增长的，是升职所需攒下的 KPI。所以数值平衡不是去调敌人或计时器，而是塑造<strong>同一条成本曲线</strong>。目标是：让第一次升职在几秒内到手、最后一次却要熬上几小时，而玩家自始至终不用学任何新按钮，只需学会更会赚。">Managing Up has no fail state and adds no harder inputs as you climb — the only thing that grows is the KPI you must bank to promote. So balancing wasn't about tuning enemies or timers; it was about shaping one cost curve.</p>
+
+          <!-- ===== BLOCK 1 · the sink / cost curve ===== -->
+          <div class="bal__block">
+            <span class="bal__btag" data-en="Demand · the sink" data-zh="支出端 · KPI 消耗">Demand · the sink</span>
+            <h4 class="bal__btitle" data-en="The cost curve is the difficulty curve" data-zh="成本曲线就是难度曲线">The cost curve is the difficulty curve</h4>
+            <p class="bal__bsub"
+              data-en-html="Five promotions, each gated by KPI alone. Costs jump <strong>×100 → ×6 → ×3.3 → ×2</strong> — a steep early wall that keeps flattening, so the curve accelerates in absolute KPI while each single step feels less punishing than the last."
+              data-zh-html="五次升职，每一次都只由 KPI 把关。花费依次跳涨 <strong>×100 → ×6 → ×3.3 → ×2</strong>——先立起一道陡墙，再逐级放缓，于是绝对数值在加速，单步的相对压力却越来越小。">Five promotions, each gated by KPI alone. Costs jump ×100 → ×6 → ×3.3 → ×2 — a steep early wall that keeps flattening.</p>
+
+            <div class="balchart">
+              <div class="balchart__legend">
+                <span class="balchart__scale"><span data-en="KPI cost" data-zh="KPI 花费">KPI cost</span> · <span data-en="log scale" data-zh="对数刻度">log scale</span></span>
+                <span class="balchart__key"><span class="balchart__kdot" style="background:#69bd92"></span><span data-en="Early" data-zh="前期">Early</span></span>
+                <span class="balchart__key"><span class="balchart__kdot" style="background:#96b26c"></span><span data-en="Mid" data-zh="中期">Mid</span></span>
+                <span class="balchart__key"><span class="balchart__kdot" style="background:#cda44e"></span><span data-en="Late" data-zh="后期">Late</span></span>
+              </div>
+
+              <div class="balchart__bars">
+                <div class="balbar balbar--early">
+                  <span class="balbar__cost">50</span>
+                  <div class="balbar__col" style="height:14%"></div>
+                </div>
+                <div class="balbar balbar--mid">
+                  <span class="balbar__cost">5,000 <span class="balbar__mult">×100</span></span>
+                  <div class="balbar__col" style="height:56%"></div>
+                </div>
+                <div class="balbar balbar--mid">
+                  <span class="balbar__cost">30,000 <span class="balbar__mult">×6</span></span>
+                  <div class="balbar__col" style="height:73%"></div>
+                </div>
+                <div class="balbar balbar--late">
+                  <span class="balbar__cost">100,000 <span class="balbar__mult">×3.3</span></span>
+                  <div class="balbar__col" style="height:84%"></div>
+                </div>
+                <div class="balbar balbar--late">
+                  <span class="balbar__cost">200,000 <span class="balbar__mult">×2</span></span>
+                  <div class="balbar__col" style="height:90%"></div>
+                </div>
+              </div>
+
+              <div class="balchart__axis">
+                <div class="balaxis"><span class="balaxis__lv">Lv.1→2</span><span class="balaxis__time" data-en="≤ 2 min" data-zh="≤ 2 分钟">≤ 2 min</span></div>
+                <div class="balaxis"><span class="balaxis__lv">Lv.2→3</span><span class="balaxis__time" data-en="15–40 min" data-zh="15–40 分钟">15–40 min</span></div>
+                <div class="balaxis"><span class="balaxis__lv">Lv.3→4</span><span class="balaxis__time" data-en="1–2.5 hr" data-zh="1–2.5 小时">1–2.5 hr</span></div>
+                <div class="balaxis"><span class="balaxis__lv">Lv.4→5</span><span class="balaxis__time" data-en="3–6 hr" data-zh="3–6 小时">3–6 hr</span></div>
+                <div class="balaxis"><span class="balaxis__lv">Lv.5→6</span><span class="balaxis__time" data-en="6–10 hr" data-zh="6–10 小时">6–10 hr</span></div>
+              </div>
+
+              <p class="balchart__total"
+                data-en-html="Total to Lv.6: <strong>≈ 335,000 KPI</strong> over <strong>10–20 hrs</strong> — then the Win Scene fires. No Game Over branch exists."
+                data-zh-html="升到 Lv.6 共需 <strong>≈ 335,000 KPI</strong>、约 <strong>10–20 小时</strong>——随后触发 Win Scene。游戏没有 Game Over 分支。">Total to Lv.6: ≈ 335,000 KPI over 10–20 hrs — then the Win Scene fires.</p>
+            </div>
+
+            <p class="bal__quote"
+              data-en-html="<strong>Fun is front-loaded, idling is back-loaded.</strong> The early levels reward active play in minutes; the late levels hand the game over to the roster you've built and the office you've optimized."
+              data-zh-html="<strong>乐趣前置，挂机后置。</strong>前期几分钟就能靠主动操作拿到回报；后期则把游戏交给你攒下的团队和优化过的办公室去跑。">Fun is front-loaded, idling is back-loaded. The early levels reward active play in minutes; the late levels hand the game over to the roster you've built and the office you've optimized.</p>
+          </div>
+
+          <!-- ===== BLOCK 2 · the source / two levers ===== -->
+          <div class="bal__block">
+            <span class="bal__btag" data-en="Supply · the source" data-zh="供给端 · KPI 来源">Supply · the source</span>
+            <h4 class="bal__btitle" data-en="Two levers close the gap" data-zh="两根杠杆去填这条曲线">Two levers close the gap</h4>
+            <p class="bal__bsub"
+              data-en-html="Production is the only way to feed the curve, and <strong>KPI/min = KPI per document × documents per minute</strong>. Those two terms map onto two coworker stats the player optimizes independently: Quality (richer documents) and Efficiency (faster cycles)."
+              data-zh-html="产出是喂饱曲线的唯一方式，而 <strong>每分钟 KPI = 每份文件的 KPI × 每分钟产出的文件数</strong>。这两项正好对应玩家可独立优化的两个员工属性：质量（更值钱的文件）与效率（更快的循环）。">Production is the only way to feed the curve, and KPI/min = KPI per document × documents per minute.</p>
+
+            <div class="bal__levers">
+
+              <!-- Lever 1 · Quality -->
+              <div class="balcard">
+                <span class="balcard__lever" data-en="Lever 1 · Quality" data-zh="杠杆一 · 质量">Lever 1 · Quality</span>
+                <h5 class="balcard__h" data-en="KPI per document" data-zh="每份文件的 KPI">KPI per document</h5>
+                <table class="baltable">
+                  <thead>
+                    <tr>
+                      <th data-en="Grade" data-zh="等级">Grade</th>
+                      <th data-en="Score" data-zh="评分">Score</th>
+                      <th data-en="×KPI" data-zh="倍率">×KPI</th>
+                      <th>KPI</th>
+                      <th>$</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td class="g-grey" data-en="Grey" data-zh="灰">Grey</td><td>1–30</td><td>100%</td><td class="kpi">23</td><td>$1</td></tr>
+                    <tr><td class="g-green" data-en="Green" data-zh="绿">Green</td><td>31–70</td><td>120%</td><td class="kpi">27</td><td>$4</td></tr>
+                    <tr><td class="g-blue" data-en="Blue" data-zh="蓝">Blue</td><td>71–94</td><td>200%</td><td class="kpi">45</td><td>$6</td></tr>
+                    <tr><td class="g-gold" data-en="Gold" data-zh="金">Gold</td><td>95</td><td>300%</td><td class="kpi">68</td><td>$10</td></tr>
+                  </tbody>
+                </table>
+                <span class="balcard__flabel" data-en="Formula" data-zh="公式">Formula</span>
+                <code class="balcard__formula">Final KPI = round(30 × <b>grade</b> × 0.75)</code>
+                <p class="balcard__note"
+                  data-en-html="Early Grey-heavy output averages <strong>≈ 25 KPI/doc</strong>; Quality buffs push mid–late output to <strong>35–45</strong>."
+                  data-zh-html="前期以灰卡为主，约 <strong>25 KPI/份</strong>；质量加成把中后期拉到 <strong>35–45</strong>。">Early Grey-heavy output averages ≈ 25 KPI/doc; Quality buffs push mid–late output to 35–45.</p>
+              </div>
+
+              <!-- Lever 2 · Efficiency -->
+              <div class="balcard">
+                <span class="balcard__lever" data-en="Lever 2 · Efficiency" data-zh="杠杆二 · 效率">Lever 2 · Efficiency</span>
+                <h5 class="balcard__h" data-en="Seconds per cycle" data-zh="每个循环的秒数">Seconds per cycle</h5>
+                <table class="baltable">
+                  <thead>
+                    <tr>
+                      <th data-en="Efficiency" data-zh="效率">Efficiency</th>
+                      <th data-en="Cycle" data-zh="循环时长">Cycle</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>1</td><td class="kpi" data-en="~135 s" data-zh="~135 秒">~135 s</td></tr>
+                    <tr><td>5</td><td class="kpi" data-en="~75 s" data-zh="~75 秒">~75 s</td></tr>
+                    <tr><td>10</td><td class="kpi" data-en="1 s (floor)" data-zh="1 秒（下限）">1 s (floor)</td></tr>
+                  </tbody>
+                </table>
+                <span class="balcard__flabel" data-en="Formula" data-zh="公式">Formula</span>
+                <code class="balcard__formula">cycle = max(1s, (300 − <b>eff</b>×30×rand 0.8–1.2) × 0.5)</code>
+                <p class="balcard__note"
+                  data-en-html="Higher Efficiency shortens every cycle; at <strong>Eff 10</strong> production hits the 1-second floor and the lever caps out."
+                  data-zh-html="效率越高，每个循环越短；<strong>效率到 10</strong> 触及 1 秒下限，这根杠杆封顶。">Higher Efficiency shortens every cycle; at Eff 10 production hits the 1-second floor and the lever caps out.</p>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- ===== BLOCK 3 · design intent ===== -->
+          <div class="bal__principles">
+            <span class="bal__btag" data-en="Design intent" data-zh="设计意图">Design intent</span>
+            <h4 class="bal__btitle" data-en="Why a pure cost curve works" data-zh="为什么纯成本曲线行得通">Why a pure cost curve works</h4>
+            <div class="balprin">
+              <div class="balprin__item">
+                <span class="balprin__n">01</span>
+                <p class="balprin__t" data-en="No new inputs" data-zh="不加新操作">No new inputs</p>
+                <p class="balprin__d" data-en="Later levels never add harder controls or execution — the same clicks carry you from Lv.1 to Lv.6." data-zh="越往后也不引入更难的操作或手速要求——从 Lv.1 到 Lv.6 都是同一套点击。">Later levels never add harder controls or execution — the same clicks carry you from Lv.1 to Lv.6.</p>
+              </div>
+              <div class="balprin__item">
+                <span class="balprin__n">02</span>
+                <p class="balprin__t" data-en="Resources, not reflexes" data-zh="拼资源，不拼反应">Resources, not reflexes</p>
+                <p class="balprin__d" data-en="Difficulty is paid in KPI: stronger coworkers, upgraded desks, and office bonuses — not twitch skill." data-zh="难度用 KPI 结账：更强的员工、升级的工位、办公室加成，而非操作技巧。">Difficulty is paid in KPI: stronger coworkers, upgraded desks, and office bonuses — not twitch skill.</p>
+              </div>
+              <div class="balprin__item">
+                <span class="balprin__n">03</span>
+                <p class="balprin__t" data-en="Idle gains weight" data-zh="挂机权重上升">Idle gains weight</p>
+                <p class="balprin__d" data-en="The focus shifts from quick active rewards early to sustained idle accumulation and layout optimization late." data-zh="重心从前期的主动快回报，逐步转向后期的持续挂机积累与布局优化。">The focus shifts from quick active rewards early to sustained idle accumulation and layout optimization late.</p>
+              </div>
+              <div class="balprin__item">
+                <span class="balprin__n">04</span>
+                <p class="balprin__t" data-en="No fail state" data-zh="没有失败状态">No fail state</p>
+                <p class="balprin__d" data-en="You can't lose — difficulty is simply the time and resources to the next promotion, never the risk of a Game Over." data-zh="你不会输——难度只是抵达下一次升职所需的时间与资源，从无 Game Over 之虞。">You can't lose — difficulty is simply the time and resources to the next promotion, never the risk of a Game Over.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
       </div>
       <div class="tab-panel" id="tab-build">
         <div class="build">
@@ -891,6 +1220,340 @@
           </div>
 
           <p class="build__close" data-en="All of these systems were built solo. For design interviewers, they're proof the design can ship; for engineering interviewers, they're samples of how I handle engineering problems." data-zh="这些系统全部独立实现。对策划，它们是设计能落地的证明；对程序，它们是我处理工程问题的样本。">All of these systems were built solo. For design interviewers, they're proof the design can ship; for engineering interviewers, they're samples of how I handle engineering problems.</p>
+
+        </div>
+      </div>
+      <div class="tab-panel" id="tab-gdd">
+        <div class="gdd">
+
+          <!-- ===== 1 · GAME OVERVIEW ===== -->
+          <div class="gdd__sec">
+            <div class="gdd__sechead"><span class="gdd__secnum">01</span><h4 class="gdd__sectitle" data-en="Game Overview" data-zh="游戏概述">Game Overview</h4></div>
+
+            <div class="gdd__sub">
+              <p class="gdd__subtitle" data-en="1.1 · Title" data-zh="1.1 · 标题">1.1 · Title</p>
+              <p class="gdd__p">Managing Up</p>
+            </div>
+            <div class="gdd__sub">
+              <p class="gdd__subtitle" data-en="1.2 · Genre" data-zh="1.2 · 类型">1.2 · Genre</p>
+              <p class="gdd__p" data-en="Idle / Management Simulation" data-zh="放置 / 经营模拟">Idle / Management Simulation</p>
+            </div>
+            <div class="gdd__sub">
+              <p class="gdd__subtitle" data-en="1.3 · Platform" data-zh="1.3 · 平台">1.3 · Platform</p>
+              <p class="gdd__p">PC</p>
+            </div>
+
+            <div class="gdd__sub">
+              <p class="gdd__subtitle" data-en="1.4 · Target Audience" data-zh="1.4 · 目标用户">1.4 · Target Audience</p>
+              <ul class="gdd__ul">
+                <li data-en-html="<strong>Age:</strong> players aged 20–45." data-zh-html="<strong>年龄：</strong>20–45 岁玩家。">Age: players aged 20–45.</li>
+                <li data-en-html="<strong>Primary:</strong> white-collar workers, students, and others who spend long stretches at a computer." data-zh-html="<strong>主要人群：</strong>白领、学生，以及其他长时间对着电脑工作或学习的人。">Primary: white-collar workers, students, and others who spend long stretches at a computer.</li>
+                <li data-en-html="<strong>Genre prefs:</strong> idle / incremental games, management sims, desktop games, satirical or humorous experiences." data-zh-html="<strong>品类偏好：</strong>放置 / 增量游戏、经营模拟、桌面小游戏，以及讽刺幽默向的体验。">Genre prefs: idle / incremental games, management sims, desktop games, satirical or humorous experiences.</li>
+                <li data-en-html="<strong>Play habits:</strong> simple controls, low entry barrier, short sessions, continuous idle progression." data-zh-html="<strong>游玩习惯：</strong>操作简单、上手门槛低、单次时长短、可持续挂机推进。">Play habits: simple controls, low entry barrier, short sessions, continuous idle progression.</li>
+                <li data-en-html="<strong>Emotional needs:</strong> stress relief, humor, and a sense of control over familiar workplace situations." data-zh-html="<strong>情绪需求：</strong>解压、幽默，以及对熟悉职场情境的一种掌控感。">Emotional needs: stress relief, humor, and a sense of control over familiar workplace situations.</li>
+                <li data-en-html="<strong>Theme appeal:</strong> workplace culture, office politics, &#8216;quiet quitting&#8217;, and shared workplace experiences." data-zh-html="<strong>主题共鸣：</strong>职场文化、办公室政治、&#8216;安静离职&#8217;等共通的打工经历。">Theme appeal: workplace culture, office politics, 'quiet quitting', and shared workplace experiences.</li>
+                <li data-en-html="<strong>Personalization:</strong> players who enjoy customizing characters and recreating recognizable people — coworkers or the &#8216;real boss&#8217; — as pixel-art avatars." data-zh-html="<strong>个性化兴趣：</strong>喜欢自定义角色、用像素头像还原现实中熟人（同事或&#8216;真老板&#8217;）的玩家。">Personalization: players who enjoy recreating recognizable people as pixel-art avatars.</li>
+                <li data-en-html="<strong>Comparable audience:</strong> players of MyVoiceZoo and Window Garden — small desktop companions kept open while they work." data-zh-html="<strong>同类受众：</strong>《MyVoiceZoo》《Window Garden》这类桌面小宠物的玩家，喜欢边工作边开着的小程序。">Comparable audience: players of MyVoiceZoo and Window Garden — desktop companions kept open while they work.</li>
+              </ul>
+            </div>
+
+            <div class="gdd__sub">
+              <p class="gdd__subtitle" data-en="1.5 · One-Sentence Pitch" data-zh="1.5 · 一句话简介">1.5 · One-Sentence Pitch</p>
+              <p class="gdd__callout"
+                data-en="Managing Up is a lighthearted office-themed idle game where players manage coworkers, collect KPI / DOLLAR, and gradually climb the corporate ladder. A Work-Safe mode lets the game appear as a desktop notepad or compact overlay, making it easy to keep running while working."
+                data-zh="《Managing Up》是一款轻松的职场题材放置游戏：玩家管理同事、收集 KPI / DOLLAR，一步步往上爬。Work-Safe 模式可把游戏伪装成桌面记事本或小窗悬浮条，方便上班时一直挂着。">Managing Up is a lighthearted office-themed idle game where players manage coworkers, collect KPI / DOLLAR, and gradually climb the corporate ladder. A Work-Safe mode lets the game appear as a desktop notepad or compact overlay, making it easy to keep running while working.</p>
+            </div>
+
+            <div class="gdd__sub">
+              <p class="gdd__subtitle" data-en="1.6 · Key Features" data-zh="1.6 · 核心特性">1.6 · Key Features</p>
+              <ul class="gdd__ul">
+                <li data-en-html="<strong>Lighthearted role reversal:</strong> the player moves from ordinary employee to manager, turning familiar workplace pressure into a relaxed sense of control and progression." data-zh-html="<strong>轻松的角色反转：</strong>玩家从普通员工变成管理者，把熟悉的职场压力转化为轻松的掌控感与成长感。">Lighthearted role reversal: from ordinary employee to manager, turning workplace pressure into a relaxed sense of control.</li>
+                <li data-en-html="<strong>Strategic idle gameplay:</strong> coworkers handle most production automatically; players can speed up work, manage employees, upgrade workstations, recruit stronger coworkers, and use facilities to lift productivity." data-zh-html="<strong>策略性挂机：</strong>同事自动完成大部分产出；玩家可以加速、管理员工、升级工位、招募更强的同事，并用办公设施提升整体产能。">Strategic idle gameplay: coworkers produce automatically; players speed up, manage, upgrade, recruit, and use facilities to lift productivity.</li>
+                <li data-en-html="<strong>Work-Safe mode:</strong> the game can appear as a desktop notepad or compact overlay, so players keep it running quietly while working or studying." data-zh-html="<strong>Work-Safe 模式：</strong>游戏可伪装成桌面记事本或小窗悬浮条，让玩家在工作或学习时安静地挂着。">Work-Safe mode: appears as a desktop notepad or compact overlay, kept running quietly while working.</li>
+                <li data-en-html="<strong>Recruitment &amp; selection:</strong> recruit R / SR / SSR coworkers with different Efficiency, Quality, and Experience; retain strong ones, fire the unproductive." data-zh-html="<strong>招募与取舍：</strong>招募 R / SR / SSR 同事，效率、质量、经验各不相同；留下强的，开掉不出活的。">Recruitment &amp; selection: recruit R / SR / SSR coworkers with different stats; retain strong ones, fire the unproductive.</li>
+                <li data-en-html="<strong>Office production system:</strong> Workstations, Pantry, Recruitment Office, Meeting Room, and Culture Center provide functions and bonuses that affect performance and output." data-zh-html="<strong>办公产出系统：</strong>工位、茶水间、招聘办公室、会议室、企业文化中心提供不同功能与加成，影响员工表现与资源产出。">Office production system: Workstations, Pantry, Recruitment Office, Meeting Room, and Culture Center provide functions and bonuses.</li>
+                <li data-en-html="<strong>Clear long-term progression:</strong> earn KPI, expand the office, unlock functions, and work toward Player Level 6 to trigger the final Win Scene." data-zh-html="<strong>清晰的长期成长：</strong>持续赚 KPI、扩张办公室、解锁功能，最终冲到玩家 6 级触发结局 Win Scene。">Clear long-term progression: earn KPI, expand the office, unlock functions, reach Level 6 to trigger the Win Scene.</li>
+                <li data-en-html="<strong>Clean pixel-art style:</strong> Chibi characters and a top-down office for a simple, friendly, easy-to-read look." data-zh-html="<strong>干净的像素风：</strong>Q 版角色配俯视视角办公室，画面简洁、亲切、好读。">Clean pixel-art style: Chibi characters and a top-down office for a simple, easy-to-read look.</li>
+              </ul>
+            </div>
+
+            <div class="gdd__sub">
+              <p class="gdd__subtitle" data-en="1.7 · Core Concept &amp; Player Fantasy" data-zh="1.7 · 核心概念与玩家幻想">1.7 · Core Concept &amp; Player Fantasy</p>
+              <p class="gdd__p" data-en="The player starts as a low-level rookie and climbs toward top-executive status by &#8216;managing&#8217; — in practice, exploiting — coworkers. Coworkers automatically produce Documents, which convert into KPI and sometimes Dollars. The player spends those resources to expand the office, improve production, and reach Level 6." data-zh="玩家从底层新人起步，靠&#8216;管理&#8217;（实则压榨）同事一路爬向高管。同事自动产出 Documents，转化为 KPI、偶尔产出 Dollars。玩家用这些资源扩张办公室、提升产能，直到抵达 6 级。">The player starts as a low-level rookie and climbs toward top-executive status by 'managing' — in practice, exploiting — coworkers. Coworkers automatically produce Documents, which convert into KPI and sometimes Dollars.</p>
+              <p class="gdd__p" data-en="The core fantasy is &#8216;Strategic Idling&#8217;. Most of the time, coworkers generate resources on their own. When players want to intervene, they can let progress bars fill, click coworkers to speed up production, resolve slacking events, replace weak coworkers, recruit stronger ones, and use meetings or snack buffs to optimize output." data-zh="核心幻想是&#8216;策略性挂机&#8217;。多数时候同事自动产出资源；当玩家想介入时，可以看着进度条涨、点击同事加速、处理摸鱼事件、换掉弱同事、招更强的人，并用会议或零食 buff 来优化产出。">The core fantasy is 'Strategic Idling' — coworkers generate resources on their own, and players intervene to speed up, resolve slacking, replace weak coworkers, and optimize output.</p>
+            </div>
+          </div>
+
+          <!-- ===== 2 · NARRATIVE ===== -->
+          <div class="gdd__sec">
+            <div class="gdd__sechead"><span class="gdd__secnum">02</span><h4 class="gdd__sectitle" data-en="Narrative" data-zh="叙事">Narrative</h4></div>
+
+            <div class="gdd__sub">
+              <p class="gdd__subtitle" data-en="2.1 · Backstory" data-zh="2.1 · 背景故事">2.1 · Backstory</p>
+              <p class="gdd__p" data-en="Before the game begins, the Boss opens a new office floor and nonchalantly assigns the low-ranking player to manage a new project team. The player must continuously recruit coworkers and push them to work to accumulate personal KPI — &#8216;earning&#8217; credit by squeezing productivity out of coworkers, then spending it to apply for promotions, unlock new office features, and gain authority to hire more staff. The cycle continues until the player reaches the highest rank." data-zh="游戏开始前，老板开了一层新办公区，随手把低职级的玩家丢去管一个新项目组。玩家必须不断招同事、催他们干活来攒个人 KPI——靠压榨同事的产能&#8216;挣&#8217;业绩，再拿业绩去申请晋升、解锁新办公功能、获得招更多人的权限。如此循环，直到玩家爬到最高职级。">Before the game begins, the Boss opens a new office floor and nonchalantly assigns the low-ranking player to manage a new project team. The player recruits coworkers and pushes them to work to accumulate KPI, spending it on promotions, new features, and hiring authority — until reaching the highest rank.</p>
+            </div>
+
+            <div class="gdd__sub">
+              <p class="gdd__subtitle" data-en="2.2 · Plot Progression" data-zh="2.2 · 剧情推进">2.2 · Plot Progression</p>
+              <p class="gdd__p" data-en="The narrative follows a clear path of corporate advancement: supervise and organize coworkers, convert their work into KPI, spend KPI to upgrade and unlock new functions, and finally reach the maximum level to trigger the win scene. In the future, players who reach the company&#8217;s pinnacle may transcend to other worlds, unlocking more content and repeating the loop." data-zh="叙事沿着一条清晰的升职线展开：监督并组织同事，把他们的工作转化为 KPI，花 KPI 升级、解锁新功能，最终满级触发胜利场景。未来，登顶的玩家还可能穿越到其他世界，解锁更多内容并重复循环。">The narrative follows a clear path of corporate advancement: organize coworkers, convert their work into KPI, spend it to upgrade and unlock, and finally reach max level to trigger the win scene. Future: pinnacle players may transcend to other worlds.</p>
+            </div>
+
+            <div class="gdd__sub">
+              <p class="gdd__subtitle" data-en="2.3 · Characters" data-zh="2.3 · 角色">2.3 · Characters</p>
+              <p class="gdd__p" data-en="Only the Player, the Boss, and the tutorial AI have defined personas. The Boss is lazy and nonsensical — the embodiment of a negligent capitalist who offloads all work onto the player. The AI is the player&#8217;s accomplice, using lighthearted, witty language to teach how to squeeze KPI out of coworkers. The Boss and AI appear mainly during the tutorial; regular coworkers have no individual backstories." data-zh="只有玩家、老板和教程 AI 有明确人设。老板又懒又荒谬——一个把所有活都甩给玩家的失职资本家化身。AI 是玩家的&#8216;同谋&#8217;，用轻松俏皮的口吻教玩家怎么从同事身上压榨 KPI。老板和 AI 主要出现在教程里；普通同事没有各自的背景故事。">Only the Player, the Boss, and the tutorial AI have defined personas. The Boss is a negligent capitalist who offloads all work; the AI is the player's witty accomplice who teaches how to squeeze KPI. Regular coworkers have no individual backstories.</p>
+            </div>
+
+            <div class="gdd__sub">
+              <p class="gdd__subtitle" data-en="2.4 · Opening Sequence &amp; Tutorial" data-zh="2.4 · 开场与教程">2.4 · Opening Sequence &amp; Tutorial</p>
+              <p class="gdd__p" data-en="The game has one formal narrative sequence at the start. A Boss-to-Player conversation establishes the premise and doubles as the tutorial, using UI masks and highlights to guide the first functional clicks. After the tutorial, the game avoids mandatory cutscenes and uses non-intrusive prompts instead." data-zh="游戏开头只有一段正式叙事：老板与玩家的对话交代前提，同时充当教程，用 UI 遮罩与高亮引导玩家完成最初的功能点击。教程之后，游戏不再强制插入过场，改用不打扰的轻提示。">The game has one formal narrative sequence at the start: a Boss-to-Player conversation that doubles as the tutorial, using UI masks and highlights. Afterward, the game avoids mandatory cutscenes in favor of non-intrusive prompts.</p>
+            </div>
+
+            <div class="gdd__sub">
+              <p class="gdd__subtitle" data-en="2.5 · Game World" data-zh="2.5 · 游戏世界">2.5 · Game World</p>
+              <p class="gdd__p" data-en="The main location is a horizontally scrolling, self-contained Office Floor. As the player&#8217;s level rises, usable space expands through additional workstations and offices, visually reflecting growing authority. There are no traditional &#8216;1-1, 1-2&#8217; stages; progression is divided into five promotion phases from Level 1 to Level 6." data-zh="主场景是一条横向滚动、自成一体的办公楼层。随着玩家升级，可用空间通过新增工位和办公室不断扩张，直观反映权力增长。没有传统的&#8216;1-1、1-2&#8217;关卡；进程被划分为从 1 级到 6 级的五个升职阶段。">The main location is a horizontally scrolling, self-contained Office Floor. As the player levels up, usable space expands through more workstations and offices. No traditional stages — progression is five promotion phases from Level 1 to Level 6.</p>
+              <ul class="gdd__ul">
+                <li data-en-html="<strong>Tutorial phase:</strong> build the first workstation → recruit and seat a coworker → click to speed up → convert Documents into KPI → preview office purchase and function selection." data-zh-html="<strong>教程阶段：</strong>搭第一个工位 → 招募并安置一名同事 → 点击加速 → 把 Documents 换成 KPI → 预览办公室购买与功能选择。">Tutorial phase: build the first workstation → seat a coworker → click to speed up → convert Documents into KPI → preview office purchase.</li>
+                <li data-en-html="<strong>Main phases:</strong> five promotions. Difficulty grows through exponentially higher KPI requirements rather than more complicated inputs; each promotion unlocks new functions and/or dialogue." data-zh-html="<strong>主阶段：</strong>五次升职。难度靠指数级上升的 KPI 需求增长，而非更复杂的操作；每次升职解锁新功能和 / 或对话。">Main phases: five promotions. Difficulty grows through exponentially higher KPI requirements, not harder inputs; each unlocks new functions and/or dialogue.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- ===== 3 · GAMEPLAY ===== -->
+          <div class="gdd__sec">
+            <div class="gdd__sechead"><span class="gdd__secnum">03</span><h4 class="gdd__sectitle" data-en="Gameplay" data-zh="玩法">Gameplay</h4></div>
+
+            <div class="gdd__sub">
+              <p class="gdd__subtitle" data-en="3.1 · Player Goals" data-zh="3.1 · 玩家目标">3.1 · Player Goals</p>
+              <ul class="gdd__ul">
+                <li data-en-html="<strong>Primary:</strong> reach Player Level 6 (M6) and trigger the endgame Win Scene." data-zh-html="<strong>主目标：</strong>抵达玩家 6 级（M6），触发终局 Win Scene。">Primary: reach Player Level 6 (M6) and trigger the endgame Win Scene.</li>
+                <li data-en-html="<strong>Secondary:</strong> unlock all office facilities and functions, build a varied roster of R / SR / SSR coworkers, and complete the collection gallery." data-zh-html="<strong>次目标：</strong>解锁全部办公设施与功能，组建 R / SR / SSR 多样化阵容，集齐图鉴。">Secondary: unlock all facilities, build a varied R / SR / SSR roster, and complete the collection gallery.</li>
+              </ul>
+            </div>
+
+            <div class="gdd__sub">
+              <p class="gdd__subtitle" data-en="3.2 · Victory Condition &amp; Ending" data-zh="3.2 · 胜利条件与结局">3.2 · Victory Condition &amp; Ending</p>
+              <p class="gdd__p" data-en="Managing Up has no lose state and no traditional win/lose structure. It defines one positive end-state: reaching Player Level 6." data-zh="《Managing Up》没有失败状态，也没有传统的输赢结构。它只定义一个正向终局：抵达玩家 6 级。">Managing Up has no lose state and no traditional win/lose structure. It defines one positive end-state: reaching Player Level 6.</p>
+              <ul class="gdd__ul">
+                <li data-en-html="<strong>Trigger:</strong> the final promotion to Level 6 (upgrades_page.gd → player_level == 6 → _show_win_scene())." data-zh-html="<strong>触发：</strong>完成升到 6 级的最后一次晋升（upgrades_page.gd → player_level == 6 → _show_win_scene()）。">Trigger: the final promotion to Level 6 (upgrades_page.gd → player_level == 6 → _show_win_scene()).</li>
+                <li data-en-html="<strong>Result:</strong> instantiates scenes/narrative/win_scene.tscn — a short scripted dialogue, then a final title and body text." data-zh-html="<strong>结果：</strong>实例化 scenes/narrative/win_scene.tscn——一段脚本对话，随后是结局标题与正文。">Result: instantiates scenes/narrative/win_scene.tscn — a short dialogue, then a final title and body text.</li>
+                <li data-en-html="<strong>Meaning:</strong> the player has reached the top of the corporate ladder — a celebration / credits-style ending, not a Game Over." data-zh-html="<strong>含义：</strong>玩家登顶职场金字塔——这是庆祝 / 致谢式的结局，而非 Game Over。">Meaning: the player has reached the top — a celebration / credits-style ending, not a Game Over.</li>
+              </ul>
+              <p class="gdd__p" data-en="After the Win Scene, the current run is complete. Isekai / Prestige is planned but not implemented." data-zh="Win Scene 之后，本局视为完成。异世界 / 转生（Isekai / Prestige）已规划但尚未实现。">After the Win Scene, the current run is complete. Isekai / Prestige is planned but not implemented.</p>
+            </div>
+
+            <div class="gdd__sub">
+              <p class="gdd__subtitle" data-en="3.3 · Controls" data-zh="3.3 · 操作">3.3 · Controls</p>
+              <div class="gddtable-wrap">
+                <table class="gddtable">
+                  <thead><tr><th data-en="Input" data-zh="输入">Input</th><th data-en="Function" data-zh="功能">Function</th></tr></thead>
+                  <tbody>
+                    <tr><td data-en="Left-click a coworker" data-zh="左键点击同事">Left-click a coworker</td><td data-en="Urge the coworker — speed up the current production cycle." data-zh="催活——加速当前生产循环。">Urge the coworker — speed up the current production cycle.</td></tr>
+                    <tr><td data-en="Left-click a slacking bubble" data-zh="左键点击摸鱼气泡">Left-click a slacking bubble</td><td data-en="Pop the slacking-off bubble before it disappears for a chance at a cash (USD) reward." data-zh="在气泡消失前戳破摸鱼气泡，有机会获得美元现金奖励。">Pop the slacking-off bubble before it disappears for a chance at a cash (USD) reward.</td></tr>
+                    <tr><td data-en="Left-click an office" data-zh="左键点击办公室">Left-click an office</td><td data-en="Open the panel and configure the office function." data-zh="打开面板，配置该办公室的功能。">Open the panel and configure the office function.</td></tr>
+                    <tr><td data-en="Drag a colleague to the Meeting Room" data-zh="把同事拖进会议室">Drag a colleague to the Meeting Room</td><td data-en="Move the coworker into a meeting; entering resets current production progress." data-zh="把同事拉进会议；进入会重置当前生产进度。">Move the coworker into a meeting; entering resets current production progress.</td></tr>
+                    <tr><td data-en="Hold middle mouse + drag" data-zh="按住中键拖动">Hold middle mouse + drag</td><td data-en="Pan the viewpoint to view different areas of the scene." data-zh="平移视角，查看场景的不同区域。">Pan the viewpoint to view different areas of the scene.</td></tr>
+                    <tr><td data-en="Left-click + drag a colleague" data-zh="左键拖动同事">Left-click + drag a colleague</td><td data-en="Assign colleagues to different workstations or help them switch seats." data-zh="把同事分配到不同工位，或帮他们换座。">Assign colleagues to different workstations or switch seats.</td></tr>
+                    <tr><td>Ctrl + Tab</td><td data-en="Activate &#8216;slacking off&#8217; (memo) mode." data-zh="激活&#8216;摸鱼&#8217;（记事本）模式。">Activate 'slacking off' (memo) mode.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="gdd__sub">
+              <p class="gdd__subtitle" data-en="3.4 · Core Loop" data-zh="3.4 · 核心循环">3.4 · Core Loop</p>
+              <p class="gdd__p" data-en="The player recruits coworkers, then earns KPI and Dollars through automatic production or active interaction. Those resources obtain more coworkers, unlock or improve workstations, and configure office functions. Spending KPI to level up unlocks new systems and raises production capacity; the improved office returns to the same loop at higher throughput. At Level 6, the loop branches into the Win Scene." data-zh="玩家招募同事，通过自动产出或主动交互赚取 KPI 与 Dollars。这些资源用来获得更多同事、解锁或升级工位、配置办公室功能。花 KPI 升级会解锁新系统、抬高产能；升级后的办公室以更高吞吐回到同一循环。到 6 级时，循环分支进入 Win Scene。">The player recruits coworkers, earns KPI and Dollars via automatic production or active interaction, then reinvests into coworkers, workstations, and office functions. Spending KPI to level up unlocks systems and raises capacity; at Level 6 the loop branches into the Win Scene.</p>
+            </div>
+
+            <div class="gdd__sub">
+              <p class="gdd__subtitle" data-en="3.5.1 · Workstation" data-zh="3.5.1 · 工位">3.5.1 · Workstation</p>
+              <p class="gdd__p" data-en="A workstation is required for a coworker to produce. Each holds exactly one coworker, who produces only after being seated." data-zh="同事必须有工位才能产出。每个工位只容一人，且只有就座后才开始产出。">A workstation is required for a coworker to produce. Each holds exactly one coworker, who produces only after being seated.</p>
+              <ul class="gdd__ul">
+                <li data-en-html="<strong>Unlock:</strong> workstations unlock progressively as the player levels up." data-zh-html="<strong>解锁：</strong>随玩家升级逐步开放工位。">Unlock: workstations unlock progressively as the player levels up.</li>
+                <li data-en-html="<strong>Purchase:</strong> click an unlocked workstation and pay KPI; the price rises with the number already owned." data-zh-html="<strong>购买：</strong>点击已解锁工位并支付 KPI；价格随已拥有数量上涨。">Purchase: pay KPI for an unlocked workstation; price rises with the number owned.</li>
+                <li data-en-html="<strong>Upgrade:</strong> workstations can reach Level 4; higher levels grant Efficiency and Quality buffs." data-zh-html="<strong>升级：</strong>工位最高 4 级；越高提供越多效率与质量加成。">Upgrade: workstations can reach Level 4; higher levels grant Efficiency and Quality buffs.</li>
+                <li data-en-html="Unlocking, purchasing, and upgrading are all <strong>irreversible</strong>." data-zh-html="解锁、购买、升级均<strong>不可逆</strong>。">Unlocking, purchasing, and upgrading are all irreversible.</li>
+              </ul>
+            </div>
+
+            <div class="gdd__sub">
+              <p class="gdd__subtitle" data-en="3.5.2 · Coworkers" data-zh="3.5.2 · 同事">3.5.2 · Coworkers</p>
+              <p class="gdd__p" data-en="Coworkers produce one Document at the end of each production cycle. Three rarities — R, SR, SSR — where higher rarity means stronger total attributes." data-zh="同事在每个生产循环结束时产出一份 Document。三种稀有度——R、SR、SSR——稀有度越高，总属性越强。">Coworkers produce one Document at the end of each cycle. Three rarities — R, SR, SSR — higher rarity means stronger total attributes.</p>
+              <div class="gddtable-wrap">
+                <table class="gddtable">
+                  <thead><tr><th data-en="Attribute" data-zh="属性">Attribute</th><th data-en="Effect" data-zh="作用">Effect</th></tr></thead>
+                  <tbody>
+                    <tr><td>Efficiency</td><td data-en="Shortens the duration of each production cycle." data-zh="缩短每个生产循环的时长。">Shortens the duration of each production cycle.</td></tr>
+                    <tr><td>Quality</td><td data-en="Raises the chance of a higher-grade Document worth more KPI." data-zh="提高产出更高评级 Document（更多 KPI）的概率。">Raises the chance of a higher-grade Document worth more KPI.</td></tr>
+                    <tr><td>Experience</td><td data-en="Raises the chance of earning Dollars during each cycle." data-zh="提高每个循环获得 Dollars 的概率。">Raises the chance of earning Dollars during each cycle.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <p class="gdd__p" data-en="Rarity guarantees a higher attribute-sum band. On acquisition, the game rolls rarity, then the total attribute sum, then distributes that total across Efficiency, Quality, and Experience." data-zh="稀有度保证更高的属性总和区间。获得时，游戏先掷稀有度，再掷属性总和，最后把总和分配到效率、质量、经验。">Rarity guarantees a higher attribute-sum band. On acquisition, the game rolls rarity, then the total attribute sum, then distributes it across Efficiency, Quality, and Experience.</p>
+            </div>
+
+            <div class="gdd__sub">
+              <p class="gdd__subtitle" data-en="3.5.3 · Recruitment" data-zh="3.5.3 · 招募">3.5.3 · Recruitment</p>
+              <ul class="gdd__ul">
+                <li data-en-html="<strong>Normal recruitment:</strong> resumes arrive automatically over time; review each applicant&#8217;s rarity and attributes before hiring — a steady source of new coworkers." data-zh-html="<strong>普通招募：</strong>简历随时间自动到达；可在录用前查看每位应聘者的稀有度与属性——稳定的新同事来源。">Normal recruitment: resumes arrive automatically; review rarity and attributes before hiring — a steady source.</li>
+                <li data-en-html="<strong>Headhunting:</strong> once the Recruitment Office is unlocked, spend Dollars to search for stronger coworkers — better odds at higher rarity, useful for replacing weak members." data-zh-html="<strong>猎头：</strong>解锁招聘办公室后，花 Dollars 搜寻更强的同事——更高稀有度概率更好，可用来替换弱将。">Headhunting: after the Recruitment Office unlocks, spend Dollars for better odds at higher rarity.</li>
+                <li data-en-html="<strong>Recruitment choices:</strong> evaluate performance, retain strong employees, and remove or fire coworkers who no longer contribute." data-zh-html="<strong>取舍：</strong>评估表现，留下强的，开掉不再产出的同事。">Recruitment choices: retain strong employees, fire those who no longer contribute.</li>
+                <li data-en-html="<strong>Parallel recruitment:</strong> normal resumes keep arriving while headhunting is in progress." data-zh-html="<strong>并行招募：</strong>猎头进行的同时，普通简历照常到达。">Parallel recruitment: normal resumes keep arriving while headhunting is in progress.</li>
+              </ul>
+            </div>
+
+            <div class="gdd__sub">
+              <p class="gdd__subtitle" data-en="3.5.4 · Production &amp; Active Urging" data-zh="3.5.4 · 生产与主动催活">3.5.4 · Production &amp; Active Urging</p>
+              <p class="gdd__p" data-en="Coworkers produce documents automatically after being seated. Each cycle&#8217;s duration depends on the coworker&#8217;s Efficiency and active buffs. Players may click a working coworker to advance the current progress." data-zh="同事就座后自动产出文件。每个循环的时长取决于同事的效率和生效中的 buff。玩家可点击正在工作的同事，推进当前进度。">Coworkers produce documents automatically after being seated. Cycle duration depends on Efficiency and active buffs; clicking a working coworker advances the current progress.</p>
+              <p class="gdd__formula"><b>final_eff</b> = efficiency + buffs<br><b>raw_duration</b> = 300s − final_eff × 30 × Random(0.8–1.2)<br><b>cycle_duration</b> = max(1.0s, raw_duration × 0.5)</p>
+              <p class="gdd__p" data-en="Buff sources: workstation buffs · Culture Center policies · snack buffs · meeting buffs." data-zh="Buff 来源：工位加成 · 企业文化政策 · 零食 buff · 会议 buff。">Buff sources: workstation buffs · Culture Center policies · snack buffs · meeting buffs.</p>
+              <p class="gdd__p" data-en="Active Urging — each click on a working coworker advances the current cycle by 4% (speed_up_amount = cycle_duration × 0.04). No cooldown, no click limit. It adds progress directly, does not raise the Efficiency attribute, and does not change the cycle duration." data-zh="主动催活——每次点击正在工作的同事，使当前循环推进 4%（speed_up_amount = cycle_duration × 0.04）。无冷却、无次数上限。它直接增加进度，不提升效率属性，也不改变循环时长。">Active Urging — each click advances the current cycle by 4% (speed_up_amount = cycle_duration × 0.04). No cooldown, no limit; it adds progress directly without raising Efficiency or changing cycle duration.</p>
+            </div>
+
+            <div class="gdd__sub">
+              <p class="gdd__subtitle" data-en="3.5.5 · Personnel Actions" data-zh="3.5.5 · 人事操作">3.5.5 · Personnel Actions</p>
+              <ul class="gdd__ul">
+                <li data-en-html="<strong>Dispatch:</strong> remove a coworker from a workstation and stop production." data-zh-html="<strong>下工：</strong>把同事移出工位，停止产出。">Dispatch: remove a coworker from a workstation and stop production.</li>
+                <li data-en-html="<strong>Recall:</strong> bring the coworker back and seat them again." data-zh-html="<strong>召回：</strong>把同事叫回来重新就座。">Recall: bring the coworker back and seat them again.</li>
+                <li data-en-html="<strong>Terminate / Fire:</strong> permanently remove the coworker; firing an SR or SSR refunds a small amount of Dollars." data-zh-html="<strong>解雇：</strong>永久移除该同事；解雇 SR 或 SSR 会返还少量 Dollars。">Terminate / Fire: permanently remove; firing an SR/SSR refunds a small amount of Dollars.</li>
+                <li data-en-html="<strong>Interruption:</strong> partial KPI = Final KPI × progress% × 50%. If a cycle is interrupted by recall, a meeting, or reseating, progress resets to zero after the partial KPI is paid." data-zh-html="<strong>中断：</strong>部分 KPI = 最终 KPI × 进度% × 50%。若循环被召回、进会议或换座中断，付完部分 KPI 后进度清零。">Interruption: partial KPI = Final KPI × progress% × 50%; progress resets to zero after the partial KPI is paid.</li>
+              </ul>
+            </div>
+
+            <div class="gdd__sub">
+              <p class="gdd__subtitle" data-en="3.5.6 · Documents" data-zh="3.5.6 · 文件">3.5.6 · Documents</p>
+              <p class="gdd__p" data-en="A coworker produces one Document per completed cycle, immediately converted into KPI and possibly Dollars. Grade is determined by score." data-zh="同事每完成一个循环产出一份 Document，立即转化为 KPI，可能附带 Dollars。评级由分数决定。">A coworker produces one Document per completed cycle, immediately converted into KPI and possibly Dollars. Grade is determined by score.</p>
+              <div class="gddtable-wrap">
+                <table class="gddtable">
+                  <thead><tr><th data-en="Grade" data-zh="评级">Grade</th><th data-en="Score" data-zh="分数">Score</th><th data-en="KPI Multiplier" data-zh="KPI 倍率">KPI Multiplier</th><th data-en="Dollar on Success" data-zh="成功 Dollar">Dollar on Success</th></tr></thead>
+                  <tbody>
+                    <tr><td class="g-grey" data-en="Grey" data-zh="灰">Grey</td><td>1–30</td><td>100%</td><td>$1</td></tr>
+                    <tr><td class="g-green" data-en="Green" data-zh="绿">Green</td><td>31–70</td><td>120%</td><td>$4</td></tr>
+                    <tr><td class="g-blue" data-en="Blue" data-zh="蓝">Blue</td><td>71–94</td><td>200%</td><td>$6</td></tr>
+                    <tr><td class="g-gold" data-en="Gold" data-zh="金">Gold</td><td>95</td><td>300%</td><td>$10</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="gdd__sub">
+              <p class="gdd__subtitle" data-en="3.5.7 · Currencies" data-zh="3.5.7 · 货币">3.5.7 · Currencies</p>
+              <ul class="gdd__ul">
+                <li data-en-html="<strong>KPI (normal):</strong> earned mainly from Documents; spent on unlocking / purchasing / upgrading workstations, reconfiguring offices, and leveling up. Default start ≈ 2000; the tutorial grants enough for introductory costs." data-zh-html="<strong>KPI（普通货币）：</strong>主要来自 Documents；用于解锁 / 购买 / 升级工位、重配办公室、升级。初始约 2000；教程会发放足够覆盖入门花费的量。">KPI (normal): earned mainly from Documents; spent on workstations, reconfiguring offices, and leveling up. Default start ≈ 2000.</li>
+                <li data-en-html="<strong>Dollars (premium):</strong> rarer; from speech-bubble clicks ($1), resolving slacking events ($2–4), SR/SSR firing refunds, and per-cycle probability; spent mainly on HR and Headhunting recruitment. Default start ≈ 100." data-zh-html="<strong>Dollars（高级货币）：</strong>更稀有；来自气泡点击（$1）、处理摸鱼事件（$2–4）、SR/SSR 解雇返还，以及每循环的概率掉落；主要花在 HR 与猎头招募。初始约 100。">Dollars (premium): rarer; from bubble clicks ($1), slacking events ($2–4), SR/SSR firing refunds, and per-cycle probability; spent on recruitment. Default start ≈ 100.</li>
+              </ul>
+            </div>
+
+            <div class="gdd__sub">
+              <p class="gdd__subtitle" data-en="3.5.8 · Random Event — Slacking Off" data-zh="3.5.8 · 随机事件 — 摸鱼">3.5.8 · Random Event — Slacking Off</p>
+              <p class="gdd__p" data-en="When a Document is produced, there is a 2% chance the coworker enters Slacking Off. A heart, coffee, or gamepad bubble appears for 30 seconds. Clicking it resolves the event and grants $2–4; if it expires, the player receives no reward." data-zh="产出 Document 时，有 2% 概率同事进入摸鱼状态。一个爱心、咖啡或手柄气泡出现 30 秒。点击它结算事件并获得 $2–4；若气泡过期，则没有奖励。">When a Document is produced, a 2% chance the coworker enters Slacking Off. A heart, coffee, or gamepad bubble appears for 30 seconds; clicking grants $2–4, expiring grants nothing.</p>
+            </div>
+
+            <div class="gdd__sub">
+              <p class="gdd__subtitle" data-en="3.5.9 · Office System" data-zh="3.5.9 · 办公室系统">3.5.9 · Office System</p>
+              <p class="gdd__p" data-en="Offices sit on the left of the scene and provide auxiliary production benefits. More unlock as the player levels up; clicking an office opens the right panel to configure its function." data-zh="办公室位于场景左侧，提供辅助产出收益。随玩家升级逐步开放；点击办公室会打开右侧面板来配置其功能。">Offices sit on the left of the scene and provide auxiliary production benefits. More unlock as the player levels up; clicking one opens the configuration panel.</p>
+              <div class="gddtable-wrap">
+                <table class="gddtable">
+                  <thead><tr><th data-en="Office" data-zh="办公室">Office</th><th data-en="Unlock" data-zh="解锁">Unlock</th><th data-en="Effect" data-zh="效果">Effect</th></tr></thead>
+                  <tbody>
+                    <tr><td data-en="Pantry" data-zh="茶水间">Pantry</td><td>Lv.1</td><td data-en="At cycle start, if conditions are met, 80% chance to grant one random snack buff." data-zh="循环开始时，若满足条件，有 80% 概率给一个随机零食 buff。">At cycle start, 80% chance to grant one random snack buff.</td></tr>
+                    <tr><td data-en="Recruitment Office" data-zh="招聘办公室">Recruitment Office</td><td>Lv.3</td><td data-en="Enables Single and Ten Headhunting." data-zh="开启单抽与十连猎头。">Enables Single and Ten Headhunting.</td></tr>
+                    <tr><td data-en="Meeting Room" data-zh="会议室">Meeting Room</td><td>Lv.4</td><td data-en="Up to 6 coworkers; trades −1 Efficiency for Quality and Experience gains." data-zh="最多 6 人；以 −1 效率换取质量与经验提升。">Up to 6 coworkers; trades −1 Efficiency for Quality and Experience gains.</td></tr>
+                    <tr><td data-en="Culture Center" data-zh="企业文化中心">Culture Center</td><td>Lv.5</td><td data-en="Applies one global Efficiency, Quality, or Experience policy." data-zh="施加一项全局的效率、质量或经验政策。">Applies one global Efficiency, Quality, or Experience policy.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <ul class="gdd__ul">
+                <li data-en-html="<strong>Pantry:</strong> at cycle start, if the coworker isn&#8217;t slacking, has no snack buff, and active snack buffs &lt; the number of Pantries, an 80% chance grants a random snack — Milk Tea (Efficiency +2), Cake (Quality +3), or Sausage (Experience +3). The buff lasts until the cycle ends and is lost if interrupted; changing the office function doesn&#8217;t remove an already-granted buff." data-zh-html="<strong>茶水间：</strong>循环开始时，若同事没摸鱼、没零食 buff，且生效零食 buff 数 &lt; 茶水间数量，则 80% 概率给一个随机零食——奶茶（效率 +2）、蛋糕（质量 +3）或香肠（经验 +3）。buff 持续到循环结束，中断则丢失；更改办公室功能不会移除已生效的 buff。">Pantry: 80% chance for a random snack — Milk Tea (Eff +2), Cake (Quality +3), Sausage (Exp +3); lasts until cycle end.</li>
+                <li data-en-html="<strong>Meeting Room:</strong> drag up to six coworkers in (MAX_CAPACITY). Entering resets production progress to zero. Each attendee gets Efficiency −1, Quality +1–3, Experience +1–3 (rolled separately); desks read &#8216;Occupied (Meeting)&#8217;. Dismissing returns everyone; attendees may still receive other buffs." data-zh-html="<strong>会议室：</strong>最多拖 6 人进去（MAX_CAPACITY）。进入即把生产进度清零。每位与会者获得效率 −1、质量 +1–3、经验 +1–3（分别掷点）；工位显示&#8216;占用（会议中）&#8217;。散会后各自归位；与会者仍可获得其他 buff。">Meeting Room: up to 6 coworkers; entering resets progress; each gets Eff −1, Quality +1–3, Exp +1–3.</li>
+                <li data-en-html="<strong>Recruitment Office:</strong> enables Single and Ten Headhunting. Changing the office function during recruitment cancels it and refunds all Dollars." data-zh-html="<strong>招聘办公室：</strong>开启单抽与十连猎头。招募途中更改办公室功能会取消招募并全额返还 Dollars。">Recruitment Office: enables Single and Ten Headhunting; changing function mid-recruitment cancels and refunds.</li>
+                <li data-en-html="<strong>Culture Center:</strong> (formerly the Bulletin Board) applies one global policy to all coworkers; only one may be active at a time — Efficiency, Quality, or Experience." data-zh-html="<strong>企业文化中心：</strong>（原&#8216;公告栏&#8217;）对所有同事施加一项全局政策；同一时间只能激活一项——效率、质量或经验。">Culture Center: applies one global policy (Efficiency, Quality, or Experience); only one active at a time.</li>
+              </ul>
+            </div>
+
+            <div class="gdd__sub">
+              <p class="gdd__subtitle" data-en="3.5.10 · Player Level" data-zh="3.5.10 · 玩家等级">3.5.10 · Player Level</p>
+              <p class="gdd__p" data-en="Player status progresses from Level 1 to Level 6. Every promotion costs KPI and unlocks more workstations, offices, and functions. Level 6 is the maximum and triggers the Win Scene." data-zh="玩家职级从 1 级升到 6 级。每次晋升消耗 KPI，并解锁更多工位、办公室与功能。6 级为满级，触发 Win Scene。">Player status progresses from Level 1 to Level 6. Every promotion costs KPI and unlocks more workstations, offices, and functions. Level 6 is the max and triggers the Win Scene.</p>
+            </div>
+
+            <div class="gdd__sub">
+              <p class="gdd__subtitle" data-en="3.6 · Numerical Balance" data-zh="3.6 · 数值平衡">3.6 · Numerical Balance</p>
+              <p class="gdd__p" data-en="Six Player Levels, each promotion costing KPI. Early progression is intentionally fast; higher levels raise costs significantly, shifting focus to long-term accumulation, coworker management, and office optimization. There is no failure state — challenge comes from deciding how to improve production and shorten time to the next promotion, not from risk of losing." data-zh="六个玩家等级，每次晋升消耗 KPI。前期刻意做得快；高等级花费显著上升，重心转向长期积累、同事管理与办公室优化。没有失败状态——挑战在于如何提升产能、缩短到下一次晋升的时间，而非输的风险。">Six Player Levels, each promotion costing KPI. Early progression is fast; higher levels raise costs significantly, shifting focus to long-term accumulation and optimization. No failure state — challenge is shortening time to the next promotion.</p>
+
+              <p class="gdd__subtitle" style="color:#8a8780;margin-top:18px" data-en="3.6.1 · Level-Up KPI Costs" data-zh="3.6.1 · 升级 KPI 花费">3.6.1 · Level-Up KPI Costs</p>
+              <div class="gddtable-wrap">
+                <table class="gddtable">
+                  <thead><tr><th data-en="Promotion" data-zh="晋升">Promotion</th><th data-en="KPI Cost" data-zh="KPI 花费">KPI Cost</th></tr></thead>
+                  <tbody>
+                    <tr><td>Lv.1 → 2 (M2)</td><td>50</td></tr>
+                    <tr><td>Lv.2 → 3 (M3)</td><td>5,000</td></tr>
+                    <tr><td>Lv.3 → 4 (M4)</td><td>30,000</td></tr>
+                    <tr><td>Lv.4 → 5 (M5)</td><td>100,000</td></tr>
+                    <tr><td>Lv.5 → 6 (M6)</td><td>200,000</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <p class="gdd__p" data-en="System unlocks by level: Pantry (Lv.1), Recruitment Office (Lv.3), Meeting Room (Lv.4), Culture Center (Lv.5); Level 6 triggers the Win Scene." data-zh="按等级解锁的系统：茶水间（Lv.1）、招聘办公室（Lv.3）、会议室（Lv.4）、企业文化中心（Lv.5）；6 级触发 Win Scene。">System unlocks by level: Pantry (Lv.1), Recruitment Office (Lv.3), Meeting Room (Lv.4), Culture Center (Lv.5); Level 6 triggers the Win Scene.</p>
+
+              <p class="gdd__subtitle" style="color:#8a8780;margin-top:18px" data-en="3.6.2 · KPI Income Reference" data-zh="3.6.2 · KPI 收入参考">3.6.2 · KPI Income Reference</p>
+              <p class="gdd__formula"><b>Final KPI</b> = round(30 × grade_multiplier × 0.75) → Grey 23 · Green 27 · Blue 45 · Gold 68<br><b>cycle</b> = max(1.0s, (300 − eff × 30 × rand 0.8–1.2) × 0.5) → Eff 1 ≈ 135s · Eff 5 ≈ 75s · Eff 10 = 1s floor</p>
+              <p class="gdd__p" data-en="Early Grey-heavy output averages ≈ 25 KPI/Document; mid- and late-game with Quality buffs trends toward 35–45 KPI/Document." data-zh="前期以灰卡为主，平均约 25 KPI/份；中后期叠加质量 buff 趋向 35–45 KPI/份。">Early Grey-heavy output averages ≈ 25 KPI/Document; mid- and late-game with Quality buffs trends toward 35–45.</p>
+
+              <p class="gdd__subtitle" style="color:#8a8780;margin-top:18px" data-en="3.6.3 · Target Pacing by Level" data-zh="3.6.3 · 各等级目标节奏">3.6.3 · Target Pacing by Level</p>
+              <div class="gddtable-wrap">
+                <table class="gddtable">
+                  <thead><tr><th data-en="Progress" data-zh="进程">Progress</th><th data-en="Target Time" data-zh="目标时间">Target Time</th><th data-en="Design Intent" data-zh="设计意图">Design Intent</th></tr></thead>
+                  <tbody>
+                    <tr><td>Lv.1→2 (50)</td><td data-en="sec to ~1–2 min" data-zh="数秒至 ~1–2 分钟">sec to ~1–2 min</td><td data-en="Instant gratification; reachable by clicking 1–2 starter coworkers." data-zh="即时满足；点 1–2 个起始同事即可达成。">Instant gratification; clicking 1–2 starter coworkers.</td></tr>
+                    <tr><td>Lv.2→3 (5k)</td><td data-en="~15–40 min" data-zh="~15–40 分钟">~15–40 min</td><td data-en="A small idle roster matters; the Recruitment Office is introduced." data-zh="小规模挂机阵容开始重要；引入招聘办公室。">A small idle roster matters; Recruitment Office introduced.</td></tr>
+                    <tr><td>Lv.3→4 (30k)</td><td data-en="~1–2.5 hrs" data-zh="~1–2.5 小时">~1–2.5 hrs</td><td data-en="Strategic idling dominates; Meeting Room optimization matters." data-zh="策略性挂机主导；会议室优化变得关键。">Strategic idling dominates; Meeting Room optimization matters.</td></tr>
+                    <tr><td>Lv.4→5 (100k)</td><td data-en="~3–6 hrs" data-zh="~3–6 小时">~3–6 hrs</td><td data-en="Requires an optimized layout using desks, snacks, and culture policy." data-zh="需要用工位、零食与文化政策做出优化布局。">Requires an optimized layout: desks, snacks, culture policy.</td></tr>
+                    <tr><td>Lv.5→6 (200k)</td><td data-en="~6–10 hrs" data-zh="~6–10 小时">~6–10 hrs</td><td data-en="Long-tail finale before the Win Scene." data-zh="Win Scene 前的长尾收官。">Long-tail finale before the Win Scene.</td></tr>
+                    <tr><td data-en="Total to Lv.6" data-zh="到 Lv.6 合计">Total to Lv.6</td><td data-en="~10–20 hrs" data-zh="~10–20 小时">~10–20 hrs</td><td data-en="Mixed active and idle; fun is front-loaded, idling is back-loaded." data-zh="主动与挂机混合；乐趣前置，挂机后置。">Mixed active and idle; fun front-loaded, idling back-loaded.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <p class="gdd__subtitle" style="color:#8a8780;margin-top:18px" data-en="3.6.4 · Difficulty Curve" data-zh="3.6.4 · 难度曲线">3.6.4 · Difficulty Curve</p>
+              <ul class="gdd__ul">
+                <li data-en-html="<strong>Early (Lv.1–2):</strong> fast progression and immediate rewards introduce the core loop." data-zh-html="<strong>前期（Lv.1–2）：</strong>快速推进、即时奖励，引入核心循环。">Early (Lv.1–2): fast progression and immediate rewards introduce the core loop.</li>
+                <li data-en-html="<strong>Mid (Lv.2–4):</strong> team size, coworker quality, workstation upgrades, and office functions become increasingly important." data-zh-html="<strong>中期（Lv.2–4）：</strong>团队规模、同事质量、工位升级、办公室功能越来越重要。">Mid (Lv.2–4): team size, coworker quality, upgrades, and office functions become increasingly important.</li>
+                <li data-en-html="<strong>Late (Lv.4–6):</strong> long-term idle accumulation and production optimization drive the final promotions." data-zh-html="<strong>后期（Lv.4–6）：</strong>长期挂机积累与产能优化推动最后几次晋升。">Late (Lv.4–6): long-term idle accumulation and production optimization drive the final promotions.</li>
+                <li data-en-html="<strong>Interpretation:</strong> no added control complexity, resource-based challenge, idle accumulation grows in weight, and no failure state — difficulty is measured by time and resources to the next promotion." data-zh-html="<strong>解读：</strong>不增加操作复杂度、以资源为难度、挂机积累权重上升、无失败状态——难度由抵达下一次晋升所需的时间与资源衡量。">Interpretation: no added control complexity, resource-based challenge, idle gains weight, no failure state.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- ===== 6 · FUTURE UPDATES ===== -->
+          <div class="gdd__sec">
+            <div class="gdd__sechead"><span class="gdd__secnum">04</span><h4 class="gdd__sectitle" data-en="Future Updates" data-zh="后续更新">Future Updates</h4></div>
+            <p class="gdd__p" data-en="Planned post-launch expansions — not in the current build." data-zh="规划中的上线后扩展——当前版本尚未包含。">Planned post-launch expansions — not in the current build.</p>
+
+            <div class="gdd__sub">
+              <p class="gdd__subtitle" data-en="4.1 · Stock-Trading Office" data-zh="4.1 · 股票交易办公室">6.1 · Stock-Trading Office</p>
+              <p class="gdd__p" data-en="An active risk/reward layer on the idle economy: invest Dollars and/or KPI into a fluctuating in-game market for gains or losses." data-zh="给挂机经济加一层主动的风险 / 回报：把 Dollars 和 / 或 KPI 投入一个实时波动的游戏内市场，可能盈利或亏损。">An active risk/reward layer on the idle economy: invest Dollars and/or KPI into a fluctuating in-game market.</p>
+              <ul class="gdd__ul">
+                <li data-en-html="<strong>Market ticker:</strong> satirical stocks — the company&#8217;s own shares, a rival, a crypto parody — drifting in real time." data-zh-html="<strong>行情栏：</strong>讽刺向股票——自家公司、竞争对手、山寨币恶搞——价格实时漂移。">Market ticker: satirical stocks drifting in real time.</li>
+                <li data-en-html="<strong>Volatility events:</strong> layoff rumors, earnings calls, and viral memes cause spikes or crashes, possibly tied to milestones." data-zh-html="<strong>波动事件：</strong>裁员传闻、财报电话会、爆梗会引发暴涨暴跌，并可能与里程碑联动。">Volatility events: layoff rumors, earnings calls, viral memes cause spikes/crashes.</li>
+                <li data-en-html="<strong>Active engagement:</strong> something meaningful to do during long late-game waits; smooths the Lv.5→6 grind." data-zh-html="<strong>主动参与：</strong>给后期漫长等待一件有意义的事做；平滑 Lv.5→6 的肝度。">Active engagement during long late-game waits; smooths the Lv.5→6 grind.</li>
+                <li data-en-html="<strong>Risk guardrails:</strong> caps and protection prevent it from permanently blocking progression, preserving the no-fail-state design." data-zh-html="<strong>风险护栏：</strong>设上限与保护，避免它永久卡死进程，保住无失败状态的设计。">Risk guardrails preserve the no-fail-state design.</li>
+              </ul>
+            </div>
+
+            <div class="gdd__sub">
+              <p class="gdd__subtitle" data-en="4.2 · Custom Player Avatars" data-zh="4.2 · 自定义玩家形象">6.2 · Custom Player Avatars</p>
+              <p class="gdd__p" data-en="A layered editor (face shape, hair, eyes, accessories, color palettes) with save/load and, ideally, a shareable code or image so players can recreate their &#8216;real boss&#8217;." data-zh="一个分层编辑器（脸型、发型、眼睛、配饰、配色），支持存读档，并最好能导出可分享的代码或图片，让玩家还原自己的&#8216;真老板&#8217;。">A layered editor (face, hair, eyes, accessories, palettes) with save/load and a shareable code/image to recreate your 'real boss'.</p>
+            </div>
+
+            <div class="gdd__sub">
+              <p class="gdd__subtitle" data-en="4.3 · Player-Built Offices" data-zh="4.3 · 玩家自建办公室">6.3 · Player-Built Offices</p>
+              <p class="gdd__p" data-en="Players design the company layout themselves — choosing the size, position, and function of rooms, then arranging workstations and facilities. Multiple room styles, furniture sets, and decorative items allow personal visual themes." data-zh="玩家自行设计公司布局——选择房间的大小、位置与功能，再摆放工位与设施。提供多种房间风格、家具套装与装饰物，可定制个人化视觉主题。">Players design the company layout — room size, position, function — and arrange workstations and facilities, with multiple styles, furniture, and decorative themes.</p>
+            </div>
+
+            <div class="gdd__sub">
+              <p class="gdd__subtitle" data-en="4.4 · New Levels &amp; Scenes — Isekai / Prestige" data-zh="4.4 · 新关卡与场景 — 异世界 / 转生">6.4 · New Levels &amp; Scenes — Isekai / Prestige</p>
+              <p class="gdd__p" data-en="After the Level 6 Win Scene, players may spend large resources to Isekai or Prestige into themed worlds such as Hell or a Magic Tower. Each world brings new coworker art, satirical reskins, and new mechanics while preserving permanent multipliers — turning the single ending into a replayable meta-loop." data-zh="在 6 级 Win Scene 之后，玩家可花费大量资源转生 / 异世界进入主题世界，如地狱或魔法塔。每个世界带来新的同事美术、讽刺换皮与新机制，同时保留永久倍率——把单一结局变成可重玩的元循环。">After the Level 6 Win Scene, players may Isekai / Prestige into themed worlds (Hell, Magic Tower) with new art, reskins, and mechanics while keeping permanent multipliers — turning the ending into a replayable meta-loop.</p>
+            </div>
+          </div>
 
         </div>
       </div>

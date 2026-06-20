@@ -69,7 +69,7 @@
   .games-list{display:flex;flex-direction:column}
   .game-row{
     display:grid;
-    grid-template-columns:370px 1fr 220px 36px 80px;
+    grid-template-columns:115px 1fr 220px 36px 80px;
     align-items:center;
     gap:24px;
     padding:18px 32px;
@@ -80,17 +80,18 @@
   .game-row:hover{background:var(--surface);padding-left:12px;padding-right:12px;margin:0 -12px}
 
   .game-row__logo{
-    width:370px;height:139px;
+    width:115px;height:54px;
     object-fit:contain;display:block;
     background:var(--surface-2);
     flex-shrink:0;
   }
   .game-row__logo-placeholder{
-    width:370px;height:139px;
+    width:115px;height:54px;
     background:var(--surface-2);
     border:1px solid var(--line);
     display:grid;place-items:center;
-    font-family:var(--mono);font-size:18px;color:var(--faint);
+    font-family:var(--mono);font-size:11px;color:var(--faint);
+    text-align:center;line-height:1.2;padding:4px;
     flex-shrink:0;
   }
 
@@ -196,42 +197,68 @@
     <div class="games-list">
 
       <div class="game-row">
-        <img class="game-row__logo" src="GAMING/bongo cats.jpg" alt="Bongo Cats">
-        <h3 class="game-row__name" data-en="Bongo Cats" data-zh="Bongo Cats">Bongo Cats</h3>
+        <img class="game-row__logo" src="GAMING/幻兽帕鲁.jpg" alt="幻兽帕鲁">
+        <h3 class="game-row__name" data-en="Palworld" data-zh="幻兽帕鲁">Palworld</h3>
         <div class="game-row__progress">
-          <div class="game-row__bar-track"><div class="game-row__bar-fill" style="width:0%"></div></div>
-          <div class="game-row__ach"><span data-en="0 / 0 achievements" data-zh="0 / 0 个成就">0 / 0 achievements</span><span>0%</span></div>
+          <div class="game-row__bar-track"><div class="game-row__bar-fill" style="width:72%"></div></div>
+          <div class="game-row__ach"><span data-en="41 / 57 achievements" data-zh="41 / 57 个成就">41 / 57 achievements</span><span>72%</span></div>
         </div>
         <span class="game-row__crown">
           <svg viewBox="0 0 24 24"><path d="M2 20h20v2H2v-2zm2-3l3-8 5 4 5-4 3 8H4zm8-9a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/></svg>
         </span>
-        <span class="game-row__hours" data-en="0 hrs" data-zh="0 小时">0 hrs</span>
+        <span class="game-row__hours" data-en="462.9 hrs" data-zh="462.9 小时">462.9 hrs</span>
       </div>
 
       <div class="game-row">
-        <img class="game-row__logo" src="GAMING/dispatch.jpg" alt="Dispatch">
-        <h3 class="game-row__name" data-en="Dispatch" data-zh="Dispatch">Dispatch</h3>
+        <img class="game-row__logo" src="GAMING/星露谷.jpg" alt="星露谷物语">
+        <h3 class="game-row__name" data-en="Stardew Valley" data-zh="星露谷物语">Stardew Valley</h3>
         <div class="game-row__progress">
-          <div class="game-row__bar-track"><div class="game-row__bar-fill" style="width:0%"></div></div>
-          <div class="game-row__ach"><span data-en="0 / 0 achievements" data-zh="0 / 0 个成就">0 / 0 achievements</span><span>0%</span></div>
+          <div class="game-row__bar-track"><div class="game-row__bar-fill" style="width:63%"></div></div>
+          <div class="game-row__ach"><span data-en="31 / 49 achievements" data-zh="31 / 49 个成就">31 / 49 achievements</span><span>63%</span></div>
         </div>
         <span class="game-row__crown">
           <svg viewBox="0 0 24 24"><path d="M2 20h20v2H2v-2zm2-3l3-8 5 4 5-4 3 8H4zm8-9a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/></svg>
         </span>
-        <span class="game-row__hours" data-en="0 hrs" data-zh="0 小时">0 hrs</span>
+        <span class="game-row__hours" data-en="455.7 hrs" data-zh="455.7 小时">455.7 hrs</span>
       </div>
 
       <div class="game-row">
-        <img class="game-row__logo" src="GAMING/nova lands.jpg" alt="Nova Lands">
-        <h3 class="game-row__name" data-en="Nova Lands" data-zh="Nova Lands">Nova Lands</h3>
+        <img class="game-row__logo" src="GAMING/stacklands.jpg" alt="堆叠大陆">
+        <h3 class="game-row__name" data-en="Stacklands" data-zh="堆叠大陆">Stacklands</h3>
+        <div class="game-row__progress">
+          <div class="game-row__bar-track"><div class="game-row__bar-fill" style="width:100%"></div></div>
+          <div class="game-row__ach"><span data-en="All achievements" data-zh="全成就">All achievements</span><span>100%</span></div>
+        </div>
+        <span class="game-row__crown visible">
+          <svg viewBox="0 0 24 24"><path d="M2 20h20v2H2v-2zm2-3l3-8 5 4 5-4 3 8H4zm8-9a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/></svg>
+        </span>
+        <span class="game-row__hours" data-en="88.3 hrs" data-zh="88.3 小时">88.3 hrs</span>
+      </div>
+
+      <div class="game-row">
+        <img class="game-row__logo" src="GAMING/the king is watching.jpg" alt="王之凝视">
+        <h3 class="game-row__name" data-en="The King is Watching" data-zh="王之凝视">The King is Watching</h3>
         <div class="game-row__progress">
           <div class="game-row__bar-track"><div class="game-row__bar-fill" style="width:0%"></div></div>
-          <div class="game-row__ach"><span data-en="0 / 0 achievements" data-zh="0 / 0 个成就">0 / 0 achievements</span><span>0%</span></div>
+          <div class="game-row__ach"><span data-en="—" data-zh="—">—</span><span>—</span></div>
         </div>
         <span class="game-row__crown">
           <svg viewBox="0 0 24 24"><path d="M2 20h20v2H2v-2zm2-3l3-8 5 4 5-4 3 8H4zm8-9a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/></svg>
         </span>
-        <span class="game-row__hours" data-en="0 hrs" data-zh="0 小时">0 hrs</span>
+        <span class="game-row__hours" data-en="55 hrs" data-zh="55 小时">55 hrs</span>
+      </div>
+
+      <div class="game-row">
+        <img class="game-row__logo" src="GAMING/缺氧.jpg" alt="缺氧">
+        <h3 class="game-row__name" data-en="Oxygen Not Included" data-zh="缺氧">Oxygen Not Included</h3>
+        <div class="game-row__progress">
+          <div class="game-row__bar-track"><div class="game-row__bar-fill" style="width:0%"></div></div>
+          <div class="game-row__ach"><span data-en="—" data-zh="—">—</span><span>—</span></div>
+        </div>
+        <span class="game-row__crown">
+          <svg viewBox="0 0 24 24"><path d="M2 20h20v2H2v-2zm2-3l3-8 5 4 5-4 3 8H4zm8-9a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/></svg>
+        </span>
+        <span class="game-row__hours" data-en="40 hrs" data-zh="40 小时">40 hrs</span>
       </div>
 
       <div class="game-row">
@@ -239,129 +266,64 @@
         <h3 class="game-row__name" data-en="Repo" data-zh="Repo">Repo</h3>
         <div class="game-row__progress">
           <div class="game-row__bar-track"><div class="game-row__bar-fill" style="width:0%"></div></div>
-          <div class="game-row__ach"><span data-en="0 / 0 achievements" data-zh="0 / 0 个成就">0 / 0 achievements</span><span>0%</span></div>
+          <div class="game-row__ach"><span data-en="—" data-zh="—">—</span><span>—</span></div>
         </div>
         <span class="game-row__crown">
           <svg viewBox="0 0 24 24"><path d="M2 20h20v2H2v-2zm2-3l3-8 5 4 5-4 3 8H4zm8-9a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/></svg>
         </span>
-        <span class="game-row__hours" data-en="0 hrs" data-zh="0 小时">0 hrs</span>
-      </div>
-
-      <div class="game-row">
-        <img class="game-row__logo" src="GAMING/stacklands.jpg" alt="Stacklands">
-        <h3 class="game-row__name" data-en="Stacklands" data-zh="Stacklands">Stacklands</h3>
-        <div class="game-row__progress">
-          <div class="game-row__bar-track"><div class="game-row__bar-fill" style="width:0%"></div></div>
-          <div class="game-row__ach"><span data-en="0 / 0 achievements" data-zh="0 / 0 个成就">0 / 0 achievements</span><span>0%</span></div>
-        </div>
-        <span class="game-row__crown">
-          <svg viewBox="0 0 24 24"><path d="M2 20h20v2H2v-2zm2-3l3-8 5 4 5-4 3 8H4zm8-9a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/></svg>
-        </span>
-        <span class="game-row__hours" data-en="0 hrs" data-zh="0 小时">0 hrs</span>
-      </div>
-
-      <div class="game-row">
-        <img class="game-row__logo" src="GAMING/夜族崛起.jpg" alt="夜族崛起">
-        <h3 class="game-row__name" data-en="V Rising" data-zh="夜族崛起">夜族崛起</h3>
-        <div class="game-row__progress">
-          <div class="game-row__bar-track"><div class="game-row__bar-fill" style="width:0%"></div></div>
-          <div class="game-row__ach"><span data-en="0 / 0 achievements" data-zh="0 / 0 个成就">0 / 0 achievements</span><span>0%</span></div>
-        </div>
-        <span class="game-row__crown">
-          <svg viewBox="0 0 24 24"><path d="M2 20h20v2H2v-2zm2-3l3-8 5 4 5-4 3 8H4zm8-9a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/></svg>
-        </span>
-        <span class="game-row__hours" data-en="0 hrs" data-zh="0 小时">0 hrs</span>
-      </div>
-
-      <div class="game-row">
-        <img class="game-row__logo" src="GAMING/幻兽帕鲁.jpg" alt="幻兽帕鲁">
-        <h3 class="game-row__name" data-en="Palworld" data-zh="幻兽帕鲁">幻兽帕鲁</h3>
-        <div class="game-row__progress">
-          <div class="game-row__bar-track"><div class="game-row__bar-fill" style="width:0%"></div></div>
-          <div class="game-row__ach"><span data-en="0 / 0 achievements" data-zh="0 / 0 个成就">0 / 0 achievements</span><span>0%</span></div>
-        </div>
-        <span class="game-row__crown">
-          <svg viewBox="0 0 24 24"><path d="M2 20h20v2H2v-2zm2-3l3-8 5 4 5-4 3 8H4zm8-9a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/></svg>
-        </span>
-        <span class="game-row__hours" data-en="0 hrs" data-zh="0 小时">0 hrs</span>
+        <span class="game-row__hours" data-en="120.4 hrs" data-zh="120.4 小时">120.4 hrs</span>
       </div>
 
       <div class="game-row">
         <img class="game-row__logo" src="GAMING/摸鱼小镇.jpg" alt="摸鱼小镇">
-        <h3 class="game-row__name" data-en="LOAFING TOWN" data-zh="摸鱼小镇">摸鱼小镇</h3>
+        <h3 class="game-row__name" data-en="LOAFING TOWN" data-zh="摸鱼小镇">LOAFING TOWN</h3>
         <div class="game-row__progress">
           <div class="game-row__bar-track"><div class="game-row__bar-fill" style="width:0%"></div></div>
-          <div class="game-row__ach"><span data-en="0 / 0 achievements" data-zh="0 / 0 个成就">0 / 0 achievements</span><span>0%</span></div>
+          <div class="game-row__ach"><span data-en="—" data-zh="—">—</span><span>—</span></div>
         </div>
         <span class="game-row__crown">
           <svg viewBox="0 0 24 24"><path d="M2 20h20v2H2v-2zm2-3l3-8 5 4 5-4 3 8H4zm8-9a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/></svg>
         </span>
-        <span class="game-row__hours" data-en="0 hrs" data-zh="0 小时">0 hrs</span>
+        <span class="game-row__hours" data-en="169.8 hrs" data-zh="169.8 小时">169.8 hrs</span>
       </div>
 
       <div class="game-row">
-        <img class="game-row__logo" src="GAMING/星露谷.jpg" alt="星露谷">
-        <h3 class="game-row__name" data-en="Stardew Valley" data-zh="星露谷">星露谷</h3>
+        <img class="game-row__logo" src="GAMING/nova lands.jpg" alt="诺娃之岛">
+        <h3 class="game-row__name" data-en="Nova Lands" data-zh="诺娃之岛">Nova Lands</h3>
         <div class="game-row__progress">
-          <div class="game-row__bar-track"><div class="game-row__bar-fill" style="width:0%"></div></div>
-          <div class="game-row__ach"><span data-en="0 / 0 achievements" data-zh="0 / 0 个成就">0 / 0 achievements</span><span>0%</span></div>
+          <div class="game-row__bar-track"><div class="game-row__bar-fill" style="width:67%"></div></div>
+          <div class="game-row__ach"><span data-en="16 / 24 achievements" data-zh="16 / 24 个成就">16 / 24 achievements</span><span>67%</span></div>
         </div>
         <span class="game-row__crown">
           <svg viewBox="0 0 24 24"><path d="M2 20h20v2H2v-2zm2-3l3-8 5 4 5-4 3 8H4zm8-9a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/></svg>
         </span>
-        <span class="game-row__hours" data-en="0 hrs" data-zh="0 小时">0 hrs</span>
+        <span class="game-row__hours" data-en="42.2 hrs" data-zh="42.2 小时">42.2 hrs</span>
       </div>
 
       <div class="game-row">
-        <img class="game-row__logo" src="GAMING/森林.jpg" alt="森林">
-        <h3 class="game-row__name" data-en="The Forest" data-zh="森林">森林</h3>
+        <img class="game-row__logo" src="GAMING/夜族崛起.jpg" alt="夜族崛起">
+        <h3 class="game-row__name" data-en="V Rising" data-zh="夜族崛起">V Rising</h3>
         <div class="game-row__progress">
-          <div class="game-row__bar-track"><div class="game-row__bar-fill" style="width:0%"></div></div>
-          <div class="game-row__ach"><span data-en="0 / 0 achievements" data-zh="0 / 0 个成就">0 / 0 achievements</span><span>0%</span></div>
+          <div class="game-row__bar-track"><div class="game-row__bar-fill" style="width:45%"></div></div>
+          <div class="game-row__ach"><span data-en="22 / 49 achievements" data-zh="22 / 49 个成就">22 / 49 achievements</span><span>45%</span></div>
         </div>
         <span class="game-row__crown">
           <svg viewBox="0 0 24 24"><path d="M2 20h20v2H2v-2zm2-3l3-8 5 4 5-4 3 8H4zm8-9a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/></svg>
         </span>
-        <span class="game-row__hours" data-en="0 hrs" data-zh="0 小时">0 hrs</span>
+        <span class="game-row__hours" data-en="45.1 hrs" data-zh="45.1 小时">45.1 hrs</span>
       </div>
 
       <div class="game-row">
         <img class="game-row__logo" src="GAMING/沉没意志.jpg" alt="沉没意志">
-        <h3 class="game-row__name" data-en="MINDS BENEATH US" data-zh="沉没意志">沉没意志</h3>
+        <h3 class="game-row__name" data-en="MINDS BENEATH US" data-zh="沉没意志">MINDS BENEATH US</h3>
         <div class="game-row__progress">
-          <div class="game-row__bar-track"><div class="game-row__bar-fill" style="width:0%"></div></div>
-          <div class="game-row__ach"><span data-en="0 / 0 achievements" data-zh="0 / 0 个成就">0 / 0 achievements</span><span>0%</span></div>
+          <div class="game-row__bar-track"><div class="game-row__bar-fill" style="width:48%"></div></div>
+          <div class="game-row__ach"><span data-en="10 / 21 achievements" data-zh="10 / 21 个成就">10 / 21 achievements</span><span>48%</span></div>
         </div>
         <span class="game-row__crown">
           <svg viewBox="0 0 24 24"><path d="M2 20h20v2H2v-2zm2-3l3-8 5 4 5-4 3 8H4zm8-9a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/></svg>
         </span>
-        <span class="game-row__hours" data-en="0 hrs" data-zh="0 小时">0 hrs</span>
-      </div>
-
-      <div class="game-row">
-        <img class="game-row__logo" src="GAMING/潜水员大夫.jpg" alt="潜水员大夫">
-        <h3 class="game-row__name" data-en="Dave the Diver" data-zh="潜水员大夫">潜水员大夫</h3>
-        <div class="game-row__progress">
-          <div class="game-row__bar-track"><div class="game-row__bar-fill" style="width:0%"></div></div>
-          <div class="game-row__ach"><span data-en="0 / 0 achievements" data-zh="0 / 0 个成就">0 / 0 achievements</span><span>0%</span></div>
-        </div>
-        <span class="game-row__crown">
-          <svg viewBox="0 0 24 24"><path d="M2 20h20v2H2v-2zm2-3l3-8 5 4 5-4 3 8H4zm8-9a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/></svg>
-        </span>
-        <span class="game-row__hours" data-en="0 hrs" data-zh="0 小时">0 hrs</span>
-      </div>
-
-      <div class="game-row">
-        <img class="game-row__logo" src="GAMING/缺氧.jpg" alt="缺氧">
-        <h3 class="game-row__name" data-en="Oxygen Not Included" data-zh="缺氧">缺氧</h3>
-        <div class="game-row__progress">
-          <div class="game-row__bar-track"><div class="game-row__bar-fill" style="width:0%"></div></div>
-          <div class="game-row__ach"><span data-en="0 / 0 achievements" data-zh="0 / 0 个成就">0 / 0 achievements</span><span>0%</span></div>
-        </div>
-        <span class="game-row__crown">
-          <svg viewBox="0 0 24 24"><path d="M2 20h20v2H2v-2zm2-3l3-8 5 4 5-4 3 8H4zm8-9a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/></svg>
-        </span>
-        <span class="game-row__hours" data-en="0 hrs" data-zh="0 小时">0 hrs</span>
+        <span class="game-row__hours" data-en="12.2 hrs" data-zh="12.2 小时">12.2 hrs</span>
       </div>
 
     </div>
