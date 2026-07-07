@@ -243,10 +243,8 @@
   }
 
   .thumb--managing-up{background-image:url('WORKS/MANAGING UP/MANAGING UP COVER.png')}
-  .thumb--rainfall{background:linear-gradient(150deg,#0d1f2d,#1a4a6b 55%,#071015)}
-  .thumb--soma    {background:linear-gradient(150deg,#2d0f0a,#8b2810 55%,#1a0805)}
-  .thumb--blacksea{background:linear-gradient(150deg,#0a0a0a,#252525 55%,#050505)}
-  .thumb--dice    {background:linear-gradient(150deg,#2a1408,#7a3010 55%,#150a04)}
+  .thumb--arka{background-image:url('WORKS/ARKA/ARKA COVER.png')}
+  .thumb--quiet-town{background-image:url("WORKS/Quiet Town/Quiet Town cover.png")}
 
   .work__overlay{
     position:absolute;inset:0;z-index:1;
@@ -257,7 +255,8 @@
     font-family:var(--mono);font-size:12px;
     color:rgba(255,255,255,.55);letter-spacing:.14em;
   }
-  .work[data-project="managing-up"] .work__title{font-family:'StackedPixel',var(--display)}
+  .work[data-project="managing-up"] .work__title,
+  .work[data-project="quiet-town"] .work__title{font-family:'StackedPixel',var(--display)}
   .work__title{
     font-family:var(--display);font-weight:900;
     font-size:clamp(40px,5vw,64px);line-height:1;
@@ -514,6 +513,42 @@
     <h2 class="section-title reveal" data-en="SELECTED WORKS" data-zh="精选作品">SELECTED WORKS</h2>
     <ul class="works__list">
 
+      <li class="work reveal" data-project="arka">
+        <a class="work__link" href="arka.html">
+          <div class="work__thumb thumb--arka">
+            <span class="work__arrow"><img src="icon/长箭头.png" alt="→"></span>
+            <div class="work__overlay">
+              <div>
+                <h3 class="work__title">ARKA</h3>
+                <div class="work__meta">
+                  <span data-en="· PROJECT TYPE : UX/UI · PRODUCT DESIGN" data-zh="· 项目类型：UX/UI · 产品设计">· PROJECT TYPE : UX/UI · PRODUCT DESIGN</span>
+                  <span data-en="· DELIVERABLE : High-Fidelity Interactive Prototype (Figma)" data-zh="· 交付成果：高保真交互原型 (Figma)">· DELIVERABLE : High-Fidelity Interactive Prototype (Figma)</span>
+                </div>
+                <p class="work__desc" data-en="An AI-supported HR Gap Assessment platform that turns a fragmented, manual consulting audit into a guided, transparent digital workflow — pairing a task-based client portal with a decision-support admin dashboard. Delivered as a high-fidelity interactive Figma prototype." data-zh="一个 AI 辅助的 HR 差距评估平台，把碎片化、手动的咨询审计流程转化为清晰、透明的数字工作流——将任务式的客户门户与决策支持型的管理端仪表盘结合起来。最终以高保真交互 Figma 原型形式交付。">An AI-supported HR Gap Assessment platform that turns a fragmented, manual consulting audit into a guided, transparent digital workflow — pairing a task-based client portal with a decision-support admin dashboard. Delivered as a high-fidelity interactive Figma prototype.</p>
+              </div>
+            </div>
+          </div>
+        </a>
+      </li>
+
+      <li class="work reveal" data-project="quiet-town">
+        <a class="work__link" href="quiet-town.html">
+          <div class="work__thumb thumb--quiet-town">
+            <span class="work__arrow"><img src="icon/长箭头.png" alt="→"></span>
+            <div class="work__overlay">
+              <div>
+                <h3 class="work__title">QUIET TOWN</h3>
+                <div class="work__meta">
+                  <span data-en="· GAME TYPE : FARMING &amp; LIFE SIM" data-zh="· 游戏类型：农场经营 × 模拟养成">· GAME TYPE : FARMING &amp; LIFE SIM</span>
+                  <span data-en="· PLATFORM : PC (Windows) · Godot 4" data-zh="· 平台：PC (Windows) · Godot 4">· PLATFORM : PC (Windows) · Godot 4</span>
+                </div>
+                <p class="work__desc" data-en="A Stardew-Valley-style farming sim, taken solo from a course foundation into real design work: a fully documented, iterated economy-balance model, a rarity-driven fish-variety system, and a playtest-and-telemetry loop that tunes the numbers from data rather than feel." data-zh="一款星露谷式的农场经营模拟，由我一人从课程框架推进到真正的设计工作：一套完整记录、反复迭代的经济数值模型，一个由稀有度驱动的鱼类多样性系统，以及一条用数据而非手感来调参的 playtest 与遥测闭环。">A Stardew-Valley-style farming sim, taken solo from a course foundation into real design work: a fully documented, iterated economy-balance model, a rarity-driven fish-variety system, and a playtest-and-telemetry loop that tunes the numbers from data rather than feel.</p>
+              </div>
+            </div>
+          </div>
+        </a>
+      </li>
+
       <li class="work reveal" data-project="managing-up">
         <a class="work__link" href="managing-up.html">
           <div class="work__thumb thumb--managing-up">
@@ -526,76 +561,6 @@
                   <span data-en="· DEMO PLATFORM : itch.io" data-zh="· 试玩平台：itch.io">· DEMO PLATFORM : itch.io</span>
                 </div>
                 <p class="work__desc" data-en="An idle game where you exploit subordinates to smash KPIs, climb the corporate ladder, and ultimately rule the entire office! Features a 'Secret Notepad' mode so you can safely slack off on the clock." data-zh="一款通过压榨下属以达成KPI，在职场晋升之路上步步高升，最终掌控整个办公室的挂机游戏！游戏还包含&quot;秘密记事本&quot;模式，让你在工作时间也能安全地摸鱼。">An idle game where you exploit subordinates to smash KPIs, climb the corporate ladder, and ultimately rule the entire office! Features a 'Secret Notepad' mode so you can safely slack off on the clock.</p>
-              </div>
-            </div>
-          </div>
-        </a>
-      </li>
-
-      <li class="work reveal" data-project="rainfall-echoes">
-        <a class="work__link" href="#">
-          <div class="work__thumb thumb--rainfall">
-            <span class="work__arrow"><img src="icon/长箭头.png" alt="→"></span>
-            <div class="work__overlay">
-              <div>
-                <h3 class="work__title">RAINFALL ECHOES</h3>
-                <div class="work__meta">
-                  <span data-en="· Game Type: A Third Person Horror Deception Game" data-zh="· 游戏类型：第三人称恐怖欺骗游戏">· Game Type: A Third Person Horror Deception Game</span>
-                  <span data-en="· Game Platform: PC" data-zh="· 游戏平台：PC">· Game Platform: PC</span>
-                </div>
-                <p class="work__desc" data-en="In the far future, raindrops mysteriously fell on the arid city. Since then, the humans began to wander around the open city, and there was no sign of stopping. Players will play the role of a detective and investigate the truth of the event." data-zh="遥远的未来，神秘雨水降临干旱之城。从此，人们开始漫无目的地游荡街头，久久不散。玩家将扮演一名侦探，追查这一事件背后的真相。">In the far future, raindrops mysteriously fell on the arid city. Since then, the humans began to wander around the open city, and there was no sign of stopping. Players will play the role of a detective and investigate the truth of the event.</p>
-              </div>
-            </div>
-          </div>
-        </a>
-      </li>
-
-      <li class="work reveal" data-project="vermillion-soma">
-        <a class="work__link" href="#">
-          <div class="work__thumb thumb--soma">
-            <span class="work__arrow"><img src="icon/长箭头.png" alt="→"></span>
-            <div class="work__overlay">
-              <div>
-                <h3 class="work__title">VERMILLION SOMA</h3>
-                <div class="work__meta">
-                  <span data-en="· Game Art / Concept Art" data-zh="· 游戏美术 / 概念设计">· Game Art / Concept Art</span>
-                </div>
-                <p class="work__desc" data-en="SOMA is a three-player cooperative alien planet survival exploration game, in which players can choose from three different professions and enter game dungeons in groups of three." data-zh="SOMA 是一款三人合作的异星生存探索游戏。玩家从三个职业中选择，以三人小队进入副本，协同配合、共享资源，击败BOSS完成游戏。">SOMA is a three-player cooperative alien planet survival exploration game, in which players can choose from three different professions and enter game dungeons in groups of three. On the map, the three players are, and they need to collaborate and share resources to terminate the dungeon boss and complete the game.</p>
-              </div>
-            </div>
-          </div>
-        </a>
-      </li>
-
-      <li class="work reveal" data-project="black-sea">
-        <a class="work__link" href="#">
-          <div class="work__thumb thumb--blacksea">
-            <span class="work__arrow"><img src="icon/长箭头.png" alt="→"></span>
-            <div class="work__overlay">
-              <div>
-                <h3 class="work__title">BLACK SEA</h3>
-                <div class="work__meta">
-                  <span data-en="· Concept Design" data-zh="· 概念设计">· Concept Design</span>
-                </div>
-                <p class="work__desc" data-en="An unknown territory has always hidden an unexplored forbidden zone, known as the &quot;Black Sea&quot;. This &quot;Black Sea&quot; was said like a shadow at the corner of the area." data-zh="在这片未知领域深处，始终藏着一片无人踏足的禁区——「黑海」。据说它如同盘踞在角落的阴影，踏入其中的人便与黑暗融为一体。">An unknown territory has always hidden an unexplored forbidden zone, known as the "Black Sea". This "Black Sea" was said like a shadow at the corner of the area. People entering here are like hiding in darkness, merging into darkness, and there seems to be some mysterious power in the darkness that pursues the people here.</p>
-              </div>
-            </div>
-          </div>
-        </a>
-      </li>
-
-      <li class="work reveal" data-project="dice-or-death">
-        <a class="work__link" href="#">
-          <div class="work__thumb thumb--dice">
-            <span class="work__arrow"><img src="icon/长箭头.png" alt="→"></span>
-            <div class="work__overlay">
-              <div>
-                <h3 class="work__title">DICE OR DEATH</h3>
-                <div class="work__meta">
-                  <span data-en="· Platform: PC &amp;nbsp;·&amp;nbsp; Team: Endless Ladder Studio" data-zh="· 平台：PC &amp;nbsp;·&amp;nbsp; 团队：Endless Ladder Studio">· Platform: PC &nbsp;·&nbsp; Team: Endless Ladder Studio</span>
-                  <span data-en="· Awards: Best Art &amp;amp; Best Popularity — Mini Game Competition" data-zh="· 奖项：最佳美术奖 &amp; 最受欢迎奖 — 小型游戏大赛">· Awards: Best Art &amp; Best Popularity — Mini Game Competition</span>
-                </div>
-                <p class="work__desc" data-en="A strategy roguelike game on PC. The player is like a small dice — they need to roll the dice so that the numbers on different sides can come into contact with different nodes on the map, aiming to obtain the highest score possible." data-zh="一款PC端策略肉鸽游戏。玩家化身一枚小骰子，不断翻滚，让各面数字触碰地图节点，力求得分最高。">A strategy roguelike game on PC. The player is like a small dice — they need to roll the dice so that the numbers on different sides can come into contact with different nodes on the map, aiming to obtain the highest score possible.</p>
               </div>
             </div>
           </div>
