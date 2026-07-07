@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiet Town — Amber</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  @font-face{font-family:'StackedPixel';src:url('fonts/Stacked pixel.ttf') format('truetype')}
+  :root{
+    --bg:#191816;--surface:#211f1d;--surface-2:#272421;
+    --line:rgba(255,255,255,.12);--line-strong:rgba(255,255,255,.22);
+    --text:#f3f0ea;--muted:#9b978d;--faint:#6a665e;
+    --display:'Archivo',sans-serif;--body:'Inter',sans-serif;--mono:'Space Mono',monospace;
+    --maxw:880px;--ease:cubic-bezier(.22,.61,.36,1);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--text);font-family:var(--body);line-height:1.55;-webkit-font-smoothing:antialiased;padding:0 20px;overflow-x:hidden}
+  .wrap{max-width:var(--maxw);margin:0 auto}
+
+  /* NAV */
+  .nav{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:center;height:60px;background:rgba(25,24,22,.82);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line);margin:0 -20px;padding:0 20px}
+  .nav__links{display:flex;gap:96px;list-style:none}
+  .nav__links a{font-family:var(--mono);font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,0.65);text-decoration:none;position:relative;padding:6px 0;transition:color .25s var(--ease)}
+  .nav__links a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:1px;background:var(--text);transition:width .3s var(--ease)}
+  .nav__links a:hover,.nav__links a.active{color:var(--text)}
+  .nav__links a:hover::after,.nav__links a.active::after{width:100%}
+  .lang-toggle{position:absolute;right:60px;display:flex;align-items:center;background:rgba(255,255,255,.08);border-radius:20px;padding:3px;gap:2px}
+  .lang-toggle__btn{font-family:var(--mono);font-size:11px;font-weight:500;color:rgba(255,255,255,.45);background:transparent;border:none;cursor:pointer;padding:5px 13px;border-radius:16px;transition:color .2s ease,background .2s ease}
+  .lang-toggle__btn.active{background:#fff;color:#1a1a1a;box-shadow:0 1px 5px rgba(0,0,0,.35)}
+
+  /* BACK LINK */
+  .back{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:var(--mono);font-size:13px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--faint);text-decoration:none;
+    padding:28px 0 0;
+    margin-left:calc(-50vw + 50% + 100px);
+    transition:color .25s var(--ease);
+  }
+  .back:hover{color:var(--text)}
+  .back svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2}
+
+  /* HERO */
+  .proj-hero{
+    width:calc(100vw - 160px);
+    margin-left:calc(-50vw + 50% + 80px);
+    margin-top:48px;
+    position:relative;
+    height:385px;
+    overflow:hidden;
+  }
+  .proj-hero__img{
+    width:100%;height:100%;
+    object-fit:cover;object-position:center;
+    display:block;
+  }
+  .proj-hero__overlay{
+    position:absolute;inset:0;
+    background:linear-gradient(to right,rgba(0,0,0,.85) 0%,rgba(0,0,0,.3) 55%,transparent 100%);
+    display:flex;flex-direction:column;justify-content:flex-end;
+    padding:48px 56px;
+  }
+  .proj-hero__title{
+    font-family:'StackedPixel',var(--display);font-weight:900;
+    font-size:clamp(34px,5vw,62px);line-height:1.05;
+    margin-bottom:16px;max-width:14ch;
+  }
+  .proj-hero__meta{
+    font-family:var(--mono);font-size:11px;letter-spacing:.08em;
+    color:rgba(255,255,255,.6);
+    display:flex;flex-direction:column;gap:4px;
+  }
+
+  /* INFO ROW */
+  .proj-info{
+    display:grid;grid-template-columns:repeat(5,1fr);
+    gap:0;
+    border:1px solid var(--line);
+    margin-top:48px;
+    width:calc(100vw - 440px);
+    margin-left:calc(-50vw + 50% + 220px);
+  }
+  .proj-info__item{
+    padding:24px 28px;
+    border-right:1px solid var(--line);
+  }
+  .proj-info__item:last-child{border-right:0}
+  .proj-info__label{
+    font-family:var(--mono);font-size:12px;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--muted);margin-bottom:10px;
+  }
+  .proj-info__value{
+    font-size:15px;font-weight:600;color:var(--text);line-height:1.5;
+  }
+  .proj-info__link{
+    color:var(--text);text-decoration:none;
+    transition:color .25s var(--ease);
+  }
+  .proj-info__link:hover{color:var(--muted)}
+
+  /* BODY SECTIONS */
+  .proj-body{
+    padding:72px 0 48px;display:flex;flex-direction:column;gap:72px;
+    width:calc(100vw - 440px);
+    margin-left:calc(-50vw + 50% + 220px);
+  }
+
+  .proj-section__label{
+    font-family:var(--mono);font-size:15px;letter-spacing:.2em;
+    text-transform:uppercase;color:#ffffff;
+    margin-bottom:20px;
+  }
+  .proj-section__text{
+    font-size:16px;line-height:1.8;color:#ffffff;
+  }
+  .proj-section__text strong{color:#ffffff;font-weight:400}
+
+  /* DEMO BUTTON */
+  .demo-btn{
+    display:inline-flex;align-items:center;gap:11px;
+    font-family:var(--mono);font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+    color:#15151b;background:#69bd92;text-decoration:none;
+    border-radius:9px;padding:14px 24px;margin-bottom:30px;
+    transition:transform .25s var(--ease),box-shadow .25s var(--ease),background .25s var(--ease);
+  }
+  .demo-btn:hover{background:#7ccfa3;transform:translateY(-2px);box-shadow:0 10px 26px rgba(105,189,146,.28)}
+  .demo-btn:active{transform:translateY(0)}
+  .demo-btn__icon{width:17px;height:17px;flex-shrink:0;fill:#15151b}
+  .demo-btn__arrow{width:14px;height:14px;flex-shrink:0;stroke:#15151b;stroke-width:2;fill:none;transition:transform .25s var(--ease)}
+  .demo-btn:hover .demo-btn__arrow{transform:translate(2px,-2px)}
+
+  /* TABS */
+  .tab-bar{display:flex;gap:0;border-bottom:1px solid var(--line);margin-bottom:32px;flex-wrap:wrap}
+  .tab-btn{
+    font-family:var(--mono);font-size:13px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--faint);background:none;border:none;cursor:pointer;
+    padding:12px 44px 12px 0;position:relative;white-space:nowrap;
+    transition:color .25s var(--ease);
+  }
+  .tab-btn::after{content:'';position:absolute;left:0;bottom:-1px;width:0;height:2px;background:var(--text);transition:width .3s var(--ease)}
+  .tab-btn.active{color:var(--text)}
+  .tab-btn.active::after{width:calc(100% - 44px)}
+  .tab-btn:hover:not(.active){color:var(--muted)}
+  .tab-panel{display:none}
+  .tab-panel.active{display:block}
+
+  /* CONCEPT TIMELINE (Setting) */
+  .concept-timeline{padding-top:4px}
+  .concept-timeline__intro{font-size:15px;line-height:1.85;color:#a4a4b0;margin-bottom:52px}
+  .concept-spine{position:relative;padding-left:36px}
+  .concept-spine::before{
+    content:'';position:absolute;
+    left:8px;top:9px;bottom:9px;
+    width:2px;
+    background:linear-gradient(to bottom,#69bd92 0%,#cda44e 100%);
+    z-index:0;
+  }
+  .concept-entry{position:relative;padding-bottom:44px}
+  .concept-entry:last-child{padding-bottom:2px}
+  .concept-entry__dot{
+    position:absolute;left:-35px;top:2px;
+    width:14px;height:14px;border-radius:50%;
+    border:1.5px solid rgba(164,164,176,.38);
+    background:var(--bg);
+    box-sizing:border-box;z-index:1;
+  }
+  .concept-entry--payoff{
+    background:linear-gradient(to right,rgba(105,189,146,.08) 0%,transparent 68%);
+    border-radius:8px;
+    margin-left:-14px;padding-left:14px;
+    padding-top:10px;margin-top:-10px;
+  }
+  .concept-entry--payoff .concept-entry__dot{
+    background:#69bd92;border-color:#69bd92;
+    box-shadow:0 0 10px rgba(105,189,146,.55),0 0 22px rgba(105,189,146,.2);
+  }
+  .concept-entry__meta{
+    font-family:var(--mono);font-size:12px;letter-spacing:.2em;
+    text-transform:uppercase;color:#a4a4b0;
+    margin-bottom:8px;
+  }
+  .concept-entry__title{
+    font-size:20px;font-weight:700;color:#eae7df;
+    margin-bottom:10px;line-height:1.25;
+    display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+  }
+  .concept-entry__tag{
+    font-family:var(--mono);font-size:10px;letter-spacing:.1em;
+    color:#69bd92;border:1px solid rgba(105,189,146,.4);
+    border-radius:3px;padding:2px 8px;
+    font-weight:400;text-transform:uppercase;white-space:nowrap;flex-shrink:0;
+  }
+  .concept-entry__body{font-size:15px;line-height:1.8;color:#a4a4b0}
+  @media(prefers-reduced-motion:no-preference){
+    @keyframes cfadeup{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+    .tab-panel.active .concept-entry{animation:cfadeup .55s cubic-bezier(.22,.61,.36,1) both}
+    .tab-panel.active .concept-entry:nth-child(1){animation-delay:.00s}
+    .tab-panel.active .concept-entry:nth-child(2){animation-delay:.08s}
+    .tab-panel.active .concept-entry:nth-child(3){animation-delay:.16s}
+    .tab-panel.active .concept-entry:nth-child(4){animation-delay:.24s}
+    .tab-panel.active .concept-entry:nth-child(5){animation-delay:.32s}
+  }
+  @media(max-width:600px){
+    .concept-spine{padding-left:28px}
+    .concept-entry__dot{left:-27px}
+    .concept-entry__title{font-size:17px}
+  }
+
+  /* ===== THE SIGHT (signature mechanic) ===== */
+  .sight{padding-top:4px}
+  .sight__lead{font-family:var(--display);font-weight:800;font-size:clamp(23px,3vw,32px);line-height:1.22;color:#eae7df;margin-bottom:16px;max-width:20ch}
+  .sight__lead em{color:#69bd92;font-style:normal}
+  .sight__intro{font-size:15px;line-height:1.85;color:#a4a4b0;margin-bottom:40px;max-width:64ch}
+
+  .sight__rule{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:52px}
+  .srule{border:1px solid var(--line);border-radius:12px;padding:24px 26px;background:rgba(255,255,255,.018)}
+  .srule--on{border-color:rgba(105,189,146,.32);background:linear-gradient(to bottom,rgba(105,189,146,.06),transparent 62%)}
+  .srule--off{opacity:.86}
+  .srule__tag{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;display:flex;align-items:center;gap:8px;margin-bottom:13px}
+  .srule--on .srule__tag{color:#69bd92}
+  .srule--off .srule__tag{color:#7d7a72}
+  .srule__bulb{width:9px;height:9px;border-radius:50%;display:inline-block}
+  .srule--on .srule__bulb{background:#69bd92;box-shadow:0 0 9px rgba(105,189,146,.7)}
+  .srule--off .srule__bulb{background:#4a4843}
+  .srule__h{font-family:var(--display);font-weight:700;font-size:19px;color:#eae7df;margin-bottom:9px}
+  .srule__d{font-size:14.5px;line-height:1.7;color:#a4a4b0}
+
+  /* shape progression */
+  .sight__shead{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#69bd92;display:block;margin-bottom:11px}
+  .sight__shtitle{font-family:var(--display);font-weight:700;font-size:21px;color:#eae7df;line-height:1.3;margin-bottom:11px}
+  .sight__shsub{font-size:15px;line-height:1.78;color:#a4a4b0;margin-bottom:28px;max-width:62ch}
+  .shapes{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:18px}
+  .shapecard{border:1px solid var(--line);border-radius:10px;padding:20px 16px;background:rgba(255,255,255,.012);text-align:center}
+  .shapecard__art{height:78px;display:flex;align-items:flex-end;justify-content:center;margin-bottom:15px}
+  .shapegrid{display:grid;grid-template-columns:repeat(2,20px);grid-auto-rows:20px;gap:3px}
+  .cell{width:20px;height:20px;border-radius:3px;background:rgba(255,255,255,.05)}
+  .cell--on{background:#69bd92;box-shadow:0 0 8px rgba(105,189,146,.4)}
+  .shapecard__lv{font-family:var(--mono);font-weight:700;font-size:14px;color:#eae7df;margin-bottom:3px}
+  .shapecard__n{font-family:var(--mono);font-size:11px;letter-spacing:.05em;color:#69bd92}
+  .shapecard__name{font-size:12.5px;color:#8a8780;margin-top:7px;line-height:1.4}
+  .sight__controls{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:46px}
+  .sctrl{font-family:var(--mono);font-size:12px;letter-spacing:.04em;color:#a4a4b0;border:1px solid var(--line);border-radius:6px;padding:8px 13px}
+  .sctrl b{color:#cda44e;font-weight:700}
+
+  /* shared callout band (Sight + Roster) */
+  .callout{border:1px solid rgba(105,189,146,.32);border-radius:12px;padding:24px 28px;background:linear-gradient(to right,rgba(105,189,146,.07),transparent 72%)}
+  .callout__head{display:flex;align-items:center;gap:11px;margin-bottom:12px}
+  .callout__diamond{width:12px;height:12px;background:#69bd92;transform:rotate(45deg);flex-shrink:0;box-shadow:0 0 10px rgba(105,189,146,.5)}
+  .callout__title{font-family:var(--display);font-weight:700;font-size:18px;color:#69bd92}
+  .callout__text{font-size:15px;line-height:1.78;color:#a4a4b0}
+  .callout__text strong{color:#eae7df;font-weight:500}
+
+  @media(prefers-reduced-motion:no-preference){
+    @keyframes sfade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+    @keyframes spop{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:none}}
+    .tab-panel.active .sight__lead{animation:sfade .5s var(--ease) both}
+    .tab-panel.active .sight__intro{animation:sfade .55s var(--ease) .06s both}
+    .tab-panel.active .sight__rule{animation:sfade .55s var(--ease) .14s both}
+    .tab-panel.active .shapecard{animation:spop .5s var(--ease) both}
+    .tab-panel.active .shapes .shapecard:nth-child(1){animation-delay:.20s}
+    .tab-panel.active .shapes .shapecard:nth-child(2){animation-delay:.28s}
+    .tab-panel.active .shapes .shapecard:nth-child(3){animation-delay:.36s}
+    .tab-panel.active .shapes .shapecard:nth-child(4){animation-delay:.44s}
+    .tab-panel.active .callout{animation:sfade .55s var(--ease) .3s both}
+  }
+  @media(max-width:600px){
+    .sight__rule{grid-template-columns:1fr}
+    .shapes{grid-template-columns:repeat(2,1fr)}
+  }
+
+  /* ===== CORE LOOP ===== */
+  .loop{padding-top:4px}
+  .loop__intro{font-size:15px;line-height:1.85;color:#a4a4b0;margin-bottom:34px}
+
+  .loop__res{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:42px}
+  .res-chip{flex:1 1 230px;border:1px solid var(--line);border-radius:10px;padding:17px 19px;background:rgba(255,255,255,.018)}
+  .res-chip__head{display:flex;align-items:center;gap:9px;margin-bottom:9px}
+  .res-chip__dot{width:11px;height:11px;border-radius:50%;flex-shrink:0}
+  .res-chip__name{font-family:var(--display);font-weight:700;font-size:16px;color:#eae7df}
+  .res-chip__tag{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#6f6f7c;margin-left:auto}
+  .res-chip__desc{font-size:15px;line-height:1.65;color:#a4a4b0}
+
+  .loop__cards{display:flex;flex-direction:column;gap:18px}
+  .lcard{border:1px solid var(--line);border-radius:12px;padding:26px 30px 30px;background:rgba(255,255,255,.018)}
+  .lcard__head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:24px}
+  .lcard__idx{font-family:var(--mono);font-weight:700;font-size:15px;letter-spacing:.08em}
+  .lcard__title{font-family:var(--display);font-weight:700;font-size:21px;color:#eae7df}
+  .lcard__en{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#6f6f7c}
+  .lcard__freq{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#6f6f7c;margin-left:auto;white-space:nowrap}
+  .lcard__body{display:grid;grid-template-columns:240px 1fr;gap:36px;align-items:center}
+
+  .lring{width:100%;max-width:240px;height:auto;margin:0 auto;display:block}
+  .lr-num{font-family:var(--mono);font-weight:700;font-size:14px}
+  .lr-cycle{font-family:var(--mono);font-weight:700;font-size:34px;fill:#69bd92}
+
+  .lnodes{display:flex;flex-direction:column}
+  .lnode{display:flex;gap:14px;padding:13px 0;border-bottom:1px solid var(--line)}
+  .lnode:first-child{padding-top:0}
+  .lnode:last-child{border-bottom:0;padding-bottom:0}
+  .lnode__num{font-family:var(--mono);font-weight:700;font-size:13px;color:#69bd92;flex-shrink:0;width:16px;padding-top:3px}
+  .lnode__main{flex:1;min-width:0}
+  .lnode__dec{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-weight:700;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#69bd92;border:1px solid rgba(105,189,146,.4);border-radius:3px;padding:2px 8px;margin-bottom:7px}
+  .lnode__title{font-size:16px;font-weight:600;color:#eae7df;line-height:1.5}
+  .lnode__desc{font-size:15px;color:#a4a4b0;line-height:1.6;margin-top:2px}
+  .lnode--auto .lnode__title{font-weight:400;color:#cdcabf}
+  .lnode--gate{background:linear-gradient(to right,rgba(105,189,146,.08),transparent 80%);border-radius:8px;margin:0 -10px;padding-left:10px;padding-right:10px}
+  .lnode--gate .lnode__dec{background:#69bd92;color:#15151b;border-color:#69bd92;box-shadow:0 0 12px rgba(105,189,146,.5)}
+  .lnode__feed{font-family:var(--mono);font-size:13px;letter-spacing:.06em;color:#69bd92;margin-top:14px}
+
+  .lcard__body--line{display:block}
+  .lprog{display:flex;align-items:stretch;margin:6px 0 0}
+  .lprog__step{flex:1;position:relative;padding:0 8px}
+  .lprog__step:not(:last-child)::after{content:'';position:absolute;top:8px;left:calc(50% + 12px);right:calc(-50% + 12px);height:2px;background:#69bd92;opacity:.5}
+  .lprog__dot{width:18px;height:18px;border-radius:50%;border:1.5px solid #69bd92;background:#15151b;margin:0 auto 14px;position:relative;z-index:1}
+  .lprog__m{font-family:var(--mono);font-weight:700;font-size:15px;color:#69bd92;text-align:center;margin-bottom:6px}
+  .lprog__cost{font-family:var(--mono);font-weight:700;font-size:13px;color:#69bd92;text-align:center;margin-bottom:13px}
+  .lprog__list{list-style:none;display:flex;flex-direction:column;gap:6px;padding:0}
+  .lprog__list li{font-size:13.5px;line-height:1.5;color:#a4a4b0;padding-left:12px;position:relative}
+  .lprog__list li::before{content:'';position:absolute;left:0;top:7px;width:4px;height:4px;border-radius:50%;background:#69bd92;opacity:.7}
+  .lprog__list li.unlock{color:#cda44e}
+  .lprog__list li.unlock::before{background:#cda44e}
+  .lmeta__note{font-size:14px;line-height:1.7;color:#6f6f7c;margin-top:26px;border-top:1px solid var(--line);padding-top:16px}
+
+  .lgate{margin-top:24px;border:1px solid rgba(105,189,146,.32);border-radius:12px;padding:24px 28px;background:linear-gradient(to right,rgba(105,189,146,.07),transparent 72%)}
+  .lgate__head{display:flex;align-items:center;gap:11px;margin-bottom:12px}
+  .lgate__diamond{width:12px;height:12px;background:#69bd92;transform:rotate(45deg);flex-shrink:0;box-shadow:0 0 10px rgba(105,189,146,.5)}
+  .lgate__title{font-family:var(--display);font-weight:700;font-size:18px;color:#69bd92}
+  .lgate__text{font-size:15px;line-height:1.78;color:#a4a4b0}
+  .lgate__text strong{color:#eae7df;font-weight:500}
+
+  @media(prefers-reduced-motion:no-preference){
+    @keyframes lfade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+    @keyframes ldraw{to{stroke-dashoffset:0}}
+    @keyframes gpulse{0%,100%{opacity:.5}50%{opacity:.95}}
+    .tab-panel.active .loop__intro{animation:lfade .5s var(--ease) both}
+    .tab-panel.active .loop__res{animation:lfade .6s var(--ease) .08s both}
+    .tab-panel.active .lcard:nth-of-type(1){animation:lfade .6s var(--ease) .18s both}
+    .tab-panel.active .lcard:nth-of-type(2){animation:lfade .6s var(--ease) .28s both}
+    .tab-panel.active .lcard:nth-of-type(3){animation:lfade .6s var(--ease) .38s both}
+    .tab-panel.active .lgate{animation:lfade .6s var(--ease) .48s both}
+    .tab-panel.active .lr-arc{stroke-dasharray:140;stroke-dashoffset:140;animation:ldraw .8s var(--ease) .3s forwards}
+    .gate-glow{animation:gpulse 2.8s ease-in-out infinite}
+  }
+  @media(max-width:720px){
+    .lcard__body{grid-template-columns:1fr;gap:24px}
+    .lprog{flex-direction:column;gap:22px}
+    .lprog__step{display:grid;grid-template-columns:22px 1fr;gap:0 14px;padding:0}
+    .lprog__step:not(:last-child)::after{display:none}
+    .lprog__dot{margin:2px 0 0;grid-row:1 / span 3}
+    .lprog__m,.lprog__cost{text-align:left}
+    .lprog__cost{margin-bottom:9px}
+  }
+
+  /* ===== ROSTER ===== */
+  .roster{padding-top:4px}
+  .roster__intro{font-size:15px;line-height:1.85;color:#a4a4b0;margin-bottom:32px;max-width:64ch}
+  .ucards{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:30px}
+  .ucard{border:1px solid var(--line);border-top:2px solid var(--uc,#69bd92);border-radius:10px;padding:22px 24px 20px;background:rgba(255,255,255,.018)}
+  .ucard__head{display:flex;align-items:baseline;gap:10px;margin-bottom:3px;flex-wrap:wrap}
+  .ucard__name{font-family:var(--display);font-weight:700;font-size:18px;color:#eae7df}
+  .ucard__role{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--uc,#69bd92);margin-left:auto}
+  .ucard__cn{font-family:var(--mono);font-size:12px;letter-spacing:.05em;color:#6f6f7c;margin-bottom:14px}
+  .ucard__d{font-size:14.5px;line-height:1.7;color:#a4a4b0;margin-bottom:13px}
+  .ucard__d em{color:#eae7df;font-style:normal;font-weight:500}
+  .ucard__sig{font-family:var(--mono);font-size:12px;line-height:1.5;letter-spacing:.02em;color:#cda44e;border-top:1px solid var(--line);padding-top:11px}
+  @media(prefers-reduced-motion:no-preference){
+    .tab-panel.active .roster__intro{animation:lfade .5s var(--ease) both}
+    .tab-panel.active .ucard{animation:lfade .55s var(--ease) both}
+    .tab-panel.active .ucards .ucard:nth-child(1){animation-delay:.1s}
+    .tab-panel.active .ucards .ucard:nth-child(2){animation-delay:.18s}
+    .tab-panel.active .ucards .ucard:nth-child(3){animation-delay:.26s}
+    .tab-panel.active .ucards .ucard:nth-child(4){animation-delay:.34s}
+  }
+  @media(max-width:600px){.ucards{grid-template-columns:1fr}}
+
+  /* ===== BUILD / SYSTEMS ===== */
+  .build{padding-top:4px}
+  .build__intro{font-size:15px;line-height:1.85;color:#a4a4b0;margin-bottom:24px;max-width:64ch}
+  .build__stack{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:34px}
+  .build__tag{font-family:var(--mono);font-size:12px;letter-spacing:.08em;color:#6f6f7c;border:1px solid var(--line);border-radius:4px;padding:5px 12px}
+  .build__cards{display:flex;flex-direction:column;gap:14px}
+  .build__row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+
+  .bcard{border:1px solid var(--line);border-radius:10px;background:rgba(255,255,255,.012);overflow:hidden}
+  .bcard--main{border-color:rgba(105,189,146,.22);background:linear-gradient(to bottom,rgba(105,189,146,.03),transparent 55%)}
+  .bcard__summary{list-style:none;cursor:pointer;padding:24px 26px;display:block}
+  .bcard--main .bcard__summary{padding:26px 30px}
+  .bcard__summary::-webkit-details-marker{display:none}
+  .bcard__summary::marker{content:''}
+  .bcard__summary:focus-visible{outline:2px solid #69bd92;outline-offset:-2px}
+  .bcard__head{display:flex;align-items:center;gap:12px;margin-bottom:13px}
+  .bcard__idx{font-family:var(--mono);font-weight:700;font-size:14px;letter-spacing:.1em;color:#6f6f7c}
+  .bcard__badge{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#69bd92;border:1px solid rgba(105,189,146,.4);border-radius:3px;padding:2px 8px}
+  .bcard__title{font-family:var(--display);font-weight:700;font-size:17px;color:#eae7df;line-height:1.35;margin-bottom:16px}
+  .bcard--main .bcard__title{font-size:20px}
+  .bcard__seg{margin-bottom:13px}
+  .bcard__seg:last-of-type{margin-bottom:0}
+  .bcard__label{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#6f6f7c;display:block;margin-bottom:6px}
+  .bcard__text{font-size:15px;line-height:1.75;color:#a4a4b0}
+  .bcard__seg--oneline .bcard__text{color:#cdcabf}
+  .bcard__toggle{display:inline-flex;align-items:center;gap:7px;margin-top:18px;font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#69bd92}
+  .bcard__chev{transition:transform .3s var(--ease);font-size:13px}
+  .bcard[open] .bcard__chev{transform:rotate(180deg)}
+  .bcard__detail{padding:0 24px 24px}
+  .bcard--main .bcard__detail{padding:0 28px 28px}
+  .bcard__detail-inner{border-top:1px solid var(--line);padding-top:18px;display:flex;flex-direction:column;gap:16px}
+  .bcard__list{list-style:none;display:flex;flex-direction:column;gap:7px;padding:0}
+  .bcard__list li{font-size:14px;line-height:1.65;color:#a4a4b0;padding-left:14px;position:relative}
+  .bcard__list li::before{content:'';position:absolute;left:0;top:9px;width:4px;height:4px;border-radius:50%;background:#69bd92;opacity:.65}
+  .bcard__list li code{font-family:var(--mono);font-size:12.5px;color:#cda44e}
+  .bcard__why{font-size:14px;line-height:1.7;color:#a4a4b0;border-left:2px solid #69bd92;padding:10px 0 10px 15px;background:linear-gradient(to right,rgba(105,189,146,.05),transparent 80%);border-radius:0 6px 6px 0}
+  .bcard__why strong{color:#eae7df;font-weight:500}
+  .build__close{margin-top:26px;font-size:14px;line-height:1.75;color:#6f6f7c;border-top:1px solid var(--line);padding-top:18px}
+  @media(prefers-reduced-motion:no-preference){
+    @keyframes bdetail{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+    .tab-panel.active .build__intro{animation:lfade .5s var(--ease) both}
+    .tab-panel.active .build__stack{animation:lfade .5s var(--ease) .08s both}
+    .tab-panel.active .build__cards>.bcard{animation:lfade .55s var(--ease) .16s both}
+    .tab-panel.active .build__row>.bcard:nth-child(1){animation:lfade .55s var(--ease) .26s both}
+    .tab-panel.active .build__row>.bcard:nth-child(2){animation:lfade .55s var(--ease) .32s both}
+    .tab-panel.active .build__close{animation:lfade .5s var(--ease) .4s both}
+    .bcard[open] .bcard__detail-inner{animation:bdetail .4s var(--ease) both}
+  }
+  @media(max-width:720px){.build__row{grid-template-columns:1fr}}
+
+  /* FOOTER */
+  .footer{border-top:1px solid var(--line);padding:48px 0 60px;display:grid;grid-template-columns:1fr auto auto;gap:60px;width:calc(100vw - 160px);margin-left:calc(-50vw + 50% + 80px)}
+  .footer__logo{font-family:var(--display);font-weight:900;font-size:34px;letter-spacing:-.01em;align-self:start}
+  .footer__logo span{color:var(--muted)}
+  .footer__col+.footer__col{margin-left:100px}
+  .footer__col:last-child{margin-right:200px}
+  .footer__col h4{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);font-weight:700;margin-bottom:16px}
+  .footer__col ul{list-style:none}
+  .footer__col li{margin-bottom:9px}
+  .footer__col a{color:var(--text);text-decoration:none;font-size:14px;position:relative;transition:color .25s var(--ease)}
+  .footer__col a::after{content:"";position:absolute;left:0;bottom:-2px;width:0;height:1px;background:currentColor;transition:width .3s var(--ease)}
+  .footer__col a:hover{color:var(--muted)}
+  .footer__col a:hover::after{width:100%}
+
+  .reveal{opacity:0;transform:translateY(20px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+  .reveal.in{opacity:1;transform:none}
+
+  /* ===== DATA TABLE (economy / fish) ===== */
+  .dtable{width:100%;border-collapse:collapse;margin:6px 0 8px;font-size:14px}
+  .dtable th,.dtable td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--line)}
+  .dtable thead th{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#69bd92;font-weight:700}
+  .dtable tbody td{color:#a4a4b0}
+  .dtable tbody tr td:first-child{color:#eae7df;font-weight:600}
+  .dtable .num{font-family:var(--mono);color:#cda44e;text-align:right;white-space:nowrap}
+  .dtable tbody tr:last-child td{border-bottom:0}
+  .dtable__cap{font-family:var(--mono);font-size:12px;letter-spacing:.04em;color:#6f6f7c;margin:2px 0 22px}
+  .dtable-wrap{border:1px solid var(--line);border-radius:12px;padding:6px 20px 14px;background:rgba(255,255,255,.012);margin-bottom:14px}
+
+  /* fix / problem two-column */
+  .fixgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:8px 0 40px}
+  .fixcard{border:1px solid var(--line);border-radius:12px;padding:22px 24px;background:rgba(255,255,255,.018)}
+  .fixcard--before{opacity:.9}
+  .fixcard--after{border-color:rgba(105,189,146,.32);background:linear-gradient(to bottom,rgba(105,189,146,.06),transparent 62%)}
+  .fixcard__tag{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;display:flex;align-items:center;gap:8px;margin-bottom:12px}
+  .fixcard--before .fixcard__tag{color:#7d7a72}
+  .fixcard--after .fixcard__tag{color:#69bd92}
+  .fixcard__bulb{width:9px;height:9px;border-radius:50%;display:inline-block}
+  .fixcard--before .fixcard__bulb{background:#4a4843}
+  .fixcard--after .fixcard__bulb{background:#69bd92;box-shadow:0 0 9px rgba(105,189,146,.7)}
+  .fixcard__h{font-family:var(--display);font-weight:700;font-size:17px;color:#eae7df;margin-bottom:8px}
+  .fixcard__d{font-size:14px;line-height:1.7;color:#a4a4b0}
+  .fixcard__d code{font-family:var(--mono);font-size:12.5px;color:#cda44e}
+  @media(max-width:600px){.fixgrid{grid-template-columns:1fr}}
+
+  /* blank characters panel */
+  .blankpanel{border:1px dashed var(--line-strong);border-radius:14px;padding:64px 40px;text-align:center;background:rgba(255,255,255,.012);margin-top:8px}
+  .blankpanel__mark{font-family:var(--display);font-weight:900;font-size:34px;color:#3d3a35;margin-bottom:18px;letter-spacing:.04em}
+  .blankpanel__title{font-family:var(--display);font-weight:700;font-size:22px;color:#eae7df;margin-bottom:10px}
+  .blankpanel__sub{font-size:14.5px;line-height:1.75;color:#6f6f7c;max-width:44ch;margin:0 auto}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <ul class="nav__links">
+    <li><a href="PORTFOLIO.html" data-en="Home" data-zh="主页">Home</a></li>
+    <li><a href="works.html" class="active" data-en="Works" data-zh="作品集">Works</a></li>
+    <li><a href="experience.html" data-en="Gaming" data-zh="游戏经历">Gaming</a></li>
+    <li><a href="resume.html" data-en="Resume" data-zh="简历">Resume</a></li>
+    <li><a href="contact.html" data-en="Contact" data-zh="联系">Contact</a></li>
+  </ul>
+  <div class="lang-toggle">
+    <button class="lang-toggle__btn active" data-lang="en">EN</button>
+    <button class="lang-toggle__btn" data-lang="zh">中文</button>
+  </div>
+</nav>
+
+<div class="wrap">
+  <a class="back" href="works.html">
+    <svg viewBox="0 0 24 24"><path d="M19 12H5M5 12l7 7M5 12l7-7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span data-en="Back to Works" data-zh="返回作品集">Back to Works</span>
+  </a>
+</div>
+
+<!-- HERO (full-bleed) -->
+<div style="max-width:var(--maxw);margin:0 auto;padding:0 20px">
+  <div class="proj-hero reveal">
+    <img class="proj-hero__img" src="WORKS/Quiet Town/Quiet Town cover.png" alt="Quiet Town Cover">
+    <div class="proj-hero__overlay">
+      <h1 class="proj-hero__title">QUIET TOWN</h1>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- INFO ROW -->
+  <div class="proj-info reveal">
+    <div class="proj-info__item">
+      <p class="proj-info__label" data-en="Role" data-zh="职位">Role</p>
+      <p class="proj-info__value" data-en-html="Solo — Design,<br>Code &amp; Balance" data-zh-html="独立开发<br>设计 · 程序 · 数值">Solo — Design,<br>Code &amp; Balance</p>
+    </div>
+    <div class="proj-info__item">
+      <p class="proj-info__label" data-en="Genre" data-zh="类型">Genre</p>
+      <p class="proj-info__value" data-en-html="Farming /<br>Life Sim" data-zh-html="农场经营 /<br>模拟养成">Farming /<br>Life Sim</p>
+    </div>
+    <div class="proj-info__item">
+      <p class="proj-info__label" data-en="Platform" data-zh="平台">Platform</p>
+      <p class="proj-info__value" data-en-html="PC (Windows)<br>Gamepad ready" data-zh-html="PC (Windows)<br>支持手柄">PC (Windows)<br>Gamepad ready</p>
+    </div>
+    <div class="proj-info__item">
+      <p class="proj-info__label" data-en="Duration" data-zh="周期">Duration</p>
+      <p class="proj-info__value" data-en="5 Days" data-zh="5 天">5 Days</p>
+    </div>
+    <div class="proj-info__item">
+      <p class="proj-info__label" data-en="Tools" data-zh="工具">Tools</p>
+      <p class="proj-info__value" data-en-html="Godot 4<br>GDScript" data-zh-html="Godot 4<br>GDScript">Godot 4<br>GDScript</p>
+    </div>
+  </div>
+
+  <!-- BODY -->
+  <div class="proj-body">
+
+    <div class="reveal">
+      <!-- TODO: replace href="#" below with your itch.io / web build URL -->
+      <a class="demo-btn" href="#" target="_blank" rel="noopener noreferrer">
+        <svg class="demo-btn__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+        <span data-en="Play Demo" data-zh="试玩 Demo">Play Demo</span>
+        <svg class="demo-btn__arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M17 7H8M17 7v9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <p class="proj-section__label" data-en="Overview" data-zh="项目简介">Overview</p>
+      <p class="proj-section__text" style="margin-bottom:12px" data-en="Game Type: Farming &amp; Life Sim · Cozy" data-zh="游戏类型：农场经营 × 模拟养成 · 治愈">Game Type: Farming &amp; Life Sim · Cozy</p>
+      <p class="proj-section__text"
+        data-en-html="<em>Quiet Town</em> is a Stardew-Valley-style farming sim: plant, water and harvest crops across a day/night cycle, fish in a timing mini-game, place machines, trade with travelling merchants, and raise your standing with the townsfolk. It began from a Godot course foundation — then I took it over solo and did the real design work on top: a fully documented, iterated <strong>economy-balance model</strong>, a rarity-driven <strong>fish-variety system</strong>, and a <strong>playtest-and-telemetry loop</strong> that tunes the numbers from data rather than feel. This page is a designer's tour of what I consider the project's real highlights."
+        data-zh-html="《Quiet Town》是一款星露谷式的农场经营模拟：在昼夜循环中种植、浇水、收获作物，玩计时钓鱼小游戏，摆放机器，与旅商交易，并经营与镇民的关系。它起步于一套 Godot 课程框架——之后由我一人接手，并在其上做了真正的设计工作：一套完整记录、反复迭代的<strong>经济数值模型</strong>，一个由稀有度驱动的<strong>鱼类多样性系统</strong>，以及一条<strong>playtest 与遥测闭环</strong>——用数据、而非手感来调参。这一页，是一名策划视角下、我认为这个项目真正的亮点巡览。">
+        <em>Quiet Town</em> is a Stardew-Valley-style farming sim: plant, water and harvest crops across a day/night cycle, fish in a timing mini-game, place machines, trade with travelling merchants, and raise your standing with the townsfolk. It began from a Godot course foundation — then I took it over solo and did the real design work on top: a fully documented, iterated <strong>economy-balance model</strong>, a rarity-driven <strong>fish-variety system</strong>, and a <strong>playtest-and-telemetry loop</strong> that tunes the numbers from data rather than feel. This page is a designer's tour of what I consider the project's real highlights.
+      </p>
+    </div>
+
+    <div class="reveal">
+      <div class="tab-bar">
+        <button class="tab-btn active" data-tab="loop" data-en="Core Loop" data-zh="核心循环">Core Loop</button>
+        <button class="tab-btn" data-tab="economy" data-en="Economy" data-zh="经济设计">Economy</button>
+        <button class="tab-btn" data-tab="fish" data-en="Fish System" data-zh="鱼类系统">Fish System</button>
+        <button class="tab-btn" data-tab="validation" data-en="Validation" data-zh="打磨与验证">Validation</button>
+        <button class="tab-btn" data-tab="characters" data-en="Characters" data-zh="人物设定">Characters</button>
+      </div>
+
+      <!-- ===== TAB 1 · CORE LOOP ===== -->
+      <div class="tab-panel active" id="tab-loop">
+        <div class="concept-timeline">
+
+          <p class="concept-timeline__intro"
+            data-en="Quiet Town runs on the classic cozy-sim loop, measured out one in-game day at a time. Each day you earn, spend and invest — and every number on this page is tuned around that single unit. Here is the moment-to-moment flow a player actually lives through, from soil to town square."
+            data-zh="《Quiet Town》跑的是经典的治愈模拟循环，以「一个游戏日」为单位徐徐展开。每一天你都在赚取、花费、再投入——本页每一个数值，都是围绕这一个单位来调的。下面，是玩家真正会经历的、从田间到镇上广场的逐刻流程。">Quiet Town runs on the classic cozy-sim loop, measured out one in-game day at a time. Each day you earn, spend and invest — and every number on this page is tuned around that single unit. Here is the moment-to-moment flow a player actually lives through, from soil to town square.</p>
+
+          <div class="concept-spine">
+
+            <div class="concept-entry">
+              <div class="concept-entry__dot" aria-hidden="true"></div>
+              <p class="concept-entry__meta">THE DAY · 一天</p>
+              <h4 class="concept-entry__title" data-en="Day / night &amp; weather" data-zh="昼夜与天气">Day / night &amp; weather</h4>
+              <p class="concept-entry__body"
+                data-en="The world turns on a day/night cycle with weather — rain waters your crops for free. The in-game day is the heartbeat of the whole design: it's the pacing unit the entire five-day economy model is balanced against."
+                data-zh="世界在带天气的昼夜循环中运转——下雨会免费替你浇灌作物。「游戏日」是整套设计的心跳：它就是整个五天经济模型所对齐的节奏单位。">The world turns on a day/night cycle with weather — rain waters your crops for free. The in-game day is the heartbeat of the whole design: it's the pacing unit the entire five-day economy model is balanced against.</p>
+            </div>
+
+            <div class="concept-entry">
+              <div class="concept-entry__dot" aria-hidden="true"></div>
+              <p class="concept-entry__meta">FARM · 农事</p>
+              <h4 class="concept-entry__title" data-en="Plant → water → harvest → sell" data-zh="种植 → 浇水 → 收获 → 售卖">Plant → water → harvest → sell</h4>
+              <p class="concept-entry__body"
+                data-en="Four crops — wheat, corn, tomato, pumpkin — each with its own growth time and payout. Fast wheat pays little and often; slow pumpkin is a long, high-value bet. Choosing what to plant is the player's first real economic decision every day."
+                data-zh="四种作物——小麦、玉米、番茄、南瓜——各有成长周期与回报。小麦快、单次收益低但频繁；南瓜慢、是一笔长线高价值的押注。「种什么」是玩家每天面对的第一个真正的经济决策。">Four crops — wheat, corn, tomato, pumpkin — each with its own growth time and payout. Fast wheat pays little and often; slow pumpkin is a long, high-value bet. Choosing what to plant is the player's first real economic decision every day.</p>
+            </div>
+
+            <div class="concept-entry">
+              <div class="concept-entry__dot" aria-hidden="true"></div>
+              <p class="concept-entry__meta">FISH · 垂钓</p>
+              <h4 class="concept-entry__title" data-en="A timing mini-game" data-zh="计时钓鱼小游戏">A timing mini-game</h4>
+              <p class="concept-entry__body"
+                data-en="Fishing is an active skill check, not a passive wait: land the timing and you reel in a fish. It's the player's early cash flow before crops mature — and, as the Fish System tab shows, it's built to stay more rewarding than any automated substitute."
+                data-zh="钓鱼是一个主动的技巧判定，而非被动等待：抓准时机，才能钓上鱼。它是作物成熟前玩家的早期现金流——而正如「鱼类系统」页所示，它被刻意设计得比任何自动化替代品都更划算。">Fishing is an active skill check, not a passive wait: land the timing and you reel in a fish. It's the player's early cash flow before crops mature — and, as the Fish System tab shows, it's built to stay more rewarding than any automated substitute.</p>
+            </div>
+
+            <div class="concept-entry">
+              <div class="concept-entry__dot" aria-hidden="true"></div>
+              <p class="concept-entry__meta">BUILD · 建造</p>
+              <h4 class="concept-entry__title" data-en="Blueprints &amp; machines" data-zh="蓝图与机器">Blueprints &amp; machines</h4>
+              <p class="concept-entry__body"
+                data-en="Sprinklers, fishers and scarecrows are placed from unlocked blueprints onto the grid. Every placement spends materials — so automation is never free, and the town you build is a running record of the choices you paid for."
+                data-zh="洒水器、自动钓者、稻草人都从已解锁的蓝图放置到网格上。每一次放置都要消耗材料——所以自动化从不免费，而你建起的这座小镇，正是你为之付费的一连串选择的实时记录。">Sprinklers, fishers and scarecrows are placed from unlocked blueprints onto the grid. Every placement spends materials — so automation is never free, and the town you build is a running record of the choices you paid for.</p>
+            </div>
+
+            <div class="concept-entry concept-entry--payoff">
+              <div class="concept-entry__dot" aria-hidden="true"></div>
+              <p class="concept-entry__meta">TOWN · 小镇</p>
+              <h4 class="concept-entry__title" data-en="Trade, townsfolk &amp; comfort" data-zh="交易、镇民与体验"><span>Trade, townsfolk &amp; comfort</span><span class="concept-entry__tag" data-en="QoL" data-zh="体验打磨">QoL</span></h4>
+              <p class="concept-entry__body"
+                data-en-html="Travelling merchants (Courier, Cat, Mouse) buy and sell, and townsfolk like Mira run their own <strong>relationship, gift and quest</strong> systems. Wrapped around all of it is deliberate quality-of-life work: hint buttons, a player-pointer highlighter, and <strong>full gamepad support</strong> tested alongside mouse and keyboard."
+                data-zh-html="旅行商人（信使、猫、鼠）负责买卖，而像 Mira 这样的镇民各自跑着<strong>好感、赠礼与任务</strong>系统。包裹在这一切之外的，是刻意打磨的体验：提示按钮、玩家指针高亮，以及与键鼠一同测试的<strong>完整手柄支持</strong>。">Travelling merchants (Courier, Cat, Mouse) buy and sell, and townsfolk like Mira run their own <strong>relationship, gift and quest</strong> systems. Wrapped around all of it is deliberate quality-of-life work: hint buttons, a player-pointer highlighter, and <strong>full gamepad support</strong> tested alongside mouse and keyboard.</p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== TAB 2 · ECONOMY ===== -->
+      <div class="tab-panel" id="tab-economy">
+        <div class="sight">
+
+          <p class="sight__lead" data-en-html="I rebuilt the economy from a <em>model</em>, not from feel." data-zh-html="我用一套<em>模型</em>重做了经济，而不是靠手感。">I rebuilt the economy from a <em>model</em>, not from feel.</p>
+
+          <p class="sight__intro"
+            data-en="The course foundation shipped with 50-item debug stacks and machines you could place for free forever — fine for a tutorial, fatal for a real economy. I wrote a running design contract (Day 1 raw baseline → Day 2 v1/v2 → Day 4 v3) that fixed the starting state, priced every action, and proved the five-day curve on paper before a line of balance code changed. This tab is the heart of the highlight."
+            data-zh="课程框架初始带着 50 个一叠的调试库存，以及可以永远免费放置的机器——做教程没问题，做一套真正的经济则是致命的。我写了一份持续演进的设计契约（Day 1 原始基线 → Day 2 v1/v2 → Day 4 v3），固定了初始状态、为每一个动作定价，并在改动任何一行数值代码之前，先在纸面上验证了五天曲线。这一页，是全部亮点的核心。">The course foundation shipped with 50-item debug stacks and machines you could place for free forever — fine for a tutorial, fatal for a real economy. I wrote a running design contract (Day 1 raw baseline → Day 2 v1/v2 → Day 4 v3) that fixed the starting state, priced every action, and proved the five-day curve on paper before a line of balance code changed. This tab is the heart of the highlight.</p>
+
+          <div class="fixgrid">
+            <div class="fixcard fixcard--before">
+              <span class="fixcard__tag"><span class="fixcard__bulb"></span><span data-en="Course baseline" data-zh="课程基线">Course baseline</span></span>
+              <h4 class="fixcard__h" data-en="No scarcity, no choice" data-zh="没有稀缺，就没有选择">No scarcity, no choice</h4>
+              <p class="fixcard__d" data-en-html="Every item started at <code>50</code>, coins at <code>250</code>. Machines cost a one-time material fee to <em>unlock</em>, then placed for free forever. Nothing the player did carried a lasting cost." data-zh-html="每种物品初始 <code>50</code>，金币 <code>250</code>。机器只需一次性材料费用来<em>解锁</em>，之后便可永远免费放置。玩家做的任何事，都不带持续成本。">Every item started at <code>50</code>, coins at <code>250</code>. Machines cost a one-time material fee to <em>unlock</em>, then placed for free forever. Nothing the player did carried a lasting cost.</p>
+            </div>
+            <div class="fixcard fixcard--after">
+              <span class="fixcard__tag"><span class="fixcard__bulb"></span><span data-en="Balanced v2 / v3" data-zh="平衡版 v2 / v3">Balanced v2 / v3</span></span>
+              <h4 class="fixcard__h" data-en="Every action has a price" data-zh="每个动作都有代价">Every action has a price</h4>
+              <p class="fixcard__d" data-en-html="Start cut to <code>150</code> coins and a real <code>27</code>-crop opening (exactly enough to plant 16 tiles). Blueprints now cost <strong>coins to unlock</strong>; each machine <strong>placement</strong> then spends a material recipe — so automation is an ongoing investment." data-zh-html="初始削减到 <code>150</code> 金币与真实的 <code>27</code> 份作物开局（刚好够种 16 格）。蓝图现在<strong>用金币解锁</strong>；此后每次机器<strong>放置</strong>都消耗一份材料配方——于是自动化成了一项持续投入。">Start cut to <code>150</code> coins and a real <code>27</code>-crop opening (exactly enough to plant 16 tiles). Blueprints now cost <strong>coins to unlock</strong>; each machine <strong>placement</strong> then spends a material recipe — so automation is an ongoing investment.</p>
+            </div>
+          </div>
+
+          <span class="sight__shead" data-en="Four crops, four risk profiles" data-zh="四种作物，四条风险曲线">Four crops, four risk profiles</span>
+          <h4 class="sight__shtitle" data-en="Reward rises with the wait" data-zh="回报随等待上升">Reward rises with the wait</h4>
+          <p class="sight__shsub"
+            data-en="Coin rewards are set so the long-run return per tile per day strictly increases with growth time. Fast wheat is safe pocket money; pumpkin is a twelve-day commitment that pays the most. The order is a deliberate, protected invariant."
+            data-zh="金币奖励的设定，使「每格每天」的长线回报随成长时间严格递增。小麦快、是稳妥的零花钱；南瓜是十二天的长线承诺，回报最高。这个顺序是一条刻意保留、受保护的不变量。">Coin rewards are set so the long-run return per tile per day strictly increases with growth time. Fast wheat is safe pocket money; pumpkin is a twelve-day commitment that pays the most. The order is a deliberate, protected invariant.</p>
+
+          <div class="dtable-wrap">
+            <table class="dtable">
+              <thead><tr>
+                <th data-en="Crop" data-zh="作物">Crop</th>
+                <th class="num" data-en="Growth" data-zh="成长天数">Growth</th>
+                <th class="num" data-en="Coin / harvest" data-zh="收获金币">Coin / harvest</th>
+                <th class="num" data-en="Coin / tile / day" data-zh="每格每天">Coin / tile / day</th>
+              </tr></thead>
+              <tbody>
+                <tr><td data-en="Wheat" data-zh="小麦">Wheat</td><td class="num">3d</td><td class="num">20</td><td class="num">6.67</td></tr>
+                <tr><td data-en="Corn" data-zh="玉米">Corn</td><td class="num">3d</td><td class="num">25</td><td class="num">8.33</td></tr>
+                <tr><td data-en="Tomato" data-zh="番茄">Tomato</td><td class="num">4d</td><td class="num">40</td><td class="num">10.00</td></tr>
+                <tr><td data-en="Pumpkin" data-zh="南瓜">Pumpkin</td><td class="num">12d</td><td class="num">150</td><td class="num">12.50</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="dtable__cap" data-en="Invariant preserved across every revision:  Wheat  <  Corn  <  Tomato  <  Pumpkin" data-zh="每一版都严格保留的不变量：  小麦  <  玉米  <  番茄  <  南瓜">Invariant preserved across every revision:  Wheat  &lt;  Corn  &lt;  Tomato  &lt;  Pumpkin</p>
+
+          <span class="sight__shead" data-en="Blueprints &amp; placement recipes" data-zh="蓝图与放置配方">Blueprints &amp; placement recipes</span>
+          <h4 class="sight__shtitle" data-en="Unlock once, pay to place" data-zh="解锁一次，放置付费">Unlock once, pay to place</h4>
+          <p class="sight__shsub"
+            data-en="Blueprint coin costs are paced to be first affordable on their target day (Day 3 / 4 / 5). Then every placement re-spends materials — a second machine costs again, keeping automation tied to continued farming and fishing."
+            data-zh="蓝图的金币价格按目标日（第 3 / 4 / 5 天）首次可负担来定节奏。此后每次放置都会再耗材料——第二台机器要再付一次，让自动化始终绑定在持续的耕作与垂钓上。">Blueprint coin costs are paced to be first affordable on their target day (Day 3 / 4 / 5). Then every placement re-spends materials — a second machine costs again, keeping automation tied to continued farming and fishing.</p>
+
+          <div class="dtable-wrap">
+            <table class="dtable">
+              <thead><tr>
+                <th data-en="Machine" data-zh="机器">Machine</th>
+                <th class="num" data-en="Blueprint (coins)" data-zh="蓝图（金币）">Blueprint (coins)</th>
+                <th data-en="Cost per placement" data-zh="每次放置成本">Cost per placement</th>
+                <th class="num" data-en="Target day" data-zh="目标日">Target day</th>
+              </tr></thead>
+              <tbody>
+                <tr><td data-en="Sprinkler" data-zh="洒水器">Sprinkler</td><td class="num">400</td><td data-en="Tomato 2 + Wheat 4" data-zh="番茄 2 + 小麦 4">Tomato 2 + Wheat 4</td><td class="num">Day 3</td></tr>
+                <tr><td data-en="Fisher" data-zh="自动钓者">Fisher</td><td class="num">600</td><td data-en="Wood 8 + Any Fish 4" data-zh="木材 8 + 任意鱼 4">Wood 8 + Any Fish 4</td><td class="num">Day 4</td></tr>
+                <tr><td data-en="Scarecrow" data-zh="稻草人">Scarecrow</td><td class="num">900</td><td data-en="Pumpkin 1 + Corn 4" data-zh="南瓜 1 + 玉米 4">Pumpkin 1 + Corn 4</td><td class="num">Day 5</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="dtable__cap" data-en="Placement is atomic: materials are deducted only after tile legality and setup succeed — a failed placement costs nothing." data-zh="放置是原子的：只有在格子合法且初始化成功后才扣材料——放置失败，分文不取。">Placement is atomic: materials are deducted only after tile legality and setup succeed — a failed placement costs nothing.</p>
+
+          <div class="callout">
+            <div class="callout__head">
+              <span class="callout__diamond"></span>
+              <span class="callout__title" data-en="The result: choices with teeth" data-zh="结果：有分量的取舍">The result: choices with teeth</span>
+            </div>
+            <p class="callout__text"
+              data-en-html="Across the modelled five days, <strong>no single repeatable income source exceeds 50%</strong> (fishing 47.7%, farming 41.4%, the one-off quest 10.9%) — so neither activity trivialises the other. And spending competes: buying a Cowboy hat drains the very Wood the Fisher needs, creating <strong>real opportunity cost</strong> instead of a checklist. Balance came out of the spreadsheet, then got confirmed in playtests."
+              data-zh-html="在建模的五天里，<strong>没有任何单一可重复收入来源超过 50%</strong>（钓鱼 47.7%、耕作 41.4%、一次性任务 10.9%）——于是两种活动谁也不会让另一种失去意义。而花费彼此竞争：买一顶牛仔帽，会耗掉自动钓者正需要的木材，制造出<strong>真实的机会成本</strong>，而非一张清单。平衡先出自表格，再在 playtest 中被确认。">Across the modelled five days, <strong>no single repeatable income source exceeds 50%</strong> (fishing 47.7%, farming 41.4%, the one-off quest 10.9%) — so neither activity trivialises the other. And spending competes: buying a Cowboy hat drains the very Wood the Fisher needs, creating <strong>real opportunity cost</strong> instead of a checklist. Balance came out of the spreadsheet, then got confirmed in playtests.</p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ===== TAB 3 · FISH SYSTEM ===== -->
+      <div class="tab-panel" id="tab-fish">
+        <div class="roster">
+
+          <p class="roster__intro"
+            data-en="The course shipped fishing as one generic FISH item — you caught it, you sold it, done. I turned it into a rarity-driven species system that gives fishing texture without inflating the economy, and threaded it through inventory, trade, recipes and telemetry with a save-safe, append-only migration."
+            data-zh="课程里的钓鱼只有一种通用的 FISH 物品——钓上来、卖掉，结束。我把它改造成了一套由稀有度驱动的鱼种系统：既让钓鱼有了层次，又不让经济膨胀，并以「只追加、不重排」的存档安全迁移，把它贯穿进背包、交易、配方与遥测。">The course shipped fishing as one generic FISH item — you caught it, you sold it, done. I turned it into a rarity-driven species system that gives fishing texture without inflating the economy, and threaded it through inventory, trade, recipes and telemetry with a save-safe, append-only migration.</p>
+
+          <div class="ucards">
+            <div class="ucard" style="--uc:#9b978d">
+              <div class="ucard__head">
+                <span class="ucard__name" data-en="Gray Carp" data-zh="灰鲤">Gray Carp</span>
+                <span class="ucard__role" data-en="Common" data-zh="普通">Common</span>
+              </div>
+              <p class="ucard__cn" data-en="Drop weight 50 / 100" data-zh="掉落权重 50 / 100">Drop weight 50 / 100</p>
+              <p class="ucard__d" data-en="The bread-and-butter catch. Cheap, frequent, and the fish your machine recipes are meant to eat first." data-zh="最家常的一条。便宜、常见，也是机器配方本就该优先消耗的那种鱼。">The bread-and-butter catch. Cheap, frequent, and the fish your machine recipes are meant to eat first.</p>
+              <p class="ucard__sig" data-en="SELL 9 · BUY 16" data-zh="售 9 · 购 16">SELL 9 · BUY 16</p>
+            </div>
+            <div class="ucard" style="--uc:#6aa9e0">
+              <div class="ucard__head">
+                <span class="ucard__name" data-en="Silver Perch" data-zh="银鲈">Silver Perch</span>
+                <span class="ucard__role" data-en="Uncommon" data-zh="少见">Uncommon</span>
+              </div>
+              <p class="ucard__cn" data-en="Drop weight 30 / 100" data-zh="掉落权重 30 / 100">Drop weight 30 / 100</p>
+              <p class="ucard__d" data-en="A step up in value. Still reachable by the automatic Fisher, so passive play isn't locked to the cheapest fish alone." data-zh="价值更进一步。自动钓者仍能产出，因此被动玩法不会被锁死在最廉价的鱼上。">A step up in value. Still reachable by the automatic Fisher, so passive play isn't locked to the cheapest fish alone.</p>
+              <p class="ucard__sig" data-en="SELL 14 · BUY 24" data-zh="售 14 · 购 24">SELL 14 · BUY 24</p>
+            </div>
+            <div class="ucard" style="--uc:#cda44e">
+              <div class="ucard__head">
+                <span class="ucard__name" data-en="Golden Koi" data-zh="金锦鲤">Golden Koi</span>
+                <span class="ucard__role" data-en="Rare" data-zh="稀有">Rare</span>
+              </div>
+              <p class="ucard__cn" data-en="Drop weight 15 / 100 · manual only" data-zh="掉落权重 15 / 100 · 仅手动">Drop weight 15 / 100 · manual only</p>
+              <p class="ucard__d" data-en="A genuine reward for playing the mini-game. The automatic Fisher can never produce it — rarity you have to earn." data-zh="对亲自玩小游戏的真正回报。自动钓者永远产不出它——这份稀有，只能靠自己挣。">A genuine reward for playing the mini-game. The automatic Fisher can never produce it — rarity you have to earn.</p>
+              <p class="ucard__sig" data-en="SELL 24 · BUY 38" data-zh="售 24 · 购 38">SELL 24 · BUY 38</p>
+            </div>
+            <div class="ucard" style="--uc:#d0674f">
+              <div class="ucard__head">
+                <span class="ucard__name" data-en="Red Snapper" data-zh="红鲷">Red Snapper</span>
+                <span class="ucard__role" data-en="Rare" data-zh="稀有">Rare</span>
+              </div>
+              <p class="ucard__cn" data-en="Drop weight 5 / 100 · manual only" data-zh="掉落权重 5 / 100 · 仅手动">Drop weight 5 / 100 · manual only</p>
+              <p class="ucard__d" data-en-html="The trophy fish — one in twenty successful casts. Priced high, kept scarce, and deliberately <em>protected</em> from being spent by machines." data-zh-html="奖杯鱼——每二十次成功抛竿才见一条。定价高、保持稀有，并被刻意<em>保护</em>，不被机器消耗掉。">The trophy fish — one in twenty successful casts. Priced high, kept scarce, and deliberately <em>protected</em> from being spent by machines.</p>
+              <p class="ucard__sig" data-en="SELL 42 · BUY 65" data-zh="售 42 · 购 65">SELL 42 · BUY 65</p>
+            </div>
+          </div>
+
+          <div class="dtable-wrap">
+            <table class="dtable">
+              <thead><tr>
+                <th data-en="Source" data-zh="来源">Source</th>
+                <th class="num">Gray</th>
+                <th class="num">Silver</th>
+                <th class="num">Koi</th>
+                <th class="num">Snapper</th>
+                <th class="num" data-en="Avg sell" data-zh="加权均价">Avg sell</th>
+              </tr></thead>
+              <tbody>
+                <tr><td data-en="Manual (skill)" data-zh="手动（技巧）">Manual (skill)</td><td class="num">50%</td><td class="num">30%</td><td class="num">15%</td><td class="num">5%</td><td class="num">14.4</td></tr>
+                <tr><td data-en="Auto Fisher" data-zh="自动钓者">Auto Fisher</td><td class="num">70%</td><td class="num">30%</td><td class="num">0%</td><td class="num">0%</td><td class="num">10.5</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="dtable__cap" data-en="Manual weighted value (14.4) sits just under the old flat fish (15) — variety adds texture, not inflation. Automatic (10.5) stays weaker, so active fishing is always worth more." data-zh="手动加权价值（14.4）刚好压在旧的固定鱼价（15）之下——多样性增添的是层次，而非通胀。自动（10.5）始终更弱，让亲自钓鱼永远更划算。">Manual weighted value (14.4) sits just under the old flat fish (15) — variety adds texture, not inflation. Automatic (10.5) stays weaker, so active fishing is always worth more.</p>
+
+          <div class="callout">
+            <div class="callout__head">
+              <span class="callout__diamond"></span>
+              <span class="callout__title" data-en="&quot;Any Fish&quot; recipes that protect the rares" data-zh="「任意鱼」配方，且保护稀有鱼">"Any Fish" recipes that protect the rares</span>
+            </div>
+            <p class="callout__text"
+              data-en-html="The Fisher's build cost is <strong>Any Fish × 3</strong> — a category, not a specific species. When it charges, it consumes fish in a fixed order: <strong>lowest sell price first</strong>. So placing a machine eats your Gray Carp and leaves the Golden Koi and Red Snapper untouched. The player never has to babysit which fish gets spent, and the trophy catch stays a trophy — one clean rule doing quiet, player-friendly work."
+              data-zh-html="自动钓者的建造成本是<strong>任意鱼 × 3</strong>——是一个类别，而非指定鱼种。扣费时，它按固定顺序消耗：<strong>售价最低者优先</strong>。于是放置机器吃掉的是灰鲤，金锦鲤与红鲷分毫不动。玩家无需操心哪条鱼被花掉，奖杯鱼也依旧是奖杯——一条干净的规则，默默做着对玩家友好的事。">The Fisher's build cost is <strong>Any Fish × 3</strong> — a category, not a specific species. When it charges, it consumes fish in a fixed order: <strong>lowest sell price first</strong>. So placing a machine eats your Gray Carp and leaves the Golden Koi and Red Snapper untouched. The player never has to babysit which fish gets spent, and the trophy catch stays a trophy — one clean rule doing quiet, player-friendly work.</p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ===== TAB 4 · VALIDATION ===== -->
+      <div class="tab-panel" id="tab-validation">
+        <div class="build">
+
+          <p class="build__intro"
+            data-en="The part I'm proudest of isn't a feature — it's the process. Every balance change was proposed on paper, measured against a written playtest protocol, logged as telemetry, and rolled out in small reversible steps. This is how I'd want to work on a real team. Each card opens for detail."
+            data-zh="我最自豪的不是某个功能——而是流程。每一次数值改动都先在纸面上提出、对照一份成文的 playtest 协议去测量、以遥测记录下来，再以可回滚的小步推进。这正是我在真实团队里想要的工作方式。每张卡片都可展开。">The part I'm proudest of isn't a feature — it's the process. Every balance change was proposed on paper, measured against a written playtest protocol, logged as telemetry, and rolled out in small reversible steps. This is how I'd want to work on a real team. Each card opens for detail.</p>
+
+          <div class="build__stack">
+            <span class="build__tag" data-en="Playtest protocols" data-zh="Playtest 协议">Playtest protocols</span>
+            <span class="build__tag" data-en="Telemetry JSON" data-zh="遥测 JSON">Telemetry JSON</span>
+            <span class="build__tag" data-en="Staged migration" data-zh="分阶段迁移">Staged migration</span>
+            <span class="build__tag" data-en="Rollback plans" data-zh="回滚预案">Rollback plans</span>
+            <span class="build__tag" data-en="Data-driven tuning" data-zh="数据驱动调参">Data-driven tuning</span>
+          </div>
+
+          <div class="build__cards">
+
+            <!-- MAIN -->
+            <details class="bcard bcard--main" open>
+              <summary class="bcard__summary">
+                <div class="bcard__head">
+                  <span class="bcard__idx">01</span>
+                  <span class="bcard__badge" data-en="Core" data-zh="核心">Core</span>
+                </div>
+                <h5 class="bcard__title" data-en="Written playtest protocols" data-zh="成文的 playtest 协议">Written playtest protocols</h5>
+                <div class="bcard__seg bcard__seg--oneline">
+                  <span class="bcard__label" data-en="In one line" data-zh="一句话">In one line</span>
+                  <p class="bcard__text" data-en="Each build ships with a checklist that says exactly what to test and what &quot;pass&quot; means." data-zh="每个版本都配一份清单，写明该测什么、以及「通过」意味着什么。">Each build ships with a checklist that says exactly what to test and what "pass" means.</p>
+                </div>
+                <span class="bcard__toggle"><span data-en="Details" data-zh="展开细节">Details</span> <span class="bcard__chev">&#9662;</span></span>
+              </summary>
+              <div class="bcard__detail">
+                <div class="bcard__detail-inner">
+                  <ul class="bcard__list">
+                    <li data-en="The fish-species protocol asks the tester to log 20+ manual catches, run 5+ automatic Fisher cycles, and buy/sell every species — with expected values written next to each." data-zh="鱼种协议要求测试者记录 20+ 次手动垂钓、跑 5+ 个自动钓者周期，并买卖每一种鱼——每一项旁边都写好了预期值。">The fish-species protocol asks the tester to log 20+ manual catches, run 5+ automatic Fisher cycles, and buy/sell every species — with expected values written next to each.</li>
+                    <li data-en-html="Placement tests explicitly check the rare-protection order: given mixed fish, the Fisher must consume Gray/Silver and leave Koi/Snapper <code>unchanged</code>." data-zh-html="放置测试明确检验稀有保护顺序：给定混合鱼，自动钓者必须消耗灰/银，而金锦鲤/红鲷保持 <code>unchanged</code>。">Placement tests explicitly check the rare-protection order: given mixed fish, the Fisher must consume Gray/Silver and leave Koi/Snapper <code>unchanged</code>.</li>
+                    <li data-en="Every flow is repeated across mouse, keyboard and Xbox controller; cancel paths (right-click / Esc / B) must place nothing and cost nothing." data-zh="每条流程都在鼠标、键盘、Xbox 手柄上重跑一遍；取消路径（右键 / Esc / B）必须不放置、不扣费。">Every flow is repeated across mouse, keyboard and Xbox controller; cancel paths (right-click / Esc / B) must place nothing and cost nothing.</li>
+                  </ul>
+                  <p class="bcard__why" data-en-html="<strong>A protocol turns &quot;it feels okay&quot; into a checklist someone else could run.</strong> That's the difference between testing and hoping." data-zh-html="<strong>一份协议，把「感觉还行」变成别人也能照着跑的清单。</strong>这就是「测试」与「祈祷」之间的区别。">A protocol turns "it feels okay" into a checklist someone else could run. That's the difference between testing and hoping.</p>
+                </div>
+              </div>
+            </details>
+
+            <div class="build__row">
+              <!-- Telemetry -->
+              <details class="bcard">
+                <summary class="bcard__summary">
+                  <div class="bcard__head">
+                    <span class="bcard__idx">02</span>
+                    <span class="bcard__badge" data-en="Data" data-zh="数据">Data</span>
+                  </div>
+                  <h5 class="bcard__title" data-en="Telemetry, not vibes" data-zh="用遥测，不靠感觉">Telemetry, not vibes</h5>
+                  <div class="bcard__seg bcard__seg--oneline">
+                    <span class="bcard__label" data-en="In one line" data-zh="一句话">In one line</span>
+                    <p class="bcard__text" data-en="The game logs structured JSON events so balance can be read off numbers." data-zh="游戏记录结构化 JSON 事件，让平衡可以从数字里读出来。">The game logs structured JSON events so balance can be read off numbers.</p>
+                  </div>
+                  <span class="bcard__toggle"><span data-en="Details" data-zh="展开细节">Details</span> <span class="bcard__chev">&#9662;</span></span>
+                </summary>
+                <div class="bcard__detail">
+                  <div class="bcard__detail-inner">
+                    <ul class="bcard__list">
+                      <li data-en-html="Catch events tag their <code>source</code> (<code>manual</code> vs <code>automatic_fisher</code>), species, and inventory after — so drop-rate reality can be checked against the 50/30/15/5 design." data-zh-html="垂钓事件标记 <code>source</code>（<code>manual</code> 对 <code>automatic_fisher</code>）、鱼种与事后库存——从而可用实际掉率对照 50/30/15/5 的设计。">Catch events tag their <code>source</code> (<code>manual</code> vs <code>automatic_fisher</code>), species, and inventory after — so drop-rate reality can be checked against the 50/30/15/5 design.</li>
+                      <li data-en-html="Machine placement logs <code>category_materials_consumed</code>, recording exactly which fish were spent — proof the rare-protection order actually fired." data-zh-html="机器放置记录 <code>category_materials_consumed</code>，精确写下消耗了哪些鱼——证明稀有保护顺序确实生效。">Machine placement logs <code>category_materials_consumed</code>, recording exactly which fish were spent — proof the rare-protection order actually fired.</li>
+                      <li data-en="Fishing attempts, successes, failures and durations are all counted, feeding the success-rate and per-day income assumptions in the economy model." data-zh="钓鱼的尝试、成功、失败与时长都被计数，反哺经济模型里的成功率与每日收入假设。">Fishing attempts, successes, failures and durations are all counted, feeding the success-rate and per-day income assumptions in the economy model.</li>
+                    </ul>
+                    <p class="bcard__why" data-en-html="Telemetry closes the loop: the model <strong>predicts</strong>, the log <strong>measures</strong>, and the gap tells me what to tune next." data-zh-html="遥测闭合了循环：模型<strong>预测</strong>，日志<strong>测量</strong>，二者之差告诉我下一步该调什么。">Telemetry closes the loop: the model predicts, the log measures, and the gap tells me what to tune next.</p>
+                  </div>
+                </div>
+              </details>
+
+              <!-- Migration -->
+              <details class="bcard">
+                <summary class="bcard__summary">
+                  <div class="bcard__head">
+                    <span class="bcard__idx">03</span>
+                    <span class="bcard__badge" data-en="Architecture" data-zh="架构">Architecture</span>
+                  </div>
+                  <h5 class="bcard__title" data-en="Staged, reversible migration" data-zh="分阶段、可回滚的迁移">Staged, reversible migration</h5>
+                  <div class="bcard__seg bcard__seg--oneline">
+                    <span class="bcard__label" data-en="In one line" data-zh="一句话">In one line</span>
+                    <p class="bcard__text" data-en="The fish system shipped in seven small phases, each with its own rollback." data-zh="鱼类系统分七个小阶段落地，每阶段都自带回滚。">The fish system shipped in seven small phases, each with its own rollback.</p>
+                  </div>
+                  <span class="bcard__toggle"><span data-en="Details" data-zh="展开细节">Details</span> <span class="bcard__chev">&#9662;</span></span>
+                </summary>
+                <div class="bcard__detail">
+                  <div class="bcard__detail-inner">
+                    <ul class="bcard__list">
+                      <li data-en="It began as a read-only architecture audit — mapping every place the old generic FISH was referenced before touching any of them." data-zh="它以一次只读的架构审计开始——在改动之前，先梳理旧的通用 FISH 被引用的每一处。">It began as a read-only architecture audit — mapping every place the old generic FISH was referenced before touching any of them.</li>
+                      <li data-en-html="New item enums are <strong>append-only</strong> (added after existing values, never reordered) so old saves and logs never break." data-zh-html="新物品枚举<strong>只追加</strong>（加在既有值之后，绝不重排），因此旧存档与日志永不损坏。">New item enums are <strong>append-only</strong> (added after existing values, never reordered) so old saves and logs never break.</li>
+                      <li data-en="Data first, then manual fishing, then the automatic Fisher, then recipes, then UI cleanup — each phase with runtime tests and a stated rollback risk." data-zh="先数据，再手动钓鱼，再自动钓者，再配方，最后 UI 清理——每一阶段都有运行时测试和明确标注的回滚风险。">Data first, then manual fishing, then the automatic Fisher, then recipes, then UI cleanup — each phase with runtime tests and a stated rollback risk.</li>
+                    </ul>
+                    <p class="bcard__why" data-en-html="Small reversible steps mean a broken phase is <strong>contained, not catastrophic</strong> — the way you change live systems safely." data-zh-html="可回滚的小步意味着某个阶段出错时是<strong>可控的、而非灾难性的</strong>——这正是安全改动线上系统的方式。">Small reversible steps mean a broken phase is contained, not catastrophic — the way you change live systems safely.</p>
+                  </div>
+                </div>
+              </details>
+            </div>
+
+            <!-- Tuning (full width) -->
+            <details class="bcard">
+              <summary class="bcard__summary">
+                <div class="bcard__head">
+                  <span class="bcard__idx">04</span>
+                  <span class="bcard__badge" data-en="Balance" data-zh="数值">Balance</span>
+                </div>
+                <h5 class="bcard__title" data-en="A stated tuning priority" data-zh="一套明确的调参优先级">A stated tuning priority</h5>
+                <div class="bcard__seg bcard__seg--oneline">
+                  <span class="bcard__label" data-en="In one line" data-zh="一句话">In one line</span>
+                  <p class="bcard__text" data-en="When data disagrees with the model, there's a fixed order for what to change." data-zh="当数据与模型不符时，改什么、先改什么，有固定顺序。">When data disagrees with the model, there's a fixed order for what to change.</p>
+                </div>
+                <span class="bcard__toggle"><span data-en="Details" data-zh="展开细节">Details</span> <span class="bcard__chev">&#9662;</span></span>
+              </summary>
+              <div class="bcard__detail">
+                <div class="bcard__detail-inner">
+                  <ul class="bcard__list">
+                    <li data-en="Tune in order: (1) manual fishing reward, (2) blueprint coin cost, (3) starting coins, (4) crop coin rewards." data-zh="按顺序调：(1) 手动钓鱼奖励，(2) 蓝图金币价，(3) 初始金币，(4) 作物金币奖励。">Tune in order: (1) manual fishing reward, (2) blueprint coin cost, (3) starting coins, (4) crop coin rewards.</li>
+                    <li data-en-html="Crop <strong>growth times are off-limits</strong> — they define the four crops' identities, so they're the last thing I'd touch, not the first." data-zh-html="作物的<strong>成长时间不动</strong>——它们定义了四种作物的身份，所以是我最后才会碰的、而非最先。">Crop <strong>growth times are off-limits</strong> — they define the four crops' identities, so they're the last thing I'd touch, not the first.</li>
+                    <li data-en="The five-day model is re-validated after each change against a checklist: does any repeatable source exceed 50%, do purchases still land on their target days." data-zh="每次改动后，五天模型都对照清单重新验证：是否有可重复来源超过 50%、各项购买是否仍落在目标日。">The five-day model is re-validated after each change against a checklist: does any repeatable source exceed 50%, do purchases still land on their target days.</li>
+                  </ul>
+                  <p class="bcard__why" data-en-html="Knowing <strong>what not to touch</strong> is as much a design skill as knowing what to change." data-zh-html="知道<strong>什么不该碰</strong>，和知道该改什么一样，都是设计功力。">Knowing what not to touch is as much a design skill as knowing what to change.</p>
+                </div>
+              </div>
+            </details>
+
+          </div>
+
+          <p class="build__close"
+            data-en="The starting point was a Godot course project; the design work on top — the economy model, the fish-variety system, the playtest-and-telemetry loop, and the QoL polish — is mine. Art and audio use the Ninja Adventure, Tiny Swords and Sprout Lands asset packs."
+            data-zh="起点是一个 Godot 课程项目；在其之上的设计工作——经济模型、鱼类多样性系统、playtest 与遥测闭环、以及体验打磨——由我完成。美术与音频使用 Ninja Adventure、Tiny Swords 与 Sprout Lands 素材包。">The starting point was a Godot course project; the design work on top — the economy model, the fish-variety system, the playtest-and-telemetry loop, and the QoL polish — is mine. Art and audio use the Ninja Adventure, Tiny Swords and Sprout Lands asset packs.</p>
+
+        </div>
+      </div>
+
+      <!-- ===== TAB 5 · CHARACTERS (intentionally blank) ===== -->
+      <div class="tab-panel" id="tab-characters">
+        <div class="blankpanel">
+          <div class="blankpanel__mark">✦</div>
+          <h4 class="blankpanel__title" data-en="Character design — coming soon" data-zh="人物设定 — 待补充">Character design — coming soon</h4>
+          <p class="blankpanel__sub"
+            data-en="This page is reserved for the townsfolk of Quiet Town — their looks, personalities, and stories. Content to be added."
+            data-zh="这一页留给《Quiet Town》的镇民们——他们的样貌、性格与故事。内容稍后补充。">This page is reserved for the townsfolk of Quiet Town — their looks, personalities, and stories. Content to be added.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+
+<div class="wrap" style="padding-bottom:120px"></div>
+
+<div style="max-width:var(--maxw);margin:0 auto;padding:0 20px">
+  <footer class="footer">
+    <div class="footer__logo">AMBER<span>.</span></div>
+    <nav class="footer__col">
+      <h4 data-en="Navigation" data-zh="导航">Navigation</h4>
+      <ul>
+        <li><a href="PORTFOLIO.html" data-en="Home" data-zh="主页">Home</a></li>
+        <li><a href="works.html" data-en="Works" data-zh="作品集">Works</a></li>
+        <li><a href="experience.html" data-en="Gaming" data-zh="游戏经历">Gaming</a></li>
+        <li><a href="resume.html" data-en="Resume" data-zh="简历">Resume</a></li>
+        <li><a href="contact.html" data-en="Contact" data-zh="联系">Contact</a></li>
+      </ul>
+    </nav>
+    <nav class="footer__col">
+      <h4 data-en="Connect" data-zh="联系">Connect</h4>
+      <ul>
+        <li><a href="#" target="_blank" rel="noopener">itch.io</a></li>
+        <li><a href="#" target="_blank" rel="noopener">LinkedIn</a></li>
+        <li><a href="#" target="_blank" rel="noopener">GitHub</a></li>
+      </ul>
+    </nav>
+  </footer>
+</div>
+
+<script>
+(function(){
+  var els = document.querySelectorAll('.reveal');
+  if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')});return}
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target)}});
+  },{threshold:.12});
+  els.forEach(function(e){io.observe(e)});
+})();
+/* ---- Tabs ---- */
+(function(){
+  var bar = document.querySelector('.tab-bar');
+  if(!bar) return;
+  bar.addEventListener('click', function(e){
+    var btn = e.target.closest('.tab-btn');
+    if(!btn) return;
+    document.querySelectorAll('.tab-btn').forEach(function(b){b.classList.remove('active')});
+    document.querySelectorAll('.tab-panel').forEach(function(p){p.classList.remove('active')});
+    btn.classList.add('active');
+    var panel = document.getElementById('tab-' + btn.dataset.tab);
+    if(panel) panel.classList.add('active');
+  });
+})();
+/* ---- Language Switch ---- */
+(function(){
+  var K = 'portfolio_lang';
+  function applyLang(lang) {
+    document.querySelectorAll('[data-en]').forEach(function(el){
+      el.textContent = el.getAttribute('data-' + lang) || el.getAttribute('data-en');
+    });
+    document.querySelectorAll('[data-en-html]').forEach(function(el){
+      el.innerHTML = el.getAttribute('data-' + lang + '-html') || el.getAttribute('data-en-html');
+    });
+    document.querySelectorAll('.lang-toggle__btn').forEach(function(b){
+      b.classList.toggle('active', b.dataset.lang === lang);
+    });
+    document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+    try { localStorage.setItem(K, lang); } catch(e){}
+  }
+  var saved; try { saved = localStorage.getItem(K); } catch(e){}
+  applyLang(saved || 'en');
+  var toggle = document.querySelector('.lang-toggle');
+  if(toggle) toggle.addEventListener('click', function(e){
+    var btn = e.target.closest('[data-lang]');
+    if(btn) applyLang(btn.dataset.lang);
+  });
+})();
+</script>
+</body>
+</html>

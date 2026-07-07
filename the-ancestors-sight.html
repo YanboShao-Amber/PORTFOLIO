@@ -1,0 +1,1248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Ancestor's Sight — Amber</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  @font-face{font-family:'StackedPixel';src:url('fonts/Stacked pixel.ttf') format('truetype')}
+  :root{
+    --bg:#191816;--surface:#211f1d;--surface-2:#272421;
+    --line:rgba(255,255,255,.12);--line-strong:rgba(255,255,255,.22);
+    --text:#f3f0ea;--muted:#9b978d;--faint:#6a665e;
+    --display:'Archivo',sans-serif;--body:'Inter',sans-serif;--mono:'Space Mono',monospace;
+    --maxw:880px;--ease:cubic-bezier(.22,.61,.36,1);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--text);font-family:var(--body);line-height:1.55;-webkit-font-smoothing:antialiased;padding:0 20px;overflow-x:hidden}
+  .wrap{max-width:var(--maxw);margin:0 auto}
+
+  /* NAV */
+  .nav{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:center;height:60px;background:rgba(25,24,22,.82);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line);margin:0 -20px;padding:0 20px}
+  .nav__links{display:flex;gap:96px;list-style:none}
+  .nav__links a{font-family:var(--mono);font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,0.65);text-decoration:none;position:relative;padding:6px 0;transition:color .25s var(--ease)}
+  .nav__links a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:1px;background:var(--text);transition:width .3s var(--ease)}
+  .nav__links a:hover,.nav__links a.active{color:var(--text)}
+  .nav__links a:hover::after,.nav__links a.active::after{width:100%}
+  .lang-toggle{position:absolute;right:60px;display:flex;align-items:center;background:rgba(255,255,255,.08);border-radius:20px;padding:3px;gap:2px}
+  .lang-toggle__btn{font-family:var(--mono);font-size:11px;font-weight:500;color:rgba(255,255,255,.45);background:transparent;border:none;cursor:pointer;padding:5px 13px;border-radius:16px;transition:color .2s ease,background .2s ease}
+  .lang-toggle__btn.active{background:#fff;color:#1a1a1a;box-shadow:0 1px 5px rgba(0,0,0,.35)}
+
+  /* BACK LINK */
+  .back{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:var(--mono);font-size:13px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--faint);text-decoration:none;
+    padding:28px 0 0;
+    margin-left:calc(-50vw + 50% + 100px);
+    transition:color .25s var(--ease);
+  }
+  .back:hover{color:var(--text)}
+  .back svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2}
+
+  /* HERO */
+  .proj-hero{
+    width:calc(100vw - 160px);
+    margin-left:calc(-50vw + 50% + 80px);
+    margin-top:48px;
+    position:relative;
+    height:385px;
+    overflow:hidden;
+  }
+  .proj-hero__img{
+    width:100%;height:100%;
+    object-fit:cover;object-position:center;
+    display:block;
+  }
+  .proj-hero__overlay{
+    position:absolute;inset:0;
+    background:linear-gradient(to right,rgba(0,0,0,.85) 0%,rgba(0,0,0,.3) 55%,transparent 100%);
+    display:flex;flex-direction:column;justify-content:flex-end;
+    padding:48px 56px;
+  }
+  .proj-hero__title{
+    font-family:'StackedPixel',var(--display);font-weight:900;
+    font-size:clamp(34px,5vw,62px);line-height:1.05;
+    margin-bottom:16px;max-width:14ch;
+  }
+  .proj-hero__meta{
+    font-family:var(--mono);font-size:11px;letter-spacing:.08em;
+    color:rgba(255,255,255,.6);
+    display:flex;flex-direction:column;gap:4px;
+  }
+
+  /* INFO ROW */
+  .proj-info{
+    display:grid;grid-template-columns:repeat(5,1fr);
+    gap:0;
+    border:1px solid var(--line);
+    margin-top:48px;
+    width:calc(100vw - 440px);
+    margin-left:calc(-50vw + 50% + 220px);
+  }
+  .proj-info__item{
+    padding:24px 28px;
+    border-right:1px solid var(--line);
+  }
+  .proj-info__item:last-child{border-right:0}
+  .proj-info__label{
+    font-family:var(--mono);font-size:12px;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--muted);margin-bottom:10px;
+  }
+  .proj-info__value{
+    font-size:15px;font-weight:600;color:var(--text);line-height:1.5;
+  }
+  .proj-info__link{
+    color:var(--text);text-decoration:none;
+    transition:color .25s var(--ease);
+  }
+  .proj-info__link:hover{color:var(--muted)}
+
+  /* BODY SECTIONS */
+  .proj-body{
+    padding:72px 0 48px;display:flex;flex-direction:column;gap:72px;
+    width:calc(100vw - 440px);
+    margin-left:calc(-50vw + 50% + 220px);
+  }
+
+  .proj-section__label{
+    font-family:var(--mono);font-size:15px;letter-spacing:.2em;
+    text-transform:uppercase;color:#ffffff;
+    margin-bottom:20px;
+  }
+  .proj-section__text{
+    font-size:16px;line-height:1.8;color:#ffffff;
+  }
+  .proj-section__text strong{color:#ffffff;font-weight:400}
+
+  /* DEMO BUTTON */
+  .demo-btn{
+    display:inline-flex;align-items:center;gap:11px;
+    font-family:var(--mono);font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+    color:#15151b;background:#69bd92;text-decoration:none;
+    border-radius:9px;padding:14px 24px;margin-bottom:30px;
+    transition:transform .25s var(--ease),box-shadow .25s var(--ease),background .25s var(--ease);
+  }
+  .demo-btn:hover{background:#7ccfa3;transform:translateY(-2px);box-shadow:0 10px 26px rgba(105,189,146,.28)}
+  .demo-btn:active{transform:translateY(0)}
+  .demo-btn__icon{width:17px;height:17px;flex-shrink:0;fill:#15151b}
+  .demo-btn__arrow{width:14px;height:14px;flex-shrink:0;stroke:#15151b;stroke-width:2;fill:none;transition:transform .25s var(--ease)}
+  .demo-btn:hover .demo-btn__arrow{transform:translate(2px,-2px)}
+
+  /* TABS */
+  .tab-bar{display:flex;gap:0;border-bottom:1px solid var(--line);margin-bottom:32px;flex-wrap:wrap}
+  .tab-btn{
+    font-family:var(--mono);font-size:13px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--faint);background:none;border:none;cursor:pointer;
+    padding:12px 44px 12px 0;position:relative;white-space:nowrap;
+    transition:color .25s var(--ease);
+  }
+  .tab-btn::after{content:'';position:absolute;left:0;bottom:-1px;width:0;height:2px;background:var(--text);transition:width .3s var(--ease)}
+  .tab-btn.active{color:var(--text)}
+  .tab-btn.active::after{width:calc(100% - 44px)}
+  .tab-btn:hover:not(.active){color:var(--muted)}
+  .tab-panel{display:none}
+  .tab-panel.active{display:block}
+
+  /* CONCEPT TIMELINE (Setting) */
+  .concept-timeline{padding-top:4px}
+  .concept-timeline__intro{font-size:15px;line-height:1.85;color:#a4a4b0;margin-bottom:52px}
+  .concept-spine{position:relative;padding-left:36px}
+  .concept-spine::before{
+    content:'';position:absolute;
+    left:8px;top:9px;bottom:9px;
+    width:2px;
+    background:linear-gradient(to bottom,#69bd92 0%,#cda44e 100%);
+    z-index:0;
+  }
+  .concept-entry{position:relative;padding-bottom:44px}
+  .concept-entry:last-child{padding-bottom:2px}
+  .concept-entry__dot{
+    position:absolute;left:-35px;top:2px;
+    width:14px;height:14px;border-radius:50%;
+    border:1.5px solid rgba(164,164,176,.38);
+    background:var(--bg);
+    box-sizing:border-box;z-index:1;
+  }
+  .concept-entry--payoff{
+    background:linear-gradient(to right,rgba(105,189,146,.08) 0%,transparent 68%);
+    border-radius:8px;
+    margin-left:-14px;padding-left:14px;
+    padding-top:10px;margin-top:-10px;
+  }
+  .concept-entry--payoff .concept-entry__dot{
+    background:#69bd92;border-color:#69bd92;
+    box-shadow:0 0 10px rgba(105,189,146,.55),0 0 22px rgba(105,189,146,.2);
+  }
+  .concept-entry__meta{
+    font-family:var(--mono);font-size:12px;letter-spacing:.2em;
+    text-transform:uppercase;color:#a4a4b0;
+    margin-bottom:8px;
+  }
+  .concept-entry__title{
+    font-size:20px;font-weight:700;color:#eae7df;
+    margin-bottom:10px;line-height:1.25;
+    display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+  }
+  .concept-entry__tag{
+    font-family:var(--mono);font-size:10px;letter-spacing:.1em;
+    color:#69bd92;border:1px solid rgba(105,189,146,.4);
+    border-radius:3px;padding:2px 8px;
+    font-weight:400;text-transform:uppercase;white-space:nowrap;flex-shrink:0;
+  }
+  .concept-entry__body{font-size:15px;line-height:1.8;color:#a4a4b0}
+  @media(prefers-reduced-motion:no-preference){
+    @keyframes cfadeup{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+    .tab-panel.active .concept-entry{animation:cfadeup .55s cubic-bezier(.22,.61,.36,1) both}
+    .tab-panel.active .concept-entry:nth-child(1){animation-delay:.00s}
+    .tab-panel.active .concept-entry:nth-child(2){animation-delay:.08s}
+    .tab-panel.active .concept-entry:nth-child(3){animation-delay:.16s}
+    .tab-panel.active .concept-entry:nth-child(4){animation-delay:.24s}
+    .tab-panel.active .concept-entry:nth-child(5){animation-delay:.32s}
+  }
+  @media(max-width:600px){
+    .concept-spine{padding-left:28px}
+    .concept-entry__dot{left:-27px}
+    .concept-entry__title{font-size:17px}
+  }
+
+  /* ===== THE SIGHT (signature mechanic) ===== */
+  .sight{padding-top:4px}
+  .sight__lead{font-family:var(--display);font-weight:800;font-size:clamp(23px,3vw,32px);line-height:1.22;color:#eae7df;margin-bottom:16px;max-width:20ch}
+  .sight__lead em{color:#69bd92;font-style:normal}
+  .sight__intro{font-size:15px;line-height:1.85;color:#a4a4b0;margin-bottom:40px;max-width:64ch}
+
+  .sight__rule{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:52px}
+  .srule{border:1px solid var(--line);border-radius:12px;padding:24px 26px;background:rgba(255,255,255,.018)}
+  .srule--on{border-color:rgba(105,189,146,.32);background:linear-gradient(to bottom,rgba(105,189,146,.06),transparent 62%)}
+  .srule--off{opacity:.86}
+  .srule__tag{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;display:flex;align-items:center;gap:8px;margin-bottom:13px}
+  .srule--on .srule__tag{color:#69bd92}
+  .srule--off .srule__tag{color:#7d7a72}
+  .srule__bulb{width:9px;height:9px;border-radius:50%;display:inline-block}
+  .srule--on .srule__bulb{background:#69bd92;box-shadow:0 0 9px rgba(105,189,146,.7)}
+  .srule--off .srule__bulb{background:#4a4843}
+  .srule__h{font-family:var(--display);font-weight:700;font-size:19px;color:#eae7df;margin-bottom:9px}
+  .srule__d{font-size:14.5px;line-height:1.7;color:#a4a4b0}
+
+  /* shape progression */
+  .sight__shead{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#69bd92;display:block;margin-bottom:11px}
+  .sight__shtitle{font-family:var(--display);font-weight:700;font-size:21px;color:#eae7df;line-height:1.3;margin-bottom:11px}
+  .sight__shsub{font-size:15px;line-height:1.78;color:#a4a4b0;margin-bottom:28px;max-width:62ch}
+  .shapes{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:18px}
+  .shapecard{border:1px solid var(--line);border-radius:10px;padding:20px 16px;background:rgba(255,255,255,.012);text-align:center}
+  .shapecard__art{height:78px;display:flex;align-items:flex-end;justify-content:center;margin-bottom:15px}
+  .shapegrid{display:grid;grid-template-columns:repeat(2,20px);grid-auto-rows:20px;gap:3px}
+  .cell{width:20px;height:20px;border-radius:3px;background:rgba(255,255,255,.05)}
+  .cell--on{background:#69bd92;box-shadow:0 0 8px rgba(105,189,146,.4)}
+  .shapecard__lv{font-family:var(--mono);font-weight:700;font-size:14px;color:#eae7df;margin-bottom:3px}
+  .shapecard__n{font-family:var(--mono);font-size:11px;letter-spacing:.05em;color:#69bd92}
+  .shapecard__name{font-size:12.5px;color:#8a8780;margin-top:7px;line-height:1.4}
+  .sight__controls{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:46px}
+  .sctrl{font-family:var(--mono);font-size:12px;letter-spacing:.04em;color:#a4a4b0;border:1px solid var(--line);border-radius:6px;padding:8px 13px}
+  .sctrl b{color:#cda44e;font-weight:700}
+
+  /* shared callout band (Sight + Roster) */
+  .callout{border:1px solid rgba(105,189,146,.32);border-radius:12px;padding:24px 28px;background:linear-gradient(to right,rgba(105,189,146,.07),transparent 72%)}
+  .callout__head{display:flex;align-items:center;gap:11px;margin-bottom:12px}
+  .callout__diamond{width:12px;height:12px;background:#69bd92;transform:rotate(45deg);flex-shrink:0;box-shadow:0 0 10px rgba(105,189,146,.5)}
+  .callout__title{font-family:var(--display);font-weight:700;font-size:18px;color:#69bd92}
+  .callout__text{font-size:15px;line-height:1.78;color:#a4a4b0}
+  .callout__text strong{color:#eae7df;font-weight:500}
+
+  @media(prefers-reduced-motion:no-preference){
+    @keyframes sfade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+    @keyframes spop{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:none}}
+    .tab-panel.active .sight__lead{animation:sfade .5s var(--ease) both}
+    .tab-panel.active .sight__intro{animation:sfade .55s var(--ease) .06s both}
+    .tab-panel.active .sight__rule{animation:sfade .55s var(--ease) .14s both}
+    .tab-panel.active .shapecard{animation:spop .5s var(--ease) both}
+    .tab-panel.active .shapes .shapecard:nth-child(1){animation-delay:.20s}
+    .tab-panel.active .shapes .shapecard:nth-child(2){animation-delay:.28s}
+    .tab-panel.active .shapes .shapecard:nth-child(3){animation-delay:.36s}
+    .tab-panel.active .shapes .shapecard:nth-child(4){animation-delay:.44s}
+    .tab-panel.active .callout{animation:sfade .55s var(--ease) .3s both}
+  }
+  @media(max-width:600px){
+    .sight__rule{grid-template-columns:1fr}
+    .shapes{grid-template-columns:repeat(2,1fr)}
+  }
+
+  /* ===== CORE LOOP ===== */
+  .loop{padding-top:4px}
+  .loop__intro{font-size:15px;line-height:1.85;color:#a4a4b0;margin-bottom:34px}
+
+  .loop__res{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:42px}
+  .res-chip{flex:1 1 230px;border:1px solid var(--line);border-radius:10px;padding:17px 19px;background:rgba(255,255,255,.018)}
+  .res-chip__head{display:flex;align-items:center;gap:9px;margin-bottom:9px}
+  .res-chip__dot{width:11px;height:11px;border-radius:50%;flex-shrink:0}
+  .res-chip__name{font-family:var(--display);font-weight:700;font-size:16px;color:#eae7df}
+  .res-chip__tag{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#6f6f7c;margin-left:auto}
+  .res-chip__desc{font-size:15px;line-height:1.65;color:#a4a4b0}
+
+  .loop__cards{display:flex;flex-direction:column;gap:18px}
+  .lcard{border:1px solid var(--line);border-radius:12px;padding:26px 30px 30px;background:rgba(255,255,255,.018)}
+  .lcard__head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:24px}
+  .lcard__idx{font-family:var(--mono);font-weight:700;font-size:15px;letter-spacing:.08em}
+  .lcard__title{font-family:var(--display);font-weight:700;font-size:21px;color:#eae7df}
+  .lcard__en{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#6f6f7c}
+  .lcard__freq{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#6f6f7c;margin-left:auto;white-space:nowrap}
+  .lcard__body{display:grid;grid-template-columns:240px 1fr;gap:36px;align-items:center}
+
+  .lring{width:100%;max-width:240px;height:auto;margin:0 auto;display:block}
+  .lr-num{font-family:var(--mono);font-weight:700;font-size:14px}
+  .lr-cycle{font-family:var(--mono);font-weight:700;font-size:34px;fill:#69bd92}
+
+  .lnodes{display:flex;flex-direction:column}
+  .lnode{display:flex;gap:14px;padding:13px 0;border-bottom:1px solid var(--line)}
+  .lnode:first-child{padding-top:0}
+  .lnode:last-child{border-bottom:0;padding-bottom:0}
+  .lnode__num{font-family:var(--mono);font-weight:700;font-size:13px;color:#69bd92;flex-shrink:0;width:16px;padding-top:3px}
+  .lnode__main{flex:1;min-width:0}
+  .lnode__dec{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-weight:700;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#69bd92;border:1px solid rgba(105,189,146,.4);border-radius:3px;padding:2px 8px;margin-bottom:7px}
+  .lnode__title{font-size:16px;font-weight:600;color:#eae7df;line-height:1.5}
+  .lnode__desc{font-size:15px;color:#a4a4b0;line-height:1.6;margin-top:2px}
+  .lnode--auto .lnode__title{font-weight:400;color:#cdcabf}
+  .lnode--gate{background:linear-gradient(to right,rgba(105,189,146,.08),transparent 80%);border-radius:8px;margin:0 -10px;padding-left:10px;padding-right:10px}
+  .lnode--gate .lnode__dec{background:#69bd92;color:#15151b;border-color:#69bd92;box-shadow:0 0 12px rgba(105,189,146,.5)}
+  .lnode__feed{font-family:var(--mono);font-size:13px;letter-spacing:.06em;color:#69bd92;margin-top:14px}
+
+  .lcard__body--line{display:block}
+  .lprog{display:flex;align-items:stretch;margin:6px 0 0}
+  .lprog__step{flex:1;position:relative;padding:0 8px}
+  .lprog__step:not(:last-child)::after{content:'';position:absolute;top:8px;left:calc(50% + 12px);right:calc(-50% + 12px);height:2px;background:#69bd92;opacity:.5}
+  .lprog__dot{width:18px;height:18px;border-radius:50%;border:1.5px solid #69bd92;background:#15151b;margin:0 auto 14px;position:relative;z-index:1}
+  .lprog__m{font-family:var(--mono);font-weight:700;font-size:15px;color:#69bd92;text-align:center;margin-bottom:6px}
+  .lprog__cost{font-family:var(--mono);font-weight:700;font-size:13px;color:#69bd92;text-align:center;margin-bottom:13px}
+  .lprog__list{list-style:none;display:flex;flex-direction:column;gap:6px;padding:0}
+  .lprog__list li{font-size:13.5px;line-height:1.5;color:#a4a4b0;padding-left:12px;position:relative}
+  .lprog__list li::before{content:'';position:absolute;left:0;top:7px;width:4px;height:4px;border-radius:50%;background:#69bd92;opacity:.7}
+  .lprog__list li.unlock{color:#cda44e}
+  .lprog__list li.unlock::before{background:#cda44e}
+  .lmeta__note{font-size:14px;line-height:1.7;color:#6f6f7c;margin-top:26px;border-top:1px solid var(--line);padding-top:16px}
+
+  .lgate{margin-top:24px;border:1px solid rgba(105,189,146,.32);border-radius:12px;padding:24px 28px;background:linear-gradient(to right,rgba(105,189,146,.07),transparent 72%)}
+  .lgate__head{display:flex;align-items:center;gap:11px;margin-bottom:12px}
+  .lgate__diamond{width:12px;height:12px;background:#69bd92;transform:rotate(45deg);flex-shrink:0;box-shadow:0 0 10px rgba(105,189,146,.5)}
+  .lgate__title{font-family:var(--display);font-weight:700;font-size:18px;color:#69bd92}
+  .lgate__text{font-size:15px;line-height:1.78;color:#a4a4b0}
+  .lgate__text strong{color:#eae7df;font-weight:500}
+
+  @media(prefers-reduced-motion:no-preference){
+    @keyframes lfade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+    @keyframes ldraw{to{stroke-dashoffset:0}}
+    @keyframes gpulse{0%,100%{opacity:.5}50%{opacity:.95}}
+    .tab-panel.active .loop__intro{animation:lfade .5s var(--ease) both}
+    .tab-panel.active .loop__res{animation:lfade .6s var(--ease) .08s both}
+    .tab-panel.active .lcard:nth-of-type(1){animation:lfade .6s var(--ease) .18s both}
+    .tab-panel.active .lcard:nth-of-type(2){animation:lfade .6s var(--ease) .28s both}
+    .tab-panel.active .lcard:nth-of-type(3){animation:lfade .6s var(--ease) .38s both}
+    .tab-panel.active .lgate{animation:lfade .6s var(--ease) .48s both}
+    .tab-panel.active .lr-arc{stroke-dasharray:140;stroke-dashoffset:140;animation:ldraw .8s var(--ease) .3s forwards}
+    .gate-glow{animation:gpulse 2.8s ease-in-out infinite}
+  }
+  @media(max-width:720px){
+    .lcard__body{grid-template-columns:1fr;gap:24px}
+    .lprog{flex-direction:column;gap:22px}
+    .lprog__step{display:grid;grid-template-columns:22px 1fr;gap:0 14px;padding:0}
+    .lprog__step:not(:last-child)::after{display:none}
+    .lprog__dot{margin:2px 0 0;grid-row:1 / span 3}
+    .lprog__m,.lprog__cost{text-align:left}
+    .lprog__cost{margin-bottom:9px}
+  }
+
+  /* ===== ROSTER ===== */
+  .roster{padding-top:4px}
+  .roster__intro{font-size:15px;line-height:1.85;color:#a4a4b0;margin-bottom:32px;max-width:64ch}
+  .ucards{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:30px}
+  .ucard{border:1px solid var(--line);border-top:2px solid var(--uc,#69bd92);border-radius:10px;padding:22px 24px 20px;background:rgba(255,255,255,.018)}
+  .ucard__head{display:flex;align-items:baseline;gap:10px;margin-bottom:3px;flex-wrap:wrap}
+  .ucard__name{font-family:var(--display);font-weight:700;font-size:18px;color:#eae7df}
+  .ucard__role{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--uc,#69bd92);margin-left:auto}
+  .ucard__cn{font-family:var(--mono);font-size:12px;letter-spacing:.05em;color:#6f6f7c;margin-bottom:14px}
+  .ucard__d{font-size:14.5px;line-height:1.7;color:#a4a4b0;margin-bottom:13px}
+  .ucard__d em{color:#eae7df;font-style:normal;font-weight:500}
+  .ucard__sig{font-family:var(--mono);font-size:12px;line-height:1.5;letter-spacing:.02em;color:#cda44e;border-top:1px solid var(--line);padding-top:11px}
+  @media(prefers-reduced-motion:no-preference){
+    .tab-panel.active .roster__intro{animation:lfade .5s var(--ease) both}
+    .tab-panel.active .ucard{animation:lfade .55s var(--ease) both}
+    .tab-panel.active .ucards .ucard:nth-child(1){animation-delay:.1s}
+    .tab-panel.active .ucards .ucard:nth-child(2){animation-delay:.18s}
+    .tab-panel.active .ucards .ucard:nth-child(3){animation-delay:.26s}
+    .tab-panel.active .ucards .ucard:nth-child(4){animation-delay:.34s}
+  }
+  @media(max-width:600px){.ucards{grid-template-columns:1fr}}
+
+  /* ===== BUILD / SYSTEMS ===== */
+  .build{padding-top:4px}
+  .build__intro{font-size:15px;line-height:1.85;color:#a4a4b0;margin-bottom:24px;max-width:64ch}
+  .build__stack{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:34px}
+  .build__tag{font-family:var(--mono);font-size:12px;letter-spacing:.08em;color:#6f6f7c;border:1px solid var(--line);border-radius:4px;padding:5px 12px}
+  .build__cards{display:flex;flex-direction:column;gap:14px}
+  .build__row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+
+  .bcard{border:1px solid var(--line);border-radius:10px;background:rgba(255,255,255,.012);overflow:hidden}
+  .bcard--main{border-color:rgba(105,189,146,.22);background:linear-gradient(to bottom,rgba(105,189,146,.03),transparent 55%)}
+  .bcard__summary{list-style:none;cursor:pointer;padding:24px 26px;display:block}
+  .bcard--main .bcard__summary{padding:26px 30px}
+  .bcard__summary::-webkit-details-marker{display:none}
+  .bcard__summary::marker{content:''}
+  .bcard__summary:focus-visible{outline:2px solid #69bd92;outline-offset:-2px}
+  .bcard__head{display:flex;align-items:center;gap:12px;margin-bottom:13px}
+  .bcard__idx{font-family:var(--mono);font-weight:700;font-size:14px;letter-spacing:.1em;color:#6f6f7c}
+  .bcard__badge{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#69bd92;border:1px solid rgba(105,189,146,.4);border-radius:3px;padding:2px 8px}
+  .bcard__title{font-family:var(--display);font-weight:700;font-size:17px;color:#eae7df;line-height:1.35;margin-bottom:16px}
+  .bcard--main .bcard__title{font-size:20px}
+  .bcard__seg{margin-bottom:13px}
+  .bcard__seg:last-of-type{margin-bottom:0}
+  .bcard__label{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#6f6f7c;display:block;margin-bottom:6px}
+  .bcard__text{font-size:15px;line-height:1.75;color:#a4a4b0}
+  .bcard__seg--oneline .bcard__text{color:#cdcabf}
+  .bcard__toggle{display:inline-flex;align-items:center;gap:7px;margin-top:18px;font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#69bd92}
+  .bcard__chev{transition:transform .3s var(--ease);font-size:13px}
+  .bcard[open] .bcard__chev{transform:rotate(180deg)}
+  .bcard__detail{padding:0 24px 24px}
+  .bcard--main .bcard__detail{padding:0 28px 28px}
+  .bcard__detail-inner{border-top:1px solid var(--line);padding-top:18px;display:flex;flex-direction:column;gap:16px}
+  .bcard__list{list-style:none;display:flex;flex-direction:column;gap:7px;padding:0}
+  .bcard__list li{font-size:14px;line-height:1.65;color:#a4a4b0;padding-left:14px;position:relative}
+  .bcard__list li::before{content:'';position:absolute;left:0;top:9px;width:4px;height:4px;border-radius:50%;background:#69bd92;opacity:.65}
+  .bcard__list li code{font-family:var(--mono);font-size:12.5px;color:#cda44e}
+  .bcard__why{font-size:14px;line-height:1.7;color:#a4a4b0;border-left:2px solid #69bd92;padding:10px 0 10px 15px;background:linear-gradient(to right,rgba(105,189,146,.05),transparent 80%);border-radius:0 6px 6px 0}
+  .bcard__why strong{color:#eae7df;font-weight:500}
+  .build__close{margin-top:26px;font-size:14px;line-height:1.75;color:#6f6f7c;border-top:1px solid var(--line);padding-top:18px}
+  @media(prefers-reduced-motion:no-preference){
+    @keyframes bdetail{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+    .tab-panel.active .build__intro{animation:lfade .5s var(--ease) both}
+    .tab-panel.active .build__stack{animation:lfade .5s var(--ease) .08s both}
+    .tab-panel.active .build__cards>.bcard{animation:lfade .55s var(--ease) .16s both}
+    .tab-panel.active .build__row>.bcard:nth-child(1){animation:lfade .55s var(--ease) .26s both}
+    .tab-panel.active .build__row>.bcard:nth-child(2){animation:lfade .55s var(--ease) .32s both}
+    .tab-panel.active .build__close{animation:lfade .5s var(--ease) .4s both}
+    .bcard[open] .bcard__detail-inner{animation:bdetail .4s var(--ease) both}
+  }
+  @media(max-width:720px){.build__row{grid-template-columns:1fr}}
+
+  /* FOOTER */
+  .footer{border-top:1px solid var(--line);padding:48px 0 60px;display:grid;grid-template-columns:1fr auto auto;gap:60px;width:calc(100vw - 160px);margin-left:calc(-50vw + 50% + 80px)}
+  .footer__logo{font-family:var(--display);font-weight:900;font-size:34px;letter-spacing:-.01em;align-self:start}
+  .footer__logo span{color:var(--muted)}
+  .footer__col+.footer__col{margin-left:100px}
+  .footer__col:last-child{margin-right:200px}
+  .footer__col h4{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);font-weight:700;margin-bottom:16px}
+  .footer__col ul{list-style:none}
+  .footer__col li{margin-bottom:9px}
+  .footer__col a{color:var(--text);text-decoration:none;font-size:14px;position:relative;transition:color .25s var(--ease)}
+  .footer__col a::after{content:"";position:absolute;left:0;bottom:-2px;width:0;height:1px;background:currentColor;transition:width .3s var(--ease)}
+  .footer__col a:hover{color:var(--muted)}
+  .footer__col a:hover::after{width:100%}
+
+  .reveal{opacity:0;transform:translateY(20px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+  .reveal.in{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <ul class="nav__links">
+    <li><a href="PORTFOLIO.html" data-en="Home" data-zh="主页">Home</a></li>
+    <li><a href="works.html" class="active" data-en="Works" data-zh="作品集">Works</a></li>
+    <li><a href="experience.html" data-en="Gaming" data-zh="游戏经历">Gaming</a></li>
+    <li><a href="resume.html" data-en="Resume" data-zh="简历">Resume</a></li>
+    <li><a href="contact.html" data-en="Contact" data-zh="联系">Contact</a></li>
+  </ul>
+  <div class="lang-toggle">
+    <button class="lang-toggle__btn active" data-lang="en">EN</button>
+    <button class="lang-toggle__btn" data-lang="zh">中文</button>
+  </div>
+</nav>
+
+<div class="wrap">
+  <a class="back" href="works.html">
+    <svg viewBox="0 0 24 24"><path d="M19 12H5M5 12l7 7M5 12l7-7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span data-en="Back to Works" data-zh="返回作品集">Back to Works</span>
+  </a>
+</div>
+
+<!-- HERO (full-bleed) -->
+<div style="max-width:var(--maxw);margin:0 auto;padding:0 20px">
+  <div class="proj-hero reveal">
+    <img class="proj-hero__img" src="WORKS/The Ancestor's Sight/The Ancestor's Sight cover.png" alt="The Ancestor's Sight Cover">
+    <div class="proj-hero__overlay">
+      <h1 class="proj-hero__title">THE ANCESTOR'S SIGHT</h1>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- INFO ROW -->
+  <div class="proj-info reveal">
+    <div class="proj-info__item">
+      <p class="proj-info__label" data-en="Role" data-zh="职位">Role</p>
+      <p class="proj-info__value" data-en-html="Game Designer,<br>Game Programmer" data-zh-html="游戏策划，<br>游戏程序">Game Designer,<br>Game Programmer</p>
+    </div>
+    <div class="proj-info__item">
+      <p class="proj-info__label" data-en="Genre" data-zh="类型">Genre</p>
+      <p class="proj-info__value" data-en-html="Base-Building<br>Tower Defense" data-zh-html="经营 ×<br>塔防">Base-Building<br>Tower Defense</p>
+    </div>
+    <div class="proj-info__item">
+      <p class="proj-info__label" data-en="Platform" data-zh="平台">Platform</p>
+      <p class="proj-info__value">PC (Windows)</p>
+    </div>
+    <div class="proj-info__item">
+      <p class="proj-info__label" data-en="Duration" data-zh="周期">Duration</p>
+      <p class="proj-info__value" data-en="2 Months" data-zh="2 个月">2 Months</p>
+    </div>
+    <div class="proj-info__item">
+      <p class="proj-info__label" data-en="Tools" data-zh="工具">Tools</p>
+      <p class="proj-info__value">Godot 4.6</p>
+    </div>
+  </div>
+
+  <!-- BODY -->
+  <div class="proj-body">
+
+    <div class="reveal">
+      <!-- TODO: replace href="#" below with your itch.io / web build URL -->
+      <a class="demo-btn" href="#" target="_blank" rel="noopener noreferrer">
+        <svg class="demo-btn__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+        <span data-en="Play Demo" data-zh="试玩 Demo">Play Demo</span>
+        <svg class="demo-btn__arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M17 7H8M17 7v9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <p class="proj-section__label" data-en="Overview" data-zh="项目简介">Overview</p>
+      <p class="proj-section__text" style="margin-bottom:12px" data-en="Game Type: Base-Building Tower Defense · Xianxia" data-zh="游戏类型：经营 × 塔防 · 修仙">Game Type: Base-Building Tower Defense · Xianxia</p>
+      <p class="proj-section__text"
+        data-en-html="You play an all-powerful sect Ancestor, called out of seclusion to defend the mountain gate as demonic energy floods the land. Rebuild the sect's sealed grottoes into a self-sustaining war-economy — then channel your divine Sight, a limited and movable field of attention, to decide which of them gets to run. A grotto only produces, and only musters disciples, while the Ancestor is looking at it."
+        data-zh-html="你扮演一位法力无边的宗门老祖，在魔气席卷天地之际被请出关，镇守山门。把宗门收纳起来的洞天逐一重建成一套自给自足的战争经济——再以你的「天眼灵力」，一片有限且可移动的注意力，决定此刻让哪些洞天运转。洞天唯有被老祖注视时，才会产出、才会出兵。">
+        You play an all-powerful sect Ancestor, called out of seclusion to defend the mountain gate as demonic energy floods the land. Rebuild the sect's sealed grottoes into a self-sustaining war-economy — then channel your divine Sight, a limited and movable field of attention, to decide which of them gets to run. A grotto only produces, and only musters disciples, while the Ancestor is looking at it.
+      </p>
+    </div>
+
+    <div class="reveal">
+      <div class="tab-bar">
+        <button class="tab-btn active" data-tab="setting" data-en="Setting" data-zh="背景设定">Setting</button>
+        <button class="tab-btn" data-tab="sight" data-en="The Sight" data-zh="天眼灵力">The Sight</button>
+        <button class="tab-btn" data-tab="loop" data-en="Core Loop" data-zh="游戏循环">Core Loop</button>
+        <button class="tab-btn" data-tab="roster" data-en="Roster" data-zh="阵容战斗">Roster</button>
+        <button class="tab-btn" data-tab="build" data-en="Systems" data-zh="系统实现">Systems</button>
+      </div>
+
+      <!-- ===== TAB 1 · SETTING ===== -->
+      <div class="tab-panel active" id="tab-setting">
+        <div class="concept-timeline">
+
+          <p class="concept-timeline__intro"
+            data-en="The Ancestor's Sight is set in a xianxia world on the edge of ruin. The story isn't told in cutscenes — it's the reason every system exists. You are not a hero on the battlefield; you are the power that keeps the battlefield alive."
+            data-zh="《The Ancestor's Sight》设定在一个濒临崩坏的修仙世界。故事不靠过场动画讲述——它就是每一个系统存在的理由。你不是战场上的英雄，而是让战场得以存续的那股力量。">The Ancestor's Sight is set in a xianxia world on the edge of ruin. The story isn't told in cutscenes — it's the reason every system exists. You are not a hero on the battlefield; you are the power that keeps the battlefield alive.</p>
+
+          <div class="concept-spine">
+
+            <div class="concept-entry">
+              <div class="concept-entry__dot" aria-hidden="true"></div>
+              <p class="concept-entry__meta">THE THREAT · 危局</p>
+              <h4 class="concept-entry__title" data-en="Demonic Energy from the East" data-zh="东方魔气上涌">Demonic Energy from the East</h4>
+              <p class="concept-entry__body"
+                data-en="Demonic energy surges from the East; inside the sect and out, not a blade of grass survives. For the human cultivators this is a war of survival — and the front line has already reached home."
+                data-zh="东方魔气上涌，宗门内外寸草不生。对人族修士而言，这是一场生死存亡之战——而战线，已经烧到了家门口。">Demonic energy surges from the East; inside the sect and out, not a blade of grass survives. For the human cultivators this is a war of survival — and the front line has already reached home.</p>
+            </div>
+
+            <div class="concept-entry">
+              <div class="concept-entry__dot" aria-hidden="true"></div>
+              <p class="concept-entry__meta">THE ANCESTOR · 老祖（你）</p>
+              <h4 class="concept-entry__title" data-en="Summoned from Seclusion" data-zh="被请出关">Summoned from Seclusion</h4>
+              <p class="concept-entry__body"
+                data-en="The Sect Master breaks a standing oath never to disturb your cultivation and calls you forth. You are near-omnipotent — but you fight from above, by sustaining everything, not by drawing a sword yourself."
+                data-zh="掌门打破「不到万不得已绝不打扰老祖清修」的旧约，将你请出关。你法力近乎无边——但你以「维系万物」的方式从高处作战，而非亲自提剑上阵。">The Sect Master breaks a standing oath never to disturb your cultivation and calls you forth. You are near-omnipotent — but you fight from above, by sustaining everything, not by drawing a sword yourself.</p>
+            </div>
+
+            <div class="concept-entry">
+              <div class="concept-entry__dot" aria-hidden="true"></div>
+              <p class="concept-entry__meta">THE GROTTOES · 洞天</p>
+              <h4 class="concept-entry__title" data-en="Sealed, Awaiting Rebuild" data-zh="被收纳的洞天">Sealed, Awaiting Rebuild</h4>
+              <p class="concept-entry__body"
+                data-en="To shield them from corruption, the disciples sealed the sect's caves and training grounds away. They endured — but lie dormant and disordered, waiting on heavenly materials to be rebuilt inside the mountain gate."
+                data-zh="为防魔气侵扰，弟子们将各处洞天与修炼场收纳起来。它们得以保全——却也陷入沉寂与混乱，唯有备齐天材地宝，方能在山门内重建。">To shield them from corruption, the disciples sealed the sect's caves and training grounds away. They endured — but lie dormant and disordered, waiting on heavenly materials to be rebuilt inside the mountain gate.</p>
+            </div>
+
+            <div class="concept-entry">
+              <div class="concept-entry__dot" aria-hidden="true"></div>
+              <p class="concept-entry__meta">THE SPRING · 灵泉</p>
+              <h4 class="concept-entry__title" data-en="Wired to the Ley Lines" data-zh="直连地脉的灵泉">Wired to the Ley Lines</h4>
+              <p class="concept-entry__body"
+                data-en="Only the Spirit Spring, plugged straight into the world's ley lines, can be used at once. Rebuild it and it pours out resources — the single seed from which the entire economy grows."
+                data-zh="唯有灵泉直连地脉，可即刻启用。将它重建，便会涌出资源——整套经济，皆由这一颗种子生发。">Only the Spirit Spring, plugged straight into the world's ley lines, can be used at once. Rebuild it and it pours out resources — the single seed from which the entire economy grows.</p>
+            </div>
+
+            <div class="concept-entry concept-entry--payoff">
+              <div class="concept-entry__dot" aria-hidden="true"></div>
+              <p class="concept-entry__meta">THE WALL · 山门</p>
+              <h4 class="concept-entry__title" data-en="If It Falls, All Is Lost" data-zh="山门一破，万事皆休"><span>If It Falls, All Is Lost</span><span class="concept-entry__tag" data-en="Lose condition" data-zh="失败条件">Lose condition</span></h4>
+              <p class="concept-entry__body"
+                data-en="Behind the Wall stand the last of the human cultivators. The demons break against it wave after wave. Hold it to the end and the sect is saved; let it fall and the run is over. Everything you build is in service of this one line."
+                data-zh="山门之后，是人族修士最后的退路。魔潮一波又一波撞来。守到最后，宗门得救；一旦城破，则一局皆终。你建造的一切，都只为守住这一道防线。">Behind the Wall stand the last of the human cultivators. The demons break against it wave after wave. Hold it to the end and the sect is saved; let it fall and the run is over. Everything you build is in service of this one line.</p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== TAB 2 · THE SIGHT ===== -->
+      <div class="tab-panel" id="tab-sight">
+        <div class="sight">
+
+          <p class="sight__lead" data-en-html="You can only run what you're <em>looking at</em>." data-zh-html="你只能运转你正在<em>注视</em>的东西。">You can only run what you're <em>looking at</em>.</p>
+
+          <p class="sight__intro"
+            data-en="The Ancestor's Sight isn't a buff or an ability — it's the title, and the one constraint the whole game is built around. Your spiritual force is a single field of attention on a 5×5 board. A grotto produces resources and musters disciples only while the Sight covers it; the moment it slips out, that grotto freezes. You always own more grottoes than the Sight can hold, so every second is a quiet question: where do I look now?"
+            data-zh="「天眼灵力」不是增益、也不是技能——它是标题，也是整个游戏唯一围绕展开的约束。你的灵力是 5×5 棋盘上一片单一的注意力。洞天唯有被它笼罩时才会产出资源、召出弟子；一旦移出，那座洞天立刻停摆。你拥有的洞天永远多过灵力能覆盖的范围，于是每一秒都是一个安静的问题：现在，该看向哪里？">The Ancestor's Sight isn't a buff or an ability — it's the title, and the one constraint the whole game is built around. Your spiritual force is a single field of attention on a 5×5 board. A grotto produces resources and musters disciples only while the Sight covers it; the moment it slips out, that grotto freezes. You always own more grottoes than the Sight can hold, so every second is a quiet question: where do I look now?</p>
+
+          <div class="sight__rule">
+            <div class="srule srule--on">
+              <span class="srule__tag"><span class="srule__bulb"></span><span data-en="Under the Sight" data-zh="在灵力之下">Under the Sight</span></span>
+              <h4 class="srule__h" data-en="It runs" data-zh="运转">It runs</h4>
+              <p class="srule__d" data-en="Production bars advance; combat grottoes muster disciples. Both the economy and the army flow only here." data-zh="产出进度推进，战斗洞天召出弟子。经济与军队，都只在这里流动。">Production bars advance; combat grottoes muster disciples. Both the economy and the army flow only here.</p>
+            </div>
+            <div class="srule srule--off">
+              <span class="srule__tag"><span class="srule__bulb"></span><span data-en="Outside the Sight" data-zh="在灵力之外">Outside the Sight</span></span>
+              <h4 class="srule__h" data-en="It freezes" data-zh="停摆">It freezes</h4>
+              <p class="srule__d" data-en="Bars hold in place — no resources, no troops. The grotto still exists; it just waits for your attention to return." data-zh="进度原地冻结——不产资源，不出兵。洞天依然存在，只是等待你的目光回来。">Bars hold in place — no resources, no troops. The grotto still exists; it just waits for your attention to return.</p>
+            </div>
+          </div>
+
+          <span class="sight__shead" data-en="It grows with you" data-zh="灵力随你成长">It grows with you</span>
+          <h4 class="sight__shtitle" data-en="The Sight upgrades from 3 to 6 cells" data-zh="天眼从 3 格升至 6 格">The Sight upgrades from 3 to 6 cells</h4>
+          <p class="sight__shsub"
+            data-en="Spend resources and your attention literally expands — from a 3-cell corner to a full 2×3 block. More reach means fewer hard choices, so growing the Sight is itself a strategic investment. Every shape can be dragged and rotated freely across the board."
+            data-zh="花费资源，你的注意力会真正变大——从 3 格的拐角，长到 2×3 的满块。覆盖越广，硬性取舍越少，所以「升级天眼」本身就是一项战略投资。每一种形状都可在棋盘上自由拖动、旋转。">Spend resources and your attention literally expands — from a 3-cell corner to a full 2×3 block. More reach means fewer hard choices, so growing the Sight is itself a strategic investment. Every shape can be dragged and rotated freely across the board.</p>
+
+          <div class="shapes">
+            <div class="shapecard">
+              <div class="shapecard__art">
+                <div class="shapegrid" style="grid-template-rows:repeat(2,20px)">
+                  <span class="cell cell--on"></span><span class="cell cell--on"></span>
+                  <span class="cell"></span><span class="cell cell--on"></span>
+                </div>
+              </div>
+              <p class="shapecard__lv">Lv.3</p>
+              <p class="shapecard__n" data-en="3 cells" data-zh="3 格">3 cells</p>
+              <p class="shapecard__name" data-en="Corner" data-zh="拐角形">Corner</p>
+            </div>
+            <div class="shapecard">
+              <div class="shapecard__art">
+                <div class="shapegrid" style="grid-template-rows:repeat(2,20px)">
+                  <span class="cell cell--on"></span><span class="cell cell--on"></span>
+                  <span class="cell cell--on"></span><span class="cell cell--on"></span>
+                </div>
+              </div>
+              <p class="shapecard__lv">Lv.4</p>
+              <p class="shapecard__n" data-en="4 cells" data-zh="4 格">4 cells</p>
+              <p class="shapecard__name" data-en="Square 2×2" data-zh="方块 2×2">Square 2×2</p>
+            </div>
+            <div class="shapecard">
+              <div class="shapecard__art">
+                <div class="shapegrid" style="grid-template-rows:repeat(3,20px)">
+                  <span class="cell cell--on"></span><span class="cell cell--on"></span>
+                  <span class="cell cell--on"></span><span class="cell cell--on"></span>
+                  <span class="cell"></span><span class="cell cell--on"></span>
+                </div>
+              </div>
+              <p class="shapecard__lv">Lv.5</p>
+              <p class="shapecard__n" data-en="5 cells" data-zh="5 格">5 cells</p>
+              <p class="shapecard__name" data-en="P-shape" data-zh="P 形">P-shape</p>
+            </div>
+            <div class="shapecard">
+              <div class="shapecard__art">
+                <div class="shapegrid" style="grid-template-rows:repeat(3,20px)">
+                  <span class="cell cell--on"></span><span class="cell cell--on"></span>
+                  <span class="cell cell--on"></span><span class="cell cell--on"></span>
+                  <span class="cell cell--on"></span><span class="cell cell--on"></span>
+                </div>
+              </div>
+              <p class="shapecard__lv">Lv.6</p>
+              <p class="shapecard__n" data-en="6 cells" data-zh="6 格">6 cells</p>
+              <p class="shapecard__name" data-en="Block 2×3" data-zh="满块 2×3">Block 2×3</p>
+            </div>
+          </div>
+
+          <div class="sight__controls">
+            <span class="sctrl" data-en-html="<b>Left-drag</b> · move the Sight" data-zh-html="<b>左键拖动</b> · 移动灵力">Left-drag · move the Sight</span>
+            <span class="sctrl" data-en-html="<b>Right-click</b> · rotate 90°" data-zh-html="<b>右键</b> · 旋转 90°">Right-click · rotate 90°</span>
+            <span class="sctrl" data-en-html="<b>Shift + Left</b> · relocate a grotto" data-zh-html="<b>Shift + 左键</b> · 搬迁洞天">Shift + Left · relocate a grotto</span>
+          </div>
+
+          <div class="callout">
+            <div class="callout__head">
+              <span class="callout__diamond"></span>
+              <span class="callout__title" data-en="Theme = mechanic" data-zh="主题即机制">Theme = mechanic</span>
+            </div>
+            <p class="callout__text"
+              data-en-html="The fantasy is a reclusive, near-omnipotent Ancestor whose power is real but whose <strong>attention is finite</strong>. The Sight makes that literal: you don't command troops or spend gold — you decide where a god is looking. Title, theme, and core mechanic are the same object."
+              data-zh-html="幻想设定是一位避世、近乎全能的老祖——法力是真的，但<strong>注意力是有限的</strong>。天眼把这一点变成了字面意义：你不指挥部队、也不花金币，你只决定一位神看向何方。标题、主题与核心机制，是同一个东西。">The fantasy is a reclusive, near-omnipotent Ancestor whose power is real but whose <strong>attention is finite</strong>. The Sight makes that literal: you don't command troops or spend gold — you decide where a god is looking. Title, theme, and core mechanic are the same object.</p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ===== TAB 3 · CORE LOOP ===== -->
+      <div class="tab-panel" id="tab-loop">
+        <div class="loop">
+
+          <p class="loop__intro"
+            data-en="Three loops run on one board at the same time — a build-and-power economy, a wall-defense battle, and a between-waves draft. They share a single bottleneck: the Ancestor's Sight. Nothing on the board moves unless you are looking at it, and you can never look at everything at once. Designing that scarcity — and giving the player a real choice every second — is the goal of this system."
+            data-zh="三条循环在同一张棋盘上同时运转——建造供能的经济环、守墙的战斗环、波次之间的抽卡环。它们共用同一个瓶颈：老祖的天眼灵力。除非你注视，棋盘上的一切都不会动；而你永远无法同时注视全部。设计这份「稀缺」、并让玩家每一秒都有真正的取舍，正是这套系统的目标。">Three loops run on one board at the same time — a build-and-power economy, a wall-defense battle, and a between-waves draft. They share a single bottleneck: the Ancestor's Sight. Nothing on the board moves unless you are looking at it, and you can never look at everything at once. Designing that scarcity — and giving the player a real choice every second — is the goal of this system.</p>
+
+          <!-- shared SVG defs -->
+          <svg width="0" height="0" aria-hidden="true" style="position:absolute">
+            <defs>
+              <marker id="lah-green" viewBox="0 0 10 10" refX="7.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#69bd92"/></marker>
+              <linearGradient id="recRing" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#69bd92"/>
+                <stop offset="100%" stop-color="#cda44e"/>
+              </linearGradient>
+              <radialGradient id="ringGlow" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#69bd92" stop-opacity=".10"/>
+                <stop offset="66%" stop-color="#69bd92" stop-opacity="0"/>
+              </radialGradient>
+              <filter id="lgateGlow" x="-90%" y="-90%" width="280%" height="280%">
+                <feGaussianBlur stdDeviation="4" result="b"/>
+                <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+            </defs>
+          </svg>
+
+          <!-- resource chips -->
+          <div class="loop__res">
+            <div class="res-chip">
+              <div class="res-chip__head">
+                <span class="res-chip__dot" style="background:#69bd92"></span>
+                <span class="res-chip__name" data-en="Spirit Materials" data-zh="天材地宝">Spirit Materials</span>
+                <span class="res-chip__tag" data-en="Production" data-zh="产出资源">Production</span>
+              </div>
+              <p class="res-chip__desc" data-en="Five resources — elixir, herb, spirit stone, mystic iron, aether crystal — produced by grottoes. The fuel for rebuilding everything else." data-zh="五种资源——丹药、灵草、灵石、玄铁、灵晶——由洞天产出，是重建其余一切的燃料。">Five resources — elixir, herb, spirit stone, mystic iron, aether crystal — produced by grottoes. The fuel for rebuilding everything else.</p>
+            </div>
+            <div class="res-chip">
+              <div class="res-chip__head">
+                <span class="res-chip__dot" style="background:#cda44e"></span>
+                <span class="res-chip__name" data-en="The Sight" data-zh="天眼灵力">The Sight</span>
+                <span class="res-chip__tag" data-en="Scarce attention" data-zh="稀缺注意力">Scarce attention</span>
+              </div>
+              <p class="res-chip__desc" data-en="A movable, rotatable field on a 5×5 grid. A grotto produces and musters only while the Sight covers it — and the Sight can never cover the whole board." data-zh="5×5 棋盘上一片可移动、可旋转的灵力。洞天唯有被它笼罩时才会产出与出兵——而它永远无法笼罩整张棋盘。">A movable, rotatable field on a 5×5 grid. A grotto produces and musters only while the Sight covers it — and the Sight can never cover the whole board.</p>
+            </div>
+            <div class="res-chip">
+              <div class="res-chip__head">
+                <span class="res-chip__dot" style="background:#7d7a72"></span>
+                <span class="res-chip__name" data-en="Q-Coin" data-zh="灵气铜钱">Q-Coin</span>
+                <span class="res-chip__tag" data-en="Draft currency" data-zh="抽卡货币">Draft currency</span>
+              </div>
+              <p class="res-chip__desc" data-en="+50 every time a wave is cleared. Spent in the between-wave shop to buy new grotto blueprints." data-zh="每清一波 +50。用于波次之间的商店，购入新的洞天蓝图。">+50 every time a wave is cleared. Spent in the between-wave shop to buy new grotto blueprints.</p>
+            </div>
+          </div>
+
+          <div class="loop__cards">
+
+            <!-- ===== ① POWER LOOP ===== -->
+            <div class="lcard">
+              <div class="lcard__head">
+                <span class="lcard__idx" style="color:#69bd92">①</span>
+                <span class="lcard__title" data-en="Power Loop" data-zh="供能循环">Power Loop</span>
+                <span class="lcard__en">Power Loop</span>
+                <span class="lcard__freq" data-en="High-freq · per second" data-zh="高频 · 每秒">High-freq · per second</span>
+              </div>
+              <div class="lcard__body">
+                <svg class="lring" viewBox="0 0 240 240" aria-hidden="true">
+                  <circle cx="120" cy="120" r="104" fill="url(#ringGlow)"/>
+                  <path class="lr-arc" d="M139.35 42.4 A80 80 0 0 1 197.6 100.65" fill="none" stroke="#69bd92" stroke-width="2.4" marker-end="url(#lah-green)"/>
+                  <path class="lr-arc" d="M197.6 139.35 A80 80 0 0 1 139.35 197.6" fill="none" stroke="#69bd92" stroke-width="2.4" marker-end="url(#lah-green)"/>
+                  <path class="lr-arc" d="M100.65 197.6 A80 80 0 0 1 42.4 139.35" fill="none" stroke="#69bd92" stroke-width="2.4" marker-end="url(#lah-green)"/>
+                  <path class="lr-arc" d="M42.4 100.65 A80 80 0 0 1 100.65 42.4" fill="none" stroke="#69bd92" stroke-width="2.4" marker-end="url(#lah-green)"/>
+                  <text class="lr-cycle" x="120" y="122" text-anchor="middle" dominant-baseline="central">&#8635;</text>
+                  <circle cx="120" cy="40" r="15" fill="#15151b" stroke="#69bd92" stroke-width="2"/>
+                  <text class="lr-num" x="120" y="40" text-anchor="middle" dominant-baseline="central" fill="#69bd92">1</text>
+                  <rect x="189.4" y="109.4" width="21.2" height="21.2" rx="2.5" transform="rotate(45 200 120)" fill="#15151b" stroke="#69bd92" stroke-width="2"/>
+                  <text class="lr-num" x="200" y="120" text-anchor="middle" dominant-baseline="central" fill="#69bd92">2</text>
+                  <circle cx="120" cy="200" r="15" fill="#15151b" stroke="#69bd92" stroke-width="2"/>
+                  <text class="lr-num" x="120" y="200" text-anchor="middle" dominant-baseline="central" fill="#69bd92">3</text>
+                  <rect x="29.4" y="109.4" width="21.2" height="21.2" rx="2.5" transform="rotate(45 40 120)" fill="#15151b" stroke="#69bd92" stroke-width="2"/>
+                  <text class="lr-num" x="40" y="120" text-anchor="middle" dominant-baseline="central" fill="#69bd92">4</text>
+                </svg>
+                <div class="lnodes">
+                  <div class="lnode lnode--auto">
+                    <span class="lnode__num">1</span>
+                    <div class="lnode__main">
+                      <p class="lnode__title" data-en="Grottoes run — only under the Sight" data-zh="洞天运转——仅在灵力之下">Grottoes run — only under the Sight</p>
+                      <p class="lnode__desc" data-en="Covered grottoes fill their production bar; uncovered ones freeze." data-zh="被笼罩的洞天推进产出进度；未被笼罩的则停摆。">Covered grottoes fill their production bar; uncovered ones freeze.</p>
+                    </div>
+                  </div>
+                  <div class="lnode">
+                    <span class="lnode__num">2</span>
+                    <div class="lnode__main">
+                      <span class="lnode__dec" data-en="◆ Decision" data-zh="◆ 决策">◆ Decision</span>
+                      <p class="lnode__title" data-en="Aim the Sight" data-zh="调度灵力">Aim the Sight</p>
+                      <p class="lnode__desc" data-en="Drag and rotate the field over whatever matters most right now." data-zh="拖动、旋转灵力，笼罩此刻最要紧的洞天。">Drag and rotate the field over whatever matters most right now.</p>
+                    </div>
+                  </div>
+                  <div class="lnode lnode--auto">
+                    <span class="lnode__num">3</span>
+                    <div class="lnode__main"><p class="lnode__title" data-en="Resources accumulate" data-zh="资源积累">Resources accumulate</p></div>
+                  </div>
+                  <div class="lnode">
+                    <span class="lnode__num">4</span>
+                    <div class="lnode__main">
+                      <span class="lnode__dec" data-en="◆ Decision" data-zh="◆ 决策">◆ Decision</span>
+                      <p class="lnode__title" data-en="Reinvest" data-zh="再投入">Reinvest</p>
+                      <p class="lnode__desc" data-en="Rebuild a new grotto, or relocate one with Mountain-Moving Magic — at a short efficiency penalty." data-zh="重建新洞天，或施「搬山大法」移动旧洞天——但短时内产能受损。">Rebuild a new grotto, or relocate one with Mountain-Moving Magic — at a short efficiency penalty.</p>
+                    </div>
+                  </div>
+                  <p class="lnode__feed" data-en="→ capacity rises, back to the start" data-zh="→ 产能提升，回到起点">→ capacity rises, back to the start</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- ===== ② DEFENSE LOOP ===== -->
+            <div class="lcard">
+              <div class="lcard__head">
+                <span class="lcard__idx" style="color:#cda44e">②</span>
+                <span class="lcard__title" data-en="Defense Loop" data-zh="城防循环">Defense Loop</span>
+                <span class="lcard__en">Defense Loop</span>
+                <span class="lcard__freq" data-en="Continuous · 13 waves" data-zh="持续 · 共 13 波">Continuous · 13 waves</span>
+              </div>
+              <div class="lcard__body">
+                <svg class="lring" viewBox="0 0 240 240" aria-hidden="true">
+                  <circle cx="120" cy="120" r="104" fill="url(#ringGlow)"/>
+                  <path class="lr-arc" d="M139.35 42.4 A80 80 0 0 1 197.6 100.65" fill="none" stroke="url(#recRing)" stroke-width="2.4" marker-end="url(#lah-green)"/>
+                  <path class="lr-arc" d="M197.6 139.35 A80 80 0 0 1 139.35 197.6" fill="none" stroke="url(#recRing)" stroke-width="2.4" marker-end="url(#lah-green)"/>
+                  <path class="lr-arc" d="M100.65 197.6 A80 80 0 0 1 42.4 139.35" fill="none" stroke="url(#recRing)" stroke-width="2.4" marker-end="url(#lah-green)"/>
+                  <path class="lr-arc" d="M42.4 100.65 A80 80 0 0 1 100.65 42.4" fill="none" stroke="url(#recRing)" stroke-width="2.4" marker-end="url(#lah-green)"/>
+                  <text class="lr-cycle" x="120" y="122" text-anchor="middle" dominant-baseline="central" style="fill:#cda44e">&#8635;</text>
+                  <circle cx="120" cy="40" r="15" fill="#15151b" stroke="#69bd92" stroke-width="2"/>
+                  <text class="lr-num" x="120" y="40" text-anchor="middle" dominant-baseline="central" fill="#69bd92">1</text>
+                  <circle cx="200" cy="120" r="15" fill="#15151b" stroke="#69bd92" stroke-width="2"/>
+                  <text class="lr-num" x="200" y="120" text-anchor="middle" dominant-baseline="central" fill="#69bd92">2</text>
+                  <rect class="gate-glow" x="103" y="183" width="34" height="34" rx="4" transform="rotate(45 120 200)" fill="#69bd92" opacity=".5" filter="url(#lgateGlow)"/>
+                  <rect x="106.9" y="186.9" width="26.2" height="26.2" rx="3" transform="rotate(45 120 200)" fill="#69bd92" stroke="#69bd92" stroke-width="2"/>
+                  <text class="lr-num" x="120" y="200" text-anchor="middle" dominant-baseline="central" fill="#15151b">3</text>
+                  <circle cx="40" cy="120" r="15" fill="#15151b" stroke="#69bd92" stroke-width="2"/>
+                  <text class="lr-num" x="40" y="120" text-anchor="middle" dominant-baseline="central" fill="#69bd92">4</text>
+                </svg>
+                <div class="lnodes">
+                  <div class="lnode lnode--auto">
+                    <span class="lnode__num">1</span>
+                    <div class="lnode__main">
+                      <p class="lnode__title" data-en="Combat grottoes muster disciples" data-zh="战斗洞天召出弟子">Combat grottoes muster disciples</p>
+                      <p class="lnode__desc" data-en="Body, Sword, Talisman, Alchemy — also gated by the Sight." data-zh="炼体、御剑、符箓、丹道——同样受灵力约束。">Body, Sword, Talisman, Alchemy — also gated by the Sight.</p>
+                    </div>
+                  </div>
+                  <div class="lnode lnode--auto">
+                    <span class="lnode__num">2</span>
+                    <div class="lnode__main"><p class="lnode__title" data-en="Disciples auto-march to the Wall" data-zh="弟子自动奔赴山门">Disciples auto-march to the Wall</p></div>
+                  </div>
+                  <div class="lnode lnode--gate">
+                    <span class="lnode__num">3</span>
+                    <div class="lnode__main">
+                      <span class="lnode__dec" data-en="◆ The Wall · lose condition" data-zh="◆ 山门 · 失败条件">◆ The Wall · lose condition</span>
+                      <p class="lnode__title" data-en="Hold the line (HP 1000)" data-zh="守住山门（生命 1000）">Hold the line (HP 1000)</p>
+                      <p class="lnode__desc" data-en="If the Wall breaks, it's Game Over — no second chance." data-zh="一旦城破，即刻失败，没有第二次机会。">If the Wall breaks, it's Game Over — no second chance.</p>
+                    </div>
+                  </div>
+                  <div class="lnode lnode--auto">
+                    <span class="lnode__num">4</span>
+                    <div class="lnode__main"><p class="lnode__title" data-en="Wave cleared → +50 Q-Coin → next wave escalates" data-zh="清波 → +50 → 下一波更猛">Wave cleared → +50 Q-Coin → next wave escalates</p></div>
+                  </div>
+                  <p class="lnode__feed" data-en="→ 12 escalating waves, then a final Boss" data-zh="→ 12 波层层加压，最终迎战 Boss">→ 12 escalating waves, then a final Boss</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- ===== ③ DRAFT & GROWTH (line, not a loop) ===== -->
+            <div class="lcard">
+              <div class="lcard__head">
+                <span class="lcard__idx" style="color:#a4a4b0">③</span>
+                <span class="lcard__title" data-en="Draft &amp; Growth" data-zh="抽卡与成长">Draft &amp; Growth</span>
+                <span class="lcard__en">Draft &amp; Growth</span>
+                <span class="lcard__freq" data-en="Low-freq · between waves" data-zh="低频 · 波次之间">Low-freq · between waves</span>
+              </div>
+              <div class="lcard__body lcard__body--line">
+                <div class="lprog">
+                  <div class="lprog__step">
+                    <div class="lprog__dot"></div>
+                    <p class="lprog__m" data-en="DRAFT" data-zh="抽卡">DRAFT</p>
+                    <p class="lprog__cost" data-en="Each wave" data-zh="每一波">Each wave</p>
+                    <ul class="lprog__list">
+                      <li data-en="Pick 1 of 4 grotto blueprints" data-zh="4 选 1 洞天蓝图">Pick 1 of 4 grotto blueprints</li>
+                      <li class="unlock" data-en="Free reward" data-zh="免费奖励">Free reward</li>
+                    </ul>
+                  </div>
+                  <div class="lprog__step">
+                    <div class="lprog__dot"></div>
+                    <p class="lprog__m" data-en="SHOP" data-zh="商店">SHOP</p>
+                    <p class="lprog__cost" data-en="Wave 4 &amp; 8" data-zh="第 4、8 波">Wave 4 &amp; 8</p>
+                    <ul class="lprog__list">
+                      <li data-en="4 random blueprints on offer" data-zh="随机 4 件蓝图待售">4 random blueprints on offer</li>
+                      <li class="unlock" data-en="Spend Q-Coin" data-zh="花费灵气铜钱">Spend Q-Coin</li>
+                    </ul>
+                  </div>
+                  <div class="lprog__step">
+                    <div class="lprog__dot"></div>
+                    <p class="lprog__m" data-en="META" data-zh="元成长">META</p>
+                    <p class="lprog__cost" data-en="Every run" data-zh="每一局">Every run</p>
+                    <ul class="lprog__list">
+                      <li data-en="Upgrade tree: Attack / HP / Production" data-zh="升级树：攻击 / 生命 / 产能">Upgrade tree: Attack / HP / Production</li>
+                      <li class="unlock" data-en="Carries across runs" data-zh="跨局保留">Carries across runs</li>
+                    </ul>
+                  </div>
+                </div>
+                <p class="lmeta__note" data-en="This layer is drawn as a line, not a ring — the per-wave draft and the cross-run upgrade tree are one-time choices that reshape the two high-frequency loops above, rather than something you spin over and over." data-zh="这一层画成直线而非圆环——逐波的抽卡与跨局的升级树都是一次性的选择，用来重塑上面两条高频循环，而非反复运转的环。">This layer is drawn as a line, not a ring — the per-wave draft and the cross-run upgrade tree are one-time choices that reshape the two high-frequency loops above, rather than something you spin over and over.</p>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- THE SIGHT gate band -->
+          <div class="lgate">
+            <div class="lgate__head">
+              <span class="lgate__diamond"></span>
+              <span class="lgate__title" data-en="One throttle for two loops" data-zh="两环，一个节流阀">One throttle for two loops</span>
+            </div>
+            <p class="lgate__text"
+              data-en-html="Both real-time loops pass through the Sight. A production grotto only fills its bar <strong>while covered</strong>; a combat grotto only musters disciples <strong>while covered</strong>. Tie the economy and the army to the same scarce attention, and the player can never optimize both at once — which is exactly the tension the whole design is reaching for."
+              data-zh-html="两条实时循环都要穿过灵力。产出洞天<strong>唯有被笼罩</strong>时进度才推进；战斗洞天<strong>唯有被笼罩</strong>时才出兵。把经济与军队绑在同一份稀缺的注意力上，玩家便永远无法同时把两者拉满——而这，正是整套设计想要的张力。">Both real-time loops pass through the Sight. A production grotto only fills its bar <strong>while covered</strong>; a combat grotto only musters disciples <strong>while covered</strong>. Tie the economy and the army to the same scarce attention, and the player can never optimize both at once — which is exactly the tension the whole design is reaching for.</p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ===== TAB 4 · ROSTER ===== -->
+      <div class="tab-panel" id="tab-roster">
+        <div class="roster">
+
+          <p class="roster__intro"
+            data-en="Four cultivator disciplines cover the classic roles, and each runs on its own combat AI. They auto-march to the Wall and fight on their own — your job is upstream: decide who gets mustered, and keep their grotto under the Sight."
+            data-zh="四种修士流派覆盖经典定位，各自跑着自己的战斗 AI。它们会自动奔赴山门、自主作战——你的工作在上游：决定让谁出战，并把他们的洞天留在灵力之下。">Four cultivator disciplines cover the classic roles, and each runs on its own combat AI. They auto-march to the Wall and fight on their own — your job is upstream: decide who gets mustered, and keep their grotto under the Sight.</p>
+
+          <div class="ucards">
+            <div class="ucard" style="--uc:#69bd92">
+              <div class="ucard__head">
+                <span class="ucard__name" data-en="Body Cultivator" data-zh="炼体修士">Body Cultivator</span>
+                <span class="ucard__role" data-en="Tank" data-zh="坦克">Tank</span>
+              </div>
+              <p class="ucard__cn" data-en="Martial Arena" data-zh="演武场出品">Martial Arena</p>
+              <p class="ucard__d" data-en="Frontline bruiser. Plants himself in front of the Wall and soaks the wave so your damage dealers stay alive." data-zh="前排肉盾。挡在山门之前，吸收魔潮，让你的输出活下来。">Frontline bruiser. Plants himself in front of the Wall and soaks the wave so your damage dealers stay alive.</p>
+              <p class="ucard__sig" data-en="ROLE · absorbs the wave" data-zh="定位 · 承伤抗线">ROLE · absorbs the wave</p>
+            </div>
+            <div class="ucard" style="--uc:#6aa9e0">
+              <div class="ucard__head">
+                <span class="ucard__name" data-en="Sword Cultivator" data-zh="御剑修士">Sword Cultivator</span>
+                <span class="ucard__role" data-en="Assassin" data-zh="刺客">Assassin</span>
+              </div>
+              <p class="ucard__cn" data-en="Sword Monument" data-zh="剑碑出品">Sword Monument</p>
+              <p class="ucard__d" data-en="Fast single-target melee. Closes distance and deletes priority targets one at a time." data-zh="高速近战单体。贴脸突进，逐个点杀高威胁目标。">Fast single-target melee. Closes distance and deletes priority targets one at a time.</p>
+              <p class="ucard__sig" data-en="ROLE · single-target DPS" data-zh="定位 · 单体爆发">ROLE · single-target DPS</p>
+            </div>
+            <div class="ucard" style="--uc:#cda44e">
+              <div class="ucard__head">
+                <span class="ucard__name" data-en="Talisman Cultivator" data-zh="符箓修士">Talisman Cultivator</span>
+                <span class="ucard__role" data-en="Mage" data-zh="法师">Mage</span>
+              </div>
+              <p class="ucard__cn" data-en="Origin Pavilion" data-zh="本源阁出品">Origin Pavilion</p>
+              <p class="ucard__d" data-en="Ranged area attacker. Hurls talismans from afar (range 300) that detonate on a cluster — your answer to packed waves." data-zh="远程范围。隔空掷符（射程 300），在敌群中炸开——专治扎堆的魔潮。">Ranged area attacker. Hurls talismans from afar (range 300) that detonate on a cluster — your answer to packed waves.</p>
+              <p class="ucard__sig" data-en="ROLE · ranged AoE" data-zh="定位 · 远程范围">ROLE · ranged AoE</p>
+            </div>
+            <div class="ucard" style="--uc:#9b978d">
+              <div class="ucard__head">
+                <span class="ucard__name" data-en="Alchemy Cultivator" data-zh="丹道修士">Alchemy Cultivator</span>
+                <span class="ucard__role" data-en="Healer" data-zh="奶妈">Healer</span>
+              </div>
+              <p class="ucard__cn" data-en="Alchemy Lab" data-zh="丹房出品">Alchemy Lab</p>
+              <p class="ucard__d" data-en-html="The one support. Its AI ignores enemies entirely and instead auto-locks onto your <em>most-wounded</em> ally to heal — a real target-preference behavior, not a passive aura." data-zh-html="唯一的辅助。它的 AI 完全无视敌人，转而自动锁定你<em>最残血</em>的友军施治——这是真正的目标偏好行为，而非被动光环。">The one support. Its AI ignores enemies entirely and instead auto-locks onto your <em>most-wounded</em> ally to heal — a real target-preference behavior, not a passive aura.</p>
+              <p class="ucard__sig" data-en="AI · always mends the lowest-HP ally" data-zh="AI · 永远救最残血的人">AI · always mends the lowest-HP ally</p>
+            </div>
+          </div>
+
+          <div class="callout">
+            <div class="callout__head">
+              <span class="callout__diamond"></span>
+              <span class="callout__title" data-en="Behind the line: one combat brain" data-zh="防线之后：同一套战斗大脑">Behind the line: one combat brain</span>
+            </div>
+            <p class="callout__text"
+              data-en-html="All four share a single unit AI with a swappable <strong>target preference</strong> — nearest enemy, structures, or lowest-HP ally — plus pathfinding and a damage mode (single / AoE / heal). The healer is just that same system pointed at friends with a negative damage value. One clean core, four very different behaviors."
+              data-zh-html="四个单位共用同一套 AI，只切换<strong>目标偏好</strong>——最近的敌人、建筑，或最残血的友军——再加上寻路与伤害模式（单体 / 范围 / 治疗）。奶妈不过是把同一套系统指向友军、并赋予负数伤害值。一套干净的内核，跑出四种迥异的行为。">All four share a single unit AI with a swappable <strong>target preference</strong> — nearest enemy, structures, or lowest-HP ally — plus pathfinding and a damage mode (single / AoE / heal). The healer is just that same system pointed at friends with a negative damage value. One clean core, four very different behaviors.</p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ===== TAB 5 · SYSTEMS / BUILD ===== -->
+      <div class="tab-panel" id="tab-build">
+        <div class="build">
+
+          <p class="build__intro"
+            data-en="I built this as both the designer and the programmer, so the systems are mine end to end. A tour of what's under the hood — every card opens for detail."
+            data-zh="这个项目我身兼策划与程序，所以系统从头到尾都是自己搭的。下面是引擎盖之下的一次巡览——每张卡片都可展开查看细节。">I built this as both the designer and the programmer, so the systems are mine end to end. A tour of what's under the hood — every card opens for detail.</p>
+
+          <div class="build__stack">
+            <span class="build__tag">Godot 4.6</span>
+            <span class="build__tag">GDScript</span>
+            <span class="build__tag" data-en="Autoload singletons" data-zh="Autoload 单例">Autoload singletons</span>
+            <span class="build__tag" data-en="JSON save / load" data-zh="JSON 存读档">JSON save / load</span>
+            <span class="build__tag">NavigationAgent2D</span>
+            <span class="build__tag">dialogue_manager</span>
+          </div>
+
+          <div class="build__cards">
+
+            <!-- MAIN -->
+            <details class="bcard bcard--main" open>
+              <summary class="bcard__summary">
+                <div class="bcard__head">
+                  <span class="bcard__idx">01</span>
+                  <span class="bcard__badge" data-en="Core" data-zh="核心">Core</span>
+                </div>
+                <h5 class="bcard__title" data-en="The Sight engine" data-zh="天眼引擎">The Sight engine</h5>
+                <div class="bcard__seg bcard__seg--oneline">
+                  <span class="bcard__label" data-en="In one line" data-zh="一句话">In one line</span>
+                  <p class="bcard__text" data-en="A polyomino that drags, snaps, and rotates on a 5×5 grid — and decides what's allowed to run." data-zh="一个能在 5×5 网格上拖动、吸附、旋转的多格拼块——并决定什么被允许运转。">A polyomino that drags, snaps, and rotates on a 5×5 grid — and decides what's allowed to run.</p>
+                </div>
+                <span class="bcard__toggle"><span data-en="Details" data-zh="展开细节">Details</span> <span class="bcard__chev">&#9662;</span></span>
+              </summary>
+              <div class="bcard__detail">
+                <div class="bcard__detail-inner">
+                  <ul class="bcard__list">
+                    <li data-en-html="Shapes are defined as cell arrays for Lv.3–6; each rotation is re-derived from the base shape with a 90° coordinate transform, then re-normalized to the grid origin." data-zh-html="Lv.3–6 的形状以格子坐标数组定义；每次旋转都从基础形状用 90° 坐标变换重新推导，再归一化到网格原点。">Shapes are defined as cell arrays for Lv.3–6; each rotation is re-derived from the base shape with a 90° coordinate transform, then re-normalized to the grid origin.</li>
+                    <li data-en-html="Movement snaps to the 120px grid and clamps inside the 600px field; rotation pivots around the shape's center so it never drifts." data-zh-html="移动吸附到 120px 网格，并约束在 600px 场地内；旋转绕形状中心进行，不会漂移。">Movement snaps to the 120px grid and clamps inside the 600px field; rotation pivots around the shape's center so it never drifts.</li>
+                    <li data-en-html="<code>is_position_covered()</code> is the single query every building calls each frame to decide whether to tick." data-zh-html="<code>is_position_covered()</code> 是每座建筑每帧调用的唯一判定，用来决定要不要推进。"><code>is_position_covered()</code> is the single query every building calls each frame to decide whether to tick.</li>
+                  </ul>
+                  <p class="bcard__why" data-en-html="<strong>This is the spine of the whole game.</strong> Making rotation, snapping, and coverage-testing feel instant and fair was the hardest — and most rewarding — part to get right." data-zh-html="<strong>这是整个游戏的脊柱。</strong>让旋转、吸附与覆盖判定既即时又公平，是最难、也最有成就感的一环。">This is the spine of the whole game. Making rotation, snapping, and coverage-testing feel instant and fair was the hardest — and most rewarding — part to get right.</p>
+                </div>
+              </div>
+            </details>
+
+            <div class="build__row">
+              <!-- Save -->
+              <details class="bcard">
+                <summary class="bcard__summary">
+                  <div class="bcard__head">
+                    <span class="bcard__idx">02</span>
+                    <span class="bcard__badge" data-en="Systems" data-zh="系统">Systems</span>
+                  </div>
+                  <h5 class="bcard__title" data-en="Save / Load" data-zh="存读档">Save / Load</h5>
+                  <div class="bcard__seg bcard__seg--oneline">
+                    <span class="bcard__label" data-en="In one line" data-zh="一句话">In one line</span>
+                    <p class="bcard__text" data-en="Full game state survives a quit — buildings, resources, waves, the Sight." data-zh="退出后游戏状态完整保留——建筑、资源、波次、天眼。">Full game state survives a quit — buildings, resources, waves, the Sight.</p>
+                  </div>
+                  <span class="bcard__toggle"><span data-en="Details" data-zh="展开细节">Details</span> <span class="bcard__chev">&#9662;</span></span>
+                </summary>
+                <div class="bcard__detail">
+                  <div class="bcard__detail-inner">
+                    <ul class="bcard__list">
+                      <li data-en-html="Nodes that need saving join a <code>save_required</code> group and expose <code>get_save_data()</code> / <code>load_save_data()</code>." data-zh-html="需要存档的节点加入 <code>save_required</code> 组，并实现 <code>get_save_data()</code> / <code>load_save_data()</code>。">Nodes that need saving join a <code>save_required</code> group and expose <code>get_save_data()</code> / <code>load_save_data()</code>.</li>
+                      <li data-en="Serializes building positions, production progress, penalty timers, active state, resource pools, current wave + timer, and the Sight's level / rotation / position." data-zh="序列化建筑位置、产出进度、惩罚计时、激活状态、资源池、当前波次与计时，以及天眼的等级 / 旋转 / 位置。">Serializes building positions, production progress, penalty timers, active state, resource pools, current wave + timer, and the Sight's level / rotation / position.</li>
+                      <li data-en="On load, a GamedataManager hands each node back its own slice of data." data-zh="读档时，GamedataManager 把各自的数据切片发回给每个节点。">On load, a GamedataManager hands each node back its own slice of data.</li>
+                    </ul>
+                    <p class="bcard__why" data-en-html="A real persistence layer, not a checkpoint — <strong>every system had to be able to describe itself as plain data.</strong>" data-zh-html="这是一套真正的持久化层，而非简单存档点——<strong>每个系统都必须能把自己描述成纯数据。</strong>">A real persistence layer, not a checkpoint — every system had to be able to describe itself as plain data.</p>
+                  </div>
+                </div>
+              </details>
+
+              <!-- Wave director -->
+              <details class="bcard">
+                <summary class="bcard__summary">
+                  <div class="bcard__head">
+                    <span class="bcard__idx">03</span>
+                    <span class="bcard__badge" data-en="Systems" data-zh="系统">Systems</span>
+                  </div>
+                  <h5 class="bcard__title" data-en="Wave director" data-zh="波次导演">Wave director</h5>
+                  <div class="bcard__seg bcard__seg--oneline">
+                    <span class="bcard__label" data-en="In one line" data-zh="一句话">In one line</span>
+                    <p class="bcard__text" data-en="A data-driven spawner runs 12 escalating waves, then the boss." data-zh="数据驱动的生成器跑 12 波递进，最后是 Boss。">A data-driven spawner runs 12 escalating waves, then the boss.</p>
+                  </div>
+                  <span class="bcard__toggle"><span data-en="Details" data-zh="展开细节">Details</span> <span class="bcard__chev">&#9662;</span></span>
+                </summary>
+                <div class="bcard__detail">
+                  <div class="bcard__detail-inner">
+                    <ul class="bcard__list">
+                      <li data-en-html="Waves are a list of <code>{spawn_time, spawn_list}</code> dictionaries — tuning difficulty is editing data, not code." data-zh-html="波次是一组 <code>{spawn_time, spawn_list}</code> 字典——调难度是改数据，而非改代码。">Waves are a list of <code>{spawn_time, spawn_list}</code> dictionaries — tuning difficulty is editing data, not code.</li>
+                      <li data-en="+50 currency per clear; the shop opens on waves 4 &amp; 8; a reward draft appears after each wave." data-zh="每清一波 +50 货币；第 4、8 波开商店；每波后出现奖励抽卡。">+50 currency per clear; the shop opens on waves 4 &amp; 8; a reward draft appears after each wave.</li>
+                      <li data-en="The boss wave wires a death signal to a deferred scene change → Win." data-zh="Boss 波将死亡信号连到延迟切场景 → 胜利。">The boss wave wires a death signal to a deferred scene change → Win.</li>
+                    </ul>
+                    <p class="bcard__why" data-en-html="Keeping the wave table as <strong>pure data</strong> made pacing fast to iterate without touching logic." data-zh-html="把波次表保持为<strong>纯数据</strong>，让节奏调整无需触碰逻辑，迭代飞快。">Keeping the wave table as pure data made pacing fast to iterate without touching logic.</p>
+                  </div>
+                </div>
+              </details>
+            </div>
+
+            <div class="build__row">
+              <!-- Roguelite -->
+              <details class="bcard">
+                <summary class="bcard__summary">
+                  <div class="bcard__head">
+                    <span class="bcard__idx">04</span>
+                    <span class="bcard__badge" data-en="Progression" data-zh="成长">Progression</span>
+                  </div>
+                  <h5 class="bcard__title" data-en="Draft + meta tree" data-zh="抽卡 + 元成长树">Draft + meta tree</h5>
+                  <div class="bcard__seg bcard__seg--oneline">
+                    <span class="bcard__label" data-en="In one line" data-zh="一句话">In one line</span>
+                    <p class="bcard__text" data-en="Per-run drafting on top of a persistent cross-run upgrade tree." data-zh="逐局抽卡，叠加一棵跨局保留的升级树。">Per-run drafting on top of a persistent cross-run upgrade tree.</p>
+                  </div>
+                  <span class="bcard__toggle"><span data-en="Details" data-zh="展开细节">Details</span> <span class="bcard__chev">&#9662;</span></span>
+                </summary>
+                <div class="bcard__detail">
+                  <div class="bcard__detail-inner">
+                    <ul class="bcard__list">
+                      <li data-en="Reward and shop pull random grotto blueprints from a shared pool; pick-1-of-4 each wave." data-zh="奖励与商店从共享池中随机抽取洞天蓝图；每波 4 选 1。">Reward and shop pull random grotto blueprints from a shared pool; pick-1-of-4 each wave.</li>
+                      <li data-en-html="The upgrade tree (Attack / HP / Production) is tiered — later tiers require earlier ones — and saved to <code>user://</code>." data-zh-html="升级树（攻击 / 生命 / 产能）分层——后置层需前置层——并存到 <code>user://</code>。">The upgrade tree (Attack / HP / Production) is tiered — later tiers require earlier ones — and saved to <code>user://</code>.</li>
+                      <li data-en="Upgrades apply to every unit at match start; percent bonuses compound over flat bonuses." data-zh="升级在开局应用到所有单位；百分比加成叠乘于固定加成之上。">Upgrades apply to every unit at match start; percent bonuses compound over flat bonuses.</li>
+                    </ul>
+                    <p class="bcard__why" data-en-html="<strong>Two progression speeds</strong> — a fast in-run draft and a slow cross-run climb — keep both a single run and the whole game moving forward." data-zh-html="<strong>两种成长速度</strong>——局内的快抽卡与跨局的慢攀升——让单局和整个游戏都一直在向前。">Two progression speeds — a fast in-run draft and a slow cross-run climb — keep both a single run and the whole game moving forward.</p>
+                  </div>
+                </div>
+              </details>
+
+              <!-- Combat AI -->
+              <details class="bcard">
+                <summary class="bcard__summary">
+                  <div class="bcard__head">
+                    <span class="bcard__idx">05</span>
+                    <span class="bcard__badge" data-en="Combat" data-zh="战斗">Combat</span>
+                  </div>
+                  <h5 class="bcard__title" data-en="Combat &amp; unit AI" data-zh="战斗与单位 AI">Combat &amp; unit AI</h5>
+                  <div class="bcard__seg bcard__seg--oneline">
+                    <span class="bcard__label" data-en="In one line" data-zh="一句话">In one line</span>
+                    <p class="bcard__text" data-en="One unit brain, a swappable target preference, three damage modes." data-zh="同一套单位大脑，可切换目标偏好，三种伤害模式。">One unit brain, a swappable target preference, three damage modes.</p>
+                  </div>
+                  <span class="bcard__toggle"><span data-en="Details" data-zh="展开细节">Details</span> <span class="bcard__chev">&#9662;</span></span>
+                </summary>
+                <div class="bcard__detail">
+                  <div class="bcard__detail-inner">
+                    <ul class="bcard__list">
+                      <li data-en="Target preference: nearest enemy / structures / lowest-HP ally — the cleric is the same code aimed at friends with negative damage." data-zh="目标偏好：最近的敌人 / 建筑 / 最残血友军——奶妈就是把同一套代码指向友军并赋予负伤害。">Target preference: nearest enemy / structures / lowest-HP ally — the cleric is the same code aimed at friends with negative damage.</li>
+                      <li data-en="NavigationAgent2D pathing to the chosen target on a fixed attack interval." data-zh="用 NavigationAgent2D 向所选目标寻路，按固定攻击间隔行动。">NavigationAgent2D pathing to the chosen target on a fixed attack interval.</li>
+                      <li data-en="Damage modes: single-target, AoE within a radius, and heal." data-zh="伤害模式：单体、半径内范围、治疗。">Damage modes: single-target, AoE within a radius, and heal.</li>
+                    </ul>
+                    <p class="bcard__why" data-en-html="A small, composable combat core that produced <strong>four distinct roles without four codebases.</strong>" data-zh-html="一个小而可组合的战斗内核，<strong>不用四套代码就跑出四种迥异定位。</strong>">A small, composable combat core that produced four distinct roles without four codebases.</p>
+                  </div>
+                </div>
+              </details>
+            </div>
+
+            <!-- Architecture (full width) -->
+            <details class="bcard">
+              <summary class="bcard__summary">
+                <div class="bcard__head">
+                  <span class="bcard__idx">06</span>
+                  <span class="bcard__badge" data-en="Architecture" data-zh="架构">Architecture</span>
+                </div>
+                <h5 class="bcard__title" data-en="Architecture &amp; content" data-zh="架构与内容">Architecture &amp; content</h5>
+                <div class="bcard__seg bcard__seg--oneline">
+                  <span class="bcard__label" data-en="In one line" data-zh="一句话">In one line</span>
+                  <p class="bcard__text" data-en="Autoload singletons, a blueprint building system, and diegetic dialogue." data-zh="Autoload 单例、蓝图建造系统，以及融入剧情的对白。">Autoload singletons, a blueprint building system, and diegetic dialogue.</p>
+                </div>
+                <span class="bcard__toggle"><span data-en="Details" data-zh="展开细节">Details</span> <span class="bcard__chev">&#9662;</span></span>
+              </summary>
+              <div class="bcard__detail">
+                <div class="bcard__detail-inner">
+                  <ul class="bcard__list">
+                    <li data-en="Global singletons split responsibilities: ResourceManager, SaveManager, GamedataManager, UpgradeManager, AudioManager, DialogueManager." data-zh="全局单例分工明确：ResourceManager、SaveManager、GamedataManager、UpgradeManager、AudioManager、DialogueManager。">Global singletons split responsibilities: ResourceManager, SaveManager, GamedataManager, UpgradeManager, AudioManager, DialogueManager.</li>
+                    <li data-en-html="Buildings are placed from consumable blueprints onto a grid; production, combat, and market types all extend one base <code>Building</code> class." data-zh-html="建筑由可消耗的蓝图放置到网格上；产出、战斗、市场类型都继承自同一个 <code>Building</code> 基类。">Buildings are placed from consumable blueprints onto a grid; production, combat, and market types all extend one base <code>Building</code> class.</li>
+                    <li data-en="The opening story is delivered through the dialogue_manager addon, framing every mechanic in lore." data-zh="开场剧情通过 dialogue_manager 插件呈现，把每个机制都安放进世界观里。">The opening story is delivered through the dialogue_manager addon, framing every mechanic in lore.</li>
+                  </ul>
+                  <p class="bcard__why" data-en-html="A clean split between <strong>global state, per-level state, and building behavior</strong> kept the project extensible as systems piled up." data-zh-html="把<strong>全局状态、关卡内状态与建筑行为</strong>清晰分层，让系统越堆越多时项目依然好扩展。">A clean split between global state, per-level state, and building behavior kept the project extensible as systems piled up.</p>
+                </div>
+              </div>
+            </details>
+
+          </div>
+
+          <p class="build__close"
+            data-en="Scoped and shipped in about two months — design and code by me. Character sprites are from the Tiny RPG Character asset pack; the systems, balance, and UI are original."
+            data-zh="约两个月内完成立项到收尾——设计与程序均由我负责。角色像素来自 Tiny RPG Character 素材包；系统、数值与 UI 为原创。">Scoped and shipped in about two months — design and code by me. Character sprites are from the Tiny RPG Character asset pack; the systems, balance, and UI are original.</p>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+
+<div class="wrap" style="padding-bottom:120px"></div>
+
+<div style="max-width:var(--maxw);margin:0 auto;padding:0 20px">
+  <footer class="footer">
+    <div class="footer__logo">AMBER<span>.</span></div>
+    <nav class="footer__col">
+      <h4 data-en="Navigation" data-zh="导航">Navigation</h4>
+      <ul>
+        <li><a href="PORTFOLIO.html" data-en="Home" data-zh="主页">Home</a></li>
+        <li><a href="works.html" data-en="Works" data-zh="作品集">Works</a></li>
+        <li><a href="experience.html" data-en="Gaming" data-zh="游戏经历">Gaming</a></li>
+        <li><a href="resume.html" data-en="Resume" data-zh="简历">Resume</a></li>
+        <li><a href="contact.html" data-en="Contact" data-zh="联系">Contact</a></li>
+      </ul>
+    </nav>
+    <nav class="footer__col">
+      <h4 data-en="Connect" data-zh="联系">Connect</h4>
+      <ul>
+        <li><a href="#" target="_blank" rel="noopener">itch.io</a></li>
+        <li><a href="#" target="_blank" rel="noopener">LinkedIn</a></li>
+        <li><a href="#" target="_blank" rel="noopener">GitHub</a></li>
+      </ul>
+    </nav>
+  </footer>
+</div>
+
+<script>
+(function(){
+  var els = document.querySelectorAll('.reveal');
+  if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')});return}
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target)}});
+  },{threshold:.12});
+  els.forEach(function(e){io.observe(e)});
+})();
+/* ---- Tabs ---- */
+(function(){
+  var bar = document.querySelector('.tab-bar');
+  if(!bar) return;
+  bar.addEventListener('click', function(e){
+    var btn = e.target.closest('.tab-btn');
+    if(!btn) return;
+    document.querySelectorAll('.tab-btn').forEach(function(b){b.classList.remove('active')});
+    document.querySelectorAll('.tab-panel').forEach(function(p){p.classList.remove('active')});
+    btn.classList.add('active');
+    var panel = document.getElementById('tab-' + btn.dataset.tab);
+    if(panel) panel.classList.add('active');
+  });
+})();
+/* ---- Language Switch ---- */
+(function(){
+  var K = 'portfolio_lang';
+  function applyLang(lang) {
+    document.querySelectorAll('[data-en]').forEach(function(el){
+      el.textContent = el.getAttribute('data-' + lang) || el.getAttribute('data-en');
+    });
+    document.querySelectorAll('[data-en-html]').forEach(function(el){
+      el.innerHTML = el.getAttribute('data-' + lang + '-html') || el.getAttribute('data-en-html');
+    });
+    document.querySelectorAll('.lang-toggle__btn').forEach(function(b){
+      b.classList.toggle('active', b.dataset.lang === lang);
+    });
+    document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+    try { localStorage.setItem(K, lang); } catch(e){}
+  }
+  var saved; try { saved = localStorage.getItem(K); } catch(e){}
+  applyLang(saved || 'en');
+  var toggle = document.querySelector('.lang-toggle');
+  if(toggle) toggle.addEventListener('click', function(e){
+    var btn = e.target.closest('[data-lang]');
+    if(btn) applyLang(btn.dataset.lang);
+  });
+})();
+</script>
+</body>
+</html>

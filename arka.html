@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arka — AI-Driven HR Gap Assessment — Amber</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#191816;--surface:#211f1d;--surface-2:#272421;
+    --line:rgba(255,255,255,.12);--line-strong:rgba(255,255,255,.22);
+    --text:#f3f0ea;--muted:#9b978d;--faint:#6a665e;
+    --accent:#69bd92;--gold:#cda44e;
+    --display:'Archivo',sans-serif;--body:'Inter',sans-serif;--mono:'Space Mono',monospace;
+    --maxw:880px;--ease:cubic-bezier(.22,.61,.36,1);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--text);font-family:var(--body);line-height:1.55;-webkit-font-smoothing:antialiased;padding:0 20px;overflow-x:hidden}
+  .wrap{max-width:var(--maxw);margin:0 auto}
+
+  /* NAV */
+  .nav{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:center;height:60px;background:rgba(25,24,22,.82);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line);margin:0 -20px;padding:0 20px}
+  .nav__links{display:flex;gap:96px;list-style:none}
+  .nav__links a{font-family:var(--mono);font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,0.65);text-decoration:none;position:relative;padding:6px 0;transition:color .25s var(--ease)}
+  .nav__links a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:1px;background:var(--text);transition:width .3s var(--ease)}
+  .nav__links a:hover,.nav__links a.active{color:var(--text)}
+  .nav__links a:hover::after,.nav__links a.active::after{width:100%}
+  .lang-toggle{position:absolute;right:60px;display:flex;align-items:center;background:rgba(255,255,255,.08);border-radius:20px;padding:3px;gap:2px}
+  .lang-toggle__btn{font-family:var(--mono);font-size:11px;font-weight:500;color:rgba(255,255,255,.45);background:transparent;border:none;cursor:pointer;padding:5px 13px;border-radius:16px;transition:color .2s ease,background .2s ease}
+  .lang-toggle__btn.active{background:#fff;color:#1a1a1a;box-shadow:0 1px 5px rgba(0,0,0,.35)}
+
+  /* BACK LINK */
+  .back{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:var(--mono);font-size:13px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--faint);text-decoration:none;
+    padding:28px 0 0;
+    margin-left:calc(-50vw + 50% + 100px);
+    transition:color .25s var(--ease);
+  }
+  .back:hover{color:var(--text)}
+  .back svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2}
+
+  /* HERO */
+  .proj-hero{
+    width:calc(100vw - 160px);
+    margin-left:calc(-50vw + 50% + 80px);
+    margin-top:48px;
+    position:relative;
+    min-height:360px;
+    overflow:hidden;
+    border:1px solid var(--line);
+  }
+  .proj-hero__img{
+    width:100%;height:100%;position:absolute;inset:0;
+    object-fit:cover;object-position:center;display:block;
+  }
+  .proj-hero__overlay{
+    position:absolute;inset:0;
+    background:linear-gradient(to right,rgba(0,0,0,.55) 0%,rgba(0,0,0,.18) 60%,transparent 100%);
+    display:flex;flex-direction:column;justify-content:flex-end;
+    padding:48px 56px;
+  }
+  .proj-hero__eyebrow{
+    font-family:var(--mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--accent);margin-bottom:16px;
+  }
+  .proj-hero__title{
+    font-family:var(--display);font-weight:900;
+    font-size:clamp(30px,4.6vw,56px);line-height:1.05;
+    margin-bottom:16px;max-width:18ch;
+  }
+  .proj-hero__sub{
+    font-size:clamp(15px,1.6vw,18px);line-height:1.55;color:rgba(255,255,255,.82);
+    max-width:52ch;font-weight:400;
+  }
+
+  /* META GRID */
+  .meta-grid{
+    display:grid;grid-template-columns:repeat(4,1fr);
+    border:1px solid var(--line);border-bottom:0;
+    margin-top:48px;
+    width:calc(100vw - 440px);
+    margin-left:calc(-50vw + 50% + 220px);
+  }
+  .meta-item{padding:22px 26px;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .meta-item:nth-child(4n){border-right:0}
+  .meta-label{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+  .meta-value{font-size:14.5px;font-weight:600;color:var(--text);line-height:1.5}
+  .meta-note{
+    width:calc(100vw - 440px);margin-left:calc(-50vw + 50% + 220px);
+    margin-top:16px;border:1px solid var(--line);border-radius:10px;
+    padding:20px 24px;background:rgba(255,255,255,.018);
+  }
+  .meta-note__label{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:12px}
+  .meta-note__chips{display:flex;flex-wrap:wrap;gap:8px}
+  .meta-chip{font-family:var(--mono);font-size:12px;letter-spacing:.04em;color:#c9c6bd;border:1px solid var(--line);border-radius:6px;padding:6px 12px;background:rgba(255,255,255,.02)}
+
+  /* LINK BUTTONS */
+  .links-row{display:flex;flex-wrap:wrap;gap:12px;
+    width:calc(100vw - 440px);margin-left:calc(-50vw + 50% + 220px);margin-top:28px}
+  .link-btn{
+    display:inline-flex;align-items:center;gap:11px;
+    font-family:var(--mono);font-size:12.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+    text-decoration:none;border-radius:9px;padding:13px 22px;
+    transition:transform .25s var(--ease),box-shadow .25s var(--ease),background .25s var(--ease),border-color .25s var(--ease),color .25s var(--ease);
+  }
+  .link-btn--primary{color:#15151b;background:var(--accent)}
+  .link-btn--primary:hover{background:#7ccfa3;transform:translateY(-2px);box-shadow:0 10px 26px rgba(105,189,146,.28)}
+  .link-btn--ghost{color:var(--text);background:transparent;border:1px solid var(--line-strong)}
+  .link-btn--ghost:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
+  .link-btn__arrow{width:14px;height:14px;flex-shrink:0;stroke:currentColor;stroke-width:2;fill:none;transition:transform .25s var(--ease)}
+  .link-btn:hover .link-btn__arrow{transform:translate(2px,-2px)}
+
+  /* BODY */
+  .proj-body{
+    padding:80px 0 48px;display:flex;flex-direction:column;gap:76px;
+    width:calc(100vw - 440px);
+    margin-left:calc(-50vw + 50% + 220px);
+  }
+  .sec__label{font-family:var(--mono);font-size:15px;letter-spacing:.2em;text-transform:uppercase;color:#fff;margin-bottom:20px;display:flex;align-items:center;gap:12px}
+  .sec__label::before{content:'';width:22px;height:2px;background:var(--accent);flex-shrink:0}
+  .sec__sub{font-family:var(--display);font-weight:700;font-size:clamp(19px,2.2vw,24px);line-height:1.3;color:var(--text);margin:-6px 0 22px}
+  .sec__text{font-size:16px;line-height:1.8;color:#d9d6cd}
+  .sec__text+.sec__text{margin-top:16px}
+  .sec__text strong{color:#fff;font-weight:600}
+  .sec__q{
+    font-family:var(--display);font-weight:700;font-size:clamp(18px,2vw,22px);line-height:1.4;
+    color:var(--text);border-left:2px solid var(--accent);padding:6px 0 6px 22px;margin-top:28px;
+  }
+
+  /* TWO-COLUMN CARDS (experiences / users) */
+  .duo{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:28px}
+  .duo-card{border:1px solid var(--line);border-top:2px solid var(--accent);border-radius:12px;padding:26px 28px;background:rgba(255,255,255,.018)}
+  .duo-card--gold{border-top-color:var(--gold)}
+  .duo-card__tag{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
+  .duo-card--gold .duo-card__tag{color:var(--gold)}
+  .duo-card__h{font-family:var(--display);font-weight:700;font-size:19px;color:var(--text);margin-bottom:12px}
+  .duo-card__d{font-size:14.5px;line-height:1.7;color:#bdbab1}
+  .needs{list-style:none;margin-top:6px;display:flex;flex-direction:column;gap:9px}
+  .needs li{position:relative;padding-left:18px;font-size:14.5px;line-height:1.6;color:#bdbab1}
+  .needs li::before{content:'';position:absolute;left:0;top:9px;width:6px;height:6px;border-radius:50%;background:var(--accent)}
+  .duo-card--gold .needs li::before{background:var(--gold)}
+
+  /* BULLET LIST (challenge / topics) */
+  .blist{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:10px 28px;margin-top:22px}
+  .blist li{position:relative;padding-left:20px;font-size:15px;line-height:1.6;color:#cfccC3}
+  .blist li::before{content:'';position:absolute;left:0;top:9px;width:7px;height:7px;border-radius:2px;background:var(--accent);transform:rotate(45deg)}
+
+  /* NUMBERED CARDS (goals / value / process) */
+  .numgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:26px}
+  .numcard{border:1px solid var(--line);border-radius:12px;padding:24px 26px;background:rgba(255,255,255,.018);position:relative}
+  .numcard__n{font-family:var(--mono);font-weight:700;font-size:13px;letter-spacing:.1em;color:var(--accent);margin-bottom:12px}
+  .numcard__h{font-family:var(--display);font-weight:700;font-size:17px;color:var(--text);margin-bottom:10px;line-height:1.3}
+  .numcard__d{font-size:14.5px;line-height:1.7;color:#bdbab1}
+
+  /* INSIGHTS / PROCESS — spine list */
+  .spine{position:relative;padding-left:34px;margin-top:26px}
+  .spine::before{content:'';position:absolute;left:7px;top:8px;bottom:8px;width:2px;background:linear-gradient(to bottom,var(--accent),var(--gold))}
+  .spine__row{position:relative;padding-bottom:26px}
+  .spine__row:last-child{padding-bottom:0}
+  .spine__dot{position:absolute;left:-33px;top:3px;width:14px;height:14px;border-radius:50%;border:1.5px solid rgba(105,189,146,.5);background:var(--bg);box-sizing:border-box}
+  .spine__meta{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:6px}
+  .spine__h{font-family:var(--display);font-weight:700;font-size:16px;color:var(--text);margin-bottom:5px;line-height:1.35}
+  .spine__d{font-size:14.5px;line-height:1.7;color:#bdbab1}
+
+  /* MVP columns */
+  .mvp{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:26px}
+  .mvp-col{border:1px solid var(--line);border-radius:12px;padding:24px 26px;background:rgba(255,255,255,.018)}
+  .mvp-col--future{border-style:dashed;border-color:var(--line-strong);grid-column:1 / -1;background:rgba(255,255,255,.01)}
+  .mvp-col__tag{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:4px}
+  .mvp-col--future .mvp-col__tag{color:var(--gold)}
+  .mvp-col__h{font-family:var(--display);font-weight:700;font-size:16px;color:var(--text);margin-bottom:14px}
+  .mvp-list{list-style:none;display:flex;flex-direction:column;gap:9px}
+  .mvp-list li{position:relative;padding-left:18px;font-size:14px;line-height:1.55;color:#bdbab1}
+  .mvp-list li::before{content:'';position:absolute;left:0;top:8px;width:6px;height:6px;border-radius:50%;background:var(--accent)}
+  .mvp-col--future .mvp-list{display:flex;flex-wrap:wrap;flex-direction:row;gap:8px}
+  .mvp-col--future .mvp-list li{padding-left:0;border:1px solid var(--line);border-radius:6px;padding:6px 12px;font-family:var(--mono);font-size:12px;color:#c9c6bd}
+  .mvp-col--future .mvp-list li::before{display:none}
+  .mvp-note{font-size:13.5px;line-height:1.6;color:var(--faint);margin-top:16px;font-style:italic}
+
+  /* WORKFLOW */
+  .flow{display:flex;flex-wrap:wrap;align-items:stretch;gap:10px;margin-top:26px}
+  .flow__step{
+    display:flex;align-items:center;gap:10px;
+    border:1px solid var(--line);border-radius:8px;padding:12px 16px;
+    background:rgba(255,255,255,.018);
+  }
+  .flow__step--key{border-color:rgba(105,189,146,.4);background:linear-gradient(to bottom,rgba(105,189,146,.08),transparent 70%)}
+  .flow__n{font-family:var(--mono);font-weight:700;font-size:12px;color:var(--accent)}
+  .flow__t{font-size:13.5px;font-weight:600;color:var(--text);white-space:nowrap}
+  .flow__arrow{display:flex;align-items:center;color:var(--faint);font-size:14px}
+  .flow__note{font-size:14.5px;line-height:1.75;color:#bdbab1;margin-top:24px;max-width:66ch}
+
+  /* FEATURE BLOCKS (solutions) */
+  .feat{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:26px}
+  .feat-card{border:1px solid var(--line);border-radius:12px;padding:22px 24px;background:rgba(255,255,255,.018)}
+  .feat-card__h{font-family:var(--display);font-weight:700;font-size:16px;color:var(--text);margin-bottom:9px;display:flex;align-items:center;gap:9px}
+  .feat-card__h::before{content:'';width:9px;height:9px;border-radius:2px;background:var(--accent);transform:rotate(45deg);flex-shrink:0}
+  .feat-card__d{font-size:14px;line-height:1.7;color:#bdbab1}
+
+  /* OUTCOME / LEARNED lists */
+  .checklist{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:12px 28px;margin-top:22px}
+  .checklist li{position:relative;padding-left:26px;font-size:15px;line-height:1.55;color:#cfccc3}
+  .checklist li::before{content:'';position:absolute;left:0;top:3px;width:15px;height:15px;border-radius:4px;border:1.5px solid var(--accent);background:rgba(105,189,146,.12)}
+  .checklist li::after{content:'';position:absolute;left:4.5px;top:6px;width:5px;height:8px;border:solid var(--accent);border-width:0 2px 2px 0;transform:rotate(45deg)}
+
+  .learned{list-style:none;display:flex;flex-direction:column;gap:12px;margin-top:22px}
+  .learned li{position:relative;padding:16px 20px 16px 22px;border:1px solid var(--line);border-left:2px solid var(--accent);border-radius:8px;background:rgba(255,255,255,.018);font-size:15px;line-height:1.6;color:#cfccc3}
+
+  /* EXPLORE (external links block) */
+  .explore{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:26px}
+  .explore-card{border:1px solid var(--line);border-radius:12px;padding:26px 28px;background:rgba(255,255,255,.018);display:flex;flex-direction:column}
+  .explore-card__tag{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
+  .explore-card__d{font-size:14.5px;line-height:1.7;color:#bdbab1;margin-bottom:20px;flex:1}
+  .explore-card .link-btn{align-self:flex-start}
+
+  /* FOOTER */
+  .footer{border-top:1px solid var(--line);padding:48px 0 60px;display:grid;grid-template-columns:1fr auto auto;gap:60px;width:calc(100vw - 160px);margin-left:calc(-50vw + 50% + 80px)}
+  .footer__logo{font-family:var(--display);font-weight:900;font-size:34px;letter-spacing:-.01em;align-self:start}
+  .footer__logo span{color:var(--muted)}
+  .footer__col+.footer__col{margin-left:100px}
+  .footer__col:last-child{margin-right:200px}
+  .footer__col h4{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);font-weight:700;margin-bottom:16px}
+  .footer__col ul{list-style:none}
+  .footer__col li{margin-bottom:9px}
+  .footer__col a{color:var(--text);text-decoration:none;font-size:14px;position:relative;transition:color .25s var(--ease)}
+  .footer__col a::after{content:"";position:absolute;left:0;bottom:-2px;width:0;height:1px;background:currentColor;transition:width .3s var(--ease)}
+  .footer__col a:hover{color:var(--muted)}
+  .footer__col a:hover::after{width:100%}
+
+  .reveal{opacity:0;transform:translateY(20px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+  .reveal.in{opacity:1;transform:none}
+
+  /* RESPONSIVE */
+  @media(max-width:1100px){
+    .back{margin-left:0}
+    .proj-hero{width:100%;margin-left:0}
+    .meta-grid,.meta-note,.links-row,.proj-body,.footer{width:100%;margin-left:0}
+    .footer{grid-template-columns:1fr}
+    .footer__col+.footer__col{margin-left:0}
+    .footer__col:last-child{margin-right:0}
+  }
+  @media(max-width:820px){
+    .meta-grid{grid-template-columns:repeat(2,1fr)}
+    .meta-item:nth-child(4n){border-right:1px solid var(--line)}
+    .meta-item:nth-child(2n){border-right:0}
+    .proj-hero__overlay{padding:36px 28px}
+  }
+  @media(max-width:640px){
+    .duo,.numgrid,.mvp,.feat,.explore,.blist,.checklist{grid-template-columns:1fr}
+    .mvp-col--future{grid-column:auto}
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <ul class="nav__links">
+    <li><a href="PORTFOLIO.html" data-en="Home" data-zh="主页">Home</a></li>
+    <li><a href="works.html" class="active" data-en="Works" data-zh="作品集">Works</a></li>
+    <li><a href="experience.html" data-en="Gaming" data-zh="游戏经历">Gaming</a></li>
+    <li><a href="resume.html" data-en="Resume" data-zh="简历">Resume</a></li>
+    <li><a href="contact.html" data-en="Contact" data-zh="联系">Contact</a></li>
+  </ul>
+  <div class="lang-toggle">
+    <button class="lang-toggle__btn active" data-lang="en">EN</button>
+    <button class="lang-toggle__btn" data-lang="zh">中文</button>
+  </div>
+</nav>
+
+<div class="wrap">
+  <a class="back" href="works.html">
+    <svg viewBox="0 0 24 24"><path d="M19 12H5M5 12l7 7M5 12l7-7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span data-en="Back to Works" data-zh="返回作品集">Back to Works</span>
+  </a>
+</div>
+
+<!-- HERO -->
+<div style="max-width:var(--maxw);margin:0 auto;padding:0 20px">
+  <div class="proj-hero reveal">
+    <img class="proj-hero__img" src="WORKS/ARKA/ARKA COVER.png" alt="Arka Cover">
+    <div class="proj-hero__overlay">
+      <p class="proj-hero__eyebrow" data-en="UX/UI · Product Design · Interactive Prototype" data-zh="UX/UI · 产品设计 · 交互原型">UX/UI · Product Design · Interactive Prototype</p>
+      <h1 class="proj-hero__title" data-en="Arka — AI-Driven HR Gap Assessment" data-zh="Arka — AI 驱动的 HR 差距评估">Arka — AI-Driven HR Gap Assessment</h1>
+      <p class="proj-hero__sub" data-en="Transforming a fragmented, manual HR audit into a guided, transparent, and actionable digital experience." data-zh="将碎片化、依赖人工的 HR 审计，转化为有引导、透明且可落地的数字化体验。">Transforming a fragmented, manual HR audit into a guided, transparent, and actionable digital experience.</p>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- META GRID -->
+  <div class="meta-grid reveal">
+    <div class="meta-item">
+      <p class="meta-label" data-en="Project Type" data-zh="项目类型">Project Type</p>
+      <p class="meta-value" data-en="UX/UI Design · Product Design · Interactive Prototype" data-zh="UX/UI 设计 · 产品设计 · 交互原型">UX/UI Design · Product Design · Interactive Prototype</p>
+    </div>
+    <div class="meta-item">
+      <p class="meta-label" data-en="Context" data-zh="项目背景">Context</p>
+      <p class="meta-value" data-en="Client-Based Academic Project" data-zh="基于真实客户的学术项目">Client-Based Academic Project</p>
+    </div>
+    <div class="meta-item">
+      <p class="meta-label" data-en="Course" data-zh="课程">Course</p>
+      <p class="meta-value" data-en="DGM 6168 — Usability and Human Interaction" data-zh="DGM 6168 — 可用性与人机交互">DGM 6168 — Usability and Human Interaction</p>
+    </div>
+    <div class="meta-item">
+      <p class="meta-label" data-en="Institution" data-zh="院校">Institution</p>
+      <p class="meta-value" data-en="Northeastern University" data-zh="东北大学（Northeastern University）">Northeastern University</p>
+    </div>
+    <div class="meta-item">
+      <p class="meta-label" data-en="Timeline" data-zh="周期">Timeline</p>
+      <p class="meta-value" data-en="Fall 2025" data-zh="2025 年秋季">Fall 2025</p>
+    </div>
+    <div class="meta-item">
+      <p class="meta-label" data-en="Platform" data-zh="平台">Platform</p>
+      <p class="meta-value" data-en="Responsive Web Application" data-zh="响应式 Web 应用">Responsive Web Application</p>
+    </div>
+    <div class="meta-item">
+      <p class="meta-label" data-en="Tools" data-zh="工具">Tools</p>
+      <p class="meta-value">Figma</p>
+    </div>
+    <div class="meta-item">
+      <!-- EDIT: confirm this matches your actual role on the team -->
+      <p class="meta-label" data-en="My Role" data-zh="我的角色">My Role</p>
+      <p class="meta-value" data-en="UX/UI Designer · Product Designer" data-zh="UX/UI 设计师 · 产品设计师">UX/UI Designer · Product Designer</p>
+    </div>
+  </div>
+
+  <!-- RESPONSIBILITIES (editable) -->
+  <!-- EDIT: trim the chips below to the responsibilities you personally owned before publishing. -->
+  <div class="meta-note reveal">
+    <p class="meta-note__label" data-en="Responsibilities" data-zh="职责">Responsibilities</p>
+    <div class="meta-note__chips">
+      <span class="meta-chip" data-en="User Research" data-zh="用户研究">User Research</span>
+      <span class="meta-chip" data-en="Workflow Mapping" data-zh="流程梳理">Workflow Mapping</span>
+      <span class="meta-chip" data-en="Information Architecture" data-zh="信息架构">Information Architecture</span>
+      <span class="meta-chip" data-en="Wireframing" data-zh="线框图">Wireframing</span>
+      <span class="meta-chip" data-en="Interface Design" data-zh="界面设计">Interface Design</span>
+      <span class="meta-chip" data-en="Prototyping" data-zh="原型设计">Prototyping</span>
+      <span class="meta-chip" data-en="Usability Testing" data-zh="可用性测试">Usability Testing</span>
+    </div>
+  </div>
+
+  <!-- EXTERNAL LINKS -->
+  <div class="links-row reveal">
+    <a class="link-btn link-btn--primary" href="https://www.figma.com/design/yy22U4Aj1Vl4w18HDaiYtY/Arka---Design-Prototype-Model?node-id=167-13408&t=ieNwahHXsh0d8NEy-1" target="_blank" rel="noopener">
+      <span data-en="View Figma Prototype" data-zh="查看 Figma 原型">View Figma Prototype</span>
+      <svg class="link-btn__arrow" viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H8M17 7v9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+    <a class="link-btn link-btn--ghost" href="https://drive.google.com/file/d/1_hktLQzXinYOAxZFrlzaqY_gufOeYcTa/view?usp=drivesdk" target="_blank" rel="noopener">
+      <span data-en="Watch Admin Experience Demo" data-zh="观看管理端体验演示">Watch Admin Experience Demo</span>
+      <svg class="link-btn__arrow" viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H8M17 7v9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+    <a class="link-btn link-btn--ghost" href="https://www.loom.com/share/e91b6e0a4bb5427a9f35190b95d2bfd7" target="_blank" rel="noopener">
+      <span data-en="Watch Client Experience Demo" data-zh="观看客户端体验演示">Watch Client Experience Demo</span>
+      <svg class="link-btn__arrow" viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H8M17 7v9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </div>
+
+  <div class="proj-body">
+
+    <!-- INTRO -->
+    <section class="reveal">
+      <p class="sec__label" data-en="Introduction" data-zh="项目简介">Introduction</p>
+      <p class="sec__text" data-en="Arka is an AI-supported HR Gap Assessment platform designed to help small and mid-sized businesses organize HR assessments, submit required information, identify policy gaps, and understand the next steps through a structured digital workflow." data-zh="Arka 是一个 AI 辅助的 HR 差距评估平台，旨在帮助中小型企业组织 HR 评估、提交所需信息、识别政策差距，并通过结构化的数字工作流了解后续步骤。">Arka is an AI-supported HR Gap Assessment platform designed to help small and mid-sized businesses organize HR assessments, submit required information, identify policy gaps, and understand the next steps through a structured digital workflow.</p>
+      <p class="sec__text" data-en="The project explores how automation, clear progress tracking, and actionable data visualization can make a traditionally manual consulting process more efficient for both Arka consultants and their clients. The final deliverable is a high-fidelity, interactive Figma prototype rather than a deployed product." data-zh="项目探讨了自动化、清晰的进度追踪与可落地的数据可视化，如何让传统上依赖人工的咨询流程对 Arka 顾问及其客户双方都更高效。最终交付成果是一个高保真、可交互的 Figma 原型，而非已上线的产品。">The project explores how automation, clear progress tracking, and actionable data visualization can make a traditionally manual consulting process more efficient for both Arka consultants and their clients. The final deliverable is a high-fidelity, interactive Figma prototype rather than a deployed product.</p>
+    </section>
+
+    <!-- PROJECT OVERVIEW -->
+    <section class="reveal">
+      <p class="sec__label" data-en="Project Overview" data-zh="项目概览">Project Overview</p>
+      <p class="sec__text" data-en="Arka's existing HR Gap Assessment process relied heavily on interviews, document reviews, manual follow-ups, and consultant interpretation. Information was often collected through separate communication channels, making it difficult for clients to understand their progress and for consultants to manage assessments consistently." data-zh="Arka 原有的 HR 差距评估流程高度依赖访谈、文档审查、人工跟进以及顾问的主观解读。信息往往分散在不同的沟通渠道中，导致客户难以了解自身进度，顾问也难以对评估进行一致的管理。">Arka's existing HR Gap Assessment process relied heavily on interviews, document reviews, manual follow-ups, and consultant interpretation. Information was often collected through separate communication channels, making it difficult for clients to understand their progress and for consultants to manage assessments consistently.</p>
+      <p class="sec__text" data-en="The design connects the client onboarding process with Arka's internal review workflow. The concept includes a client-facing assessment portal, an administrative results dashboard, structured document collection, interview scheduling, survey distribution, progress tracking, and AI-supported recommendations." data-zh="该设计将客户的入驻流程与 Arka 的内部审查工作流连接起来。整体概念包含面向客户的评估门户、管理端结果仪表盘、结构化的文档收集、访谈排期、问卷分发、进度追踪，以及 AI 辅助的建议。">The design connects the client onboarding process with Arka's internal review workflow. The concept includes a client-facing assessment portal, an administrative results dashboard, structured document collection, interview scheduling, survey distribution, progress tracking, and AI-supported recommendations.</p>
+      <p class="sec__sub" style="margin-top:34px" data-en="Two Connected Experiences" data-zh="两个相互连接的体验">Two Connected Experiences</p>
+      <div class="duo">
+        <div class="duo-card">
+          <p class="duo-card__tag" data-en="Client Portal" data-zh="客户门户">Client Portal</p>
+          <p class="duo-card__d" data-en="A guided workspace that helps clients complete assessment tasks, submit HR documents, distribute employee surveys, schedule interviews, and monitor overall progress." data-zh="一个有引导的工作空间，帮助客户完成评估任务、提交 HR 文档、分发员工问卷、安排访谈并监控整体进度。">A guided workspace that helps clients complete assessment tasks, submit HR documents, distribute employee surveys, schedule interviews, and monitor overall progress.</p>
+        </div>
+        <div class="duo-card duo-card--gold">
+          <p class="duo-card__tag" data-en="Admin Dashboard" data-zh="管理端仪表盘">Admin Dashboard</p>
+          <p class="duo-card__d" data-en="A decision-support workspace that helps Arka consultants review clients, identify critical HR gaps, evaluate document status, and translate findings into actionable recommendations." data-zh="一个决策支持型工作空间，帮助 Arka 顾问审查客户、识别关键 HR 差距、评估文档状态，并将发现转化为可落地的建议。">A decision-support workspace that helps Arka consultants review clients, identify critical HR gaps, evaluate document status, and translate findings into actionable recommendations.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- THE CHALLENGE -->
+    <section class="reveal">
+      <p class="sec__label" data-en="The Challenge" data-zh="挑战">The Challenge</p>
+      <p class="sec__text" data-en="Traditional HR gap assessments can be slow, fragmented, and difficult to scale. Consultants must manually collect documents, conduct interviews, review policies, follow up with clients, and organize findings before recommendations can be created." data-zh="传统的 HR 差距评估往往缓慢、碎片化且难以规模化。顾问必须手动收集文档、开展访谈、审查政策、跟进客户并整理发现，之后才能给出建议。">Traditional HR gap assessments can be slow, fragmented, and difficult to scale. Consultants must manually collect documents, conduct interviews, review policies, follow up with clients, and organize findings before recommendations can be created.</p>
+      <p class="sec__text" style="margin-bottom:4px" data-en="Meanwhile, clients may not know:" data-zh="与此同时，客户往往并不清楚：">Meanwhile, clients may not know:</p>
+      <ul class="blist">
+        <li data-en="Which tasks they still need to complete" data-zh="自己还有哪些任务尚未完成">Which tasks they still need to complete</li>
+        <li data-en="Which documents Arka requires" data-zh="Arka 需要哪些文档">Which documents Arka requires</li>
+        <li data-en="Whether employees have completed the survey" data-zh="员工是否已完成问卷">Whether employees have completed the survey</li>
+        <li data-en="When interviews are scheduled" data-zh="访谈安排在什么时候">When interviews are scheduled</li>
+        <li data-en="What the assessment findings mean" data-zh="评估发现意味着什么">What the assessment findings mean</li>
+        <li data-en="Which HR issues should be addressed first" data-zh="哪些 HR 问题应当优先处理">Which HR issues should be addressed first</li>
+      </ul>
+      <p class="sec__q" data-en="How might we design an intuitive, efficient, and decision-supportive HR Gap Assessment experience that reduces manual work, guides non-technical clients through the process, and turns complex HR findings into clear next steps?" data-zh="我们该如何设计一套直观、高效且支持决策的 HR 差距评估体验，既能减少人工工作，又能引导非技术背景的客户完成流程，并把复杂的 HR 发现转化为清晰的后续步骤？">How might we design an intuitive, efficient, and decision-supportive HR Gap Assessment experience that reduces manual work, guides non-technical clients through the process, and turns complex HR findings into clear next steps?</p>
+    </section>
+
+    <!-- DESIGN GOALS -->
+    <section class="reveal">
+      <p class="sec__label" data-en="Design Goals" data-zh="设计目标">Design Goals</p>
+      <div class="numgrid">
+        <div class="numcard">
+          <p class="numcard__n">01</p>
+          <p class="numcard__h" data-en="Guide the Assessment Process" data-zh="引导评估流程">Guide the Assessment Process</p>
+          <p class="numcard__d" data-en="Turn a complex consulting process into a clear sequence of manageable tasks." data-zh="把复杂的咨询流程转化为一系列清晰、可管理的任务。">Turn a complex consulting process into a clear sequence of manageable tasks.</p>
+        </div>
+        <div class="numcard">
+          <p class="numcard__n">02</p>
+          <p class="numcard__h" data-en="Make Progress Visible" data-zh="让进度可见">Make Progress Visible</p>
+          <p class="numcard__d" data-en="Help clients and consultants immediately understand what has been completed, what is in progress, and what still requires attention." data-zh="帮助客户与顾问一眼看清哪些已完成、哪些进行中、哪些仍需关注。">Help clients and consultants immediately understand what has been completed, what is in progress, and what still requires attention.</p>
+        </div>
+        <div class="numcard">
+          <p class="numcard__n">03</p>
+          <p class="numcard__h" data-en="Turn Findings into Actions" data-zh="把发现转化为行动">Turn Findings into Actions</p>
+          <p class="numcard__d" data-en="Present HR gaps through understandable priorities, explanations, and recommendations rather than overwhelming users with raw data." data-zh="通过易懂的优先级、解释与建议来呈现 HR 差距，而不是用原始数据淹没用户。">Present HR gaps through understandable priorities, explanations, and recommendations rather than overwhelming users with raw data.</p>
+        </div>
+        <div class="numcard">
+          <p class="numcard__n">04</p>
+          <p class="numcard__h" data-en="Support Trust and Transparency" data-zh="支持信任与透明">Support Trust and Transparency</p>
+          <p class="numcard__d" data-en="Ensure that AI-supported findings remain understandable, reviewable, and connected to human consultant oversight." data-zh="确保 AI 辅助的发现始终可理解、可复核，并与人工顾问的把关相连接。">Ensure that AI-supported findings remain understandable, reviewable, and connected to human consultant oversight.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESEARCH & DISCOVERY -->
+    <section class="reveal">
+      <p class="sec__label" data-en="Research and Discovery" data-zh="研究与探索">Research and Discovery</p>
+      <p class="sec__text" data-en="The research phase focused on understanding how HR professionals and Arka consultants currently collect information, conduct assessments, evaluate documents, and communicate recommendations." data-zh="研究阶段聚焦于了解 HR 从业者与 Arka 顾问当前如何收集信息、开展评估、评估文档以及沟通建议。">The research phase focused on understanding how HR professionals and Arka consultants currently collect information, conduct assessments, evaluate documents, and communicate recommendations.</p>
+      <p class="sec__text" style="margin-bottom:4px" data-en="Research topics included:" data-zh="研究主题包括：">Research topics included:</p>
+      <ul class="blist">
+        <li data-en="Existing HR assessment workflows" data-zh="现有的 HR 评估工作流">Existing HR assessment workflows</li>
+        <li data-en="Manual and time-consuming tasks" data-zh="人工且耗时的任务">Manual and time-consuming tasks</li>
+        <li data-en="Document collection challenges" data-zh="文档收集中的挑战">Document collection challenges</li>
+        <li data-en="Client communication and follow-up" data-zh="客户沟通与跟进">Client communication and follow-up</li>
+        <li data-en="Privacy concerns around sensitive HR information" data-zh="敏感 HR 信息的隐私顾虑">Privacy concerns around sensitive HR information</li>
+        <li data-en="Expectations for AI-supported analysis" data-zh="对 AI 辅助分析的期望">Expectations for AI-supported analysis</li>
+        <li data-en="Important HR metrics and report formats" data-zh="重要的 HR 指标与报告格式">Important HR metrics and report formats</li>
+        <li data-en="How consultants prioritize recommendations" data-zh="顾问如何对建议排定优先级">How consultants prioritize recommendations</li>
+        <li data-en="How clients understand and act on findings" data-zh="客户如何理解并据此采取行动">How clients understand and act on findings</li>
+      </ul>
+      <p class="sec__sub" style="margin-top:38px" data-en="Key Insights" data-zh="关键洞察">Key Insights</p>
+      <div class="spine">
+        <div class="spine__row">
+          <span class="spine__dot"></span>
+          <p class="spine__meta" data-en="Insight 01" data-zh="洞察 01">Insight 01</p>
+          <p class="spine__d" data-en="The assessment process was fragmented across documents, meetings, surveys, and communication channels." data-zh="评估流程分散在文档、会议、问卷与各类沟通渠道之间。">The assessment process was fragmented across documents, meetings, surveys, and communication channels.</p>
+        </div>
+        <div class="spine__row">
+          <span class="spine__dot"></span>
+          <p class="spine__meta" data-en="Insight 02" data-zh="洞察 02">Insight 02</p>
+          <p class="spine__d" data-en="Clients needed clearer instructions and stronger visibility into their assessment progress." data-zh="客户需要更清晰的指引，以及对评估进度更强的可见性。">Clients needed clearer instructions and stronger visibility into their assessment progress.</p>
+        </div>
+        <div class="spine__row">
+          <span class="spine__dot"></span>
+          <p class="spine__meta" data-en="Insight 03" data-zh="洞察 03">Insight 03</p>
+          <p class="spine__d" data-en="Consultants needed critical findings and priority issues to appear before detailed supporting information." data-zh="顾问希望关键发现与优先问题能先于详细的支撑信息呈现。">Consultants needed critical findings and priority issues to appear before detailed supporting information.</p>
+        </div>
+        <div class="spine__row">
+          <span class="spine__dot"></span>
+          <p class="spine__meta" data-en="Insight 04" data-zh="洞察 04">Insight 04</p>
+          <p class="spine__d" data-en="Users wanted automation to reduce repetitive work, but they still expected human review and transparent explanations." data-zh="用户希望通过自动化减少重复工作，但仍期待人工复核与透明的解释。">Users wanted automation to reduce repetitive work, but they still expected human review and transparent explanations.</p>
+        </div>
+        <div class="spine__row">
+          <span class="spine__dot"></span>
+          <p class="spine__meta" data-en="Insight 05" data-zh="洞察 05">Insight 05</p>
+          <p class="spine__d" data-en="The product needed to support two distinct user groups without separating them into disconnected systems." data-zh="产品需要同时服务两类不同的用户群体，而不能把他们拆分成彼此割裂的系统。">The product needed to support two distinct user groups without separating them into disconnected systems.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- USERS -->
+    <section class="reveal">
+      <p class="sec__label" data-en="Designing for Two User Groups" data-zh="为两类用户群体而设计">Designing for Two User Groups</p>
+      <div class="duo">
+        <div class="duo-card">
+          <p class="duo-card__tag" data-en="User Group 01" data-zh="用户群体 01">User Group 01</p>
+          <p class="duo-card__h" data-en="Arka Consultants" data-zh="Arka 顾问">Arka Consultants</p>
+          <ul class="needs">
+            <li data-en="Review several client assessments efficiently" data-zh="高效地审查多个客户的评估">Review several client assessments efficiently</li>
+            <li data-en="Identify missing or outdated HR policies" data-zh="识别缺失或过时的 HR 政策">Identify missing or outdated HR policies</li>
+            <li data-en="Compare findings across HR categories" data-zh="跨 HR 类别比较各项发现">Compare findings across HR categories</li>
+            <li data-en="Prioritize critical issues" data-zh="对关键问题排定优先级">Prioritize critical issues</li>
+            <li data-en="Review AI-supported recommendations" data-zh="复核 AI 辅助的建议">Review AI-supported recommendations</li>
+            <li data-en="Communicate results clearly to clients" data-zh="向客户清晰地传达结果">Communicate results clearly to clients</li>
+          </ul>
+        </div>
+        <div class="duo-card duo-card--gold">
+          <p class="duo-card__tag" data-en="User Group 02" data-zh="用户群体 02">User Group 02</p>
+          <p class="duo-card__h" data-en="Client HR Managers" data-zh="客户方 HR 经理">Client HR Managers</p>
+          <ul class="needs">
+            <li data-en="Understand what Arka requires from them" data-zh="了解 Arka 对自己有哪些要求">Understand what Arka requires from them</li>
+            <li data-en="Track all assessment tasks in one place" data-zh="在一个地方追踪所有评估任务">Track all assessment tasks in one place</li>
+            <li data-en="Upload documents securely" data-zh="安全地上传文档">Upload documents securely</li>
+            <li data-en="Distribute employee surveys" data-zh="分发员工问卷">Distribute employee surveys</li>
+            <li data-en="Schedule consultant interviews" data-zh="安排与顾问的访谈">Schedule consultant interviews</li>
+            <li data-en="Receive reminders and status updates" data-zh="接收提醒与状态更新">Receive reminders and status updates</li>
+            <li data-en="Understand final findings without HR analytics expertise" data-zh="在不具备 HR 分析专业知识的情况下理解最终发现">Understand final findings without HR analytics expertise</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- MVP -->
+    <section class="reveal">
+      <p class="sec__label" data-en="Defining the MVP" data-zh="定义 MVP">Defining the MVP</p>
+      <p class="sec__text" data-en="Because the full HR consulting workflow contains many possible features, the team prioritized the functions that would provide the most immediate value to both clients and consultants." data-zh="由于完整的 HR 咨询工作流包含众多可能的功能，团队优先选择了能为客户与顾问双方带来最直接价值的功能。">Because the full HR consulting workflow contains many possible features, the team prioritized the functions that would provide the most immediate value to both clients and consultants.</p>
+      <div class="mvp">
+        <div class="mvp-col">
+          <p class="mvp-col__tag" data-en="Core Prototype" data-zh="核心原型">Core Prototype</p>
+          <p class="mvp-col__h" data-en="Must-Have Client Features" data-zh="客户端必备功能">Must-Have Client Features</p>
+          <ul class="mvp-list">
+            <li data-en="Secure client portal access" data-zh="安全的客户门户访问">Secure client portal access</li>
+            <li data-en="Assessment task list" data-zh="评估任务清单">Assessment task list</li>
+            <li data-en="Overall and individual task progress" data-zh="整体与单项任务进度">Overall and individual task progress</li>
+            <li data-en="Employee survey sharing" data-zh="员工问卷分享">Employee survey sharing</li>
+            <li data-en="Interview scheduling" data-zh="访谈排期">Interview scheduling</li>
+            <li data-en="Required-document checklist" data-zh="所需文档清单">Required-document checklist</li>
+            <li data-en="Document upload" data-zh="文档上传">Document upload</li>
+            <li data-en="Assessment status visibility" data-zh="评估状态可见性">Assessment status visibility</li>
+          </ul>
+        </div>
+        <div class="mvp-col">
+          <p class="mvp-col__tag" data-en="Core Prototype" data-zh="核心原型">Core Prototype</p>
+          <p class="mvp-col__h" data-en="Must-Have Admin Features" data-zh="管理端必备功能">Must-Have Admin Features</p>
+          <ul class="mvp-list">
+            <li data-en="Client assessment overview" data-zh="客户评估总览">Client assessment overview</li>
+            <li data-en="Global HR assessment score" data-zh="整体 HR 评估得分">Global HR assessment score</li>
+            <li data-en="Category-level results" data-zh="分类别结果">Category-level results</li>
+            <li data-en="Critical gap identification" data-zh="关键差距识别">Critical gap identification</li>
+            <li data-en="Document status review" data-zh="文档状态审查">Document status review</li>
+            <li data-en="Priority indicators" data-zh="优先级标识">Priority indicators</li>
+            <li data-en="AI-supported recommendation cards" data-zh="AI 辅助的建议卡片">AI-supported recommendation cards</li>
+            <li data-en="Clear paths from findings to recommended actions" data-zh="从发现到建议行动的清晰路径">Clear paths from findings to recommended actions</li>
+          </ul>
+        </div>
+        <div class="mvp-col mvp-col--future">
+          <p class="mvp-col__tag" data-en="Future / Optional Concepts" data-zh="未来 / 可选概念">Future / Optional Concepts</p>
+          <p class="mvp-col__h" data-en="Secondary Features" data-zh="次要功能">Secondary Features</p>
+          <ul class="mvp-list">
+            <li data-en="Report export" data-zh="报告导出">Report export</li>
+            <li data-en="Reminder notifications" data-zh="提醒通知">Reminder notifications</li>
+            <li data-en="Email notifications" data-zh="邮件通知">Email notifications</li>
+            <li data-en="Support center" data-zh="帮助中心">Support center</li>
+            <li data-en="Client filtering" data-zh="客户筛选">Client filtering</li>
+            <li data-en="AI chatbot assistance" data-zh="AI 聊天助手">AI chatbot assistance</li>
+          </ul>
+          <p class="mvp-note" data-en="Secondary features are explored as future or optional concepts and are not presented as fully implemented in the prototype." data-zh="次要功能作为未来或可选概念进行探索，在原型中并未作为已完整实现的功能呈现。">Secondary features are explored as future or optional concepts and are not presented as fully implemented in the prototype.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SYSTEM WORKFLOW -->
+    <section class="reveal">
+      <p class="sec__label" data-en="Connecting the Full Assessment Journey" data-zh="连接完整的评估旅程">Connecting the Full Assessment Journey</p>
+      <div class="flow">
+        <div class="flow__step"><span class="flow__n">01</span><span class="flow__t" data-en="Client Onboarding" data-zh="客户入驻">Client Onboarding</span></div>
+        <span class="flow__arrow">→</span>
+        <div class="flow__step"><span class="flow__n">02</span><span class="flow__t" data-en="Complete Assessment Tasks" data-zh="完成评估任务">Complete Assessment Tasks</span></div>
+        <span class="flow__arrow">→</span>
+        <div class="flow__step"><span class="flow__n">03</span><span class="flow__t" data-en="Share Employee Survey" data-zh="分发员工问卷">Share Employee Survey</span></div>
+        <span class="flow__arrow">→</span>
+        <div class="flow__step"><span class="flow__n">04</span><span class="flow__t" data-en="Schedule Consultant Interview" data-zh="安排顾问访谈">Schedule Consultant Interview</span></div>
+        <span class="flow__arrow">→</span>
+        <div class="flow__step"><span class="flow__n">05</span><span class="flow__t" data-en="Upload HR Documents" data-zh="上传 HR 文档">Upload HR Documents</span></div>
+        <span class="flow__arrow">→</span>
+        <div class="flow__step flow__step--key"><span class="flow__n">06</span><span class="flow__t" data-en="Automated Gap Analysis" data-zh="自动化差距分析">Automated Gap Analysis</span></div>
+        <span class="flow__arrow">→</span>
+        <div class="flow__step flow__step--key"><span class="flow__n">07</span><span class="flow__t" data-en="Consultant Review" data-zh="顾问复核">Consultant Review</span></div>
+        <span class="flow__arrow">→</span>
+        <div class="flow__step"><span class="flow__n">08</span><span class="flow__t" data-en="Results and Recommendations" data-zh="结果与建议">Results and Recommendations</span></div>
+        <span class="flow__arrow">→</span>
+        <div class="flow__step"><span class="flow__n">09</span><span class="flow__t" data-en="Client Action Plan" data-zh="客户行动计划">Client Action Plan</span></div>
+      </div>
+      <p class="flow__note" data-en="The workflow connects client participation with consultant analysis instead of treating them as separate experiences. Information submitted through the client portal becomes the foundation for the administrative review and results experience." data-zh="该工作流将客户的参与与顾问的分析连接起来，而非将二者视为彼此独立的体验。通过客户门户提交的信息，成为管理端审查与结果体验的基础。">The workflow connects client participation with consultant analysis instead of treating them as separate experiences. Information submitted through the client portal becomes the foundation for the administrative review and results experience.</p>
+    </section>
+
+    <!-- KEY SOLUTION 01 -->
+    <section class="reveal">
+      <p class="sec__label" data-en="Key Solution 01 · Client Portal" data-zh="关键方案 01 · 客户门户">Key Solution 01 · Client Portal</p>
+      <p class="sec__sub" data-en="Making a complex assessment process feel manageable." data-zh="让复杂的评估流程变得可掌控。">Making a complex assessment process feel manageable.</p>
+      <p class="sec__text" data-en="The client portal organizes the full HR assessment into a clear, task-based experience. Instead of relying on separate emails, spreadsheets, meeting links, and file-sharing tools, clients can understand and complete their responsibilities from one central location." data-zh="客户门户把完整的 HR 评估组织成一套清晰的、以任务为核心的体验。客户无需再依赖零散的邮件、表格、会议链接与文件共享工具，而是可以在一个中心位置理解并完成自己的职责。">The client portal organizes the full HR assessment into a clear, task-based experience. Instead of relying on separate emails, spreadsheets, meeting links, and file-sharing tools, clients can understand and complete their responsibilities from one central location.</p>
+      <div class="feat">
+        <div class="feat-card">
+          <p class="feat-card__h" data-en="Progress-Based Dashboard" data-zh="以进度为核心的仪表盘">Progress-Based Dashboard</p>
+          <p class="feat-card__d" data-en="A centralized dashboard shows the overall assessment status and the progress of each required task." data-zh="集中的仪表盘展示整体评估状态以及每项所需任务的进度。">A centralized dashboard shows the overall assessment status and the progress of each required task.</p>
+        </div>
+        <div class="feat-card">
+          <p class="feat-card__h" data-en="Guided Task List" data-zh="有引导的任务清单">Guided Task List</p>
+          <p class="feat-card__d" data-en="Clients can see what needs to be completed, what is currently in progress, and which actions are overdue or require attention." data-zh="客户可以看到哪些需要完成、哪些正在进行，以及哪些已逾期或需要关注。">Clients can see what needs to be completed, what is currently in progress, and which actions are overdue or require attention.</p>
+        </div>
+        <div class="feat-card">
+          <p class="feat-card__h" data-en="Survey Distribution" data-zh="问卷分发">Survey Distribution</p>
+          <p class="feat-card__d" data-en="Clients can access and share the employee survey link while monitoring its completion status." data-zh="客户可以访问并分享员工问卷链接，同时监控其完成情况。">Clients can access and share the employee survey link while monitoring its completion status.</p>
+        </div>
+        <div class="feat-card">
+          <p class="feat-card__h" data-en="Interview Scheduling" data-zh="访谈排期">Interview Scheduling</p>
+          <p class="feat-card__d" data-en="The platform provides direct access to consultant availability, scheduled meetings, and meeting links." data-zh="平台提供对顾问可用时间、已安排会议及会议链接的直接访问。">The platform provides direct access to consultant availability, scheduled meetings, and meeting links.</p>
+        </div>
+        <div class="feat-card">
+          <p class="feat-card__h" data-en="Document Checklist and Upload" data-zh="文档清单与上传">Document Checklist and Upload</p>
+          <p class="feat-card__d" data-en="A structured checklist communicates which HR documents are required and gives clients a clear place to upload and manage them." data-zh="结构化的清单说明需要哪些 HR 文档，并为客户提供清晰的上传与管理位置。">A structured checklist communicates which HR documents are required and gives clients a clear place to upload and manage them.</p>
+        </div>
+        <div class="feat-card">
+          <p class="feat-card__h" data-en="Notifications and Support" data-zh="通知与支持">Notifications and Support</p>
+          <p class="feat-card__d" data-en="Reminder and support concepts help prevent the assessment from stalling when clients need additional guidance." data-zh="提醒与支持相关概念，帮助在客户需要额外指引时避免评估停滞。">Reminder and support concepts help prevent the assessment from stalling when clients need additional guidance.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- KEY SOLUTION 02 -->
+    <section class="reveal">
+      <p class="sec__label" data-en="Key Solution 02 · Admin Dashboard" data-zh="关键方案 02 · 管理端仪表盘">Key Solution 02 · Admin Dashboard</p>
+      <p class="sec__sub" data-en="Turning complex HR findings into decision-support tools." data-zh="把复杂的 HR 发现转化为决策支持工具。">Turning complex HR findings into decision-support tools.</p>
+      <p class="sec__text" data-en="The administrative experience helps Arka consultants move from document collection to analysis and recommendation. The dashboard prioritizes the information consultants need first while still providing access to supporting details." data-zh="管理端体验帮助 Arka 顾问从文档收集迈向分析与建议。仪表盘优先呈现顾问最先需要的信息，同时仍提供对支撑细节的访问。">The administrative experience helps Arka consultants move from document collection to analysis and recommendation. The dashboard prioritizes the information consultants need first while still providing access to supporting details.</p>
+      <div class="feat">
+        <div class="feat-card">
+          <p class="feat-card__h" data-en="Global Assessment Overview" data-zh="整体评估总览">Global Assessment Overview</p>
+          <p class="feat-card__d" data-en="A summary score provides an immediate understanding of the client's overall HR health." data-zh="汇总得分让顾问即时了解客户整体的 HR 健康状况。">A summary score provides an immediate understanding of the client's overall HR health.</p>
+        </div>
+        <div class="feat-card">
+          <p class="feat-card__h" data-en="Category-Level Analysis" data-zh="分类别分析">Category-Level Analysis</p>
+          <p class="feat-card__d" data-en="Results are organized into HR categories so consultants can identify areas with strong coverage and areas requiring immediate attention." data-zh="结果按 HR 类别组织，方便顾问识别覆盖良好的领域与亟需关注的领域。">Results are organized into HR categories so consultants can identify areas with strong coverage and areas requiring immediate attention.</p>
+        </div>
+        <div class="feat-card">
+          <p class="feat-card__h" data-en="Critical Gap Prioritization" data-zh="关键差距优先级">Critical Gap Prioritization</p>
+          <p class="feat-card__d" data-en="High-risk or incomplete policies are surfaced before less urgent findings." data-zh="高风险或不完整的政策会先于较不紧急的发现被呈现出来。">High-risk or incomplete policies are surfaced before less urgent findings.</p>
+        </div>
+        <div class="feat-card">
+          <p class="feat-card__h" data-en="Document Status" data-zh="文档状态">Document Status</p>
+          <p class="feat-card__d" data-en="Consultants can identify missing, expired, incomplete, partially compliant, or fully compliant documents." data-zh="顾问可以识别缺失、过期、不完整、部分合规或完全合规的文档。">Consultants can identify missing, expired, incomplete, partially compliant, or fully compliant documents.</p>
+        </div>
+        <div class="feat-card">
+          <p class="feat-card__h" data-en="Actionable Recommendations" data-zh="可落地的建议">Actionable Recommendations</p>
+          <p class="feat-card__d" data-en="AI-supported recommendation cards connect identified gaps with suggested actions, while keeping consultant review central to the process." data-zh="AI 辅助的建议卡片将已识别的差距与建议行动连接起来，同时让顾问复核始终处于流程核心。">AI-supported recommendation cards connect identified gaps with suggested actions, while keeping consultant review central to the process.</p>
+        </div>
+        <div class="feat-card">
+          <p class="feat-card__h" data-en="Client Management" data-zh="客户管理">Client Management</p>
+          <p class="feat-card__d" data-en="Search and filtering concepts help consultants locate existing clients and manage multiple assessments more efficiently." data-zh="搜索与筛选相关概念帮助顾问定位现有客户，并更高效地管理多个评估。">Search and filtering concepts help consultants locate existing clients and manage multiple assessments more efficiently.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHAT MAKES IT VALUABLE -->
+    <section class="reveal">
+      <p class="sec__label" data-en="What Makes the Solution Valuable" data-zh="方案价值何在">What Makes the Solution Valuable</p>
+      <div class="numgrid">
+        <div class="numcard">
+          <p class="numcard__n">01</p>
+          <p class="numcard__h" data-en="A Dual-Sided Product Ecosystem" data-zh="双端产品生态">A Dual-Sided Product Ecosystem</p>
+          <p class="numcard__d" data-en="The project considers both the client submission experience and the consultant decision-making experience." data-zh="项目同时兼顾客户的提交体验与顾问的决策体验。">The project considers both the client submission experience and the consultant decision-making experience.</p>
+        </div>
+        <div class="numcard">
+          <p class="numcard__n">02</p>
+          <p class="numcard__h" data-en="Workflow Before Decoration" data-zh="先有工作流，再谈修饰">Workflow Before Decoration</p>
+          <p class="numcard__d" data-en="The solution focuses on reducing operational friction rather than designing an isolated analytics dashboard." data-zh="方案聚焦于减少运营摩擦，而非打造一个孤立的分析仪表盘。">The solution focuses on reducing operational friction rather than designing an isolated analytics dashboard.</p>
+        </div>
+        <div class="numcard">
+          <p class="numcard__n">03</p>
+          <p class="numcard__h" data-en="Research-Driven Feature Prioritization" data-zh="以研究驱动的功能优先级">Research-Driven Feature Prioritization</p>
+          <p class="numcard__d" data-en="Features were selected according to user needs, business value, and MVP feasibility." data-zh="功能依据用户需求、商业价值与 MVP 可行性来筛选。">Features were selected according to user needs, business value, and MVP feasibility.</p>
+        </div>
+        <div class="numcard">
+          <p class="numcard__n">04</p>
+          <p class="numcard__h" data-en="Actionable Data Presentation" data-zh="可落地的数据呈现">Actionable Data Presentation</p>
+          <p class="numcard__d" data-en="Results are connected to priorities and recommendations instead of being presented as abstract scores." data-zh="结果与优先级、建议相连接，而不是作为抽象的分数呈现。">Results are connected to priorities and recommendations instead of being presented as abstract scores.</p>
+        </div>
+        <div class="numcard" style="grid-column:1 / -1">
+          <p class="numcard__n">05</p>
+          <p class="numcard__h" data-en="Human-Centered AI" data-zh="以人为本的 AI">Human-Centered AI</p>
+          <p class="numcard__d" data-en="The concept uses AI to support analysis while preserving transparency, consultant review, and user trust." data-zh="该概念用 AI 来辅助分析，同时保留透明度、顾问复核与用户信任。">The concept uses AI to support analysis while preserving transparency, consultant review, and user trust.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- DESIGN PROCESS -->
+    <section class="reveal">
+      <p class="sec__label" data-en="Design Process" data-zh="设计流程">Design Process</p>
+      <div class="spine">
+        <div class="spine__row">
+          <span class="spine__dot"></span>
+          <p class="spine__meta" data-en="01 · Stakeholder Inquiry" data-zh="01 · 利益相关者调研">01 · Stakeholder Inquiry</p>
+          <p class="spine__d" data-en="Understanding Arka's business goals, consulting workflow, document requirements, and expectations for automation." data-zh="了解 Arka 的业务目标、咨询工作流、文档要求以及对自动化的期望。">Understanding Arka's business goals, consulting workflow, document requirements, and expectations for automation.</p>
+        </div>
+        <div class="spine__row">
+          <span class="spine__dot"></span>
+          <p class="spine__meta" data-en="02 · User Research" data-zh="02 · 用户研究">02 · User Research</p>
+          <p class="spine__d" data-en="Exploring the needs, pain points, and behaviors of consultants and client HR managers." data-zh="探索顾问与客户方 HR 经理的需求、痛点与行为。">Exploring the needs, pain points, and behaviors of consultants and client HR managers.</p>
+        </div>
+        <div class="spine__row">
+          <span class="spine__dot"></span>
+          <p class="spine__meta" data-en="03 · Problem Definition" data-zh="03 · 问题定义">03 · Problem Definition</p>
+          <p class="spine__d" data-en="Identifying fragmentation, unclear progress, repetitive communication, and difficulty interpreting findings." data-zh="识别流程碎片化、进度不清晰、重复沟通以及理解发现的困难。">Identifying fragmentation, unclear progress, repetitive communication, and difficulty interpreting findings.</p>
+        </div>
+        <div class="spine__row">
+          <span class="spine__dot"></span>
+          <p class="spine__meta" data-en="04 · Feature Prioritization" data-zh="04 · 功能优先级">04 · Feature Prioritization</p>
+          <p class="spine__d" data-en="Separating must-have MVP features from secondary and future concepts." data-zh="将必备的 MVP 功能与次要及未来概念区分开来。">Separating must-have MVP features from secondary and future concepts.</p>
+        </div>
+        <div class="spine__row">
+          <span class="spine__dot"></span>
+          <p class="spine__meta" data-en="05 · Workflow Design" data-zh="05 · 工作流设计">05 · Workflow Design</p>
+          <p class="spine__d" data-en="Connecting surveys, interviews, documents, analysis, consultant review, and recommendations into one system." data-zh="将问卷、访谈、文档、分析、顾问复核与建议整合进一个系统。">Connecting surveys, interviews, documents, analysis, consultant review, and recommendations into one system.</p>
+        </div>
+        <div class="spine__row">
+          <span class="spine__dot"></span>
+          <p class="spine__meta" data-en="06 · Wireframing" data-zh="06 · 线框图">06 · Wireframing</p>
+          <p class="spine__d" data-en="Testing page structure, navigation, information hierarchy, and key task flows." data-zh="测试页面结构、导航、信息层级与关键任务流。">Testing page structure, navigation, information hierarchy, and key task flows.</p>
+        </div>
+        <div class="spine__row">
+          <span class="spine__dot"></span>
+          <p class="spine__meta" data-en="07 · High-Fidelity Prototyping" data-zh="07 · 高保真原型">07 · High-Fidelity Prototyping</p>
+          <p class="spine__d" data-en="Creating an interactive Figma prototype for both the administrative and client-facing experiences." data-zh="为管理端与客户端两种体验制作可交互的 Figma 原型。">Creating an interactive Figma prototype for both the administrative and client-facing experiences.</p>
+        </div>
+        <div class="spine__row">
+          <span class="spine__dot"></span>
+          <p class="spine__meta" data-en="08 · Review and Iteration" data-zh="08 · 评审与迭代">08 · Review and Iteration</p>
+          <p class="spine__d" data-en="Refining the experience based on stakeholder feedback, team reviews, and usability considerations." data-zh="根据利益相关者反馈、团队评审与可用性考量优化体验。">Refining the experience based on stakeholder feedback, team reviews, and usability considerations.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- OUTCOME -->
+    <section class="reveal">
+      <p class="sec__label" data-en="Outcome" data-zh="成果">Outcome</p>
+      <p class="sec__text" data-en="The final deliverable is a high-fidelity, interactive Figma prototype that demonstrates how Arka could transform a manual HR consulting process into a more organized, scalable, and client-facing digital service." data-zh="最终交付成果是一个高保真、可交互的 Figma 原型，展示了 Arka 如何将依赖人工的 HR 咨询流程，转化为更有条理、可规模化且面向客户的数字化服务。">The final deliverable is a high-fidelity, interactive Figma prototype that demonstrates how Arka could transform a manual HR consulting process into a more organized, scalable, and client-facing digital service.</p>
+      <p class="sec__text" data-en="The concept creates a connected experience in which clients know exactly what they need to complete, while consultants receive clearer and more structured information for analysis and decision-making." data-zh="该概念营造出一种相互连接的体验：客户清楚地知道自己需要完成什么，而顾问则获得更清晰、更结构化的信息用于分析与决策。">The concept creates a connected experience in which clients know exactly what they need to complete, while consultants receive clearer and more structured information for analysis and decision-making.</p>
+      <p class="sec__text" style="margin-bottom:4px" data-en="The project demonstrates:" data-zh="本项目体现了：">The project demonstrates:</p>
+      <ul class="checklist">
+        <li data-en="End-to-end product thinking" data-zh="端到端的产品思维">End-to-end product thinking</li>
+        <li data-en="Multi-user workflow design" data-zh="多用户工作流设计">Multi-user workflow design</li>
+        <li data-en="Complex information organization" data-zh="复杂信息的组织">Complex information organization</li>
+        <li data-en="Task and progress visualization" data-zh="任务与进度的可视化">Task and progress visualization</li>
+        <li data-en="Dashboard and data visualization design" data-zh="仪表盘与数据可视化设计">Dashboard and data visualization design</li>
+        <li data-en="AI transparency considerations" data-zh="AI 透明度方面的考量">AI transparency considerations</li>
+        <li data-en="MVP prioritization" data-zh="MVP 优先级排定">MVP prioritization</li>
+        <li data-en="Collaboration around a real business problem" data-zh="围绕真实商业问题的协作">Collaboration around a real business problem</li>
+      </ul>
+    </section>
+
+    <!-- REFLECTION -->
+    <section class="reveal">
+      <p class="sec__label" data-en="Reflection" data-zh="反思">Reflection</p>
+      <p class="sec__text" data-en="This project strengthened my understanding of how UX design can support both operational efficiency and user confidence." data-zh="这个项目加深了我对 UX 设计如何同时支撑运营效率与用户信心的理解。">This project strengthened my understanding of how UX design can support both operational efficiency and user confidence.</p>
+      <p class="sec__text" data-en="One of the main challenges was designing for two groups with very different goals. Clients needed guidance, reassurance, and clear next steps, while consultants needed speed, accuracy, prioritization, and access to detailed findings." data-zh="主要挑战之一是为目标截然不同的两类群体做设计。客户需要引导、安心感与清晰的下一步，而顾问需要速度、准确性、优先级以及对详细发现的访问。">One of the main challenges was designing for two groups with very different goals. Clients needed guidance, reassurance, and clear next steps, while consultants needed speed, accuracy, prioritization, and access to detailed findings.</p>
+      <p class="sec__text" data-en="The project also reinforced that AI-supported products should not hide their reasoning. Automation becomes more useful when users can understand the source of a finding, review the recommendation, and remain in control of the final decision." data-zh="项目也再次印证：AI 辅助的产品不应隐藏其推理过程。当用户能够理解发现的来源、复核建议并掌控最终决策时，自动化才会变得更有价值。">The project also reinforced that AI-supported products should not hide their reasoning. Automation becomes more useful when users can understand the source of a finding, review the recommendation, and remain in control of the final decision.</p>
+      <p class="sec__sub" style="margin-top:34px" data-en="What I Learned" data-zh="我的收获">What I Learned</p>
+      <ul class="learned">
+        <li data-en="How to translate a complex professional service into a structured digital workflow." data-zh="如何把复杂的专业服务转化为结构化的数字工作流。">How to translate a complex professional service into a structured digital workflow.</li>
+        <li data-en="How to design connected experiences for multiple user roles." data-zh="如何为多种用户角色设计相互连接的体验。">How to design connected experiences for multiple user roles.</li>
+        <li data-en="How to balance automation with transparency and human oversight." data-zh="如何在自动化与透明度、人工把关之间取得平衡。">How to balance automation with transparency and human oversight.</li>
+      </ul>
+    </section>
+
+    <!-- EXPLORE THE EXPERIENCE -->
+    <section class="reveal">
+      <p class="sec__label" data-en="Explore the Experience" data-zh="探索体验">Explore the Experience</p>
+      <div class="explore">
+        <div class="explore-card">
+          <p class="explore-card__tag" data-en="Admin Experience" data-zh="管理端体验">Admin Experience</p>
+          <p class="explore-card__d" data-en="See how Arka consultants review clients, interpret assessment results, identify critical gaps, and develop recommendations." data-zh="看看 Arka 顾问如何审查客户、解读评估结果、识别关键差距并制定建议。">See how Arka consultants review clients, interpret assessment results, identify critical gaps, and develop recommendations.</p>
+          <a class="link-btn link-btn--ghost" href="https://drive.google.com/file/d/1_hktLQzXinYOAxZFrlzaqY_gufOeYcTa/view?usp=drivesdk" target="_blank" rel="noopener">
+            <span data-en="Watch Admin Demo" data-zh="观看管理端演示">Watch Admin Demo</span>
+            <svg class="link-btn__arrow" viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H8M17 7v9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+        <div class="explore-card">
+          <p class="explore-card__tag" data-en="Client Experience" data-zh="客户端体验">Client Experience</p>
+          <p class="explore-card__d" data-en="See how client HR managers complete assessment tasks, share surveys, schedule interviews, upload documents, and track progress." data-zh="看看客户方 HR 经理如何完成评估任务、分享问卷、安排访谈、上传文档并追踪进度。">See how client HR managers complete assessment tasks, share surveys, schedule interviews, upload documents, and track progress.</p>
+          <a class="link-btn link-btn--ghost" href="https://www.loom.com/share/e91b6e0a4bb5427a9f35190b95d2bfd7" target="_blank" rel="noopener">
+            <span data-en="Watch Client Demo" data-zh="观看客户端演示">Watch Client Demo</span>
+            <svg class="link-btn__arrow" viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H8M17 7v9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="links-row" style="width:auto;margin-left:0">
+        <a class="link-btn link-btn--primary" href="https://www.figma.com/design/yy22U4Aj1Vl4w18HDaiYtY/Arka---Design-Prototype-Model?node-id=167-13408&t=ieNwahHXsh0d8NEy-1" target="_blank" rel="noopener">
+          <span data-en="View Figma Prototype" data-zh="查看 Figma 原型">View Figma Prototype</span>
+          <svg class="link-btn__arrow" viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H8M17 7v9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </section>
+
+  </div>
+
+  <footer class="footer">
+    <div class="footer__logo">AMBER<span>.</span></div>
+    <nav class="footer__col">
+      <h4 data-en="Navigation" data-zh="导航">Navigation</h4>
+      <ul>
+        <li><a href="PORTFOLIO.html" data-en="Home" data-zh="主页">Home</a></li>
+        <li><a href="works.html" data-en="Works" data-zh="作品集">Works</a></li>
+        <li><a href="experience.html" data-en="Gaming" data-zh="游戏经历">Gaming</a></li>
+        <li><a href="resume.html" data-en="Resume" data-zh="简历">Resume</a></li>
+        <li><a href="contact.html" data-en="Contact" data-zh="联系">Contact</a></li>
+      </ul>
+    </nav>
+    <nav class="footer__col">
+      <h4 data-en="Connect" data-zh="联系">Connect</h4>
+      <ul>
+        <li><a href="#" target="_blank" rel="noopener">itch.io</a></li>
+        <li><a href="#" target="_blank" rel="noopener">LinkedIn</a></li>
+        <li><a href="#" target="_blank" rel="noopener">GitHub</a></li>
+      </ul>
+    </nav>
+  </footer>
+</div>
+
+<script>
+(function(){
+  var els = document.querySelectorAll('.reveal');
+  if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')});return}
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target)}});
+  },{threshold:.12});
+  els.forEach(function(e){io.observe(e)});
+})();
+/* ---- Language Switch ---- */
+(function(){
+  var K = 'portfolio_lang';
+  function applyLang(lang) {
+    document.querySelectorAll('[data-en]').forEach(function(el){
+      el.textContent = el.getAttribute('data-' + lang) || el.getAttribute('data-en');
+    });
+    document.querySelectorAll('[data-en-html]').forEach(function(el){
+      el.innerHTML = el.getAttribute('data-' + lang + '-html') || el.getAttribute('data-en-html');
+    });
+    document.querySelectorAll('.lang-toggle__btn').forEach(function(b){
+      b.classList.toggle('active', b.dataset.lang === lang);
+    });
+    document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+    try { localStorage.setItem(K, lang); } catch(e){}
+  }
+  var saved; try { saved = localStorage.getItem(K); } catch(e){}
+  applyLang(saved || 'en');
+  var toggle = document.querySelector('.lang-toggle');
+  if(toggle) toggle.addEventListener('click', function(e){
+    var btn = e.target.closest('[data-lang]');
+    if(btn) applyLang(btn.dataset.lang);
+  });
+})();
+</script>
+</body>
+</html>
