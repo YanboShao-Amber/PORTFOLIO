@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Serenity — Mindful Focus App — Amber</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#191816;--surface:#211f1d;--surface-2:#272421;
+    --line:rgba(255,255,255,.12);--line-strong:rgba(255,255,255,.22);
+    --text:#f3f0ea;--muted:#9b978d;--faint:#6a665e;
+    --accent:#69bd92;--gold:#cda44e;
+    --display:'Archivo',sans-serif;--body:'Inter',sans-serif;--mono:'Space Mono',monospace;
+    --maxw:880px;--ease:cubic-bezier(.22,.61,.36,1);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--text);font-family:var(--body);line-height:1.55;-webkit-font-smoothing:antialiased;padding:0 20px;overflow-x:hidden}
+  .wrap{max-width:var(--maxw);margin:0 auto}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+  /* NAV */
+  .nav{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:center;height:60px;background:rgba(25,24,22,.82);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line);margin:0 -20px;padding:0 20px}
+  .nav__links{display:flex;gap:96px;list-style:none}
+  .nav__links a{font-family:var(--mono);font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,0.65);text-decoration:none;position:relative;padding:6px 0;transition:color .25s var(--ease)}
+  .nav__links a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:1px;background:var(--text);transition:width .3s var(--ease)}
+  .nav__links a:hover,.nav__links a.active{color:var(--text)}
+  .nav__links a:hover::after,.nav__links a.active::after{width:100%}
+  .lang-toggle{position:absolute;right:60px;display:flex;align-items:center;background:rgba(255,255,255,.08);border-radius:20px;padding:3px;gap:2px}
+  .lang-toggle__btn{font-family:var(--mono);font-size:11px;font-weight:500;color:rgba(255,255,255,.45);background:transparent;border:none;cursor:pointer;padding:5px 13px;border-radius:16px;transition:color .2s ease,background .2s ease}
+  .lang-toggle__btn.active{background:#fff;color:#1a1a1a;box-shadow:0 1px 5px rgba(0,0,0,.35)}
+
+  /* BACK LINK */
+  .back{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);text-decoration:none;padding:28px 0 0;margin-left:calc(-50vw + 50% + 100px);transition:color .25s var(--ease)}
+  .back:hover{color:var(--text)}
+  .back svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2}
+
+  /* HERO (full banner cover, no overlay) */
+  .proj-hero{width:calc(100vw - 160px);margin-left:calc(-50vw + 50% + 80px);margin-top:48px;border:1px solid var(--line);overflow:hidden}
+  .proj-hero__img{width:100%;height:auto;display:block}
+
+  /* META GRID */
+  .meta-grid{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--line);border-bottom:0;margin-top:48px;width:calc(100vw - 440px);margin-left:calc(-50vw + 50% + 220px)}
+  .meta-item{padding:22px 26px;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .meta-item:nth-child(3n){border-right:0}
+  .meta-label{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+  .meta-value{font-size:14.5px;font-weight:600;color:var(--text);line-height:1.5}
+
+  /* BODY */
+  .proj-body{padding:80px 0 48px;display:flex;flex-direction:column;gap:76px;width:calc(100vw - 440px);margin-left:calc(-50vw + 50% + 220px)}
+  .sec__label{font-family:var(--mono);font-size:15px;letter-spacing:.2em;text-transform:uppercase;color:#fff;margin-bottom:20px;display:flex;align-items:center;gap:12px}
+  .sec__label::before{content:'';width:22px;height:2px;background:var(--accent);flex-shrink:0}
+  .sec__sub{font-family:var(--display);font-weight:700;font-size:clamp(19px,2.2vw,24px);line-height:1.3;color:var(--text);margin:-6px 0 22px}
+  .sec__text{font-size:16px;line-height:1.8;color:#d9d6cd}
+  .sec__text+.sec__text{margin-top:16px}
+  .sec__text strong{color:#fff;font-weight:600}
+
+  /* CONCEPT CALLOUT */
+  .concept{border:1px solid rgba(105,189,146,.32);border-radius:14px;padding:30px 34px;background:linear-gradient(to right,rgba(105,189,146,.08),transparent 72%)}
+  .concept__lead{font-family:var(--display);font-weight:800;font-size:clamp(20px,2.6vw,28px);line-height:1.25;color:var(--text);margin-bottom:14px;max-width:22ch}
+  .concept__lead em{color:var(--accent);font-style:normal}
+  .concept__text{font-size:15px;line-height:1.8;color:#c7c4bb;max-width:64ch}
+
+  /* PRINCIPLES / FEATURES numbered cards */
+  .numgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:26px}
+  .numcard{border:1px solid var(--line);border-radius:12px;padding:24px 26px;background:rgba(255,255,255,.018)}
+  .numcard__n{font-family:var(--mono);font-weight:700;font-size:13px;letter-spacing:.1em;color:var(--accent);margin-bottom:12px}
+  .numcard__h{font-family:var(--display);font-weight:700;font-size:17px;color:var(--text);margin-bottom:10px;line-height:1.3}
+  .numcard__d{font-size:14.5px;line-height:1.7;color:#bdbab1}
+
+  /* FEATURE BLOCKS */
+  .feat{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:26px}
+  .feat-card{border:1px solid var(--line);border-radius:12px;padding:22px 24px;background:rgba(255,255,255,.018)}
+  .feat-card__h{font-family:var(--display);font-weight:700;font-size:16px;color:var(--text);margin-bottom:9px;display:flex;align-items:center;gap:9px}
+  .feat-card__h::before{content:'';width:9px;height:9px;border-radius:2px;background:var(--accent);transform:rotate(45deg);flex-shrink:0}
+  .feat-card__d{font-size:14px;line-height:1.7;color:#bdbab1}
+
+  /* SCREENS GALLERY */
+  .screens{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:26px}
+  .screen{background:#f0ede6;border:1px solid var(--line);border-radius:14px;padding:14px 14px 0;overflow:hidden;display:flex;flex-direction:column}
+  .screen--wide{grid-column:span 1}
+  .screen img{width:100%;height:auto;display:block;border-radius:6px}
+  .screen__cap{padding:14px 6px 16px;text-align:center}
+  .screen__t{font-family:var(--display);font-weight:700;font-size:14.5px;color:#2b2a27}
+  .screen__d{font-size:12px;line-height:1.5;color:#6a675f;margin-top:3px}
+
+  /* TAKEAWAYS */
+  .learned{list-style:none;display:flex;flex-direction:column;gap:12px;margin-top:22px}
+  .learned li{position:relative;padding:16px 20px 16px 22px;border:1px solid var(--line);border-left:2px solid var(--accent);border-radius:8px;background:rgba(255,255,255,.018);font-size:15px;line-height:1.6;color:#cfccc3}
+
+  /* FOOTER */
+  .footer{border-top:1px solid var(--line);padding:48px 0 60px;display:grid;grid-template-columns:1fr auto auto;gap:60px;width:calc(100vw - 160px);margin-left:calc(-50vw + 50% + 80px)}
+  .footer__logo{font-family:var(--display);font-weight:900;font-size:34px;letter-spacing:-.01em;align-self:start}
+  .footer__logo span{color:var(--muted)}
+  .footer__col+.footer__col{margin-left:100px}
+  .footer__col:last-child{margin-right:200px}
+  .footer__col h4{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);font-weight:700;margin-bottom:16px}
+  .footer__col ul{list-style:none}
+  .footer__col li{margin-bottom:9px}
+  .footer__col a{color:var(--text);text-decoration:none;font-size:14px;position:relative;transition:color .25s var(--ease)}
+  .footer__col a::after{content:"";position:absolute;left:0;bottom:-2px;width:0;height:1px;background:currentColor;transition:width .3s var(--ease)}
+  .footer__col a:hover{color:var(--muted)}
+  .footer__col a:hover::after{width:100%}
+
+  .reveal{opacity:0;transform:translateY(20px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+  .reveal.in{opacity:1;transform:none}
+
+  /* RESPONSIVE */
+  @media(max-width:1100px){
+    .back{margin-left:0}
+    .proj-hero,.meta-grid,.proj-body,.footer{width:100%;margin-left:0}
+    .footer{grid-template-columns:1fr}
+    .footer__col+.footer__col{margin-left:0}
+    .footer__col:last-child{margin-right:0}
+  }
+  @media(max-width:820px){
+    .screens{grid-template-columns:repeat(2,1fr)}
+  }
+  @media(max-width:640px){
+    .meta-grid{grid-template-columns:repeat(2,1fr)}
+    .meta-item:nth-child(3n){border-right:1px solid var(--line)}
+    .meta-item:nth-child(2n){border-right:0}
+    .numgrid,.feat,.screens{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <ul class="nav__links">
+    <li><a href="index.html" data-en="Home" data-zh="主页">Home</a></li>
+    <li><a href="works.html" class="active" data-en="Works" data-zh="作品集">Works</a></li>
+    <li><a href="experience.html" data-en="Gaming" data-zh="游戏经历">Gaming</a></li>
+    <li><a href="resume.html" data-en="Resume" data-zh="简历">Resume</a></li>
+    <li><a href="contact.html" data-en="Contact" data-zh="联系">Contact</a></li>
+  </ul>
+  <div class="lang-toggle">
+    <button class="lang-toggle__btn active" data-lang="en">EN</button>
+    <button class="lang-toggle__btn" data-lang="zh">中文</button>
+  </div>
+</nav>
+
+<div class="wrap">
+  <a class="back" href="works.html">
+    <svg viewBox="0 0 24 24"><path d="M19 12H5M5 12l7 7M5 12l7-7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span data-en="Back to Works" data-zh="返回作品集">Back to Works</span>
+  </a>
+</div>
+
+<!-- HERO -->
+<div style="max-width:var(--maxw);margin:0 auto;padding:0 20px">
+  <h1 class="sr-only">Serenity — A Mindful Focus App for Calm Productivity</h1>
+  <div class="proj-hero reveal">
+    <img class="proj-hero__img" src="WORKS/serenity/serenity cover.png" alt="Serenity — A Mindful Focus App for Calm Productivity">
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- META GRID -->
+  <div class="meta-grid reveal">
+    <div class="meta-item">
+      <p class="meta-label" data-en="Project Type" data-zh="项目类型">Project Type</p>
+      <p class="meta-value" data-en="UX/UI Design · Mobile App" data-zh="UX/UI 设计 · 移动应用">UX/UI Design · Mobile App</p>
+    </div>
+    <div class="meta-item">
+      <p class="meta-label" data-en="Focus" data-zh="定位">Focus</p>
+      <p class="meta-value" data-en="Productivity &amp; Wellness" data-zh="效率 & 身心健康">Productivity &amp; Wellness</p>
+    </div>
+    <div class="meta-item">
+      <p class="meta-label" data-en="Platform" data-zh="平台">Platform</p>
+      <p class="meta-value" data-en="iOS · Mobile" data-zh="iOS · 移动端">iOS · Mobile</p>
+    </div>
+    <div class="meta-item">
+      <p class="meta-label" data-en="Context" data-zh="项目背景">Context</p>
+      <p class="meta-value" data-en="Academic Final Project" data-zh="课程期末项目">Academic Final Project</p>
+    </div>
+    <div class="meta-item">
+      <!-- EDIT: 填入真实周期，例如 "Spring 2025" -->
+      <p class="meta-label" data-en="Timeline" data-zh="周期">Timeline</p>
+      <p class="meta-value" data-en="2025" data-zh="2025 年">2025</p>
+    </div>
+    <div class="meta-item">
+      <!-- EDIT: 确认工具，如非 Figma 请修改 -->
+      <p class="meta-label" data-en="Tools" data-zh="工具">Tools</p>
+      <p class="meta-value">Figma</p>
+    </div>
+  </div>
+
+  <!-- EDIT: 如果有 Figma 原型或演示链接，可在这里加一个 links-row（参考 arka.html） -->
+
+  <div class="proj-body">
+
+    <!-- OVERVIEW -->
+    <section class="reveal">
+      <p class="sec__label" data-en="Overview" data-zh="项目概览">Overview</p>
+      <p class="sec__text" data-en="Serenity is a concept design for a mobile focus app that reframes productivity as a calm, intentional ritual. Instead of pushing users with streak pressure and aggressive metrics, it pairs a gentle focus timer and daily intentions with an editorial, typography-led aesthetic — so the time you spend focusing feels like something worth looking forward to." data-zh="Serenity 是一款专注类移动应用的概念设计，它把「高效」重新诠释为一种平静而有意图的仪式。相比用连胜压力和激进的数据去逼迫用户，它把温和的专注计时器与每日意图，同一套编辑感、以排版为主导的美学结合在一起——让你专注的这段时间，本身就成为一件值得期待的事。">Serenity is a concept design for a mobile focus app that reframes productivity as a calm, intentional ritual. Instead of pushing users with streak pressure and aggressive metrics, it pairs a gentle focus timer and daily intentions with an editorial, typography-led aesthetic — so the time you spend focusing feels like something worth looking forward to.</p>
+      <p class="sec__text" data-en="The product connects four moments of a focus habit into one quiet flow: setting intentions for the day, running a focus session, reflecting on the rhythm of that focus, and being rewarded with craft rather than guilt." data-zh="产品把一个专注习惯中的四个时刻，串联成一条平静的流程：为一天设定意图、进行一次专注、回看这段专注的节奏，并以「用心的细节」而非「负罪感」作为奖励。">The product connects four moments of a focus habit into one quiet flow: setting intentions for the day, running a focus session, reflecting on the rhythm of that focus, and being rewarded with craft rather than guilt.</p>
+    </section>
+
+    <!-- CONCEPT -->
+    <section class="reveal">
+      <p class="sec__label" data-en="The Idea" data-zh="核心概念">The Idea</p>
+      <div class="concept">
+        <p class="concept__lead" data-en-html="Typography as the <em>reward</em>, not just the style." data-zh-html="把排版本身，做成<em>奖励</em>，而不只是风格。">Typography as the <em>reward</em>, not just the style.</p>
+        <p class="concept__text" data-en="Serenity's signature idea is turning typography into the reward loop. Focus time unlocks new typefaces in a Font Library, and every completed session can become a printable typographic poster — a small keepsake that makes a quiet hour of focus feel tangible and worth repeating." data-zh="Serenity 最具标志性的想法，是把排版变成奖励闭环。专注时间会在「字体库」中解锁新的字体，而每一次完成的专注，都可以生成一张可打印的排版海报——一份小小的纪念，让安静专注的一个小时变得具体、值得再来一次。">Serenity's signature idea is turning typography into the reward loop. Focus time unlocks new typefaces in a Font Library, and every completed session can become a printable typographic poster — a small keepsake that makes a quiet hour of focus feel tangible and worth repeating.</p>
+      </div>
+    </section>
+
+    <!-- DESIGN PRINCIPLES -->
+    <section class="reveal">
+      <p class="sec__label" data-en="Designing for Calm" data-zh="为「平静」而设计">Designing for Calm</p>
+      <div class="numgrid">
+        <div class="numcard">
+          <p class="numcard__n">01</p>
+          <p class="numcard__h" data-en="Calm Over Pressure" data-zh="平静优先于压力">Calm Over Pressure</p>
+          <p class="numcard__d" data-en="Soft sage tones, generous whitespace, and gentle copy — &ldquo;Begin when you're ready&rdquo; — replace the urgency that most productivity apps rely on." data-zh="柔和的鼠尾草绿、充足的留白，以及温和的文案——「准备好了再开始」——取代了大多数效率应用所依赖的紧迫感。">Soft sage tones, generous whitespace, and gentle copy — &ldquo;Begin when you're ready&rdquo; — replace the urgency that most productivity apps rely on.</p>
+        </div>
+        <div class="numcard">
+          <p class="numcard__n">02</p>
+          <p class="numcard__h" data-en="Intention First" data-zh="意图先行">Intention First</p>
+          <p class="numcard__d" data-en="The day starts as a short list of intentions rather than a backlog, and each one closes with a quiet quote to ground the ritual." data-zh="一天从一份简短的「意图」清单开始，而非堆积的待办；每一天都以一句安静的箴言收尾，为这份仪式定调。">The day starts as a short list of intentions rather than a backlog, and each one closes with a quiet quote to ground the ritual.</p>
+        </div>
+        <div class="numcard">
+          <p class="numcard__n">03</p>
+          <p class="numcard__h" data-en="Reward, Not Guilt" data-zh="奖励，而非负罪感">Reward, Not Guilt</p>
+          <p class="numcard__d" data-en="Progress is shown as a rhythm curve and unlockable craft, so a missed day reads as a pause — not a failure." data-zh="进度以「节奏曲线」和可解锁的用心细节来呈现，因此错过一天只是一次暂停，而不是一次失败。">Progress is shown as a rhythm curve and unlockable craft, so a missed day reads as a pause — not a failure.</p>
+        </div>
+        <div class="numcard">
+          <p class="numcard__n">04</p>
+          <p class="numcard__h" data-en="Editorial Typography" data-zh="编辑式排版">Editorial Typography</p>
+          <p class="numcard__d" data-en="A serif display voice and print-inspired layout make the app feel less like a tool and more like a quiet magazine you return to." data-zh="衬线标题的气质与印刷感的版式，让这款应用不像一个工具，而更像一本你会反复翻开的安静杂志。">A serif display voice and print-inspired layout make the app feel less like a tool and more like a quiet magazine you return to.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CORE FEATURES -->
+    <section class="reveal">
+      <p class="sec__label" data-en="Core Features" data-zh="核心功能">Core Features</p>
+      <div class="feat">
+        <div class="feat-card">
+          <p class="feat-card__h" data-en="Focus Timer" data-zh="专注计时器">Focus Timer</p>
+          <p class="feat-card__d" data-en="A drag-to-set circular timer. Run a free-focus session or attach it to a specific intention, then begin at your own pace." data-zh="一个拖动即可设定时长的圆形计时器。可以自由专注，也可以把它绑定到某个具体意图上，然后按自己的节奏开始。">A drag-to-set circular timer. Run a free-focus session or attach it to a specific intention, then begin at your own pace.</p>
+        </div>
+        <div class="feat-card">
+          <p class="feat-card__h" data-en="Today &amp; Intentions" data-zh="今日与意图">Today &amp; Intentions</p>
+          <p class="feat-card__d" data-en="A calm daily list tagged Work, Personal, or Learning. Each item can launch a focus session, and the day closes with a rotating quote." data-zh="一份平静的每日清单，可标记为「工作」「个人」或「学习」。每一项都能直接开启一次专注，而这一天以一句轮换的箴言收尾。">A calm daily list tagged Work, Personal, or Learning. Each item can launch a focus session, and the day closes with a rotating quote.</p>
+        </div>
+        <div class="feat-card">
+          <p class="feat-card__h" data-en="Statistics" data-zh="数据统计">Statistics</p>
+          <p class="feat-card__d" data-en="&ldquo;Trace the rhythm of your mind.&rdquo; Sessions, focused hours, and streaks sit above a Daily Focus Time Curve that surfaces your peak focus hour." data-zh="「追踪你思绪的节奏。」次数、专注时长与连续天数，位于一条「每日专注曲线」之上，帮你发现自己专注的高峰时段。">&ldquo;Trace the rhythm of your mind.&rdquo; Sessions, focused hours, and streaks sit above a Daily Focus Time Curve that surfaces your peak focus hour.</p>
+        </div>
+        <div class="feat-card">
+          <p class="feat-card__h" data-en="Focus Posters" data-zh="专注海报">Focus Posters</p>
+          <p class="feat-card__d" data-en="Each session becomes an editorial typographic poster — a named, dated keepsake like &ldquo;Deep Focus · 30 min · Morning Clarity&rdquo; that you can save or share." data-zh="每一次专注都会生成一张编辑感的排版海报——一份带名字与日期的纪念，例如「Deep Focus · 30 min · Morning Clarity」，可以保存或分享。">Each session becomes an editorial typographic poster — a named, dated keepsake like &ldquo;Deep Focus · 30 min · Morning Clarity&rdquo; that you can save or share.</p>
+        </div>
+        <div class="feat-card">
+          <p class="feat-card__h" data-en="Font Library" data-zh="字体库">Font Library</p>
+          <p class="feat-card__d" data-en="Earn typefaces with accumulated focus time. A gentle, gamified reward that lets you personalize the app's reading experience as you go." data-zh="用累计的专注时间解锁字体。一种温和的、带游戏化色彩的奖励，让你在使用过程中逐步个性化应用的阅读体验。">Earn typefaces with accumulated focus time. A gentle, gamified reward that lets you personalize the app's reading experience as you go.</p>
+        </div>
+        <div class="feat-card">
+          <p class="feat-card__h" data-en="Profile &amp; Atmosphere" data-zh="个人与氛围">Profile &amp; Atmosphere</p>
+          <p class="feat-card__d" data-en="Switch Visual Atmosphere themes (Bone, Sage, Clay, Dark), toggle an ambient Soundscape, and manage gentle session reminders." data-zh="切换「视觉氛围」主题（Bone、Sage、Clay、Dark），开关环境音景，并管理温和的专注提醒。">Switch Visual Atmosphere themes (Bone, Sage, Clay, Dark), toggle an ambient Soundscape, and manage gentle session reminders.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCREENS -->
+    <section class="reveal">
+      <p class="sec__label" data-en="The Screens" data-zh="界面展示">The Screens</p>
+      <div class="screens">
+        <div class="screen">
+          <img src="WORKS/serenity/note.jpg" alt="Serenity — Today screen">
+          <div class="screen__cap">
+            <p class="screen__t" data-en="Today" data-zh="今日">Today</p>
+            <p class="screen__d" data-en="Daily intentions &amp; a closing quote" data-zh="每日意图与收尾箴言">Daily intentions &amp; a closing quote</p>
+          </div>
+        </div>
+        <div class="screen">
+          <img src="WORKS/serenity/focus.jpg" alt="Serenity — Focus Timer screen">
+          <div class="screen__cap">
+            <p class="screen__t" data-en="Focus Timer" data-zh="专注计时器">Focus Timer</p>
+            <p class="screen__d" data-en="Drag-to-set, begin when ready" data-zh="拖动设定，准备好再开始">Drag-to-set, begin when ready</p>
+          </div>
+        </div>
+        <div class="screen">
+          <img src="WORKS/serenity/status.jpg" alt="Serenity — Statistic screen">
+          <div class="screen__cap">
+            <p class="screen__t" data-en="Statistic" data-zh="数据统计">Statistic</p>
+            <p class="screen__d" data-en="Focus rhythm &amp; peak hour" data-zh="专注节奏与高峰时段">Focus rhythm &amp; peak hour</p>
+          </div>
+        </div>
+        <div class="screen">
+          <img src="WORKS/serenity/poster.jpg" alt="Serenity — Focus Poster screen">
+          <div class="screen__cap">
+            <p class="screen__t" data-en="Focus Poster" data-zh="专注海报">Focus Poster</p>
+            <p class="screen__d" data-en="A session turned into a keepsake" data-zh="把一次专注变成纪念">A session turned into a keepsake</p>
+          </div>
+        </div>
+        <div class="screen">
+          <img src="WORKS/serenity/fonts.jpg" alt="Serenity — Font Library screen">
+          <div class="screen__cap">
+            <p class="screen__t" data-en="Font Library" data-zh="字体库">Font Library</p>
+            <p class="screen__d" data-en="Unlock typefaces with focus time" data-zh="用专注时间解锁字体">Unlock typefaces with focus time</p>
+          </div>
+        </div>
+        <div class="screen">
+          <img src="WORKS/serenity/profile.jpg" alt="Serenity — Profile screen">
+          <div class="screen__cap">
+            <p class="screen__t" data-en="Profile" data-zh="个人">Profile</p>
+            <p class="screen__d" data-en="Atmosphere, soundscape &amp; stats" data-zh="氛围、音景与统计">Atmosphere, soundscape &amp; stats</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAKEAWAYS -->
+    <section class="reveal">
+      <p class="sec__label" data-en="Design Takeaways" data-zh="设计收获">Design Takeaways</p>
+      <ul class="learned">
+        <li data-en="Wellness and productivity don't have to be opposites — tone, pacing, and typography can do the motivating instead of pressure." data-zh="身心健康与高效并不必然对立——语气、节奏与排版，完全可以取代压力来驱动用户。">Wellness and productivity don't have to be opposites — tone, pacing, and typography can do the motivating instead of pressure.</li>
+        <li data-en="A reward loop built on craft — fonts to unlock, posters to keep — can feel more sustaining than one built on streak anxiety." data-zh="一套建立在「用心细节」之上的奖励闭环——可解锁的字体、可保留的海报——比建立在连胜焦虑上的奖励更能长久维系。">A reward loop built on craft — fonts to unlock, posters to keep — can feel more sustaining than one built on streak anxiety.</li>
+        <li data-en="Treating type as a first-class design material gave the whole product a distinct, memorable identity across every screen." data-zh="把排版当作一等的设计材料来对待，让整个产品在每一个界面上都拥有了独特而令人记住的气质。">Treating type as a first-class design material gave the whole product a distinct, memorable identity across every screen.</li>
+      </ul>
+    </section>
+
+  </div>
+
+  <footer class="footer">
+    <div class="footer__logo">AMBER<span>.</span></div>
+    <nav class="footer__col">
+      <h4 data-en="Navigation" data-zh="导航">Navigation</h4>
+      <ul>
+        <li><a href="index.html" data-en="Home" data-zh="主页">Home</a></li>
+        <li><a href="works.html" data-en="Works" data-zh="作品集">Works</a></li>
+        <li><a href="experience.html" data-en="Gaming" data-zh="游戏经历">Gaming</a></li>
+        <li><a href="resume.html" data-en="Resume" data-zh="简历">Resume</a></li>
+        <li><a href="contact.html" data-en="Contact" data-zh="联系">Contact</a></li>
+      </ul>
+    </nav>
+    <nav class="footer__col">
+      <h4 data-en="Connect" data-zh="联系">Connect</h4>
+      <ul>
+        <li><a href="#" target="_blank" rel="noopener">itch.io</a></li>
+        <li><a href="#" target="_blank" rel="noopener">LinkedIn</a></li>
+        <li><a href="#" target="_blank" rel="noopener">GitHub</a></li>
+      </ul>
+    </nav>
+  </footer>
+</div>
+
+<script>
+(function(){
+  var els = document.querySelectorAll('.reveal');
+  if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')});return}
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target)}});
+  },{threshold:.12});
+  els.forEach(function(e){io.observe(e)});
+})();
+/* ---- Language Switch ---- */
+(function(){
+  var K = 'portfolio_lang';
+  function applyLang(lang) {
+    document.querySelectorAll('[data-en]').forEach(function(el){
+      el.textContent = el.getAttribute('data-' + lang) || el.getAttribute('data-en');
+    });
+    document.querySelectorAll('[data-en-html]').forEach(function(el){
+      el.innerHTML = el.getAttribute('data-' + lang + '-html') || el.getAttribute('data-en-html');
+    });
+    document.querySelectorAll('.lang-toggle__btn').forEach(function(b){
+      b.classList.toggle('active', b.dataset.lang === lang);
+    });
+    document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+    try { localStorage.setItem(K, lang); } catch(e){}
+  }
+  var saved; try { saved = localStorage.getItem(K); } catch(e){}
+  applyLang(saved || 'en');
+  var toggle = document.querySelector('.lang-toggle');
+  if(toggle) toggle.addEventListener('click', function(e){
+    var btn = e.target.closest('[data-lang]');
+    if(btn) applyLang(btn.dataset.lang);
+  });
+})();
+</script>
+</body>
+</html>
