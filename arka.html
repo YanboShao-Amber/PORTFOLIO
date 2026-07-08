@@ -45,38 +45,15 @@
   .back svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2}
 
   /* HERO */
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
   .proj-hero{
     width:calc(100vw - 160px);
     margin-left:calc(-50vw + 50% + 80px);
     margin-top:48px;
-    position:relative;
-    min-height:360px;
     overflow:hidden;
     border:1px solid var(--line);
   }
-  .proj-hero__img{
-    width:100%;height:100%;position:absolute;inset:0;
-    object-fit:cover;object-position:center;display:block;
-  }
-  .proj-hero__overlay{
-    position:absolute;inset:0;
-    background:linear-gradient(to right,rgba(0,0,0,.55) 0%,rgba(0,0,0,.18) 60%,transparent 100%);
-    display:flex;flex-direction:column;justify-content:flex-end;
-    padding:48px 56px;
-  }
-  .proj-hero__eyebrow{
-    font-family:var(--mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;
-    color:var(--accent);margin-bottom:16px;
-  }
-  .proj-hero__title{
-    font-family:var(--display);font-weight:900;
-    font-size:clamp(30px,4.6vw,56px);line-height:1.05;
-    margin-bottom:16px;max-width:18ch;
-  }
-  .proj-hero__sub{
-    font-size:clamp(15px,1.6vw,18px);line-height:1.55;color:rgba(255,255,255,.82);
-    max-width:52ch;font-weight:400;
-  }
+  .proj-hero__img{width:100%;height:auto;display:block}
 
   /* META GRID */
   .meta-grid{
@@ -248,7 +225,6 @@
     .meta-grid{grid-template-columns:repeat(2,1fr)}
     .meta-item:nth-child(4n){border-right:1px solid var(--line)}
     .meta-item:nth-child(2n){border-right:0}
-    .proj-hero__overlay{padding:36px 28px}
   }
   @media(max-width:640px){
     .duo,.numgrid,.mvp,.feat,.explore,.blist,.checklist{grid-template-columns:1fr}
@@ -281,13 +257,10 @@
 
 <!-- HERO -->
 <div style="max-width:var(--maxw);margin:0 auto;padding:0 20px">
+  <h1 class="sr-only" data-en="Arka — AI-Driven HR Gap Assessment" data-zh="Arka — AI 驱动的 HR 差距评估">Arka — AI-Driven HR Gap Assessment</h1>
   <div class="proj-hero reveal">
-    <img class="proj-hero__img" src="WORKS/ARKA/ARKA COVER.png" alt="Arka Cover">
-    <div class="proj-hero__overlay">
-      <p class="proj-hero__eyebrow" data-en="UX/UI · Product Design · Interactive Prototype" data-zh="UX/UI · 产品设计 · 交互原型">UX/UI · Product Design · Interactive Prototype</p>
-      <h1 class="proj-hero__title" data-en="Arka — AI-Driven HR Gap Assessment" data-zh="Arka — AI 驱动的 HR 差距评估">Arka — AI-Driven HR Gap Assessment</h1>
-      <p class="proj-hero__sub" data-en="Transforming a fragmented, manual HR audit into a guided, transparent, and actionable digital experience." data-zh="将碎片化、依赖人工的 HR 审计，转化为有引导、透明且可落地的数字化体验。">Transforming a fragmented, manual HR audit into a guided, transparent, and actionable digital experience.</p>
-    </div>
+    <img class="proj-hero__img" src="WORKS/ARKA/ARKA COVER.png" alt="Arka — AI-Driven HR Gap Assessment"
+         data-en-src="WORKS/ARKA/ARKA COVER.png" data-zh-src="WORKS/ARKA/ARKA COVER（Chinese）.png">
   </div>
 </div>
 
@@ -832,6 +805,9 @@
     });
     document.querySelectorAll('[data-en-html]').forEach(function(el){
       el.innerHTML = el.getAttribute('data-' + lang + '-html') || el.getAttribute('data-en-html');
+    });
+    document.querySelectorAll('[data-en-src]').forEach(function(el){
+      el.src = el.getAttribute('data-' + lang + '-src') || el.getAttribute('data-en-src');
     });
     document.querySelectorAll('.lang-toggle__btn').forEach(function(b){
       b.classList.toggle('active', b.dataset.lang === lang);

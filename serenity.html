@@ -154,7 +154,8 @@
 <div style="max-width:var(--maxw);margin:0 auto;padding:0 20px">
   <h1 class="sr-only">Serenity — A Mindful Focus App for Calm Productivity</h1>
   <div class="proj-hero reveal">
-    <img class="proj-hero__img" src="WORKS/serenity/serenity cover.png" alt="Serenity — A Mindful Focus App for Calm Productivity">
+    <img class="proj-hero__img" src="WORKS/serenity/serenity cover.png" alt="Serenity — A Mindful Focus App for Calm Productivity"
+         data-en-src="WORKS/serenity/serenity cover.png" data-zh-src="WORKS/serenity/serenity cover（Chinese）.png">
   </div>
 </div>
 
@@ -370,6 +371,9 @@
     });
     document.querySelectorAll('[data-en-html]').forEach(function(el){
       el.innerHTML = el.getAttribute('data-' + lang + '-html') || el.getAttribute('data-en-html');
+    });
+    document.querySelectorAll('[data-en-src]').forEach(function(el){
+      el.src = el.getAttribute('data-' + lang + '-src') || el.getAttribute('data-en-src');
     });
     document.querySelectorAll('.lang-toggle__btn').forEach(function(b){
       b.classList.toggle('active', b.dataset.lang === lang);

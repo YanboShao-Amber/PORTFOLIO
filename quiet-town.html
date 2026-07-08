@@ -45,6 +45,7 @@
   .back svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2}
 
   /* HERO */
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
   .proj-hero{
     width:calc(100vw - 160px);
     margin-left:calc(-50vw + 50% + 80px);
@@ -503,11 +504,10 @@
 
 <!-- HERO (full-bleed) -->
 <div style="max-width:var(--maxw);margin:0 auto;padding:0 20px">
+  <h1 class="sr-only">Quiet Town</h1>
   <div class="proj-hero reveal">
-    <img class="proj-hero__img" src="WORKS/Quiet Town/Quiet Town cover.png" alt="Quiet Town Cover">
-    <div class="proj-hero__overlay">
-      <h1 class="proj-hero__title">QUIET TOWN</h1>
-    </div>
+    <img class="proj-hero__img" src="WORKS/Quiet Town/Quiet Town cover.png" alt="Quiet Town Cover"
+         data-en-src="WORKS/Quiet Town/Quiet Town cover.png" data-zh-src="WORKS/Quiet Town/Quiet Town cover（Chinese）.png">
   </div>
 </div>
 
@@ -993,6 +993,9 @@
     });
     document.querySelectorAll('[data-en-html]').forEach(function(el){
       el.innerHTML = el.getAttribute('data-' + lang + '-html') || el.getAttribute('data-en-html');
+    });
+    document.querySelectorAll('[data-en-src]').forEach(function(el){
+      el.src = el.getAttribute('data-' + lang + '-src') || el.getAttribute('data-en-src');
     });
     document.querySelectorAll('.lang-toggle__btn').forEach(function(b){
       b.classList.toggle('active', b.dataset.lang === lang);
