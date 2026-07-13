@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Encounter 情书 — Amber</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#191816;--surface:#211f1d;--surface-2:#272421;
+    --line:rgba(255,255,255,.12);--line-strong:rgba(255,255,255,.22);
+    --text:#f3f0ea;--muted:#9b978d;--faint:#6a665e;
+    --display:'Archivo',sans-serif;--body:'Inter',sans-serif;--mono:'Space Mono',monospace;
+    --maxw:880px;--ease:cubic-bezier(.22,.61,.36,1);
+    --accent:#d9a45b;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--text);font-family:var(--body);line-height:1.55;-webkit-font-smoothing:antialiased;padding:0 20px;overflow-x:hidden}
+  .wrap{max-width:var(--maxw);margin:0 auto}
+
+  /* NAV */
+  .nav{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:center;height:60px;background:rgba(25,24,22,.82);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line);margin:0 -20px;padding:0 20px}
+  .nav__links{display:flex;gap:96px;list-style:none}
+  .nav__links a{font-family:var(--mono);font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,0.65);text-decoration:none;position:relative;padding:6px 0;transition:color .25s var(--ease)}
+  .nav__links a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:1px;background:var(--text);transition:width .3s var(--ease)}
+  .nav__links a:hover,.nav__links a.active{color:var(--text)}
+  .nav__links a:hover::after,.nav__links a.active::after{width:100%}
+  .lang-toggle{position:absolute;right:60px;display:flex;align-items:center;background:rgba(255,255,255,.08);border-radius:20px;padding:3px;gap:2px}
+  .lang-toggle__btn{font-family:var(--mono);font-size:11px;font-weight:500;color:rgba(255,255,255,.45);background:transparent;border:none;cursor:pointer;padding:5px 13px;border-radius:16px;transition:color .2s ease,background .2s ease}
+  .lang-toggle__btn.active{background:#fff;color:#1a1a1a;box-shadow:0 1px 5px rgba(0,0,0,.35)}
+
+  /* BACK LINK */
+  .back{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:var(--mono);font-size:13px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--faint);text-decoration:none;
+    padding:28px 0 0;
+    margin-left:calc(-50vw + 50% + 100px);
+    transition:color .25s var(--ease);
+  }
+  .back:hover{color:var(--text)}
+  .back svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2}
+
+  /* HERO */
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+  .proj-hero{
+    width:calc(100vw - 160px);
+    margin-left:calc(-50vw + 50% + 80px);
+    margin-top:48px;
+    position:relative;
+    height:385px;
+    overflow:hidden;
+  }
+  .proj-hero__img{
+    width:100%;height:100%;
+    object-fit:cover;object-position:center;
+    display:block;
+  }
+
+  /* INFO ROW */
+  .proj-info{
+    display:grid;grid-template-columns:repeat(5,1fr);
+    gap:0;
+    border:1px solid var(--line);
+    margin-top:48px;
+    width:calc(100vw - 440px);
+    margin-left:calc(-50vw + 50% + 220px);
+  }
+  .proj-info__item{
+    padding:24px 28px;
+    border-right:1px solid var(--line);
+  }
+  .proj-info__item:last-child{border-right:0}
+  .proj-info__label{
+    font-family:var(--mono);font-size:12px;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--muted);margin-bottom:10px;
+  }
+  .proj-info__value{
+    font-size:15px;font-weight:600;color:var(--text);line-height:1.5;
+  }
+  .proj-info__link{
+    color:var(--text);text-decoration:none;
+    transition:color .25s var(--ease);
+  }
+  .proj-info__link:hover{color:var(--muted)}
+
+  /* BODY SECTIONS */
+  .proj-body{
+    padding:72px 0 48px;display:flex;flex-direction:column;gap:72px;
+    width:calc(100vw - 440px);
+    margin-left:calc(-50vw + 50% + 220px);
+  }
+  .proj-section__label{
+    font-family:var(--mono);font-size:15px;letter-spacing:.2em;
+    text-transform:uppercase;color:#ffffff;
+    margin-bottom:20px;
+  }
+  .proj-section__text{
+    font-size:16px;line-height:1.8;color:#ffffff;
+  }
+  .proj-section__text strong{color:#ffffff;font-weight:400}
+
+  /* WATCH BUTTON */
+  .demo-btn{
+    display:inline-flex;align-items:center;gap:11px;
+    font-family:var(--mono);font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+    color:#15151b;background:var(--accent);text-decoration:none;
+    border-radius:9px;padding:14px 24px;margin-bottom:30px;
+    transition:transform .25s var(--ease),box-shadow .25s var(--ease),background .25s var(--ease);
+  }
+  .demo-btn:hover{background:#e6b573;transform:translateY(-2px);box-shadow:0 10px 26px rgba(217,164,91,.28)}
+  .demo-btn:active{transform:translateY(0)}
+  .demo-btn__icon{width:17px;height:17px;flex-shrink:0;fill:#15151b}
+  .demo-btn__arrow{width:14px;height:14px;flex-shrink:0;stroke:#15151b;stroke-width:2;fill:none;transition:transform .25s var(--ease)}
+  .demo-btn:hover .demo-btn__arrow{transform:translate(2px,-2px)}
+
+  /* ===== SCREENPLAY ===== */
+  .script-note{font-size:14px;line-height:1.7;color:var(--faint);margin-bottom:34px}
+  .screenplay{font-size:15px;line-height:2;color:#c9c5bb}
+  .screenplay h3{font-size:17px;font-weight:700;color:#eae7df;margin:44px 0 10px}
+  .screenplay h3:first-child{margin-top:0}
+  .screenplay h4{font-size:15px;font-weight:700;color:#eae7df;margin:18px 0 8px}
+  .screenplay p{margin-bottom:8px}
+  .screenplay .end{text-align:center;color:var(--faint);margin-top:40px}
+
+  /* FOOTER */
+  .footer{border-top:1px solid var(--line);padding:48px 0 60px;display:grid;grid-template-columns:1fr auto auto;gap:60px;width:calc(100vw - 160px);margin-left:calc(-50vw + 50% + 80px)}
+  .footer__logo{font-family:var(--display);font-weight:900;font-size:34px;letter-spacing:-.01em;align-self:start}
+  .footer__logo span{color:var(--muted)}
+  .footer__col+.footer__col{margin-left:100px}
+  .footer__col:last-child{margin-right:200px}
+  .footer__col h4{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);font-weight:700;margin-bottom:16px}
+  .footer__col ul{list-style:none}
+  .footer__col li{margin-bottom:9px}
+  .footer__col a{color:var(--text);text-decoration:none;font-size:14px;position:relative;transition:color .25s var(--ease)}
+  .footer__col a::after{content:"";position:absolute;left:0;bottom:-2px;width:0;height:1px;background:currentColor;transition:width .3s var(--ease)}
+  .footer__col a:hover{color:var(--muted)}
+  .footer__col a:hover::after{width:100%}
+
+  .reveal{opacity:0;transform:translateY(20px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+  .reveal.in{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <ul class="nav__links">
+    <li><a href="index.html" data-en="Home" data-zh="主页">Home</a></li>
+    <li><a href="works.html" class="active" data-en="Works" data-zh="作品集">Works</a></li>
+    <li><a href="experience.html" data-en="Gaming" data-zh="游戏经历">Gaming</a></li>
+    <li><a href="resume.html" data-en="Resume" data-zh="简历">Resume</a></li>
+    <li><a href="contact.html" data-en="Contact" data-zh="联系">Contact</a></li>
+  </ul>
+  <div class="lang-toggle">
+    <button class="lang-toggle__btn active" data-lang="en">EN</button>
+    <button class="lang-toggle__btn" data-lang="zh">中文</button>
+  </div>
+</nav>
+
+<div class="wrap">
+  <a class="back" href="works.html">
+    <svg viewBox="0 0 24 24"><path d="M19 12H5M5 12l7 7M5 12l7-7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span data-en="Back to Works" data-zh="返回作品集">Back to Works</span>
+  </a>
+</div>
+
+<!-- HERO (full-bleed) -->
+<div style="max-width:var(--maxw);margin:0 auto;padding:0 20px">
+  <h1 class="sr-only">Encounter 情书</h1>
+  <div class="proj-hero reveal">
+    <img class="proj-hero__img" src="WORKS/encounter/qingshu cover.png" alt="Encounter 情书 Cover">
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- INFO ROW -->
+  <div class="proj-info reveal">
+    <div class="proj-info__item">
+      <p class="proj-info__label" data-en="Role" data-zh="职责">Role</p>
+      <p class="proj-info__value" data-en-html="Set Ops · Editing<br>Voice-over · Grading" data-zh-html="场务 · 剪辑<br>配音 · 调色">Set Ops · Editing<br>Voice-over · Grading</p>
+    </div>
+    <div class="proj-info__item">
+      <p class="proj-info__label" data-en="Type" data-zh="类型">Type</p>
+      <p class="proj-info__value" data-en-html="Short Film /<br>Micro Movie" data-zh-html="微电影 /<br>短片">Short Film /<br>Micro Movie</p>
+    </div>
+    <div class="proj-info__item">
+      <p class="proj-info__label" data-en="Genre" data-zh="题材">Genre</p>
+      <p class="proj-info__value" data-en-html="Romance ·<br>Time-crossing" data-zh-html="爱情 ·<br>时空交错">Romance ·<br>Time-crossing</p>
+    </div>
+    <div class="proj-info__item">
+      <p class="proj-info__label" data-en="Stage" data-zh="阶段">Stage</p>
+      <p class="proj-info__value" data-en="Undergraduate" data-zh="本科作品">Undergraduate</p>
+    </div>
+    <div class="proj-info__item">
+      <p class="proj-info__label" data-en="Watch" data-zh="观看">Watch</p>
+      <p class="proj-info__value"><a class="proj-info__link" href="https://drive.google.com/file/d/1IeK_MiK_VItrVoD4tYSwTDtGkkSh8STv/view?usp=drive_link" target="_blank" rel="noopener">Google Drive ↗</a></p>
+    </div>
+  </div>
+
+  <!-- BODY -->
+  <div class="proj-body">
+
+    <div class="reveal">
+      <a class="demo-btn" href="https://drive.google.com/file/d/1IeK_MiK_VItrVoD4tYSwTDtGkkSh8STv/view?usp=drive_link" target="_blank" rel="noopener noreferrer">
+        <svg class="demo-btn__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+        <span data-en="Watch Film" data-zh="观看影片">Watch Film</span>
+        <svg class="demo-btn__arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M17 7H8M17 7v9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <p class="proj-section__label" data-en="Overview" data-zh="项目简介">Overview</p>
+      <p class="proj-section__text" style="margin-bottom:12px" data-en="Project Type: Short Film · Romance · Time-crossing" data-zh="项目类型：微电影 · 爱情 · 时空交错">Project Type: Short Film · Romance · Time-crossing</p>
+      <p class="proj-section__text"
+        data-en-html="<em>Encounter</em> (《情书》) is a time-crossing short film made during my undergraduate studies.<br>In 2016, office worker Mo Lu receives a 'misdirected' text — from He Xi, a college student living in 2009. Their conversation across seven years leads her to an old love letter tucked inside a textbook, and to the truth behind a confession that never arrived. On this production I handled <strong>set operations, editing, voice-over, and color grading</strong>."
+        data-zh-html="《情书》（Encounter）是我本科期间参与制作的一部时空交错题材微电影。<br>2016 年，职场新人陌露收到一条『发错』的短信——发信人却是身处 2009 年的大学生何夕。一场横跨七年的对话，引她找到夹在旧课本里的一封情书，也揭开了那句迟迟未能送达的告白背后的真相。我在片中负责<strong>场务、剪辑、配音与调色</strong>。">
+        <em>Encounter</em> (《情书》) is a time-crossing short film made during my undergraduate studies. In 2016, office worker Mo Lu receives a 'misdirected' text — from He Xi, a college student living in 2009. Their conversation across seven years leads her to an old love letter tucked inside a textbook, and to the truth behind a confession that never arrived. On this production I handled <strong>set operations, editing, voice-over, and color grading</strong>.
+      </p>
+    </div>
+
+    <div>
+      <p class="proj-section__label" data-en="Screenplay" data-zh="剧本">Screenplay</p>
+      <p class="script-note" data-en="🎬 Short film screenplay — Encounter (《情书》). The screenplay is presented in its original Chinese." data-zh="🎬 微电影短片剧本——《情书》（Encounter）。">🎬 Short film screenplay — Encounter (《情书》). The screenplay is presented in its original Chinese.</p>
+
+      <div class="screenplay">
+
+        <h3>角色简介</h3>
+        <p>何夕（男，21岁）：2009年的大学生。性格内敛、深情、热爱摄影与灯光。毕业前夕因车祸不幸去世。</p>
+        <p>陌露（女，28岁）：2016年的职场新人。成熟却带着一丝孤独。大学时暗恋何夕，多年后通过一部“神秘短信”和旧物，发现了尘封的真相。</p>
+        <p>同事（女，28岁）：陌露的大学同学兼现同事，快人快语，是揭开悲剧真相的“钥匙”。</p>
+
+        <h3>【场景 1】</h3>
+        <p>时间：2016年，白天<br>地点：陌露的办公室 / 2009年 教学楼走廊（时空交错）<br>人物：陌露、何夕</p>
+        <h4>【剧情】</h4>
+        <p>▲ 画面从一片漆黑开始。</p>
+        <p>▲ 【何夕（OS声音，带着一点磁性的少年音）】：“你有收到过情书吗？”</p>
+        <p>▲ 切换现代场景。阳光从写字楼的百叶窗洒入。</p>
+        <p>▲ 2016年的陌露坐在一堆报表前，有些疲惫。她拿起手机，屏幕上是一个没有名字的陌生号码发来的短信。</p>
+        <p>▲ 【陌露（特写，轻声读出自己的回复）】：“没有。你呢？收到过情书吗？”</p>
+        <p>▲ 画面做无缝转场（Match Cut）：阳光的线条变成2009年教学楼窗边的光影。</p>
+        <p>▲ 年轻的何夕穿着格子衬衫，戴着黑框眼镜，手里拿着一台老式按键诺基亚手机，微笑着打字。</p>
+        <p>▲ 【何夕（声音/台词）】：“我也没有。不过……我打算写一封。”</p>
+        <p>▲ 镜头切回2016年，陌露看着手机笑了笑，觉得这个“发错短信的大学生”挺有意思，轻轻打字。</p>
+        <p>▲ 【陌露（台词）】：“给你们班的那个女生？”</p>
+        <p>▲ 2009年窗边。何夕看着手机，眼神里满是羞涩与坚定。</p>
+        <p>▲ 【何夕（台词）】：“嗯，在她走（转学）之前。”</p>
+        <p>▲ 画面瞬间切入黑底。</p>
+        <p>▲ 【字幕/陌露（OS声音）】：“年轻真好。加油。”</p>
+        <p>▲ 黑底上浮现出大字——《情书 QING SHU》。</p>
+
+        <h3>【场景 2】</h3>
+        <p>时间：2009年冬季（大学时期） / 2016年冬季（平行剪辑）<br>地点：下雪的大学校园、教室、2016年的超市与街道<br>人物：何夕、陌露</p>
+        <h4>【剧情】</h4>
+        <p>▲ 【情绪铺垫】：一段温暖但略带伤感的吉他独奏响起。采用双线平行剪辑，对比2009年的青春色彩与2016年的孤独都市。</p>
+        <p>【画面A（2009）】：大雪纷飞的校园，何夕穿着厚重的黑色羽绒服，双手插兜走在雪地里。</p>
+        <p>【画面B（2016）】：陌露穿着干练的职场大衣，提着公文包，走在冷清的现代街道上。</p>
+        <p>▲ 【陌露（OS旁白，2016年的心声）】：“现在的大学生，真幸福。”</p>
+        <p>▲ 【何夕（OS旁白，2009年的回复）】：“才没有，每天赶 assignment（作业），很无聊的。”</p>
+        <p>▲ 2009年教室。何夕在洒满阳光的课桌上，用钢笔认真地在信纸上写字。</p>
+        <p>▲ 2016年办公室。陌露被老板训斥，接过改了无数遍的策划案，神情沮丧。</p>
+        <p>▲ 【陌露（OS旁白）】：“如果可以，我真想回到大学。那时候一切都很简单。”</p>
+        <p>▲ 2009年雪地。何夕拿着单反相机，对着干枯却挂满雾凇的树枝按下快门。</p>
+        <p>▲ 【何夕（OS旁白）】：“为什么？是因为大学时……有喜欢的人吗？”</p>
+        <p>▲ 2016年夜晚。华灯初上，陌露独自在便利店挑选单人便当，身影在热闹的街头显得有些落寞。</p>
+        <p>▲ 【陌露（OS旁白）】：“或许吧。不过那时候的喜欢，确实很简单。现在……前不久刚分手。”</p>
+        <p>▲ 2009年。何夕看到这条短信，动作猛地一顿。他站在雪地里抬头看天，眼神里闪过一丝心疼和复杂的情绪。</p>
+        <p>▲ 【陌露（OS旁白）】：“不说我了。你呢？和那个女孩怎么样了？”</p>
+        <p>▲ 2009年教室。何夕低下头，继续写那封信。</p>
+        <p>▲ 镜头特写信纸上的字迹：“再见，陌露。2009。” 他仔细地把信折好，放进一个复古的绿色信封里。</p>
+        <p>▲ 【何夕（OS旁白）】：“听说她这学期结束就要走了。在那之前，我会把情书交到她手里。”</p>
+
+        <h3>【场景 3】</h3>
+        <p>时间：2009年，毕业/转学前夕<br>地点：学校教学楼走廊<br>人物：何夕、年轻的陌露</p>
+        <h4>【剧情】</h4>
+        <p>▲ 黄昏的阳光把走廊拉得极长。窗台上整齐地叠放着几本专业书。</p>
+        <p>▲ 何夕缓缓走过来，他的指尖划过书脊，停在最上面那一本——《灯光师入门指南》。</p>
+        <p>▲ 他动作轻柔地将那封绿色信封夹进了书页最深处。</p>
+        <p>▲ 此时，年轻的陌露（扎着马尾，显得很青涩）抱着一叠资料从走廊另一头走来。两人目光撞在一起。</p>
+        <p>▲ 何夕有些紧张，指了指窗台：</p>
+        <p>▲ 【何夕（台词）】：“你的书，帮你收好了。”</p>
+        <p>▲ 【陌露（台词）】：“啊……谢谢。我，先走了。”</p>
+        <p>▲ 陌露脸红了，低下头准备擦肩而过。</p>
+        <p>▲ 【何夕（台词）】（急切地叫住她）：“陌露同学！”</p>
+        <p>▲ 陌露停下脚步，转过身注视着他。</p>
+        <p>▲ 何夕的手在口袋里攥紧，眼神闪烁，千言万语最后变成了一句：</p>
+        <p>▲ 【何夕（台词）】：“你……明天就走啊？那个……一切都好。”</p>
+        <p>▲ 陌露眼神里闪过一丝不易察觉的失落，但随即展颜一笑。</p>
+        <p>▲ 【陌露（台词）】：“嗯，你也是。”</p>
+        <p>▲ 陌露抱紧书，转身离去。何夕站在原地，看着她的背影，微风吹动他的衣角。</p>
+        <p>▲ 【字幕标示】：2009年·夏</p>
+
+        <h3>【场景 4】</h3>
+        <p>时间：2016年，白天<br>地点：韩式餐厅 / 办公室<br>人物：陌露、同事</p>
+        <h4>【剧情】</h4>
+        <p>▲ 【字幕标示】：2016年·冬</p>
+        <p>▲ 嘈杂的韩式餐厅里。同事一边大口吃着烤肉，一边翻看着手机里同学聚会的照片。</p>
+        <p>▲ 【同事（随口提起）】：“哎，你还记得何夕吗？就大学坐你后面那个帅哥。今天班长在群里发公祭照片我才想起来，他居然毕业那年出车祸走了……真可惜。”</p>
+        <p>▲ 【特写】：陌露夹菜的手瞬间僵在半空，一块年糕掉回盘子里。</p>
+        <p>▲ 【陌露（声音颤抖）】：“你……说什么？谁走了？”</p>
+        <p>▲ 【同事（叹气）】：“何夕啊。你忘啦？2009年冬天，就在你转学走后没几天，听说是在去寄信的路上出了车祸……”</p>
+        <p>▲ 场景裂变。画面瞬间切回高楼大厦的办公室。</p>
+        <p>▲ 陌露靠在窗边，浑身冰冷。她颤抖着拿出手机，点开那个“陌生人”的短信界面：</p>
+        <p>2016年的短信记录：<br>陌露：“情书给她了吗？”<br>陌生号码（何夕）：“夹在她书里了，希望她能看见。”<br>陌露：“会的。”</p>
+        <p>▲ 陌露的呼吸开始变得急促。她看着那个号码的发送日期——所有短信的回复时间，竟然全部诡异地显示为：2009年12月14日。</p>
+        <p>▲ 也就是说，这根本不是什么现代大学生的发错短信，这是跨越了七年的时空留言！</p>
+        <p>▲ 记忆的闸门轰然打开。陌露猛地站起身，因为动作太大撞翻了办公椅。</p>
+
+        <h3>【场景 5】（高潮 / 真相大白）</h3>
+        <p>时间：2016年，夜晚（陌露家）/ 2009年（时空交错）<br>地点：陌露的储藏室 / 暴雪中的马路<br>人物：陌露、何夕</p>
+        <h4>【剧情】</h4>
+        <p>▲ 暴雨/暴雪敲打着窗户。2016年的陌露疯狂地冲回家中，跪在储藏室地上，把一个个纸箱扯开。</p>
+        <p>▲ 一本本大学教材被她疯狂地甩在地上：《Adobe After Effects教程》、《艺术学基础知识》……</p>
+        <p>▲ 终于，在箱子最底层，那本已经落满灰尘的《灯光师入门指南》被抽了出来。</p>
+        <p>▲ 陌露双手颤抖，倒拿书本用力一抖——</p>
+        <p>▲ 啪嗒。一封泛黄的绿色信封掉落在地板上。</p>
+        <p>▲ 陌露捂住嘴，眼泪瞬间夺眶而出。她颤抖着拆开信纸，何夕工整的钢笔字迹呈现。</p>
+        <p>▲ 【何夕（OS，深情而温柔的声音）】：</p>
+        <p>“陌露同学：当你看到这封信的时候，应该已经开始全新的生活了吧。原谅我的怯懦，没能把它当面给你……作为未来的灯光师，我本想为你设计一场最完美的舞台谢幕，但好像来不及了。其实，每天在教室里，我都会偷偷睁开眼看你。我喜欢你，一直一直都很喜欢你。”</p>
+        <p>▲ 【时空交错·高潮剪辑】：</p>
+        <p>▲ 音乐推向最激昂、最悲伤的高潮。</p>
+        <p>【闪回2009】：午后的阳光下，何夕和陌露趴在同一个课桌上午睡。何夕悄悄睁开眼，侧过头，满眼温柔地注视着陌露的侧脸。</p>
+        <p>【闪回雪地】：何夕站在红绿灯前，手里紧紧护着一个绿色的信封，准备去邮局。他回头，对着镜头（陌露的视角）灿烂一笑。</p>
+        <p>▲ 突然！刺耳的刹车声、重物撞击声、警报声撕裂黑夜！</p>
+        <p>▲ 红绿灯疯狂闪烁。何夕倒在血泊中，冰冷的雪花落在他的眼镜片上。他的手无力地伸向虚空，指尖全是血。</p>
+        <p>▲ 2016年的卧室里，陌露抱着那封信，整个人蜷缩在地上，哭得撕心裂肺。</p>
+
+        <h3>【尾声】</h3>
+        <p>时间：2009年，阳光明媚的午后<br>地点：大学教室 / 走廊<br>人物：陌露、何夕</p>
+        <h4>【剧情】</h4>
+        <p>▲ 哭声渐渐淡去，取而代之的是清脆的时钟倒流声（滴答、滴答）。</p>
+        <p>▲ 阳光再次变得明亮、温暖。</p>
+        <p>▲ 2009年的教室里。趴在桌上睡觉的陌露猛地睁开眼，她的眼角竟然还挂着一滴2016年的眼泪。</p>
+        <p>▲ 她迷茫地看了看四周，发现自己穿着那件黄白相间的格子毛衣。窗外没有暴雪，只有盛夏的蝉鸣和绿意。</p>
+        <p>▲ 【陌露（OS旁白）】：“命运的手轻轻拨动指针。如果爱情不能刻舟求剑……那这一次，换我奔向你。”</p>
+        <p>▲ 陌露猛地站起身，冲出教室。</p>
+        <p>▲ 走廊的窗前，何夕正站在那里看书，阳光勾勒出他干净的少年轮廓。</p>
+        <p>▲ 听到急促的脚步声，何夕疑惑地抬起头，摘下眼镜。</p>
+        <p>▲ 陌露停在他面前，大口喘着气，眼泪在眼眶里打转，但嘴角却高高扬起。</p>
+        <p>▲ 【陌露（台词，用尽全身力气，坚定地）】：</p>
+        <p>▲ “何夕同学！无可奈何的何，一夕千念的夕！我喜欢你，从过去，到未来，一直都很喜欢你！”</p>
+        <p>▲ 何夕彻底愣住了。</p>
+        <p>▲ 阳光在这一刻放大了无数倍，整个走廊被金色的暖光吞没。</p>
+        <p>▲ 何夕的眼中慢慢浮现出最灿烂、最温柔的笑容。他向陌露伸出了手。</p>
+        <p>▲ 画面定格在两人即将相拥的温暖光影中。</p>
+        <p>▲ 渐隐切入黑底。</p>
+        <p>▲ 【片尾演职人员表滚动】</p>
+        <p class="end">- 剧本完 -</p>
+
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<div class="wrap" style="padding-bottom:120px"></div>
+
+<div style="max-width:var(--maxw);margin:0 auto;padding:0 20px">
+  <footer class="footer">
+    <div class="footer__logo">AMBER<span>.</span></div>
+    <nav class="footer__col">
+      <h4 data-en="Navigation" data-zh="导航">Navigation</h4>
+      <ul>
+        <li><a href="index.html" data-en="Home" data-zh="主页">Home</a></li>
+        <li><a href="works.html" data-en="Works" data-zh="作品集">Works</a></li>
+        <li><a href="experience.html" data-en="Gaming" data-zh="游戏经历">Gaming</a></li>
+        <li><a href="resume.html" data-en="Resume" data-zh="简历">Resume</a></li>
+        <li><a href="contact.html" data-en="Contact" data-zh="联系">Contact</a></li>
+      </ul>
+    </nav>
+    <nav class="footer__col">
+      <h4 data-en="Connect" data-zh="联系">Connect</h4>
+      <ul>
+        <li><a href="https://itch.io/dashboard" target="_blank" rel="noopener">itch.io</a></li>
+        <li><a href="https://www.linkedin.com/jobs/" target="_blank" rel="noopener">LinkedIn</a></li>
+        <li><a href="https://github.com/YanboShao-Amber" target="_blank" rel="noopener">GitHub</a></li>
+      </ul>
+    </nav>
+  </footer>
+</div>
+
+<script>
+(function(){
+  var els = document.querySelectorAll('.reveal');
+  if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')});return}
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target)}});
+  },{threshold:.12});
+  els.forEach(function(e){io.observe(e)});
+})();
+/* ---- Language Switch ---- */
+(function(){
+  var K = 'portfolio_lang';
+  function applyLang(lang) {
+    document.querySelectorAll('[data-en]').forEach(function(el){
+      el.textContent = el.getAttribute('data-' + lang) || el.getAttribute('data-en');
+    });
+    document.querySelectorAll('[data-en-html]').forEach(function(el){
+      el.innerHTML = el.getAttribute('data-' + lang + '-html') || el.getAttribute('data-en-html');
+    });
+    document.querySelectorAll('[data-en-src]').forEach(function(el){
+      el.src = el.getAttribute('data-' + lang + '-src') || el.getAttribute('data-en-src');
+    });
+    document.querySelectorAll('.lang-toggle__btn').forEach(function(b){
+      b.classList.toggle('active', b.dataset.lang === lang);
+    });
+    document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+    try { localStorage.setItem(K, lang); } catch(e){}
+  }
+  var saved; try { saved = localStorage.getItem(K); } catch(e){}
+  applyLang(saved || 'en');
+  var toggle = document.querySelector('.lang-toggle');
+  if(toggle) toggle.addEventListener('click', function(e){
+    var btn = e.target.closest('[data-lang]');
+    if(btn) applyLang(btn.dataset.lang);
+  });
+})();
+</script>
+</body>
+</html>

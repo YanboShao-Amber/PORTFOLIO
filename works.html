@@ -63,6 +63,7 @@
   .thumb--quiet-town{background-image:url("WORKS/Quiet Town/Quiet Town cover.png")}
   .thumb--arka{background-image:url('WORKS/ARKA/ARKA COVER.png')}
   .thumb--serenity{background-image:url('WORKS/serenity/serenity cover.png')}
+  .thumb--qingshu{background-image:url('WORKS/encounter/qingshu cover.png')}
   /* 中文界面下使用中文封面 */
   html[lang^="zh"] .thumb--managing-up{background-image:url('WORKS/MANAGING UP/MANAGING UP COVER（Chinese）.png')}
   html[lang^="zh"] .thumb--quiet-town{background-image:url("WORKS/Quiet Town/Quiet Town cover（Chinese）.png")}
@@ -129,11 +130,29 @@
     <button class="filter-btn active" data-filter="all" data-en="All" data-zh="全部">全部</button>
     <button class="filter-btn" data-filter="demo" data-en="Game Demo" data-zh="游戏 Demo">游戏 Demo</button>
     <button class="filter-btn" data-filter="uiux" data-en="UI/UX" data-zh="UI/UX">UI/UX</button>
-    <button class="filter-btn" data-filter="system" data-en="System Design" data-zh="系统分析">系统分析</button>
+    <button class="filter-btn" data-filter="video" data-en="Video" data-zh="视频">视频</button>
   </div>
 
   <section class="works">
     <ul class="works__list">
+
+      <li class="work reveal" data-cat="demo" data-project="managing-up">
+        <a class="work__link" href="managing-up.html">
+          <div class="work__thumb thumb--managing-up">
+            <div class="work__overlay">
+              <div>
+                <h3 class="work__title">MANAGING UP</h3>
+                <div class="work__meta">
+                  <span data-en="· GAME TYPE : IDLE GAME" data-zh="· 游戏类型：挂机游戏">· GAME TYPE : IDLE GAME</span>
+                  <span data-en="· DEMO PLATFORM : itch.io" data-zh="· 试玩平台：itch.io">· DEMO PLATFORM : itch.io</span>
+                </div>
+                <p class="work__desc" data-en="An idle game where you exploit subordinates to smash KPIs, climb the corporate ladder, and ultimately rule the entire office! Features a 'Secret Notepad' mode so you can safely slack off on the clock." data-zh="一款通过压榨下属以达成KPI，在职场晋升之路上步步高升，最终掌控整个办公室的挂机游戏！游戏还包含&quot;秘密记事本&quot;模式，让你在工作时间也能安全地摸鱼。">An idle game where you exploit subordinates to smash KPIs, climb the corporate ladder, and ultimately rule the entire office! Features a 'Secret Notepad' mode so you can safely slack off on the clock.</p>
+              </div>
+              <span class="work__arrow"><img src="icon/长箭头.png" alt="→"></span>
+            </div>
+          </div>
+        </a>
+      </li>
 
       <li class="work reveal" data-cat="uiux system" data-project="arka">
         <a class="work__link" href="arka.html">
@@ -146,6 +165,24 @@
                   <span data-en="· DELIVERABLE : High-Fidelity Interactive Prototype (Figma)" data-zh="· 交付成果：高保真交互原型 (Figma)">· DELIVERABLE : High-Fidelity Interactive Prototype (Figma)</span>
                 </div>
                 <p class="work__desc" data-en="An AI-supported HR Gap Assessment platform that turns a fragmented, manual consulting audit into a guided, transparent digital workflow — pairing a task-based client portal with a decision-support admin dashboard. Delivered as a high-fidelity interactive Figma prototype." data-zh="一个 AI 辅助的 HR 差距评估平台，把碎片化、手动的咨询审计流程转化为清晰、透明的数字工作流——将任务式的客户门户与决策支持型的管理端仪表盘结合起来。最终以高保真交互 Figma 原型形式交付。">An AI-supported HR Gap Assessment platform that turns a fragmented, manual consulting audit into a guided, transparent digital workflow — pairing a task-based client portal with a decision-support admin dashboard. Delivered as a high-fidelity interactive Figma prototype.</p>
+              </div>
+              <span class="work__arrow"><img src="icon/长箭头.png" alt="→"></span>
+            </div>
+          </div>
+        </a>
+      </li>
+
+      <li class="work reveal" data-cat="video" data-project="qingshu">
+        <a class="work__link" href="qingshu.html">
+          <div class="work__thumb thumb--qingshu">
+            <div class="work__overlay">
+              <div>
+                <h3 class="work__title" data-en="ENCOUNTER 情书" data-zh="情书 ENCOUNTER">ENCOUNTER 情书</h3>
+                <div class="work__meta">
+                  <span data-en="· PROJECT TYPE : SHORT FILM (UNDERGRADUATE WORK)" data-zh="· 项目类型：微电影（本科作品）">· PROJECT TYPE : SHORT FILM (UNDERGRADUATE WORK)</span>
+                  <span data-en="· MY ROLE : Set Operations · Editing · Voice-over · Color Grading" data-zh="· 我的职责：场务 · 剪辑 · 配音 · 调色">· MY ROLE : Set Operations · Editing · Voice-over · Color Grading</span>
+                </div>
+                <p class="work__desc" data-en="A time-crossing short film. In 2016, office worker Mo Lu receives a 'misdirected' text — from He Xi, a college student living in 2009. Their conversation across seven years leads her to an old love letter tucked inside a textbook, and to the truth behind a confession that never arrived. I handled set operations, editing, voice-over, and color grading." data-zh="一部跨越时空的微电影。2016 年，职场新人陌露收到一条『发错』的短信——发信人却是身处 2009 年的大学生何夕。一场横跨七年的对话，引她找到夹在旧课本里的一封情书，也揭开了那句迟迟未能送达的告白背后的真相。我在片中负责场务、剪辑、配音与调色。">A time-crossing short film. In 2016, office worker Mo Lu receives a 'misdirected' text — from He Xi, a college student living in 2009. Their conversation across seven years leads her to an old love letter tucked inside a textbook, and to the truth behind a confession that never arrived. I handled set operations, editing, voice-over, and color grading.</p>
               </div>
               <span class="work__arrow"><img src="icon/长箭头.png" alt="→"></span>
             </div>
@@ -207,24 +244,6 @@
         </a>
       </li>
 
-      <li class="work reveal" data-cat="demo" data-project="managing-up">
-        <a class="work__link" href="managing-up.html">
-          <div class="work__thumb thumb--managing-up">
-            <div class="work__overlay">
-              <div>
-                <h3 class="work__title">MANAGING UP</h3>
-                <div class="work__meta">
-                  <span data-en="· GAME TYPE : IDLE GAME" data-zh="· 游戏类型：挂机游戏">· GAME TYPE : IDLE GAME</span>
-                  <span data-en="· DEMO PLATFORM : itch.io" data-zh="· 试玩平台：itch.io">· DEMO PLATFORM : itch.io</span>
-                </div>
-                <p class="work__desc" data-en="An idle game where you exploit subordinates to smash KPIs, climb the corporate ladder, and ultimately rule the entire office! Features a 'Secret Notepad' mode so you can safely slack off on the clock." data-zh="一款通过压榨下属以达成KPI，在职场晋升之路上步步高升，最终掌控整个办公室的挂机游戏！游戏还包含&quot;秘密记事本&quot;模式，让你在工作时间也能安全地摸鱼。">An idle game where you exploit subordinates to smash KPIs, climb the corporate ladder, and ultimately rule the entire office! Features a 'Secret Notepad' mode so you can safely slack off on the clock.</p>
-              </div>
-              <span class="work__arrow"><img src="icon/长箭头.png" alt="→"></span>
-            </div>
-          </div>
-        </a>
-      </li>
-
     </ul>
   </section>
 
@@ -243,9 +262,9 @@
     <nav class="footer__col">
       <h4 data-en="Connect" data-zh="联系">Connect</h4>
       <ul>
-        <li><a href="#" target="_blank" rel="noopener">itch.io</a></li>
-        <li><a href="#" target="_blank" rel="noopener">LinkedIn</a></li>
-        <li><a href="#" target="_blank" rel="noopener">GitHub</a></li>
+        <li><a href="https://itch.io/dashboard" target="_blank" rel="noopener">itch.io</a></li>
+        <li><a href="https://www.linkedin.com/jobs/" target="_blank" rel="noopener">LinkedIn</a></li>
+        <li><a href="https://github.com/YanboShao-Amber" target="_blank" rel="noopener">GitHub</a></li>
       </ul>
     </nav>
   </footer>

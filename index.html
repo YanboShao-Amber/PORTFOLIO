@@ -190,7 +190,7 @@
   }
 
   /* ---------- ABOUT ---------- */
-  .about{padding:64px 0;text-align:center}
+  .about{padding:28px 0;text-align:center}
   #about .section-title{margin-top:-10px}
   #about .section-title,
   #works .section-title{
@@ -205,15 +205,19 @@
     width:100vw;
   }
   .about__box{
-    max-width:840px;margin:0 auto;
+    width:min(1000px,calc(100vw - 48px));
+    position:relative;left:50%;transform:translateX(-50%);
     border:1px solid var(--line);
     background:var(--surface);
-    padding:34px 38px;
-    font-size:18px;line-height:1.7;
+    padding:22px 28px;
+    font-size:14px;line-height:1.65;
     color:#e7e3db;
+    text-align:left;
   }
-  .about__box em{color:var(--text);font-style:normal;font-weight:600}
-  .about__cta{margin-top:30px}
+  .about__box p{margin-bottom:8px}
+  .about__box p:last-child{margin-bottom:0}
+  .about__lead{color:#d9a45b;font-style:normal;font-weight:700}
+  .about__cta{margin-top:16px}
 
   /* ---------- SELECTED WORKS ---------- */
   .works{
@@ -222,6 +226,15 @@
     margin-left:calc(-50vw + 50% + 80px);
   }
   .works__list{list-style:none;display:flex;flex-direction:column;gap:4px}
+  .works__more{text-align:center;margin:6px 0 30px}
+  .works__more a{
+    display:inline-block;
+    font-family:var(--mono);font-size:13px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--muted);text-decoration:none;
+    border-bottom:1px solid var(--line);padding-bottom:3px;
+    transition:color .25s var(--ease),border-color .25s var(--ease);
+  }
+  .works__more a:hover{color:var(--text);border-color:var(--text)}
   .work{}
 
   .work__link{
@@ -457,7 +470,7 @@
     <div class="hero__mid">
       <p class="hero__desc"
          data-en-html="A DESIGNER PASSIONATE ABOUT<br>CRAFTING BOLD AND<br>MEMORABLE PROJECTS ✦"
-         data-zh-html="热爱设计<br>专注打造大胆而<br>令人难忘的项目 ✦">
+         data-zh-html="热爱设计<br>专注打造新颖且<br>令人难忘的项目 ✦">
          A DESIGNER PASSIONATE ABOUT<br>CRAFTING BOLD AND<br>MEMORABLE PROJECTS ✦</p>
 
       <figure class="hero__avatar" aria-label="Amber character">
@@ -499,10 +512,10 @@
   <section class="about reveal" id="about">
     <h2 class="section-title" data-en="ABOUT ME" data-zh="我是谁？">ABOUT ME</h2>
     <div class="about__box"
-      data-en-html='I am a <em>Gameplay Designer</em> and <em>Digital Media Designer</em> passionate about creating engaging game experiences and visual stories.'
-      data-zh-html='我是一名<em>游戏玩法设计师</em>与<em>数字媒体设计师</em>，热衷于打造沉浸式游戏体验和视觉故事。'>
-      I am a <em>Gameplay Designer</em> and <em>Digital Media Designer</em>
-      passionate about creating engaging game experiences and visual stories.
+      data-en-html="<p><em class='about__lead'>Hi, I'm Amber (Yanbo Shao)!</em></p><p>I'm a creator focused on game systems design, core gameplay design, and UI/UX. I believe the best design never lives only in a concept doc — it's proven the moment it actually ships and is experienced by players.</p><p><em class='about__lead'>I'm both a systems architect and a hands-on builder.</em><br>My day-to-day isn't just wrestling with interface layouts and interaction logic in design tools — I also open the game engine and code the idea into a working build myself. From refining the UI feedback of every single click to constructing the underlying game mechanics and resource loops, I approach my work with an end-to-end mindset. To me, the beauty of systems design lies in balance — finding, within a complex web of logic, the flow curve that keeps players most deeply immersed.</p><p><em class='about__lead'>My design doesn't run on intuition alone.</em><br>Whether it's deconstructing outstanding titles with professional frameworks, or collecting qualitative and quantitative data through rigorous playtests, I insist on backing every design iteration with objective, real feedback. I know how to validate whether a core loop is solid, and how to use data to refine the tutorial so the player's experience feels smooth and natural.</p><p><em class='about__lead'>Aesthetically, I have a little 'obsession' of my own.</em><br>I gravitate toward visually striking content, cinematic flavor, and indie-game styles with a strong personal voice. I want my work not only to solve players' pain points precisely, but to leave a distinctive, lasting visual mark.</p>"
+      data-zh-html="<p><em class='about__lead'>你好，我是 Amber (邵彦博)！</em></p><p>我是一名专注于游戏系统策划、核心玩法设计以及 UI/UX 的创作者。我相信，最好的设计从不只停留在概念文档里，而在于它真正落地、被玩家体验的那一刻。</p><p><em class='about__lead'>我是个“造局者”，也是个“实干派”。</em><br>我的日常不仅是在设计工具中死磕界面布局与交互逻辑，更会直接打开游戏引擎，亲手用代码将想法跑通。从推敲每一次点击的 UI 反馈，到构建底层的游戏机制与资源循环，我习惯用“全链路”的思维来对待作品。对我来说，系统设计的魅力就在于平衡——在复杂的逻辑网中，找出那条最能让玩家沉浸其中的“心流”曲线。</p><p><em class='about__lead'>我的设计不只依赖直觉。</em><br>不管是运用专业的框架去拆解市场上的优秀作品，还是通过严谨的用户测试 (Playtest) 收集定性与定量数据，我都坚持用客观真实的反馈来支撑我的设计迭代。我清楚如何验证一个核心循环 (Core Loop) 是否足够扎实，也知道如何利用数据去优化新手引导 (Tutorial)，让玩家的体验平滑且自然。</p><p><em class='about__lead'>在美学上，我有一点自己的“偏执”。</em><br>我偏爱极具视觉冲击力的内容、电影感，以及带有浓烈个人色彩的独立游戏风格。我希望我的作品不仅能精准解决玩家的痛点，更能留下独特且深刻的视觉印记。</p>">
+      <p><em class="about__lead">Hi, I'm Amber (Yanbo Shao)!</em></p>
+      <p>I'm a creator focused on game systems design, core gameplay design, and UI/UX. I believe the best design never lives only in a concept doc — it's proven the moment it actually ships and is experienced by players.</p>
     </div>
     <div class="about__cta">
       <a class="btn btn--download" href="resume.html">
@@ -515,7 +528,28 @@
   <!-- ============ SELECTED WORKS ============ -->
   <section class="works" id="works">
     <h2 class="section-title reveal" data-en="SELECTED WORKS" data-zh="精选作品">SELECTED WORKS</h2>
+    <div class="works__more reveal">
+      <a href="works.html" data-en="View All Works →" data-zh="查看全部作品 →">View All Works →</a>
+    </div>
     <ul class="works__list">
+
+      <li class="work reveal" data-project="managing-up">
+        <a class="work__link" href="managing-up.html">
+          <div class="work__thumb thumb--managing-up">
+            <span class="work__arrow"><img src="icon/长箭头.png" alt="→"></span>
+            <div class="work__overlay">
+              <div>
+                <h3 class="work__title">MANAGING UP</h3>
+                <div class="work__meta">
+                  <span data-en="· GAME TYPE : IDLE GAME" data-zh="· 游戏类型：挂机游戏">· GAME TYPE : IDLE GAME</span>
+                  <span data-en="· DEMO PLATFORM : itch.io" data-zh="· 试玩平台：itch.io">· DEMO PLATFORM : itch.io</span>
+                </div>
+                <p class="work__desc" data-en="An idle game where you exploit subordinates to smash KPIs, climb the corporate ladder, and ultimately rule the entire office! Features a 'Secret Notepad' mode so you can safely slack off on the clock." data-zh="一款通过压榨下属以达成KPI，在职场晋升之路上步步高升，最终掌控整个办公室的挂机游戏！游戏还包含&quot;秘密记事本&quot;模式，让你在工作时间也能安全地摸鱼。">An idle game where you exploit subordinates to smash KPIs, climb the corporate ladder, and ultimately rule the entire office! Features a 'Secret Notepad' mode so you can safely slack off on the clock.</p>
+              </div>
+            </div>
+          </div>
+        </a>
+      </li>
 
       <li class="work reveal" data-project="arka">
         <a class="work__link" href="arka.html">
@@ -553,24 +587,6 @@
         </a>
       </li>
 
-      <li class="work reveal" data-project="managing-up">
-        <a class="work__link" href="managing-up.html">
-          <div class="work__thumb thumb--managing-up">
-            <span class="work__arrow"><img src="icon/长箭头.png" alt="→"></span>
-            <div class="work__overlay">
-              <div>
-                <h3 class="work__title">MANAGING UP</h3>
-                <div class="work__meta">
-                  <span data-en="· GAME TYPE : IDLE GAME" data-zh="· 游戏类型：挂机游戏">· GAME TYPE : IDLE GAME</span>
-                  <span data-en="· DEMO PLATFORM : itch.io" data-zh="· 试玩平台：itch.io">· DEMO PLATFORM : itch.io</span>
-                </div>
-                <p class="work__desc" data-en="An idle game where you exploit subordinates to smash KPIs, climb the corporate ladder, and ultimately rule the entire office! Features a 'Secret Notepad' mode so you can safely slack off on the clock." data-zh="一款通过压榨下属以达成KPI，在职场晋升之路上步步高升，最终掌控整个办公室的挂机游戏！游戏还包含&quot;秘密记事本&quot;模式，让你在工作时间也能安全地摸鱼。">An idle game where you exploit subordinates to smash KPIs, climb the corporate ladder, and ultimately rule the entire office! Features a 'Secret Notepad' mode so you can safely slack off on the clock.</p>
-              </div>
-            </div>
-          </div>
-        </a>
-      </li>
-
     </ul>
   </section>
 
@@ -592,9 +608,9 @@
     <nav class="footer__col" aria-label="Connect">
       <h4 data-en="Connect" data-zh="联系">Connect</h4>
       <ul>
-        <li><a href="#" target="_blank" rel="noopener">itch.io</a></li>
-        <li><a href="#" target="_blank" rel="noopener">LinkedIn</a></li>
-        <li><a href="#" target="_blank" rel="noopener">GitHub</a></li>
+        <li><a href="https://itch.io/dashboard" target="_blank" rel="noopener">itch.io</a></li>
+        <li><a href="https://www.linkedin.com/jobs/" target="_blank" rel="noopener">LinkedIn</a></li>
+        <li><a href="https://github.com/YanboShao-Amber" target="_blank" rel="noopener">GitHub</a></li>
       </ul>
     </nav>
   </footer>
